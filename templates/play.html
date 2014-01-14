@@ -6,7 +6,7 @@
   {% end %}
 </div>
 <div id="input">
-  <form action="/play" method="post" id="messageform"
+  <form action="/" method="post" id="messageform"
 	class="form-inline" role="form">
     <div class="form-group">
       <label class="sr-only" for="inputbox">Command</label>
@@ -19,5 +19,7 @@
 {% end %}
 {% block js %}
 selected_tab = "#tabhome";
-start_websocket();
+var inboxdiv = $("#inbox");
+inboxdiv.scrollTop = inboxdiv[0].scrollHeight;
+// start_websocket();
 {% end %}

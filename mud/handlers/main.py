@@ -5,6 +5,9 @@
 from mud.handlers.base import BaseHandler
 from mud.db.transcript import DATABASE as TRANSCRIPTS
 
+import tornado.web
+import tornado.escape
+
 #==============================================================================
 # home page of the mud and also play page when the user is logged in.
 #==============================================================================
@@ -25,4 +28,8 @@ class MainHandler(BaseHandler):
     @tornado.web.authenticated
     def post(self):
         user = self.get_current_user()
+        trans = TRANSCRIPTS.lookup(user)
         command = self.get_argument("command")
+        html = tornado.escape.xhtml_escape(command)
+        trans.append({"type": "stuff", "html": html})
+        self.render("play.html", **self.extras())

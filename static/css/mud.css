@@ -23,9 +23,11 @@ body {
     position: fixed;
     top: 5em;
     bottom: 5em;
-    background-color: pink;
     left: 10em;
     right: 10em;
+    overflow: scroll;
+    padding-right: 1em;
+    overflow-x: hidden;
 }
 
 #inputbox {

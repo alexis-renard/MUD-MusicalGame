@@ -35,7 +35,7 @@ class BasicDB(dict):
     def pickle_save(self):
         with self.lock:
             with open(self.pickle_path, "wb") as f:
-                pickle.dump(self, f, protocol=-1)
+                pickle.dump(dict(self), f, protocol=-1)
 
     def pickle_load(self, required=False):
         try:
