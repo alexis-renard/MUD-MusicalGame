@@ -3,11 +3,11 @@ function start_websocket() {
 	if (!window.console) window.console = {};
 	if (!window.console.log) window.console.log = function() {};
 
-	$("#messageform").live("submit", function() {
+	$("#messageform").on("submit", function() {
             newMessage($(this));
             return false;
 	});
-	$("#messageform").live("keypress", function(e) {
+	$("#messageform").on("keypress", function(e) {
             if (e.keyCode == 13) {
 		newMessage($(this));
 		return false;
@@ -34,6 +34,10 @@ jQuery.fn.formToDict = function() {
     return json;
 };
 
+function scroll_to_bottom() {
+    $("#inbox").animate({scrollTop:$("#inboxcontents").height()}, 1000);
+}
+
 var updater = {
     socket: null,
 
@@ -48,9 +52,10 @@ var updater = {
     showMessage: function(message) {
         //var existing = $("#m" + message.id);
         //if (existing.length > 0) return;
-        var node = $(message.html);
-        node.hide();
-        $("#inbox").append(node);
-        node.slideDown();
+        //var node = $(message.html);
+        //node.hide();
+        $("#inboxcontents").append(message.html);
+	scroll_to_bottom();
+        //node.slideDown();
     }
 };

@@ -28,6 +28,7 @@ from mud.handlers.about    import    AboutHandler
 from mud.handlers.login    import    LoginHandler
 from mud.handlers.logout   import   LogoutHandler
 from mud.handlers.register import RegisterHandler
+from mud.handlers.message  import  MessageHandler
 
 #==============================================================================
 # start the server
@@ -39,11 +40,12 @@ def main():
     parse_command_line()
     app = tornado.web.Application(
         [
-            (r"/"        , MainHandler    ),
-            (r"/about"   , AboutHandler   ),
-            (r"/login"   , LoginHandler   ),
-            (r"/logout"  , LogoutHandler  ),
+            (r"/"        ,     MainHandler),
+            (r"/about"   ,    AboutHandler),
+            (r"/login"   ,    LoginHandler),
+            (r"/logout"  ,   LogoutHandler),
             (r"/register", RegisterHandler),
+            (r"/message" ,  MessageHandler)
         ],
         cookie_secret = str(uuid.uuid4()),
         login_url     = "/login",
