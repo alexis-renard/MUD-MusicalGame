@@ -1,0 +1,33 @@
+div.mudcontent {
+    padding-top: 7em;
+}
+
+span.welcome {
+    position: relative;
+    float: right;
+    color: white;
+    top: 1em;
+}
+
+body {
+    font-family: sans;
+}
+
+#input {
+    position: fixed;
+    bottom: 1em;
+    left: 10em;
+}
+
+#inbox {
+    position: fixed;
+    top: 5em;
+    bottom: 5em;
+    background-color: pink;
+    left: 10em;
+    right: 10em;
+}
+
+#inputbox {
+    width: 50em;
+}
