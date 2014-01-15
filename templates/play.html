@@ -3,7 +3,7 @@
 <div id="inbox">
  <div id="inboxcontents">
   {% for message in messages %}
-    {% include "message.html" %}
+    {% raw message["html"] %}
   {% end %}
  </div>
 </div>

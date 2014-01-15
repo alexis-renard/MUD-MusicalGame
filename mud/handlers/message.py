@@ -7,6 +7,7 @@ from mud.db.transcript import DATABASE as TRANSCRIPTS
 
 import tornado.websocket
 import tornado.escape
+import threading
 
 #==============================================================================
 # handler for ajax submission of user commands
@@ -14,6 +15,7 @@ import tornado.escape
 
 class MessageHandler(tornado.websocket.WebSocketHandler):
     opensockets = set()
+    lock = threading.RLock()
 
     def open(self):
         user = self.get_secure_cookie("mud_player")
@@ -38,3 +40,10 @@ class MessageHandler(tornado.websocket.WebSocketHandler):
         self.trans.append(msg)
         for ws in self.opensockets:
             ws.write_message(msg)
+
+    @staticmethod
+    def send_all(html):
+        msg = {"type":"show", "html": html.decode("utf-8")}
+        with MessageHandler.lock:
+            for ws in MessageHandler.opensockets:
+                ws.write_message(msg)
