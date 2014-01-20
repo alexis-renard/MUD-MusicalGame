@@ -4,6 +4,7 @@
 
 from mud.handlers.base import BaseHandler
 from mud.db.transcript import DATABASE as TRANSCRIPTS
+from mud.engine import ENGINE
 
 import tornado.websocket
 import tornado.escape
@@ -13,7 +14,7 @@ import threading
 # handler for ajax submission of user commands
 #==============================================================================
 
-class MessageHandler(tornado.websocket.WebSocketHandler):
+class WebSocketHandler(BaseHandler, tornado.websocket.WebSocketHandler):
     opensockets = set()
     lock = threading.RLock()
 
@@ -22,9 +23,7 @@ class MessageHandler(tornado.websocket.WebSocketHandler):
         if not user:
             self.close()
             return
-        user = tornado.escape.json_decode(user)
-        self.user = user
-        self.trans = TRANSCRIPTS.lookup(user)
+        self.player = self.get_player()
         self.opensockets.add(self)
 
     def on_close(self):
@@ -32,18 +31,13 @@ class MessageHandler(tornado.websocket.WebSocketHandler):
 
     def on_message(self, message):
         msg = tornado.escape.json_decode(message)
-        command = msg["command"]
-        command = tornado.escape.xhtml_escape(command)
-        msg = {"type": "stuff", "html": command}
-        html = self.render_string("message.html", message=msg)
-        msg = {"type": "stuff", "html": html.decode("utf-8")}
-        self.trans.append(msg)
-        for ws in self.opensockets:
-            ws.write_message(msg)
+        msg["user"] = self.player
+        ENGINE.put(msg)
 
     @staticmethod
-    def send_all(html):
-        msg = {"type":"show", "html": html.decode("utf-8")}
-        with MessageHandler.lock:
-            for ws in MessageHandler.opensockets:
+    def output_to_all(html):
+        msg = {"type":"output", "html": html}
+        with WebSocketHandler.lock:
+            for ws in WebSocketHandler.opensockets:
+                ws.player.transcript.append(html)
                 ws.write_message(msg)

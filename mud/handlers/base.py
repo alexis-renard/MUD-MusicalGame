@@ -12,3 +12,10 @@ class BaseHandler(tornado.web.RequestHandler):
         player_json = self.get_secure_cookie("mud_player")
         if not player_json: return None
         return tornado.escape.json_decode(player_json)
+
+    def get_player(self):
+        username = self.get_current_user()
+        if username is None:
+            return None
+        import mud.player
+        return mud.player.Player(username)

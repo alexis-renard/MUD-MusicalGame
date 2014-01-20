@@ -42,7 +42,7 @@ var updater = {
     socket: null,
 
     start: function() {
-        var url = "ws://" + location.host + "/message";
+        var url = "ws://" + location.host + "/websocket";
 	updater.socket = new WebSocket(url);
 	updater.socket.onmessage = function(event) {
 	    updater.showMessage(JSON.parse(event.data));
@@ -50,12 +50,7 @@ var updater = {
     },
 
     showMessage: function(message) {
-        //var existing = $("#m" + message.id);
-        //if (existing.length > 0) return;
-        //var node = $(message.html);
-        //node.hide();
         $("#inboxcontents").append(message.html);
 	scroll_to_bottom();
-        //node.slideDown();
     }
 };

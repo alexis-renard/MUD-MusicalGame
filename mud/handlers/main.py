@@ -4,6 +4,7 @@
 
 from mud.handlers.base import BaseHandler
 from mud.db.transcript import DATABASE as TRANSCRIPTS
+from mud.player import Player
 
 import tornado.web
 import tornado.escape
@@ -21,15 +22,16 @@ class MainHandler(BaseHandler):
             self.render("index.html")
 
     def extras(self):
+        player = self.get_player()
         return {
-            "messages": TRANSCRIPTS.lookup(self.get_current_user())
+            "items": player.transcript
         }
 
     @tornado.web.authenticated
     def post(self):
-        user = self.get_current_user()
-        trans = TRANSCRIPTS.lookup(user)
-        command = self.get_argument("command")
-        html = tornado.escape.xhtml_escape(command)
-        trans.append({"type": "stuff", "html": html})
+        player = self.get_player()
+        # at the moment there is nothing beyond echoing back the input
+        text = self.get_argument("text")
+        html = tornado.escape.xhtml_escape(text)
+        player.transcript.append(html)
         self.render("play.html", **self.extras())

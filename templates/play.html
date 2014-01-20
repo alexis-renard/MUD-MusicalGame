@@ -2,8 +2,8 @@
 {% block content %}
 <div id="inbox">
  <div id="inboxcontents">
-  {% for message in messages %}
-    {% raw message["html"] %}
+  {% for item in items %}
+    {% raw item %}
   {% end %}
  </div>
 </div>
@@ -12,8 +12,9 @@
 	class="form-inline" role="form">
     <div class="form-group">
       <label class="sr-only" for="inputbox">Command</label>
-      <input type="text" name="command" id="inputbox" class="form-control" placeholder="Command"/>
+      <input type="text" name="text" id="inputbox" class="form-control" placeholder="Command"/>
     </div>
+    <input type="hidden" name="type" value="input"/>
     <input type="submit" value="Send" class="btn btn-default"/>
     {% module xsrf_form_html() %}
   </form>
