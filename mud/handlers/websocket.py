@@ -32,6 +32,7 @@ class WebSocketHandler(BaseHandler, tornado.websocket.WebSocketHandler):
     def on_message(self, message):
         msg = tornado.escape.json_decode(message)
         msg["user"] = self.player
+        msg["request"] = self
         ENGINE.put(msg)
 
     @staticmethod

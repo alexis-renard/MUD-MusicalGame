@@ -5,7 +5,6 @@
 import tornado.ioloop
 
 import threading, queue
-from mud.handlers.websocket import WebSocketHandler
 
 class Engine(threading.Thread):
 
@@ -32,8 +31,8 @@ class Engine(threading.Thread):
         html    = request.render_string(
             "chat.html", user=user, text=text).decode("utf-8")
         def callback():
-            WebSocketHandler.output_to_all(html)
-        tornado.ioloop.current().add_callback(callback)
+            request.output_to_all(html)
+        tornado.ioloop.IOLoop.current().add_callback(callback)
 
 ENGINE = Engine()
 ENGINE.start()
