@@ -4,7 +4,7 @@
 
 from mud.handlers.base import BaseHandler
 from mud.db.transcript import DATABASE as TRANSCRIPTS
-from mud.player import Player
+from mud.models.player import Player
 
 import tornado.web
 import tornado.escape

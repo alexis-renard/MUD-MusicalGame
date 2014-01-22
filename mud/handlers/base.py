@@ -17,5 +17,5 @@ class BaseHandler(tornado.web.RequestHandler):
         username = self.get_current_user()
         if username is None:
             return None
-        import mud.player
-        return mud.player.Player(username)
+        import mud.models.player
+        return mud.models.player.Player(username)
