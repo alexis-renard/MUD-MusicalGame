@@ -24,21 +24,14 @@ class WebSocketHandler(BaseHandler, tornado.websocket.WebSocketHandler):
             self.close()
             return
         self.player = self.get_player()
+        self.player.websocket = self      # the player knows its websocket
         self.opensockets.add(self)
 
     def on_close(self):
+        del self.player.websocket         # remove websocket from player
         self.opensockets.remove(self)
 
     def on_message(self, message):
         msg = tornado.escape.json_decode(message)
-        msg["user"] = self.player
-        msg["request"] = self
+        msg["player"] = self.player       # add player to received message
         ENGINE.put(msg)
-
-    @staticmethod
-    def output_to_all(html):
-        msg = {"type":"output", "html": html}
-        with WebSocketHandler.lock:
-            for ws in WebSocketHandler.opensockets:
-                ws.player.transcript.append(html)
-                ws.write_message(msg)
