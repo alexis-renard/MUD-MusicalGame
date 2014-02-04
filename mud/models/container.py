@@ -51,6 +51,9 @@ class Container(Model):
     def __len__(self):
         return len(self._contents)
 
+    def _has_prop_empty(self):
+        return not bool(self._contents)
+
     #--------------------------------------------------------------------------
     # MUD container API
     #--------------------------------------------------------------------------

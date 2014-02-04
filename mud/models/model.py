@@ -2,7 +2,7 @@
 # Copyright (C) 2014 Denys Duchier, IUT d'Orléans
 #==============================================================================
 
-import uuid
+import uuid, re
 
 class Model:
 
@@ -58,22 +58,49 @@ class Model:
     #--------------------------------------------------------------------------
 
     def props_proxy(self):
+        """returns the proxy object that actually holds the properties."""
         return self
 
     def has_prop(self, prop):
-        return prop in self.props_proxy()._props
+        """checks whether the model has the given property.
+
+        m.has_prop("+foo")
+        m.has_prop("foo")
+           checks that m has property "foo".
+        m.has_prop("-foo")
+           checks that m doesn't have property "foo"."""
+        prefix = prop[0]
+        if prefix == "+":
+            return self._has_prop(prop[1:])
+        if prefix == "-":
+            return not self._has_prop(prop[1:])
+        return return self._has_prop(prop)
+
+    def _has_prop(self, prop):
+        """m.has_prop("foo") either tries m.has_prop_foo() if it exists,
+        or m._has_prop_foo() if it exists, or checks if m has a property "foo"."""
+        mprop = re.sub(r"[^\w]+", "_", prop)
+        meth = (getattr(self,  "has_prop_"+mprop, None) or
+                getattr(self, "_has_prop_"+mprop, None))
+        if meth:
+            return meth()
+        else:
+            return prop in self._get_props()
+
+    def _get_props(self):
+        return self.props_proxy()._props()
 
     def add_prop(self, prop):
-        self.props_proxy()._props.add(prop)
+        self._get_props().add(prop)
 
     def remove_prop(self, prop):
-        self.props_proxy()._props.remove(prop)
+        self._get_props().remove(prop)
 
     def set_props(self, props):
         self.props_proxy()._props = set(props)
 
     def get_props(self):
-        return list(self.props_proxy()._props)
+        return list(self._get_props())
 
     #--------------------------------------------------------------------------
     # type tests for general categories of models

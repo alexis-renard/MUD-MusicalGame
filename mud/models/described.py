@@ -23,12 +23,11 @@ class Described(Model):
     they can contain a list of alternatives guarded by propositions:
 
     long:
-      - true : [locked]
+      - props: [+locked]
         text : the thing is closed and appears to be locked
-      - true : [closed]
-        false: [locked]
+      - props: [+closed, -locked]
         text : the thing is closed
-      - false: [closed]
+      - props: [-closed]
         text : the thing is open
 
     they can contain a dictionary of alternatives retrievable by name:
@@ -36,7 +35,7 @@ class Described(Model):
     long:
       desc-locked: the thing is closed and appears to be locked
       desc-closed: the thing is closed
-      desc-open: the thing is open
+      desc-open  : the thing is open
     """
 
     #--------------------------------------------------------------------------
@@ -85,10 +84,8 @@ class Described(Model):
             return desc
         elif isinstance(desc, list):
             for d in desc:
-                t = d.get(True , None)
-                f = d.get(False, None)
-                if (((not t) or all(     self.has_prop(p)  for p in t)) and
-                    ((not f) or all((not self.has_prop(p)) for p in f))):
+                l = d.get("props", None)
+                if (not l) or all(self.has_prop(p) for p in l):
                     return d["text"]
         else:
             return desc.get(name, None)
