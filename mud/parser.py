@@ -55,3 +55,35 @@ ENGLISH_RULES=(
     ("close"      , r"close (\w+)"),
     ("attack"     , r"attack (\w+)$"),
     ("attack_with", r"attack (\w+) (?:with|using) (\w+)$"))
+
+#==============================================================================
+# example of rules for french commands
+#==============================================================================
+
+FRENCH_DIRECTIONS = {
+    "nord"     : "nord"     , "n" : "nord"      ,
+    "est"      : "est"      , "e" : "est"       ,
+    "sud"      : "sud"      , "s" : "sud"       ,
+    "ouest"    : "ouest"    , "o" : "ouest"     ,
+    "nordest"  : "nordest"  , "ne": "nordest"   ,
+    "nordouest": "nordouest", "no": "nordouest" ,
+    "sudest"   : "sudest"   , "se": "sudest"    ,
+    "sudouest" : "sudouest" , "so": "sudouest"  ,
+    "haut"     : "haut"     , "h" : "haut"      ,
+    "bas"      : "bas"      , "b" : "bas"       ,
+    "monter"   : "haut"     ,
+    "grimper"  : "haut"     ,
+    "descendre": "bas"      ,
+}
+
+FRENCH_RULES=(
+    (ActionGo, r"(%s)$" % "|".join(FRENCH_DIRECTIONS.keys())),
+    (ActionTake, r"prendre (?:le |la |les |une |un |)(\w+)$"),
+    (ActionLook, r"regarder$"),
+    (ActionInspect, r"(?:regarder|lire|inspecter|observer) (?:le |la |les |une |un |)(\w+)$"),
+    (ActionOpen, r"ouvrir (?:le |la |les |une |un |)(\w+)$"),
+    (ActionOpenWith, r"ouvrir (?:le |la |les |une |un |)(\w+) avec (?:le |la |les |une |un |)(\w+)$"),
+    (ActionClose, r"fermer (?:le |la |les |une |un |)(\w+)$"),
+    (ActionType, r"(?:taper|ecrire) (\w+)$"),
+    (ActionInventory, r"(?:inventaire|inv|i)$"),
+)
