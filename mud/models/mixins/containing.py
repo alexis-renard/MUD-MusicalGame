@@ -73,3 +73,18 @@ class Containing(Propertied):
                 if v:
                     return v
         return None
+
+    def observers(self, actor):
+        """return the set of observers (different from the actor) that can
+        see something happening in the container."""
+        obs = set()
+        con = self
+        while con:
+            for x in self:
+                if x.is_player() and x is not actor:
+                    obs.add(x)
+            # if the container is open, then outside observers can
+            # see inside it.  for simplicity, we assume that inside
+            # observers cannot see outside.
+            con = None if con.has_prop("closed") else con.container()
+        return obs
