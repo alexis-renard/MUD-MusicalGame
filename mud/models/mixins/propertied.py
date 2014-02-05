@@ -83,11 +83,24 @@ class Propertied(Identified):
     def remove_prop(self, prop):
         self._get_props().remove(prop)
 
+    def change_prop(self, prop):
+        prefix = prop[0]
+        if prefix == "+":
+            self.add_prop(prop[1:])
+        elif prefix == "-":
+            self.remove_prop(prop[1:])
+        else:
+            self.add_prop(prop)
+
     def set_props(self, props):
         self.props_proxy()._props = set(props)
 
     def get_props(self):
         return list(self._get_props())
+
+    def change_props(self, props):
+        for prop in props:
+            self.change_prop(prop)
 
     #--------------------------------------------------------------------------
     # API for checking certain capabilities
