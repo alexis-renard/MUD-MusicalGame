@@ -74,17 +74,24 @@ class Containing(Propertied):
                     return v
         return None
 
-    def observers(self, actor):
-        """return the set of observers (different from the actor) that can
-        see something happening in the container."""
-        obs = set()
+    def players(self):
+        """return the set of players in the vicinity."""
+        plr = set()
         con = self
         while con:
             for x in self:
-                if x.is_player() and x is not actor:
-                    obs.add(x)
-            # if the container is open, then outside observers can
-            # see inside it.  for simplicity, we assume that inside
-            # observers cannot see outside.
+                if x.is_player():
+                    plr.add(x)
+            # if the container is open, then outside players are
+            # considered to be in the vicinity.  for simplicity,
+            # we assume that players in nested containers are not
+            # considered to be in the vicinity.
             con = None if con.has_prop("closed") else con.container()
+        return plr
+
+    def observers(self, actor):
+        """return the set of observers (different from the actor) that can
+        see something happening in the container."""
+        obs = self.players()
+        obs.remove(actor)
         return obs
