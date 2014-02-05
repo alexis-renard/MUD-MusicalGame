@@ -2,14 +2,11 @@
 # Copyright (C) 2014 Denys Duchier, IUT d'Orléans
 #==============================================================================
 
-from .mixins.propertied import Propertied
-from .mixins.described  import Described
-from .mixins.named      import Named
-from .mixins.composed   import Composed
+from .basic import Basic
 
-class Model(Named, Propertied, Described, Composed):
+class Composed(Basic):
 
-    """primitive base class for all models."""
+    """mixin class that provides the ability to have components."""
 
     #--------------------------------------------------------------------------
     # initialization
@@ -17,6 +14,7 @@ class Model(Named, Propertied, Described, Composed):
     
     def __init__(self, **kargs):
         super().__init__(**kargs)
+        self._parts = []
 
     #--------------------------------------------------------------------------
     # initialization from YAML data
@@ -24,6 +22,11 @@ class Model(Named, Propertied, Described, Composed):
 
     def init_from_yaml(self, data, world):
         super().init_from_yaml(data, world)
+        if "parts" in data:
+            for pdata in data["parts"]:
+                p = world.make(**pdata)
+                self._parts.append(p)
+                world.autocreated.append(p)
 
     def update_from_yaml(self, data, world):
         super().update_from_yaml(data, world)
@@ -34,16 +37,3 @@ class Model(Named, Propertied, Described, Composed):
 
     def archive_into(self, obj):
         super().archive_into(obj)
-
-    #--------------------------------------------------------------------------
-    # type tests for general categories of models
-    #--------------------------------------------------------------------------
-
-    def is_player(self):
-        return False
-
-    def is_location(self):
-        return False
-
-    def is_container(self):
-        return False

@@ -22,25 +22,37 @@ class World:
             if not k.startswith("_") and type(v) is type and issubclass(v, Model):
                 self.register(v.__name__, v)
 
+    def make(self, data):
+        cls = self.types[data["type"]]
+        obj = cls(**data)                 # autoadded to database
+        if "id" not in data:
+            data["id"] = obj.id
+        return obj
+
     def load(self):
         from yaml import load_all
 
         self.load_models()
+        self.autocreated = []
 
         # create all objects in the world (except players)
         with open(self.YAML_INITIAL) as stream:
             contents = load_all(stream)
             for data in contents:
-                cls = self.types[data["type"]]
-                obj = cls(**data)         # auto added to database
-                if "id" not in data:
-                    data["id"] = obj.id
+                obj = self.make(data)
 
         # initialize them with the initial yaml data
         for data in contents:
             key = data["id"]
             obj = self.database[key]
             obj.init_from_yaml(data, self)
+
+        # initialize autocreated objects with their yaml data
+        while self.autocreated:
+            pairs = self.autocreated
+            self.autocreated = []
+            for obj,data in pairs:
+                obj.init_from_yaml(data, self)
 
         # update them with the saved current state of the game
         if os.path.exists(self.YAML_CURRENT):

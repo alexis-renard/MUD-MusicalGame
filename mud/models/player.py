@@ -3,10 +3,10 @@
 #==============================================================================
 
 from mud.db.transcript import DATABASE as TRANSCRIPTS
-from .thing     import Thing
-from .container import Container
+from .thing      import Thing
+from .containing import Containing
 
-class Player(Thing, Container):
+class Player(Containing, Thing):
 
     _UUID_IF_ID_MISSING = True
     _PLAYERS = {}

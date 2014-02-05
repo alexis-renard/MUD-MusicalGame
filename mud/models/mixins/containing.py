@@ -2,13 +2,12 @@
 # Copyright (C) 2014 Denys Duchier, IUT d'Orléans
 #==============================================================================
 
-from .thing             import Thing
-from .mixins.located    import Located
-from .mixins.containing import Containing
+from .propertied import Propertied
 
-class Container(Containing, Thing):
+class Containing(Propertied):
 
-    """a Container contains objects and/or players.  For example: a box."""
+    """a mixin that can contain objects and/or players.  it provides support
+    for contents."""
 
     #--------------------------------------------------------------------------
     # initialization
@@ -32,13 +31,6 @@ class Container(Containing, Thing):
         super().archive_into(obj)
 
     #--------------------------------------------------------------------------
-    # type tests for general categories of models
-    #--------------------------------------------------------------------------
-
-    def is_container(self):
-        return True
-
-    #--------------------------------------------------------------------------
     # python container API
     #--------------------------------------------------------------------------
 
@@ -52,7 +44,7 @@ class Container(Containing, Thing):
         return len(self._contents)
 
     def _has_prop_empty(self):
-        return not bool(self._contents)
+        return not self._contents
 
     #--------------------------------------------------------------------------
     # MUD container API
@@ -66,9 +58,18 @@ class Container(Containing, Thing):
         """remove an object or player from the container."""
         self._contents.remove(obj)
 
-    def find(self, name):
+    def find_contents(self, name):
         """return the object or player present in this container and identified
-        by this name, or None if no such object or player is found."""
-        for x in self:
+        by this name, or None if no such object or player is found.  recursively
+        look into embedded open containers."""
+        if self.has_prop("closed"):
+            return None
+        for x in self._contents:
             if x.has_name(name):
                 return x
+        for x in self._contents:
+            if isinstance(x, Containing):
+                v = x.find_contents(name)
+                if v:
+                    return v
+        return None

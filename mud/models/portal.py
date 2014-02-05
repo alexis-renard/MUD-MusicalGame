@@ -2,9 +2,9 @@
 # Copyright (C) 2014 Denys Duchier, IUT d'Orléans
 #==============================================================================
 
-from .described import Described
+from .model import Model
 
-class Portal(Described):
+class Portal(Model):
 
     """a Portal has 2 exits.  Each exit is located at a certain location in a
     given direction.  An exit refers to the properties of its portal.  In YAML
@@ -47,11 +47,13 @@ class Portal(Described):
 
     def init_from_yaml(self, data, world):
         super().init_from_yaml(data, world)
-        from .exit import Exit
         for edata in data["exits"]:
-            e = Exit(**edata)
-            e.portal = self
-            self.exists.append(e)
+            if "type" not in edata:
+                edata["type"] = "Exit"
+            obj = world.make(edata)
+            obj.portal = self
+            self.exits.append(obj)
+            world.autocreated.append(obj)
 
     def update_from_yaml(self, data, world):
         super().update_from_yaml(data, world)

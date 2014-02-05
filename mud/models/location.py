@@ -2,9 +2,10 @@
 # Copyright (C) 2014 Denys Duchier, IUT d'Orléans
 #==============================================================================
 
-from .container import Container
+from .model import Model
+from .mixins.containing import Containing
 
-class Location(Container):
+class Location(Containing, Model):
 
     #--------------------------------------------------------------------------
     # initialization

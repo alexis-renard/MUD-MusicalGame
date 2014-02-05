@@ -2,9 +2,9 @@
 # Copyright (C) 2014 Denys Duchier, IUT d'Orléans
 #==============================================================================
 
-from .model import Model
+from .propertied import Propertied
 
-class Described(Model):
+class Described(Propertied):
 
     """mixin for models that have descriptions.  this provides support for
     2 kinds of descriptions: short and long.  typically long descriptions
@@ -60,6 +60,13 @@ class Described(Model):
 
     def update_from_yaml(self, data, world):
         super().update_from_yaml(data, world)
+
+    #--------------------------------------------------------------------------
+    # API for saving the dynamic part of objects to YAML (via JSON)
+    #--------------------------------------------------------------------------
+
+    def archive_into(self, obj):
+        super().archive_into(obj)
 
     #--------------------------------------------------------------------------
     # model API

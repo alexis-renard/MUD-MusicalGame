@@ -2,14 +2,13 @@
 # Copyright (C) 2014 Denys Duchier, IUT d'Orléans
 #==============================================================================
 
-from .mixins.propertied import Propertied
-from .mixins.described  import Described
-from .mixins.named      import Named
-from .mixins.composed   import Composed
+from .identified import Identified
 
-class Model(Named, Propertied, Described, Composed):
+class Located(Identified):
 
-    """primitive base class for all models."""
+    """mixin class for things that are located in the world, i.e. that are
+    stored in containers.  A container could be a location in the world, or
+    it could be something like a box, or it could a player's inventory."""
 
     #--------------------------------------------------------------------------
     # initialization
@@ -17,6 +16,7 @@ class Model(Named, Propertied, Described, Composed):
     
     def __init__(self, **kargs):
         super().__init__(**kargs)
+        self._container = None
 
     #--------------------------------------------------------------------------
     # initialization from YAML data
@@ -24,9 +24,13 @@ class Model(Named, Propertied, Described, Composed):
 
     def init_from_yaml(self, data, world):
         super().init_from_yaml(data, world)
+        if "container" in data:
+            self.move_to(world[data["container"]])
 
     def update_from_yaml(self, data, world):
         super().update_from_yaml(data, world)
+        if "container" in data:
+            self.move_to(world[data["container"]])
 
     #--------------------------------------------------------------------------
     # API for saving the dynamic part of objects to YAML (via JSON)
@@ -34,16 +38,22 @@ class Model(Named, Propertied, Described, Composed):
 
     def archive_into(self, obj):
         super().archive_into(obj)
+        if self._container:
+            obj["container"] = self._container.id
+        else:
+            obj["container"] = None
 
     #--------------------------------------------------------------------------
-    # type tests for general categories of models
+    # model API
     #--------------------------------------------------------------------------
 
-    def is_player(self):
-        return False
+    def move_to(self, cont):
+        if self._container:
+            self._container.remove(self)
+            self._container = None
+        if cont:
+            cont.add(self)
+            self._container = cont
 
-    def is_location(self):
-        return False
-
-    def is_container(self):
-        return False
+    def container(self):
+        return self._container

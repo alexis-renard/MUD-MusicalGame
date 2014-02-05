@@ -2,33 +2,35 @@
 # Copyright (C) 2014 Denys Duchier, IUT d'Orléans
 #==============================================================================
 
-from .model import Model
-from .mixins.located import Located
+class Basic:
 
-class Thing(Located, Model):
-
-    """a Thing is located in the world."""
+    """primitive base class for all models and mixins."""
 
     #--------------------------------------------------------------------------
     # initialization
     #--------------------------------------------------------------------------
-    
+
     def __init__(self, **kargs):
-        super().__init__(**kargs)
+        pass
 
     #--------------------------------------------------------------------------
     # initialization from YAML data
     #--------------------------------------------------------------------------
 
     def init_from_yaml(self, data, world):
-        super().init_from_yaml(data, world)
+        pass
 
     def update_from_yaml(self, data, world):
-        super().update_from_yaml(data, world)
+        pass
 
     #--------------------------------------------------------------------------
-    # API for saving the dynamic part of objects to YAML (via JSON)
+    # API for saving the dynamic parts of objects to YAML (via JSON)
     #--------------------------------------------------------------------------
+
+    def to_json(self):
+        obj = {}
+        self.archive_into(obj)
+        return obj
 
     def archive_into(self, obj):
-        super().archive_into(obj)
+        pass
