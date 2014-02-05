@@ -64,22 +64,21 @@ class Containing(Propertied):
         look into embedded open containers."""
         if self.has_prop("closed"):
             return None
-        for x in self._contents:
+        for x in self:
             if x.has_name(name):
                 return x
-        for x in self._contents:
             if isinstance(x, Containing):
                 v = x.find_contents(name)
                 if v:
                     return v
         return None
 
-    def players(self):
+    def players_in_vicinity(self):
         """return the set of players in the vicinity."""
         plr = set()
         con = self
         while con:
-            for x in self:
+            for x in con:
                 if x.is_player():
                     plr.add(x)
             # if the container is open, then outside players are
@@ -89,9 +88,29 @@ class Containing(Propertied):
             con = None if con.has_prop("closed") else con.container()
         return plr
 
-    def observers(self, actor):
+    def observers_in_vicinity(self, actor):
         """return the set of observers (different from the actor) that can
         see something happening in the container."""
         obs = self.players()
         obs.remove(actor)
         return obs
+
+    def objects_in_vicinity(self):
+        """return the set of objects that can be considered to be in
+        the vicinity."""
+        objs = set()
+        con = self
+        while con:
+            for x in con:
+                objs.add(x)
+                if x.is_player():
+                    objs.extend(iter(x))
+            con = None if con.has_prop("closed") else con.container()
+        return objs
+
+    def find_prop_in_vicinity(self, prop):
+        """return True if some object in the vicinity has property prop."""
+        for x in self.objects_in_vicinity():
+            if x.has_prop(prop):
+                return True
+        return False

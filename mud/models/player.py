@@ -68,6 +68,15 @@ class Player(Containing, Thing):
         return self.find(name) or \
             (self.container and self.container.find(name))
 
+    def can_see(self, location):
+        if not location.has_prop("dark"):
+            return True
+        if self.has_prop("power-to-see-in-the-dark"):
+            return True
+        if self.find_prop_in_vicinity("light-on"):
+            return True
+        return False
+
     #--------------------------------------------------------------------------
     # API for sending messages back to the user through his websocket
     #--------------------------------------------------------------------------
