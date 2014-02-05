@@ -114,3 +114,32 @@ class Containing(Propertied):
             if x.has_prop(prop):
                 return True
         return False
+
+    def long_description_for(self, player):
+        # if the player cannot see, then return a short description
+        # which hopefully takes into account the fact that the player
+        # cannot see and says something like "it is pitch dark here. you
+        # cannot see anything."
+        if not player.can_see(self):
+            return self.dark_description()
+        text = self.long_description().strip()
+        text = EMPTY_LINE.sub("\n", text)
+        if not text.startswith("<"):
+            text = "\n".join(("<p>%s</p>" % t) for t in text.split())
+        things = []
+        for x in self:
+            things.append("<li>%s</li>" % x.short_description())
+        text += "<ul>%s</ul>" % "\n".join(things)
+        return text
+
+    def dark_description(self):
+        return "<p>il fait sombre ici... on n'y voit rien!</p>"
+
+    def short_description_for(self, player):
+        if not player.can_see(self):
+            return self.dark_description()
+        text = self.short_description().strip()
+        text = EMPTY_LINE.sub("\n", text)
+        if not text.startswith("<"):
+            text = "\n".join(("<p>%s</p>" % t) for t in text.split())
+        return text

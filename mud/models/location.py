@@ -2,8 +2,12 @@
 # Copyright (C) 2014 Denys Duchier, IUT d'Orléans
 #==============================================================================
 
+import re
 from .model import Model
 from .mixins.containing import Containing
+
+EMPTY_LINE = re.compile(r"^[\t ]*\r?\n", re.MULTILINE)
+
 
 class Location(Containing, Model):
 
@@ -52,3 +56,8 @@ class Location(Containing, Model):
         for e in self.exits:
             if e.direction == direction:
                 return e
+
+    #--------------------------------------------------------------------------
+    # detailed description:
+    #--------------------------------------------------------------------------
+
