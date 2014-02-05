@@ -88,3 +88,11 @@ class Propertied(Identified):
 
     def get_props(self):
         return list(self._get_props())
+
+    #--------------------------------------------------------------------------
+    # API for checking certain capabilities
+    #--------------------------------------------------------------------------
+
+    def is_key_for(self, obj):
+        """return True iff this is a key for obj."""
+        self.has_prop("key-for-%s" % obj.id)
