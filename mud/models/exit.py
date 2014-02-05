@@ -14,9 +14,10 @@ class Exit(Model):
 
     def __init__(self, **kargs):
         super().__init__(**kargs)
-        self.portal    = None
-        self.location  = None
-        self.direction = None
+        self.portal      = None
+        self.location    = None
+        self.direction   = None
+        self.destination = None
 
     #--------------------------------------------------------------------------
     # initialization from YAML data
@@ -24,10 +25,13 @@ class Exit(Model):
 
     def init_from_yaml(self, data, world):
         super().init_from_yaml(data, world)
-        loc = world[data["location"]]
-        dir = data["direction"]
-        self.add_name(dir)
-        loc.add_exit(self)
+        self.location  = world[data["location"]]
+        self.direction = data["direction"]
+        dest = data.get("destination")
+        if dest:
+            self.destination = world[dest]
+        self.add_name(self.direction)
+        self.location.add_exit(self)
 
     def update_from_yaml(self, data, world):
         super().update_from_yaml(data, world)
@@ -41,3 +45,12 @@ class Exit(Model):
 
     def props_proxy(self):
         return self.portal
+
+    #--------------------------------------------------------------------------
+    # model API
+    #--------------------------------------------------------------------------
+
+    def other_exit(self):
+        if self.destination:
+            return self.destination
+        return self.portal.other_exit(self)

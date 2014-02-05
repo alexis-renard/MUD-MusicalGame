@@ -64,3 +64,13 @@ class Portal(Model):
 
     def archive_into(self, obj):
         super().archive_into(obj)
+
+    #--------------------------------------------------------------------------
+    # model API
+    #--------------------------------------------------------------------------
+
+    def other_exit(self, exit):
+        # by default, pick the first other one
+        for x in self.exits:
+            if x is not exit:
+                return x
