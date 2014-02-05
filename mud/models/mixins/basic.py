@@ -41,3 +41,9 @@ class Basic:
 
     def container(self):
         return None
+
+    def short_description_for(self, player):
+        raise NotImplemented()
+
+    def long_description_for(self, player):
+        raise NotImplemented()
