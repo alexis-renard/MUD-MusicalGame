@@ -15,7 +15,7 @@ class Named(Basic):
     
     def __init__(self, **kargs):
         super().__init__(**kargs)
-        self._name = None
+        self._names = {}
 
     #--------------------------------------------------------------------------
     # initialization from YAML data
@@ -23,8 +23,10 @@ class Named(Basic):
 
     def init_from_yaml(self, data, world):
         super().init_from_yaml(data, world)
+        if "names" in data:
+            self._names.update(data["names"])
         if "name" in data:
-            self._name = data["name"]
+            self._names.add(data["name"])
 
     def update_from_yaml(self, data, world):
         super().update_from_yaml(data, world)
@@ -35,12 +37,14 @@ class Named(Basic):
 
     def archive_into(self, obj):
         super().archive_into(obj)
-        obj["name"] = self._name
+        obj["names"] = self._names
 
     #--------------------------------------------------------------------------
     # model API
     #--------------------------------------------------------------------------
 
-    def has_name(self, name):
-        return self._name == name
+    def add_name(self, name):
+        self._names.add(name)
 
+    def has_name(self, name):
+        return name in self._names

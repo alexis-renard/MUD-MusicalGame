@@ -27,6 +27,7 @@ class Player(Containing, Thing):
         super().__init__(**kargs)     # otherwise, initialize base classes
         _PLAYERS[name]  = self        # save player in static dict
         self.transcript = TRANSCRIPTS.lookup(name) # and add appropriate attributes
+        self.name = name
 
     #--------------------------------------------------------------------------
     # initialization from YAML data
@@ -34,6 +35,7 @@ class Player(Containing, Thing):
 
     def init_from_yaml(self, data, world):
         super().init_from_yaml(data, world)
+        self.add_name(self.name)
 
     def update_from_yaml(self, data, world):
         super().update_from_yaml(data, world)

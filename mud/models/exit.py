@@ -26,6 +26,7 @@ class Exit(Model):
         super().init_from_yaml(data, world)
         loc = world[data["location"]]
         dir = data["direction"]
+        self.add_name(dir)
         loc.add_exit(self)
 
     def update_from_yaml(self, data, world):
@@ -37,9 +38,6 @@ class Exit(Model):
 
     def archive_into(self, obj):
         super().archive_into(obj)
-
-    def has_name(self, name):
-        return self.direction == name
 
     def props_proxy(self):
         return self.portal
