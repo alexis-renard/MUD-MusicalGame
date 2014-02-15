@@ -3,6 +3,8 @@
 #==============================================================================
 
 from .action import Action1
+from mud.events import LookEvent
 
-class Look(Action1):
-    pass
+class LookAction(Action1):
+    EVENT = LookEvent
+    ACTION = "look"

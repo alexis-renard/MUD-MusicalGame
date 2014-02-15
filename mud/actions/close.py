@@ -3,6 +3,9 @@
 #==============================================================================
 
 from .action import Action2
+from mud.events import CloseEvent
 
-class Close(Action2):
-    pass
+class CloseAction(Action2):
+    EVENT = CloseEvent
+    RESOLVE_OBJECT = "resolve_for_operate"
+    ACTION = "close"

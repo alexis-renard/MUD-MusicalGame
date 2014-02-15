@@ -3,9 +3,9 @@
 #==============================================================================
 
 from .action import Action2
-from mud.events import InspectEvent
+from mud.events import TakeEvent
 
-class InspectAction(Action2):
-    EVENT = InspectEvent
+class TakeAction(Action2):
+    EVENT = TakeEvent
     RESOLVE_OBJECT = "resolve_for_take"
-    ACTION = "inspect"
+    ACTION = "take"

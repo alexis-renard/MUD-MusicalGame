@@ -2,11 +2,11 @@
 # Copyright (C) 2014 Denys Duchier, IUT d'Orléans
 #==============================================================================
 
-from .action  import Action, Action1, Action2, Action3
-from .close   import Close
-from .go      import Go
-from .inspect import Inspect
-from .look    import Look
-from .open    import Open
-from .unlock  import UnlockWith
-from .lock    import LockWith
+from .go        import GoAction
+from .inspect   import InspectAction
+from .look      import LookAction
+from .open      import OpenAction, OpenWithAction
+from .close     import CloseAction
+from .type      import TypeAction
+from .take      import TakeAction
+from .inventory import InventoryAction
