@@ -3,10 +3,31 @@
 #==============================================================================
 
 #==============================================================================
-# a rule is a pair (ACTION, PATTERN)
+# a rule is a pair (ACTIONCLASS, PATTERN)
 #==============================================================================
 
-rules = []
+from mud.actions import (
+    ActionGo, ActionTake, ActionLook, ActionInspect, ActionOpen,
+    ActionOpenWith, ActionClose, ActionType, ActionInventory,
+)
+from mud.static import STATIC
+
+DIRS = list(STATIC["directions"]["noun_at_the"].values())
+DIRS.extend(STATIC["directions"]["noun_the"].values())
+DIRS.extend(STATIC["directions"]["normalized"].keys())
+DETS = "(?:l |le |la |les |une |un |)"
+
+RULES = (
+    (ActionGo       , r"(?:aller |)(%s)$" % "|".join(DIRS)),
+    (ActionTake     , r"prendre %s(\w+)$" % DETS),
+    (ActionLook     , r"regarder$"),
+    (ActionInspect  , r"(?:regarder|lire|inspecter|observer) %s(\w+)$" % DETS),
+    (ActionOpen     , r"ouvrir %s(\w+)$" % DETS),
+    (ActionOpenWith , r"ouvrir %s(\w+) avec %s(\w+)$" % (DETS,DETS)),
+    (ActionClose    , r"fermer %s(\w+)$" % DETS),
+    (ActionType     , r"(?:taper|ecrire) (\w+)$"),
+    (ActionInventory, r"(?:inventaire|inv|i)$"),
+)
 
 #==============================================================================
 # parse(TEXT) returns a pair (ACTION,PARAMS), where ACTION is the name of the
@@ -14,76 +35,12 @@ rules = []
 # PATTERN.
 #==============================================================================
 
-def parse(text):
+def parse(actor, text):
     text = " ".join(text.strip().lower().split())
+    text = " ".join(text.split("'"))
     for action,pattern in rules:
+        pattern += "$"
         m = pattern.match(text)
         if m:
-            return action,m.groups()
+            return action(actor, *m.groups())
     return None,text
-
-#==============================================================================
-# example of rules for english commands. they can be activated as follows:
-#
-#     mud.parser.rules.extend(mud.parser.ENGLISH_RULES)
-#==============================================================================
-
-ENGLISH_DIRECTIONS = {
-    "north"    : "north"    , "n" : "north"    ,
-    "east"     : "east"     , "e" : "east"     ,
-    "south"    : "south"    , "s" : "south"    ,
-    "west"     : "west"     , "w" : "west"     ,
-    "northeast": "northeast", "ne": "northeast",
-    "northwest": "northwest", "nw": "northwest",
-    "southeast": "southeast", "se": "southeast",
-    "southwest": "southwest", "sw": "southwest",
-    "up"       : "up"       , "u" : "up"       ,
-    "down"     : "down"     , "d" : "down"     ,
-}
-
-
-ENGLISH_RULES=(
-    ("go"         , r"(?:go )?(%s)$" % "|".join(ENGLISH_DIRECTIONS.keys())),
-    ("take"       , r"take (\w+)$"),
-    ("drop"       , r"drop (\w+)$"),
-    ("eat"        , r"eat (\w+)$"),
-    ("drink"      , r"drink (\w+)$"),
-    ("look"       , r"look$"),
-    ("inspect"    , r"(?:look at|look|inspect) (\w+)$"),
-    ("open"       , r"open (\w+)$"),
-    ("open_with"  , r"open (\w+) (?:with|using) (\w+)$"),
-    ("close"      , r"close (\w+)"),
-    ("attack"     , r"attack (\w+)$"),
-    ("attack_with", r"attack (\w+) (?:with|using) (\w+)$"))
-
-#==============================================================================
-# example of rules for french commands
-#==============================================================================
-
-FRENCH_DIRECTIONS = {
-    "nord"     : "nord"     , "n" : "nord"      ,
-    "est"      : "est"      , "e" : "est"       ,
-    "sud"      : "sud"      , "s" : "sud"       ,
-    "ouest"    : "ouest"    , "o" : "ouest"     ,
-    "nordest"  : "nordest"  , "ne": "nordest"   ,
-    "nordouest": "nordouest", "no": "nordouest" ,
-    "sudest"   : "sudest"   , "se": "sudest"    ,
-    "sudouest" : "sudouest" , "so": "sudouest"  ,
-    "haut"     : "haut"     , "h" : "haut"      ,
-    "bas"      : "bas"      , "b" : "bas"       ,
-    "monter"   : "haut"     ,
-    "grimper"  : "haut"     ,
-    "descendre": "bas"      ,
-}
-
-FRENCH_RULES=(
-    (ActionGo, r"(%s)$" % "|".join(FRENCH_DIRECTIONS.keys())),
-    (ActionTake, r"prendre (?:le |la |les |une |un |)(\w+)$"),
-    (ActionLook, r"regarder$"),
-    (ActionInspect, r"(?:regarder|lire|inspecter|observer) (?:le |la |les |une |un |)(\w+)$"),
-    (ActionOpen, r"ouvrir (?:le |la |les |une |un |)(\w+)$"),
-    (ActionOpenWith, r"ouvrir (?:le |la |les |une |un |)(\w+) avec (?:le |la |les |une |un |)(\w+)$"),
-    (ActionClose, r"fermer (?:le |la |les |une |un |)(\w+)$"),
-    (ActionType, r"(?:taper|ecrire) (\w+)$"),
-    (ActionInventory, r"(?:inventaire|inv|i)$"),
-)
