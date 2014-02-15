@@ -7,8 +7,8 @@ import os.path
 class World:
 
     DATADIR      = os.path.dirname(__file__)
-    YAML_INITIAL = os.path.join(DATADIR, "initial.yaml")
-    YAML_CURRENT = os.path.join(DATADIR, "current.yaml")
+    YAML_INITIAL = os.path.join(DATADIR, "initial.yml")
+    YAML_CURRENT = os.path.join(DATADIR, "current.yml")
 
     def __init__(self):
         self.database = {}
