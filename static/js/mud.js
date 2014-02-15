@@ -50,7 +50,8 @@ var updater = {
     },
 
     showMessage: function(message) {
-        $("#inboxcontents").append(message.html);
+	var html = "<div class=\"alert mud-"+message.type+"\">"+message.html+"</div>"
+        $("#inboxcontents").append(html);
 	scroll_to_bottom();
     }
 };
