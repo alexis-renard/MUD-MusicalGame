@@ -1,0 +1,40 @@
+---
+id: parking-iut
+events:
+  look:
+short: parking de l'IUT.
+long: |
+  Vous êtes sur le parking de l'IUT.
+---
+id: arbre-parking-iut
+---
+id: porche-departement-info
+---
+id: hall-departement-info
+---
+id: departement-info-salle-22
+---
+id: cabane-suspendue
+---
+id: lampe-torche
+---
+id: badge-de-securite
+container: arbre-parking-iut
+long:
+  - container: arbre-parking-iut
+    text: |
+      sur la branche repose un nid, et dans le nid vous
+      apercevez un BADGE d'accès.
+short:
+  - text: un BADGE d'accès.
+---
+id       : nid-arbre-parking-iut
+type     : described-container
+container: arbre-parking-lot
+name     : nid
+short    : au creux d'une branche il y a un nid.
+long     :
+  - props: [empty]
+    text : le nid est vide.
+  - text : |
+      dans le nid, vous apercevez:
