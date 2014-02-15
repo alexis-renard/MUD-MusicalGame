@@ -6,7 +6,7 @@ from .basic import Basic
 
 class Composed(Basic):
 
-    """mixin class that provides the ability to have components."""
+    """mixin class that provides the ability to have parts."""
 
     #--------------------------------------------------------------------------
     # initialization
@@ -37,3 +37,10 @@ class Composed(Basic):
 
     def archive_into(self, obj):
         super().archive_into(obj)
+
+    #--------------------------------------------------------------------------
+    # model API
+    #--------------------------------------------------------------------------
+
+    def parts(self):
+        return iter(self._parts)

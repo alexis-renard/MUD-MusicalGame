@@ -16,7 +16,6 @@ class Container(Containing, Thing):
 
     def __init__(self, **kargs):
         super().__init__(**kargs)
-        self._contents = set()
 
     def init_from_yaml(self, data, world):
         super().init_from_yaml(data, world)
@@ -32,43 +31,13 @@ class Container(Containing, Thing):
         super().archive_into(obj)
 
     #--------------------------------------------------------------------------
-    # type tests for general categories of models
+    # model API
     #--------------------------------------------------------------------------
 
     def is_container(self):
         return True
 
-    #--------------------------------------------------------------------------
-    # python container API
-    #--------------------------------------------------------------------------
-
-    def __contains__(self, x):
-        return x in self._contents
-
-    def __iter__(self):
-        return iter(self._contents)
-
-    def __len__(self):
-        return len(self._contents)
-
-    def _has_prop_empty(self):
-        return not bool(self._contents)
-
-    #--------------------------------------------------------------------------
-    # MUD container API
-    #--------------------------------------------------------------------------
-
-    def add(self, obj):
-        """add an object or player to the container."""
-        self._contents.add(obj)
-
-    def remove(self, obj):
-        """remove an object or player from the container."""
-        self._contents.remove(obj)
-
-    def find(self, name):
-        """return the object or player present in this container and identified
-        by this name, or None if no such object or player is found."""
-        for x in self:
-            if x.has_name(name):
-                return x
+    def all(self):
+        """return an iterator over all objects in/at the container."""
+        yield from self.contents()
+        yield from self.parts()

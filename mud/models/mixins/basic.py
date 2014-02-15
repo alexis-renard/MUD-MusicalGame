@@ -39,9 +39,6 @@ class Basic:
     # MUD API
     #--------------------------------------------------------------------------
 
-    def container(self):
-        return None
-
     def short_description_for(self, player):
         raise NotImplemented()
 

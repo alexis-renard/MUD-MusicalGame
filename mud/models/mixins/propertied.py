@@ -5,6 +5,8 @@
 import re
 from .identified import Identified
 
+RE_CALL = re.compile(r"^(?P<prop>(?:\w|[-_.])+)(?:\((?P<arg>[^)]*)\)|)$")
+
 class Propertied(Identified):
 
     """mixin class that provides a way for a model to have properties that can
@@ -48,7 +50,11 @@ class Propertied(Identified):
         """returns the proxy object that actually holds the properties."""
         return self
 
-    def has_prop(self, prop):
+    def has_props(self, props, context=None):
+        """checks whether the model has all the given properties."""
+        return all(self.has_prop(prop, context) for prop in props)
+
+    def has_prop(self, prop, context=None):
         """checks whether the model has the given property.
 
         m.has_prop("+foo")
@@ -58,30 +64,56 @@ class Propertied(Identified):
            checks that m doesn't have property "foo"."""
         prefix = prop[0]
         if prefix == "+":
-            return self._has_prop(prop[1:])
+            return self._has_prop(prop[1:], context)
         if prefix == "-":
-            return not self._has_prop(prop[1:])
-        return return self._has_prop(prop)
+            return not self._has_prop(prop[1:], context)
+        return return self._has_prop(prop, context)
 
-    def _has_prop(self, prop):
-        """m.has_prop("foo") either tries m.has_prop_foo() if it exists,
-        or m._has_prop_foo() if it exists, or checks if m has a property "foo"."""
-        mprop = re.sub(r"[^\w]+", "_", prop)
+    def _has_prop(self, prop, context=None):
+        """m._has_prop("actor:foo", context) looks up actor in context and
+        delegates to it _has_prop("foo").  m._has_prop("foo") either tries
+        m.has_prop_foo() if it exists, or m._has_prop_foo() if it exists,
+        or checks if m has a property "foo"."""
+        if ":" in prop:
+            key, prop = prop.split(":", 1)
+            return context[key]._has_prop(prop)
+        m = RE_CALL.match(prop)
+        p = m.group("prop")
+        a = m.group("arg")
+        args = () if a is None else (a,)
+        mprop = self._sanitize_prop(p)
         meth = (getattr(self,  "has_prop_"+mprop, None) or
                 getattr(self, "_has_prop_"+mprop, None))
         if meth:
-            return meth()
+            return meth(*args)
+        elif args:
+            raise Exception("_has_prop: %s" % prop)
         else:
             return prop in self._get_props()
+
+    def _sanitize_prop(self, prop):
+        return re.sub(r"[^\w]+", "_", prop)
 
     def _get_props(self):
         return self.props_proxy()._props()
 
     def add_prop(self, prop):
-        self._get_props().add(prop)
+        mprop = self._sanitize_prop(prop)
+        meth = (getattr(self,  "add_prop_"+mprop, None) or
+                getattr(self, "_add_prop_"+mprop, None))
+        if meth:
+            meth()
+        else:
+            self._get_props().add(prop)
 
     def remove_prop(self, prop):
-        self._get_props().remove(prop)
+        mprop = self._sanitize_prop(prop)
+        meth = (getattr(self,  "remove_prop_"+mprop, None) or
+                getattr(self, "_remove_prop_"+mprop, None))
+        if meth:
+            meth()
+        else:
+            self._get_props().remove(prop)
 
     def change_prop(self, prop):
         prefix = prop[0]
@@ -93,7 +125,9 @@ class Propertied(Identified):
             self.add_prop(prop)
 
     def set_props(self, props):
-        self.props_proxy()._props = set(props)
+        for prop in props:
+            # this way computed properties work too
+            self.set_prop(prop)
 
     def get_props(self):
         return list(self._get_props())
@@ -103,7 +137,38 @@ class Propertied(Identified):
             self.change_prop(prop)
 
     #--------------------------------------------------------------------------
-    # API for checking certain capabilities
+    # computed properties:
+    # - empty		(purely observational)
+    # - open		(negation of closed)
+    # - has-class(ClassName)
+    #--------------------------------------------------------------------------
+
+    def _has_prop_empty(self):
+        return not self._contents
+
+    def _add_prop_empty(self):
+        raise NotImplemented()
+
+    def _remove_prop_empty(self):
+        raise NotImplemented()
+
+    def _has_prop_open(self):
+        return not self.has_prop("closed")
+
+    def _add_prop_open(self):
+        self.remove_prop("closed")
+
+    def _remove_prop_open(self):
+        self.add_prop("closed")
+
+    def _has_prop_has_class(self, cname):
+        for x in self.__class__.__mro__:
+            if cname == x.__name__:
+                return True
+        return False
+
+    #--------------------------------------------------------------------------
+    # check for certain capabilities
     #--------------------------------------------------------------------------
 
     def is_key_for(self, obj):

@@ -3,11 +3,11 @@
 #==============================================================================
 
 from .mixins.propertied import Propertied
-from .mixins.described  import Described
+from .mixins.evented    import Evented
 from .mixins.named      import Named
 from .mixins.composed   import Composed
 
-class Model(Named, Propertied, Described, Composed):
+class Model(Named, Propertied, Evented, Composed):
 
     """primitive base class for all models."""
 
@@ -47,3 +47,11 @@ class Model(Named, Propertied, Described, Composed):
 
     def is_container(self):
         return False
+
+    #--------------------------------------------------------------------------
+    # model API
+    #--------------------------------------------------------------------------
+
+    def all(self):
+        """return an iterator over all things in/at the model."""
+        yield from self.parts()

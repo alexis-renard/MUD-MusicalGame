@@ -6,10 +6,10 @@ import re
 from .model import Model
 from .mixins.containing import Containing
 
-EMPTY_LINE = re.compile(r"^[\t ]*\r?\n", re.MULTILINE)
-
-
 class Location(Containing, Model):
+
+    """a Location contains stuff and has exits; but it is not itself located in
+    something else."""
 
     #--------------------------------------------------------------------------
     # initialization
@@ -17,7 +17,7 @@ class Location(Containing, Model):
 
     def __init__(self, **kargs):
         super().__init__(**kargs)
-        self.exits = [] # through these exits, portals can be traversed to other locations
+        self._exits = [] # through these exits, portals can be traversed to other locations
 
     #--------------------------------------------------------------------------
     # initialization from YAML data
@@ -39,25 +39,24 @@ class Location(Containing, Model):
         super().archive_into(obj)
 
     #--------------------------------------------------------------------------
-    # type tests for general categories of models
+    # model API
     #--------------------------------------------------------------------------
 
     def is_location(self):
         return True
 
-    #--------------------------------------------------------------------------
-    # model API
-    #--------------------------------------------------------------------------
-
     def add_exit(self, e):
-        self.exits.append(e)
+        self._exits.append(e)
 
     def find_exit(self, direction):
-        for e in self.exits:
+        for e in self._exits:
             if e.direction == direction:
                 return e
 
-    #--------------------------------------------------------------------------
-    # detailed description:
-    #--------------------------------------------------------------------------
+    def exits(self):
+        return iter(self._exits)
 
+    def all(self):
+        yield from self.contents()
+        yield from self.parts()
+        yield from self.exits()

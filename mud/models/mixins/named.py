@@ -6,8 +6,8 @@ from .basic import Basic
 
 class Named(Basic):
 
-    """mixin class that provides a name.  a model that is named, can be
-    identfied by that name."""
+    """mixin class that provides the ability to have a name (or several).  A
+    model that is named, can be identified by that name."""
 
     #--------------------------------------------------------------------------
     # initialization
@@ -15,7 +15,7 @@ class Named(Basic):
     
     def __init__(self, **kargs):
         super().__init__(**kargs)
-        self._names = {}
+        self._names = set()
 
     #--------------------------------------------------------------------------
     # initialization from YAML data
@@ -37,7 +37,7 @@ class Named(Basic):
 
     def archive_into(self, obj):
         super().archive_into(obj)
-        obj["names"] = self._names
+        obj["names"] = list(self._names)
 
     #--------------------------------------------------------------------------
     # model API
@@ -48,3 +48,10 @@ class Named(Basic):
 
     def has_name(self, name):
         return name in self._names
+
+    def names(self):
+        return iter(self._names)
+
+    # computed property: has-name(Name)
+    def _has_prop_has_name(self, name):
+        return has_name(name)

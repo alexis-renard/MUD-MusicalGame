@@ -48,34 +48,35 @@ class Player(Containing, Thing):
         super().archive_into(obj)
 
     #--------------------------------------------------------------------------
-    # type tests for general categories of models
+    # model API
     #--------------------------------------------------------------------------
 
     def is_player(self):
         return True
 
-    #--------------------------------------------------------------------------
-    # model API
-    #--------------------------------------------------------------------------
-
     def __str__(self):
         return self.name
 
-    def find_in_context(self, name):
-        """return the object in the player's inventory or present at his
-        location and identified by this name, or None if no such object
-        is found."""
-        return self.find(name) or \
-            (self.container and self.container.find(name))
-
-    def can_see(self, location):
-        if not location.has_prop("dark"):
+    def can_see(self):
+        if not self.container().has_prop("dark"):
             return True
         if self.has_prop("power-to-see-in-the-dark"):
             return True
-        if self.find_prop_in_vicinity("light-on"):
+        if self.find_for_light(prop="light-on"):
             return True
         return False
+
+    def can_pass(self, exit):
+        other = exit.other_exit()
+        if not (exit.has_prop("closed") or other.has_prop("closed")):
+            return True
+        if self.has_prop("power-to-pass"):
+            return True
+        return False
+
+    def all(self):
+        yield from self.contents()
+        yield from self.parts()
 
     #--------------------------------------------------------------------------
     # API for sending messages back to the user through his websocket
@@ -104,3 +105,130 @@ class Player(Containing, Thing):
         """sends a description for an event not initiated by the user.
         for example, for actions of players in the same location."""
         self._send({"type": "info", "html": html})
+
+    #--------------------------------------------------------------------------
+    # find API
+    # when the player issues an order, this order will refer to objects by name
+    # or make assumptions about the existence of objects with a certain
+    # property, etc...  The MUD engine needs to find such objects that are
+    # implicitly refered to.  However, different actions will use different
+    # strategies (look in different places) to find such objects.  Below are
+    # functions for performing the search in different use cases.
+    #--------------------------------------------------------------------------
+
+    def _make_find_pred(kargs):
+        """create a function to test whether an object matches the given
+        criteria."""
+        test = kargs.get("test")          # a function           (optional)
+        name = kargs.get("name")          # a name               (optional)
+        prop = kargs.get("prop")          # a property           (optional)
+        props= kargs.get("props")         # a list of properties (optional)
+        def pred(x):                      # the new testing predicate
+            return (((not test)  or text(x))          and
+                    ((not name)  or x.has_name(name)) and
+                    ((not prop)  or x.has_prop(prop)) and
+                    ((not props) or x.has_props(props)))
+        return pred
+
+    def find_for_use(self, **kargs):
+        """find an object that you can use/drop:
+        - in your inventory"""
+        pred = self._make_find_pred(kargs)
+        for x in self.all():
+            if pred(x):
+                return x
+        return None
+
+    def find_for_operate(self, **kargs):
+        """find an object that you can operate on:
+        - in your inventory
+        - in your immediate surroundings"""
+        pred = self._make_find_pred(kargs)
+        for x in self.all():
+            if pred(x):
+                return x
+        c = self.container()
+        if c is not None:
+            for x in c:
+                if pred(x):
+                    return x
+        return None
+
+    def find_for_take(self, **kargs):
+        """find an object that you can take:
+        - in your surroundings
+        - recursively inside open containers of your surroundings"""
+        pred = self._make_find_pred(kargs)
+        cont = self.container()
+        if cont is None:
+            return None
+        q = queue.Queue()
+        q.put(cont)
+        while not q.empty():
+            cont = q.get()
+            for x in cont:
+                if pred(x):
+                    return x
+                if isinstance(x, Containing) and not x.has_prop("closed"):
+                    q.put(x)
+        return None
+
+    def find_for_light(self, **kargs):
+        """find an object that can light your surroundings:
+        - in your inventory
+        - in your surroundings
+        - or recursively in outer containers (unless you find that's
+          closed and you can't look outside any further
+        - or carried by people in your surroundings
+        - or recursively by people in outer comtainers (that you
+          can reach)"""
+        pred = self._make_find_pred(kargs)
+        for x in self:
+            if pred(x):
+                return x
+        q = queue.Queue()
+        c = self.container()
+        while c:
+            q.put(c)
+            c = c.container()
+        while not q.empty():
+            c = q.get()
+            for x in c:
+                if pred(x):
+                    return x
+                if isinstance(x, Player):
+                    for y in x:
+                        if pred(y):
+                            return y
+        return None
+
+    def find_for_go(self, **kargs):
+        """find an exit in your surroundings."""
+        c = self.container()
+        if not c or not isinstance(c, Location):
+            return None
+        pred = self._make_find_pred(kargs)
+        for x in c.exits():
+            if pred(x):
+                return x
+
+    def resolve_for_use(self, **kargs):
+        return self.find_for_use(**kargs)
+
+    def resolve_for_operate(self, **kargs):
+        if self.can_see():
+            return self.find_for_operate(**kargs)
+        else:
+            return self.find_for_use(**kargs)
+
+    def resolve_for_take(self, **kargs):
+        if self.can_see():
+            return self.find_for_take(**kargs)
+        else:
+            return None
+
+    def resolve_for_go(self, **kargs):
+        if self.can_see():
+            return self.find_for_go(**kargs)
+        else:
+            return None

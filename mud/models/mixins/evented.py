@@ -2,25 +2,18 @@
 # Copyright (C) 2014 Denys Duchier, IUT d'Orléans
 #==============================================================================
 
-from .model import Model
+from .basic import Basic
 
-class Exit(Model):
 
-    """an Exit is available at a Location, in a certain direction.  It is
-    connected to a Portal which itself is connected to 1 or more other exits."""
-
-    _NEEDS_ID = False
+class Evented(Basic):
 
     #--------------------------------------------------------------------------
     # initialization
     #--------------------------------------------------------------------------
 
-    def __init__(self, **kargs):
+    def __init__(self, events=None, **kargs):
         super().__init__(**kargs)
-        self.portal      = None
-        self.location    = None
-        self.direction   = None
-        self.destination = None
+        self._event_templates = events
 
     #--------------------------------------------------------------------------
     # initialization from YAML data
@@ -28,13 +21,8 @@ class Exit(Model):
 
     def init_from_yaml(self, data, world):
         super().init_from_yaml(data, world)
-        self.location  = world[data["location"]]
-        self.direction = data["direction"]
-        dest = data.get("destination")
-        if dest:
-            self.destination = world[dest]
-        self.add_name(self.direction)
-        self.location.add_exit(self)
+        if "events" in data:
+            self._event_templates = data["events"]
 
     def update_from_yaml(self, data, world):
         super().update_from_yaml(data, world)
@@ -50,19 +38,22 @@ class Exit(Model):
     # model API
     #--------------------------------------------------------------------------
 
-    # in this design, all exits of the same portal share the same properties
-    # which are stored on the portal
-    def props_proxy(self):
-        return self.portal
+    def get_event_templates(self):
+        return self._event_templates
 
-    def other_exit(self):
-        if self.destination:
-            return self.destination
-        return self.portal.other_exit(self)
-
-    def get_traversal(self):
-        return self.portal.get_traversal()
-
-    def the_direction(self):
-        from mud.static import STATIC
-        return STATIC.directions.noun_the
+    def get_template(self, dotpath, context={}):
+        data = self.get_event_templates()
+        for key in dotpath.split("."):
+            if not data:
+                return None
+            if isinstance(data, list):
+                data2 = None
+                for d in data:
+                    l = d.get("props", None)
+                    if l is None or exit.has_props(l, context):
+                        data2 = d["data"]
+                        break
+                if data2 is None:
+                    return None
+                data = data2
+        return data

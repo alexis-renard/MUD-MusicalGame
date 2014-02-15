@@ -74,3 +74,23 @@ class Portal(Model):
         for x in self.exits:
             if x is not exit:
                 return x
+
+    def get_traversal(self, exit):
+        return PortalTraversal(exit, exit.other_exit())
+
+    def commit_traversal(self, traversal):
+        pass
+
+
+class PortalTraversal:
+
+    def __init__(self, exit1, exit2, commit=None):
+        self.exit1 = exit1
+        self.exit2 = exit2
+        self._commit = commit
+
+    def commit(self):
+        if self._commit:
+            self._commit()
+        else:
+            self.portal.commit_traversal(self)

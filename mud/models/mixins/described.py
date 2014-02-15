@@ -96,4 +96,3 @@ class Described(Propertied):
                     return d["text"]
         else:
             return desc.get(name, None)
-        

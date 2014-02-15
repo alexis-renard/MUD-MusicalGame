@@ -6,9 +6,9 @@ from .identified import Identified
 
 class Located(Identified):
 
-    """mixin class for things that are located in the world, i.e. that are
-    stored in containers.  A container could be a location in the world, or
-    it could be something like a box, or it could a player's inventory."""
+    """mixin class that provides the ability to be located in the world, i.e.
+    to be stored in a Containing model which could be a location in the world,
+    or something like a box, or a player's inventory."""
 
     #--------------------------------------------------------------------------
     # initialization
@@ -48,6 +48,8 @@ class Located(Identified):
     #--------------------------------------------------------------------------
 
     def move_to(self, cont):
+        """remove the object from its current Containing model and add it to
+        another Containing model, thus performing a move operation."""
         if self._container:
             self._container.remove(self)
             self._container = None
