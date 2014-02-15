@@ -1,0 +1,88 @@
+directions:
+  normalized:
+    nord     : nord
+    n        : nord
+    est      : est
+    e        : est
+    sud      : sud
+    s        : sud
+    ouest    : ouest
+    o        : ouest
+    nordest  : nord-est
+    nord-est : nord-est
+    ne       : nord-est
+    nordouest: nord-ouest
+    nord-ouest: nord-ouest
+    no       : nord-ouest
+    sudest   : sud-est
+    sud-est  : sud-est
+    se       : sud-est
+    sudouest : sud-ouest
+    sud-ouest: sud-ouest
+    so       : sud-ouest
+    haut     : haut
+    h        : haut
+    bas      : bas
+    b        : bas
+    monter   : haut
+    grimper  : haut
+    descendre: bas
+  noun_the:
+    nord     : le nord
+    est      : l'est
+    sud      : le sud
+    ouest    : l'ouest
+    nord-est : le nord-est
+    nord-ouest: le nord-ouest
+    sudest   : le sud-est
+    sud-ouest: le sud-ouest
+    haut     : le haut
+    bas      : le bas
+  noun_at_the:
+    nord     : au nord
+    est      : à l'est
+    est      : a l'est
+    sud      : au sud
+    ouest    : à l'ouest
+    ouest    : a l'ouest
+    nord-est : au nord-est
+    nord-ouest: au nord-ouest
+    sud-est  : au sud-est
+    sud-ouest: au sud-ouest
+    haut     : en haut
+    bas      : en bas
+events:
+  enter_portal:
+    success:
+      actor   : "Vous sortez par {{ exit.the_direction() }}."
+      observer: "{{ actor.name }} sort par {{ exit.the_direction() }}."
+    failure:
+      actor   : "Vous tentez vainement de sortir par {{ exit.the_direction() }}."
+      observer: "{{ actor.name }} tente vainement de sortir par {{ exit.the_direction() }}."
+  leave_portal:
+    actor     : "Vous sortez par {{ exit.the_direction() }}-"
+    observer  : "{{ actor.name }} sort par {{ exit.the_direction() }}."
+  traverse_portal:
+    actor     : null
+    observer  : null
+  take:
+    success:
+      actor   : "Vous prenez {{ object.noun_the() }}."
+      observer: "{{ actor.name }} prend {{ object.noun_the() }}."
+    failure:
+      actor   : "Vous tentez en vain de prendre {{ object.noun_the() }}."
+      observer: "{{ actor.name }} tente en vain de prendre {{ object.noun_the() }}."
+  look-players:
+    actor     : "Ici vous rencontrez:"
+  look-objects:
+    actor     : "Ici vous trouvez:"
+  action-failed:
+    actor     :
+      - props : action:cannot-see
+        data  : "Dans cette obscurité, vous n'y voyez rien."
+      - props : action:go
+        data  : "Il n'y a pas d'issue dans cette direction."
+      - props : action:cannot-find-object
+        data  : "{{ action.object }}: introuvable!"
+      - props : action:cannot-find-object2
+        data  : "{{ action.object2 }}: introuvable!"
