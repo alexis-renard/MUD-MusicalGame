@@ -97,7 +97,10 @@ class Propertied(Identified):
     def _get_props(self):
         return self.props_proxy()._props()
 
-    def add_prop(self, prop):
+    def add_prop(self, prop, context=None):
+        if ":" in prop:
+            key, prop = prop.split(":", 1)
+            return context[key].add_prop(prop, context)
         mprop = self._sanitize_prop(prop)
         meth = (getattr(self,  "add_prop_"+mprop, None) or
                 getattr(self, "_add_prop_"+mprop, None))
@@ -106,7 +109,10 @@ class Propertied(Identified):
         else:
             self._get_props().add(prop)
 
-    def remove_prop(self, prop):
+    def remove_prop(self, prop, context=None):
+        if ":" in prop:
+            key, prop = prop.split(":", 1)
+            return context[key].remove_prop(prop, context)
         mprop = self._sanitize_prop(prop)
         meth = (getattr(self,  "remove_prop_"+mprop, None) or
                 getattr(self, "_remove_prop_"+mprop, None))
@@ -115,14 +121,14 @@ class Propertied(Identified):
         else:
             self._get_props().remove(prop)
 
-    def change_prop(self, prop):
+    def change_prop(self, prop, context=None):
         prefix = prop[0]
         if prefix == "+":
-            self.add_prop(prop[1:])
+            self.add_prop(prop[1:], context)
         elif prefix == "-":
-            self.remove_prop(prop[1:])
+            self.remove_prop(prop[1:], context)
         else:
-            self.add_prop(prop)
+            self.add_prop(prop, context)
 
     def set_props(self, props):
         for prop in props:
@@ -132,9 +138,9 @@ class Propertied(Identified):
     def get_props(self):
         return list(self._get_props())
 
-    def change_props(self, props):
+    def change_props(self, props, context=None):
         for prop in props:
-            self.change_prop(prop)
+            self.change_prop(prop, context)
 
     #--------------------------------------------------------------------------
     # computed properties:
