@@ -20,7 +20,6 @@ class Exit(Model):
         self.portal      = None
         self.location    = None
         self.direction   = None
-        self.destination = None
 
     #--------------------------------------------------------------------------
     # initialization from YAML data
@@ -30,9 +29,6 @@ class Exit(Model):
         super().init_from_yaml(data, world)
         self.location  = world[data["location"]]
         self.direction = data["direction"]
-        dest = data.get("destination")
-        if dest:
-            self.destination = world[dest]
         self.add_name(self.direction)
         self.location.add_exit(self)
 
@@ -56,8 +52,6 @@ class Exit(Model):
         return self.portal
 
     def other_exit(self):
-        if self.destination:
-            return self.destination
         return self.portal.other_exit(self)
 
     def get_traversal(self):
