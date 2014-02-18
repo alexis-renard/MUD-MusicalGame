@@ -7,8 +7,9 @@
 #==============================================================================
 
 from mud.actions import (
-    ActionGo, ActionTake, ActionLook, ActionInspect, ActionOpen,
-    ActionOpenWith, ActionClose, ActionType, ActionInventory,
+    GoAction, TakeAction, LookAction, InspectAction, OpenAction,
+    OpenWithAction, CloseAction, TypeAction, InventoryAction,
+    LightOnAction, LightOffAction,
 )
 from mud.static import STATIC
 
@@ -25,8 +26,10 @@ RULES = (
     (ActionOpen     , r"ouvrir %s(\w+)$" % DETS),
     (ActionOpenWith , r"ouvrir %s(\w+) avec %s(\w+)$" % (DETS,DETS)),
     (ActionClose    , r"fermer %s(\w+)$" % DETS),
-    (ActionType     , r"(?:taper|ecrire) (\w+)$"),
+    (ActionType     , r"(?:taper|[eé]crire) (\w+)$"),
     (ActionInventory, r"(?:inventaire|inv|i)$"),
+    (LightOnAction  , r"allumer %s(\w+)$"),
+    (LightOffAction , r"[eé]teindre %s(\w+)$"),
 )
 
 #==============================================================================

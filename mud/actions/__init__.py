@@ -10,3 +10,4 @@ from .close     import CloseAction
 from .type      import TypeAction
 from .take      import TakeAction
 from .inventory import InventoryAction
+from .light     import LightOnAction, LightOffAction
