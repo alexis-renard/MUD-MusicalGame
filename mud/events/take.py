@@ -8,6 +8,6 @@ class TakeEvent(Event2):
 
     def execute(self):
         if not self.object.has_prop("takable"):
-            return self.inform("take.failure")
+            return self.inform("take.failed")
         self.object.move_to(self.actor)
-        self.inform("take.success")
+        self.inform("take")

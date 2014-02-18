@@ -25,10 +25,10 @@ class EnterPortalEvent(Event2):
         TraversePortalEvent(self.actor, self.traversal).execute()
 
     def enter_portal_success(self):
-        self.inform("enter_portal.success")
+        self.inform("enter-portal")
 
     def enter_portal_failure(self):
-        self.inform("enter_portal.failure")
+        self.inform("enter-portal.failed")
 
     def context(self):
         context = super().context()
@@ -42,7 +42,7 @@ class TraversePortalEvent(Event2):
         return self.object
 
     def execute(self):
-        self.inform("traverse_portal")
+        self.inform("traverse-portal")
         self.traversal.commit()
         self.actor.move_to(self.traversal.exit2.location)
         LeavePortalEvent(self.actor, self.traversal.exit2).execute()
@@ -59,7 +59,7 @@ class LeavePortalEvent(Event2):
         return self.object
 
     def execute(self):
-        self.inform("leave_portal")
+        self.inform("leave-portal")
 
     def context(self):
         context = super().context()

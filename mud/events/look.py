@@ -10,6 +10,8 @@ class LookEvent(Event1):
         return self.actor.container().get_event_templates()
 
     def execute(self):
+        if not self.actor.can_see():
+            return self.failed_cannot_see()
         self.buffer_clear()
         self.buffer_inform("look")
         players = []
@@ -34,3 +36,8 @@ class LookEvent(Event1):
                 self.buffer_peek(x)
             self.buffer_append("</ul>")
         self.actor.send_result(self.buffer_get())
+
+    def failed_cannot_see(self):
+        self.buffer_clear()
+        self.buffer_inform("look.failed")
+        self.actor.send.result(self.buffer_get())
