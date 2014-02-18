@@ -66,6 +66,9 @@ class Player(Containing, Thing):
             return True
         return False
 
+    def _has_prop_can_see(self):
+        return self.can_see()
+
     def can_pass(self, exit):
         other = exit.other_exit()
         if not (exit.has_prop("closed") or other.has_prop("closed")):
