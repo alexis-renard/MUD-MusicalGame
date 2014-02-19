@@ -41,19 +41,48 @@ class Evented(Basic):
     def get_event_templates(self):
         return self._event_templates
 
-    def get_template(self, dotpath, context={}):
+    def _advance_event_data(self, data, context):
+        while isinstance(data, list):
+            data2 = None
+            for datum in data:
+                props = datum.get("props", None)
+                if props is None:
+                    data2 = datum
+                    break
+                if isinstance(props, str):
+                    props = [prop]
+                if self.has_props(props, context):
+                    data2 = datum
+                    break
+            if data2:
+                data = data2["data"]
+        return data
+
+    def _get_event_data(self, data, dotpath, context, deref_last):
         data = self.get_event_templates()
         for key in dotpath.split("."):
+            data = self._advance_event_data(data, context)
             if not data:
-                return None
-            if isinstance(data, list):
-                data2 = None
-                for d in data:
-                    l = d.get("props", None)
-                    if l is None or exit.has_props(l, context):
-                        data2 = d["data"]
-                        break
-                if data2 is None:
-                    return None
-                data = data2
+                break
+            data = data.get(key, None)
+        if deref_last:
+            data = self._advance_event_data(data, context)
         return data
+
+    def world(self):
+        from mud.world import WORLD
+        return WORLD
+
+    def get_event_data(self, dotpath, context, deref_last):
+        return (self._get_event_data(self.get_event_templates(),
+                                dotpath, context, deref_last) or
+                self._get_event_data(self.world().get("events"),
+                                dotpath, context, deref_last))
+
+    def get_template(self, dotpath, context={}):
+        return self.get_event_data(dotpath, context, True)
+
+    def get_effects(self, dotpath, context={}):
+        from mud.effects import Effect
+        return Effect.make_effects(
+            self.get_event_data(dotpath+".effects", context, False))

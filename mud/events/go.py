@@ -11,7 +11,7 @@ class EnterPortalEvent(Event2):
     def exit(self):
         return self.object
 
-    def execute(self):
+    def perform(self):
         self.traversal = self.exit.get_traversal()
         if not self.actor.can_pass(self.traversal.exit1):
             self.add_prop("cannot-pass")
@@ -22,6 +22,7 @@ class EnterPortalEvent(Event2):
             self.add_prop("cannot-pass-exit2")
             return self.enter_portal_failure()
         self.enter_portal_success()
+        self.execute_effects()
         TraversePortalEvent(self.actor, self.traversal).execute()
 
     def enter_portal_success(self):
@@ -41,10 +42,11 @@ class TraversePortalEvent(Event2):
     def traversal(self):
         return self.object
 
-    def execute(self):
+    def perform(self):
         self.inform("traverse-portal")
         self.traversal.commit()
         self.actor.move_to(self.traversal.exit2.location)
+        self.execute_effects()
         LeavePortalEvent(self.actor, self.traversal.exit2).execute()
 
     def context(self):
@@ -58,7 +60,7 @@ class LeavePortalEvent(Event2):
     def exit(self):
         return self.object
 
-    def execute(self):
+    def perform(self):
         self.inform("leave-portal")
 
     def context(self):

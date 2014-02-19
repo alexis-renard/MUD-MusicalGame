@@ -15,5 +15,5 @@ class FailedActionEvent(Event1):
         context["action"] = self.action
         return context
 
-    def execute(self):
+    def perform(self):
         self.inform("failed-action")

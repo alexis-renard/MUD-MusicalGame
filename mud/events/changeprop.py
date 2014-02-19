@@ -9,7 +9,7 @@ class ChangePropEvent(Event2):
     def get_event_templates(self):
         return self.actor.container().get_event_templates()
 
-    def execute(self):
+    def perform(self):
         props = self.object
         if isinstance(props, str):
             props = [props]

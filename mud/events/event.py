@@ -13,8 +13,22 @@ class Event(Evented, Propertied):
 
     NAME = None
 
+    def __init__(self):
+        super().__init__()
+        self._effects_executed = False
+
     def execute(self):
+        self.perform()
+        self.execute_effects()
+
+    def perform(self):
         raise NotImplemented()
+
+    def execute_effects(self):
+        if not self._effects_executed:
+            self._effects_executed = True
+            for effect in self.get_effects():
+                effect.execute()
 
     def format(self, template, **kargs):
         context = self.context()
@@ -23,12 +37,6 @@ class Event(Evented, Propertied):
 
     def context(self):
         return {"event": self}
-
-    def get_template(self, dotpath, context=None):
-        if context is None:
-            context = self.context()
-        return (super().get_template(dotpath, context) or
-                 STATIC.get_template(dotpath, context))
 
     def to_html(self, text):
         text = text.strip()
@@ -78,6 +86,7 @@ class Event(Evented, Propertied):
 class Event1(Event):
 
     def __init__(self, actor):
+        Event.__init__(self)
         self.actor = actor
 
     def context(self):

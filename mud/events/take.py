@@ -6,7 +6,7 @@ from .event import Event2
 
 class TakeEvent(Event2):
 
-    def execute(self):
+    def perform(self):
         if not self.object.has_prop("takable"):
             return self.inform("take.failed")
         self.object.move_to(self.actor)

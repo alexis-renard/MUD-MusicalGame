@@ -9,7 +9,7 @@ class LookEvent(Event1):
     def get_event_templates(self):
         return self.actor.container().get_event_templates()
 
-    def execute(self):
+    def perform(self):
         if not self.actor.can_see():
             return self.failed_cannot_see()
         self.buffer_clear()

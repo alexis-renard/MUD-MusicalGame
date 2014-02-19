@@ -6,3 +6,5 @@ from .failedaction import FailedActionEvent
 from .go           import EnterPortalEvent, TraversePortalEvent, LeavePortalEvent
 from .look         import LookEvent
 from .take         import TakeEvent
+from .light        import LightOnEvent, LightOffEvent
+from .changeprop   import ChangePropEvent
