@@ -71,12 +71,13 @@ class Propertied(Identified):
 
     def _has_prop(self, prop, context=None):
         """m._has_prop("actor:foo", context) looks up actor in context and
-        delegates to it _has_prop("foo").  m._has_prop("foo") either tries
-        m.has_prop_foo() if it exists, or m._has_prop_foo() if it exists,
-        or checks if m has a property "foo"."""
-        if ":" in prop:
-            key, prop = prop.split(":", 1)
-            return context[key]._has_prop(prop)
+        delegates to it _has_prop("foo").  m._has_prop("*toto:foo") looks up
+        toto (by id) in the world and delegates _has_prop("foo") to it.
+        m._has_prop("foo") either tries m.has_prop_foo() if it exists, or
+        m._has_prop_foo() if it exists, or checks if m has a property "foo"."""
+        obj, prop = self._analyze_prop(prop, context)
+        if obj is not self:
+            return obj._has_prop(prop)
         m = RE_CALL.match(prop)
         p = m.group("prop")
         a = m.group("arg")
@@ -91,6 +92,18 @@ class Propertied(Identified):
         else:
             return prop in self._get_props()
 
+    def _analyze_prop(self, prop, context):
+        if ":" in prop:
+            key, prop = prop.split(":", 1)
+            if key[0] == "*":
+                from mud.world import WORLD
+                obj = WORLD[key[1:]]
+            else:
+                obj = context[key]
+        else:
+            obj = self
+        return obj, prop
+
     def _sanitize_prop(self, prop):
         return re.sub(r"[^\w]+", "_", prop)
 
@@ -98,9 +111,9 @@ class Propertied(Identified):
         return self.props_proxy()._props()
 
     def add_prop(self, prop, context=None):
-        if ":" in prop:
-            key, prop = prop.split(":", 1)
-            return context[key].add_prop(prop, context)
+        obj, prop = self._analyze_prop(prop, context)
+        if obj is not self:
+            return obj.add_prop(prop, context)
         mprop = self._sanitize_prop(prop)
         meth = (getattr(self,  "add_prop_"+mprop, None) or
                 getattr(self, "_add_prop_"+mprop, None))
@@ -110,9 +123,9 @@ class Propertied(Identified):
             self._get_props().add(prop)
 
     def remove_prop(self, prop, context=None):
-        if ":" in prop:
-            key, prop = prop.split(":", 1)
-            return context[key].remove_prop(prop, context)
+        obj, prop = self._analyze_prop(prop, contex)
+        if obj is not self:
+            return obj.remove_prop(prop, context)
         mprop = self._sanitize_prop(prop)
         meth = (getattr(self,  "remove_prop_"+mprop, None) or
                 getattr(self, "_remove_prop_"+mprop, None))
