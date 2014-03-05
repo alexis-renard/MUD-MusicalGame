@@ -3,6 +3,7 @@
 #==============================================================================
 
 from .event import Event2
+from .info  import InfoEvent
 
 
 class EnterPortalEvent(Event2):
@@ -70,6 +71,7 @@ class LeavePortalEvent(Event2):
 
     def perform(self):
         self.inform("leave-portal")
+        InfoEvent(self.actor).execute()
 
     def context(self):
         context = super().context()

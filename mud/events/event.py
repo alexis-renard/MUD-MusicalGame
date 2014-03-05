@@ -12,6 +12,8 @@ STATIC = Evented(events=mud.static.STATIC["events"])
 class Event(Evented, Propertied):
 
     NAME = None
+    SEND_ACTOR = "send_result"
+    SEND_OBSERVER = "send_info"
 
     def __init__(self):
         super().__init__()
@@ -101,13 +103,13 @@ class Event1(Event):
         self.buffer_inform(dotpath+".actor")
         html = self.buffer_get()
         if html:
-            self.actor.send_result(html)
+            getattr(self.actor, self.SEND_ACTOR)(html)
         for observer in self.observers():
             self.buffer_clear()
             self.buffer_inform(dotpath+".observer", observer=observer)
             html = self.buffer_get()
             if html:
-                observer.send_info(html)
+                getattr(observer, self.SEND_OBSERVER)(html)
                       
 
 class Event2(Event1):

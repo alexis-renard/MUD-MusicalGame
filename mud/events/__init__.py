@@ -13,3 +13,4 @@ from .open         import OpenEvent, OpenWithEvent
 from .close        import CloseEvent, CloseWithEvent
 from .type         import TypeEvent
 from .inventory    import InventoryEvent
+from .info         import InfoEvent
