@@ -3,8 +3,8 @@
 #==============================================================================
 
 import tornado.ioloop
-
 import threading, queue
+import mud.parser
 
 class Engine(threading.Thread):
 
@@ -13,6 +13,7 @@ class Engine(threading.Thread):
         self._queue = queue.Queue()
         self.put = self._queue.put
         self.again = True
+        self.parser = mud.parser.Parser()
 
     def run(self):
         while self.again:
@@ -25,11 +26,10 @@ class Engine(threading.Thread):
         meth(task)
 
     def perform_input(self, task):
-        from mud.parser import parse
         actor = task["player"]
         text  = task["text"]
         actor.send_echo("<pre>%s</pre>" % text)
-        action,text = parse(actor, text)
+        action,text = self.parser.parse(actor, text)
         if action:
             action.execute()
 

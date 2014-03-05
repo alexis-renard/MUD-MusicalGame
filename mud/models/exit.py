@@ -3,6 +3,7 @@
 #==============================================================================
 
 from .model import Model
+import mud.game
 
 class Exit(Model):
 
@@ -58,5 +59,4 @@ class Exit(Model):
         return self.portal.get_traversal(self)
 
     def the_direction(self):
-        from mud.static import STATIC
-        return STATIC.directions.noun_the
+        return mud.game.GAME.static["directions"]["noun_the"]

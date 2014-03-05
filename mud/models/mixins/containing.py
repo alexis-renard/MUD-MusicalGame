@@ -3,7 +3,7 @@
 #==============================================================================
 
 from .propertied import Propertied
-from mud.world import WORLD
+import mud.game
 
 class Containing(Propertied):
 
@@ -25,7 +25,7 @@ class Containing(Propertied):
         super().init_from_yaml(data, world)
         self._contents = set()
         for i in data.get("contains", ()):
-            WORLD[i].move_to(self)
+            mud.game.GAME.world[i].move_to(self)
 
     def update_from_yaml(self, data, world):
         super().update_from_yaml(data, world)

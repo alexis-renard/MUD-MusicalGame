@@ -3,8 +3,7 @@
 #==============================================================================
 
 from mud.handlers.base import BaseHandler
-from mud.db.transcript import DATABASE as TRANSCRIPTS
-from mud.engine import ENGINE
+from mud.engine        import ENGINE
 
 import tornado.websocket
 import tornado.escape

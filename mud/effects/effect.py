@@ -3,6 +3,7 @@
 #==============================================================================
 
 from mud.models.mixins.propertied import Propertied
+import mud.game
 
 class Effect(Propertied):
 
@@ -23,8 +24,7 @@ class Effect(Propertied):
             return val
         # ref to a world object
         if val[0] == "=":
-            from mud.world import WORLD
-            return WORLD[val[1:]]
+            return mud.game.GAME.world[val[1:]]
         # literal string
         if val[0] == "/":
             assert val[-1] == "/"

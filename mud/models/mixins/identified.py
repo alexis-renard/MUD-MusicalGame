@@ -4,6 +4,7 @@
 
 import uuid
 from .basic import Basic
+import mud.game
 
 class Identified(Basic):
 
@@ -25,8 +26,7 @@ class Identified(Basic):
                 raise Exception("missing id: %s" % str(kargs))
         self.id = id
         if id:
-            from mud.world import WORLD
-            WORLD[id] = self
+            mud.game.GAME.world[id] = self
 
     #--------------------------------------------------------------------------
     # initialization from YAML data

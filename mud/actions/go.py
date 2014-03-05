@@ -4,6 +4,7 @@
 
 from .action import Action2
 from mud.events import EnterPortalEvent
+import mud.game
 
 class GoAction(Action2):
     EVENT = EnterPortalEvent
@@ -13,7 +14,7 @@ class GoAction(Action2):
 
     def resolve_object(self):
         if not self.RESOLVE_MAP:
-            from mud.static import STATIC
+            STATIC = mud.game.GAME.static
             self.RESOLVE_MAP.update(STATIC["directions"]["normalized"])
             self.RESOLVE_MAP.update((v,k) for (k,v) in STATIC["directions"]["noun_the"].items())
             self.RESOLVE_MAP.update((v,k) for (k,v) in STATIC["directions"]["noun_at_the"].items())

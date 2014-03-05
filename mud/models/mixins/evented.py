@@ -4,6 +4,7 @@
 
 from .basic import Basic
 import collections
+import mud.game
 
 NONE=object()
 
@@ -47,8 +48,7 @@ class Evented(Basic):
         return {"event": self}
 
     def world_context(self):
-        from mud.world import WORLD
-        return collections.ChainMap(self.context(), WORLD)
+        return collections.ChainMap(self.context(), mud.game.GAME.world)
 
     def _advance_event_data(self, data, context):
         while isinstance(data, list):

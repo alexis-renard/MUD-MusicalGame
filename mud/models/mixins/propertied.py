@@ -4,6 +4,7 @@
 
 import re
 from .basic import Basic
+import mud.game
 
 RE_CALL = re.compile(r"^(?P<prop>(?:\w|[-_.])+)(?:\((?P<arg>[^)]*)\)|)$")
 
@@ -96,8 +97,7 @@ class Propertied(Basic):
         if ":" in prop:
             key, prop = prop.split(":", 1)
             if key[0] == "=":
-                from mud.world import WORLD
-                obj = WORLD[key[1:]]
+                obj = mud.game.GAME.world[key[1:]]
             else:
                 obj = context[key]
         else:

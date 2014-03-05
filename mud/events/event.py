@@ -5,9 +5,7 @@
 from tornado.template import Template
 from mud.models.mixins.evented import Evented
 from mud.models.mixins.propertied import Propertied
-import mud.static, re
-STATIC = Evented(events=mud.static.STATIC["events"])
-
+import re
 
 class Event(Evented, Propertied):
 

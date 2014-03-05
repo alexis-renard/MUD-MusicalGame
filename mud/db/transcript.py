@@ -13,10 +13,3 @@ class TranscriptDB(BasicDB):
                 trans = []
                 self[username] = trans
             return trans
-
-#==============================================================================
-# the user transcript database instance
-#==============================================================================
-
-DATABASE = TranscriptDB("transcriptdb")
-DATABASE.load()

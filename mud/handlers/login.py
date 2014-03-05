@@ -4,7 +4,7 @@
 
 import tornado.escape
 from mud.handlers.base import BaseHandler
-from mud.db.user import DATABASE as USERS
+import mud.game
 
 #==============================================================================
 # the login handler uses the user database
@@ -25,7 +25,7 @@ class LoginHandler(BaseHandler):
         username = self.get_argument("username", "")
         password = self.get_argument("password", "")
         extras = self.extras()
-        auth = USERS.authenticate(username, password)
+        auth = mud.game.GAME.users.authenticate(username, password)
         if auth:
             self.set_secure_cookie("mud_player",
                                    tornado.escape.json_encode(username))

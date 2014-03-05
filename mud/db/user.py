@@ -22,10 +22,3 @@ class UserDB(BasicDB):
             self[username] = user
             self.save()
             return user
-
-#==============================================================================
-# the user database instance
-#==============================================================================
-
-DATABASE = UserDB("userdb")
-DATABASE.load()

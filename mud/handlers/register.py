@@ -4,7 +4,7 @@
 
 import tornado.escape
 from mud.handlers.base import BaseHandler
-from mud.db.user import DATABASE as USERS
+import mud.game
 
 #==============================================================================
 # the registration handler also uses the user db
@@ -36,7 +36,7 @@ class RegisterHandler(BaseHandler):
         elif not password1:
             extras["password_empty"] = True
         else:
-            avail = USERS.create_user(username, password1)
+            avail = mud.game.GAME.users.create_user(username, password1)
             if avail:
                 self.set_secure_cookie(
                     "mud_player", tornado.escape.json_encode(username))

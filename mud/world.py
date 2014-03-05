@@ -6,14 +6,9 @@ import os.path
 
 class World:
 
-    DATADIR      = os.path.dirname(__file__)
-    YAML_INITIAL = os.path.join(DATADIR, "initial.yml")
-    YAML_CURRENT = os.path.join(DATADIR, "current.yml")
-
     def __init__(self):
         self.database = {}
         self.types    = {}
-        #self.load()
 
     def load_models(self):
         import mud.models as models
@@ -30,17 +25,16 @@ class World:
             data["id"] = obj.id
         return obj
 
-    def load(self):
+    def load(self, initial, current):
         from yaml import load_all
 
         self.load_models()
         self.autocreated = []
 
         # create all objects in the world (except players)
-        with open(self.YAML_INITIAL) as stream:
-            contents = load_all(stream)
-            for data in contents:
-                obj = self.make(data)
+        contents = initial
+        for data in contents:
+            obj = self.make(data)
 
         # initialize them with the initial yaml data
         for obj in tuple(self.database.values()):
@@ -54,19 +48,13 @@ class World:
                 obj.init_from_yaml(obj.yaml, self)
 
         # update them with the saved current state of the game
-        if os.path.exists(self.YAML_CURRENT):
-            with open(self.YAML_CURRENT) as stream:
-                for data in load_all(stream):
-                    key = data["id"]
-                    obj = self.database[key]
-                    obj.update_from_yaml(data, world)
+        for data in current:
+            key = data["id"]
+            obj = self.database[key]
+            obj.update_from_yaml(data, world)
 
     def save(self):
-        from yaml import dump_all
-
-        contents = [x.to_json() for x in self.database.values()]
-        with open(self.YAML_CURRENT, "w") as stream:
-            dump_all(contents, stream)
+        return [x.to_json() for x in self.database.values()]
 
     def __getitem__(self, id):
         return self.database[id]
@@ -76,6 +64,3 @@ class World:
 
     def get(self, key, default=None):
         return self.database.get(key, default)
-
-
-WORLD = World()

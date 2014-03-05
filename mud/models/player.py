@@ -2,8 +2,7 @@
 # Copyright (C) 2014 Denys Duchier, IUT d'Orléans
 #==============================================================================
 
-from mud.db.transcript  import DATABASE as TRANSCRIPTS
-from mud.world          import WORLD
+import mud.game
 from .thing             import Thing
 from .mixins.containing import Containing
 from .location          import Location
@@ -29,9 +28,10 @@ class Player(Containing, Thing):
             return                    # in which case, nothing more needs to be done
         super().__init__(**kargs)     # otherwise, initialize base classes
         self._PLAYERS[name]  = self   # save player in static dict
-        self.transcript = TRANSCRIPTS.lookup(name) # and add appropriate attributes
+        GAME = mud.game.GAME
+        self.transcript = GAME.transcripts.lookup(name) # and add appropriate attributes
         self.name = name
-        self.move_to(WORLD["parking-000"])
+        self.move_to(GAME.world["parking-000"])
 
     #--------------------------------------------------------------------------
     # initialization from YAML data
