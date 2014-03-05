@@ -21,9 +21,9 @@ DETS = "(?:l |le |la |les |une |un |)"
 
 RULES = (
     (GoAction       , r"(?:aller |)(%s)$" % "|".join(DIRS)),
-    (TakeAction     , r"prendre %s(\w+)$" % DETS),
-    (LookAction     , r"regarder$"),
-    (InspectAction  , r"(?:regarder|lire|inspecter|observer) %s(\w+)$" % DETS),
+    (TakeAction     , r"(?:p|prendre) %s(\w+)$" % DETS),
+    (LookAction     , r"(?:r|regarder)$"),
+    (InspectAction  , r"(?:r|regarder|lire|inspecter|observer) %s(\w+)$" % DETS),
     (OpenAction     , r"ouvrir %s(\w+)$" % DETS),
     (OpenWithAction , r"ouvrir %s(\w+) avec %s(\w+)$" % (DETS,DETS)),
     (CloseAction    , r"fermer %s(\w+)$" % DETS),
