@@ -1,56 +1,56 @@
 directions:
   normalized:
-    nord     : nord
-    n        : nord
-    est      : est
-    e        : est
-    sud      : sud
-    s        : sud
-    ouest    : ouest
-    o        : ouest
-    nordest  : nord-est
-    nord-est : nord-est
-    ne       : nord-est
-    nordouest: nord-ouest
+    nord      : nord
+    n         : nord
+    est       : est
+    e         : est
+    sud       : sud
+    s         : sud
+    ouest     : ouest
+    o         : ouest
+    nordest   : nord-est
+    nord-est  : nord-est
+    ne        : nord-est
+    nordouest : nord-ouest
     nord-ouest: nord-ouest
-    no       : nord-ouest
-    sudest   : sud-est
-    sud-est  : sud-est
-    se       : sud-est
-    sudouest : sud-ouest
-    sud-ouest: sud-ouest
-    so       : sud-ouest
-    haut     : haut
-    h        : haut
-    bas      : bas
-    b        : bas
-    monter   : haut
-    grimper  : haut
-    descendre: bas
+    "no"      : nord-ouest
+    sudest    : sud-est
+    sud-est   : sud-est
+    se        : sud-est
+    sudouest  : sud-ouest
+    sud-ouest : sud-ouest
+    so        : sud-ouest
+    haut      : haut
+    h         : haut
+    bas       : bas
+    b         : bas
+    monter    : haut
+    grimper   : haut
+    descendre : bas
   noun_the:
-    nord     : le nord
-    est      : l'est
-    sud      : le sud
-    ouest    : l'ouest
-    nord-est : le nord-est
+    nord      : le nord
+    est       : l'est
+    sud       : le sud
+    ouest     : l'ouest
+    nord-est  : le nord-est
     nord-ouest: le nord-ouest
-    sudest   : le sud-est
-    sud-ouest: le sud-ouest
-    haut     : le haut
-    bas      : le bas
+    sudest    : le sud-est
+    sud-ouest : le sud-ouest
+    haut      : le haut
+    bas       : le bas
   noun_at_the:
-    nord     : au nord
-    est      : à l'est
-    est      : a l'est
-    sud      : au sud
-    ouest    : à l'ouest
-    ouest    : a l'ouest
-    nord-est : au nord-est
+    nord      : au nord
+    est       : à l'est
+    est       : a l'est
+    sud       : au sud
+    ouest     : à l'ouest
+    ouest     : a l'ouest
+    nord-est  : au nord-est
     nord-ouest: au nord-ouest
-    sud-est  : au sud-est
-    sud-ouest: au sud-ouest
-    haut     : en haut
-    bas      : en bas
+    sud-est   : au sud-est
+    sud-ouest : au sud-ouest
+    haut      : en haut
+    bas       : en bas
 events:
   enter-portal:
     actor     : "Vous sortez par {{ exit.the_direction() }}."
@@ -89,8 +89,12 @@ events:
       - props:
           - object:light-on
         data: "Vous allumez {{ object.noun_the() }}."
-      - data: "{{ object.noun_the() }} est déjà allumé{{ object.e() }}
+      - data: "{{ object.noun_the() }} est déjà allumé{{ object.e() }}"
     observer  : "{{ actor.name }} allume {{ object.noun_his() }}."
   light-off:
     actor     : "Vous éteignez {{ object.noun_the() }}."
     observer  : "{{ actor.name }} éteind {{ object.noun_his() }}."
+  inspect-inside:
+    actor     : "Dedans vous trouvez:"
+  inspect-inside-empty:
+    actor     : "Il n'y a rien dedans."

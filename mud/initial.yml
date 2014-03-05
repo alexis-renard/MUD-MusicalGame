@@ -1,40 +1,297 @@
 ---
-id: parking-iut
+id: parking-000
+type: Location
+events:
+  info:
+    actor: "Parking de l'IUT."
+  look:
+    actor: |
+      Vous êtes sur le parking de l'IUT.  Au nord-est, se trouve
+      l'entrée du département info.  Il y a un arbre près de vous.
+      Les branches les plus basses sont à portée de main.
+---
+id: portal-parking-arbre-000
+type: Portal
+exits:
+  - location: parking-000
+    direction: haut
+    events:
+      enter-portal:
+        actor   : "Vous grimpez prestement dans l'arbre."
+        observer: "{{ actor.name }} grimpe dans l'arbre."
+      leave-portal:
+        observer: |
+          {{ actor.name }} descend de l'arbre et vous rejoint
+          sur le parking de l'IUT.
+  - location: arbre-000
+    direction: bas
+    events:
+      enter-portal:
+        actor   : "Vous descendez prudemment de l'arbre."  
+        observer: "{{ actor.name }} vous quitte et descend de l'arbre."
+      leave-portal:
+        observer: "{{ actor.name }} vous rejoint dans l'arbre."
+---
+id: arbre-000
+type: Location
+events:
+  info:
+    actor: "Dans l'arbre."
+  look:
+    actor: |
+      Vous êtes dans l'arbre.  Les branches semblent heureusement
+      solides.  Il y a un nid au creux d'une de ces branches.
+contains:
+  - nid-000
+---
+id: nid-000
+type: Container
+name: nid
 events:
   look:
-short: parking de l'IUT.
-long: |
-  Vous êtes sur le parking de l'IUT.
+    actor: |
+      C'est un nid de facture plutôt sommaire,
+      mais assez spacieux.
+contains:
+  - badge-000
 ---
-id: arbre-parking-iut
+id: badge-000
+type: Thing
+name: badge
+props:
+  - takable
+  - key-for-porte-porche-000
+events:
+  info:
+    actor: "Un badge de sécurité."
+  look:
+    actor: |
+      C'est un badge de sécurité permettant d'ouvrir des
+      portes sécurisées.
 ---
-id: porche-departement-info
+id: portal-parking-porche-000
+type: Portal
+exits:
+  - location: parking-000
+    direction: nord-est
+  - location: porche-000
+    direction: sud-ouest
 ---
-id: hall-departement-info
+id: porche-000
+type: Location
+events:
+  info:
+    actor: "Porche du département info."
+  look:
+    actor: |
+      Vous êtes sur le porche du département info.
+      Au nord-est, une porte donne accès au hall du
+      département.
 ---
-id: departement-info-salle-22
+id: portal-porche-hall-000
+type: Portal
+props:
+  - closed
+exits:
+  - location: porche-000
+    direction: nord-est
+    name:
+      - porte
+    events:
+      enter-portal:
+        actor     : "Vous entrez dans le département info."
+        observer  : "{{ actor.name }} entre dans le département info."
+        failed:
+          actor   : &porte001 |
+            La porte d'accès au département info est sécurisée.
+            Elle est actuellement fermée et ne peut être ouverte
+            qu'avec un badge de sécurité.
+          observer: &porte002 |
+            {{ actor.name }} tente en vain d'ouvrir la porte du
+            département info.
+      leave-portal:
+        actor     : "Vous sortez du département info."
+        observer  : "{{ actor.name }} sort du département info."
+      open        :
+        - props   : closed
+          actor   : *porte001
+          observer: *porte002
+        - props   : -closed
+          actor   : "La porte est déjà ouverte."
+      open-with   :
+        - props   :
+            - closed
+            - object2:key-for-porte-porche
+          effects :
+            type  : ChangePropEffect
+            object: 
+          
+  - location: hall-000
+    direction: sud-ouest
+    name:
+      - porte
+    events:
+      enter-portal:
+        observer  : "{{ actor.name }} sort du département info."
+        failed:
+          actor   : |
+            La porte d'accès au département info est sécurisée.
+            Elle est actuellement fermée et, même pour sortir,
+            elle ne peut être ouverte qu'avec un badge de sécurité.
+          observer: |
+            {{ actor.name }} tente en vain de sortir par la porte
+            du département info.
 ---
-id: cabane-suspendue
+id: hall-000
+type: Location
+props:
+  - dark
+events:
+  info:
+    actor: "Le hall du département info."
+  look:
+    actor: |
+      Vous êtes dans le hall du département info de l'IUT.
+      Au sud-ouest, la porte d'entrée mène au porche.  Un
+      escalier mène à l'étage.
+parts:
+  - tableau-000
 ---
-id: lampe-torche
+id: tableau-000
+type: Thing
+parts:
+  - notice-000
+events:
+  info:
+    actor: "Un tableau d'affichage."
+  inspect:
+    actor: |
+      Sur le tableau d'affichage une notice jaune est
+      fixée par une punaise.
 ---
-id: badge-de-securite
-container: arbre-parking-iut
-long:
-  - container: arbre-parking-iut
-    text: |
-      sur la branche repose un nid, et dans le nid vous
-      apercevez un BADGE d'accès.
-short:
-  - text: un BADGE d'accès.
+id: notice-000
+type: Thing
+events:
+  info:
+    actor: "Une notice jaune."
+  inspect:
+    actor: |
+      Sur cette notice est inscrit: <i>le mot de passe
+      n'est pas <tt>XYZZY</tt>... absolument pas! Jamais
+      de la vie!
 ---
-id       : nid-arbre-parking-iut
-type     : described-container
-container: arbre-parking-lot
-name     : nid
-short    : au creux d'une branche il y a un nid.
-long     :
-  - props: [empty]
-    text : le nid est vide.
-  - text : |
-      dans le nid, vous apercevez:
+id: escalier-000
+type: Portal
+exits:
+  - location: hall-000
+    direction: haut
+  - location: etage-000
+    direction: bas
+---
+id: etage-000
+type: Location
+events:
+  info:
+    actor: "Étage du département info."
+  look:
+    actor: |
+      Vous êtes à l'étage du département.  Au nord-ouest,
+      la salle 22 est ouverte.
+---
+id: etage-salle-22-000
+type: Portal
+exits:
+  - location: etage-000
+    direction: nord-ouest
+  - location: salle-22-000
+    direction: sud-est
+---
+id: salle-22-000
+type: Location
+events:
+  info:
+    actor: "Salle 22."
+  look:
+    actor: |
+      Vous êtes dans la salle 22.  Il y a un ordinateur
+      allumé.
+parts:
+  - ordinateur-000
+---
+id: ordinateur-000
+type: Thing
+events:
+  info:
+    actor: "Un ordinateur."
+  look:
+    actor: |
+      L'ordinateur est allumé.  Le prompt dit: <i>tapez
+      le mot de passe du paradis.</i>
+  taper:
+    actor:
+      effects:
+        - props: event:typed-xyzzy
+          type : EnterPortalEvent
+          exit : portal-ordinateur-cabane-000-exit-1
+---
+id: portal-ordinateur-cabane-000
+type: Portal
+exits:
+  - id: portal-ordinateur-cabane-000-exit-1
+    location: salle-22-000
+    events:
+      enter-portal:
+        actor: |
+          Une étrange lumière émane de l'écran et emplit
+          la salle.  Vous vous dématérialisez et êtes aspiré
+          dans l'étrange widget étiqueté "ENTREZ SANS FRAPPER"
+          sur l'écran.
+        observer: "{{ actor.name }} disparaît."
+      leave-portal:
+        observer: "{{ actor.name }} apparaît de nulle part."
+  - id: portal-ordinateur-cabane-exit-2
+    location: cabane-000
+    direction: est
+    events:
+      enter-portal:
+        actor:
+          - props:
+              - exit:activated
+            data : |
+              Vous sautez dans le vide.  Un oiseau gigantesque
+              passe en dessous et vous reçoit sur son dos et plonge
+              dans la cascade.
+            effects:
+              - type: ChangePropsEvent
+                data:
+                  - -exit:activated
+          - data : |
+              Vous sautez dans le vide et vous vous écrasez en
+              bas de la falaise.
+            effects:
+              - type: DyingEvent
+---
+id: cabane-000
+type: Location
+events:
+  info:
+    actor: "Une cabane dans un arbre."
+  look:
+    actor: |
+      Vous êtes dans une cabane construite dans un arbre.
+      Elle surplombe un gouffre dans lequel se déverse une
+      cascade.
+---
+id: lampe-000
+type: Thing
+props:
+  - lightable
+events:
+  info:
+    actor: "Une lampe torche."
+  inspect:
+    actor:
+      - props:
+          - object:light-on
+        data: "Une lampe torche allumée."
+      - data: "Une lampe torche éteinte."
