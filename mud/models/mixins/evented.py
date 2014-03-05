@@ -3,7 +3,9 @@
 #==============================================================================
 
 from .basic import Basic
+import collections
 
+NONE=object()
 
 class Evented(Basic):
 
@@ -41,6 +43,13 @@ class Evented(Basic):
     def get_event_templates(self):
         return self._event_templates
 
+    def context(self):
+        return {"event": self}
+
+    def world_context(self):
+        from mud.world import WORLD
+        return collections.ChainMap(self.context(), WORLD)
+
     def _advance_event_data(self, data, context):
         while isinstance(data, list):
             data2 = None
@@ -59,6 +68,7 @@ class Evented(Basic):
         return data
 
     def _get_event_data(self, data, dotpath, context, deref_last):
+        # this should also be done with STATIC in case we don't find it here!!!!!! FIXME
         data = self.get_event_templates()
         for key in dotpath.split("."):
             data = self._advance_event_data(data, context)
@@ -69,20 +79,30 @@ class Evented(Basic):
             data = self._advance_event_data(data, context)
         return data
 
-    def world(self):
-        from mud.world import WORLD
-        return WORLD
-
     def get_event_data(self, dotpath, context, deref_last):
-        return (self._get_event_data(self.get_event_templates(),
-                                dotpath, context, deref_last) or
-                self._get_event_data(self.world().get("events"),
-                                dotpath, context, deref_last))
+        if hasattr(context, "maps"):
+            maps = context.maps
+        else:
+            maps = [context]
+        for m in maps:
+            if hasattr(m, "get_event_templates"):
+                t = m.get_event_templates()
+            else:
+                t = m.get("events")
+            d = self._get_event_data(t, dotpath, context, deref_last)
+            if d:
+                return d
+        return None
 
-    def get_template(self, dotpath, context={}):
+    def get_template(self, dotpath, context=NONE):
+        if context is NONE:
+            context = self.world_context()
         return self.get_event_data(dotpath, context, True)
 
-    def get_effects(self, dotpath, context={}):
-        from mud.effects import Effect
+    def get_effects(self, dotpath, context=NONE):
+        if context is NONE:
+            context = self.world_context()
+        from mud.effects.effect import Effect
         return Effect.make_effects(
-            self.get_event_data(dotpath+".effects", context, False))
+            self.get_event_data(dotpath+".effects", context, False),
+            context)

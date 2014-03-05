@@ -25,14 +25,23 @@ class Engine(threading.Thread):
         meth(task)
 
     def perform_input(self, task):
-        user    = task["user"]
-        text    = task["text"]
-        request = task["request"] # keep the request so that it can be reused for template rendering
-        html    = request.render_string(
-            "chat.html", user=user, text=text).decode("utf-8")
-        def callback():
-            request.output_to_all(html)
-        tornado.ioloop.IOLoop.current().add_callback(callback)
+        from mud.parser import parse
+        actor = task["player"]
+        text  = task["text"]
+        actor.send_echo("<pre>%s</pre>" % text)
+        action,text = parse(actor, text)
+        if action:
+            action.execute()
+
+#    def perform_input(self, task):
+#        user    = task["user"]
+#        text    = task["text"]
+#        request = task["request"] # keep the request so that it can be reused for template rendering
+#        html    = request.render_string(
+#            "chat.html", user=user, text=text).decode("utf-8")
+#        def callback():
+#            request.output_to_all(html)
+#        tornado.ioloop.IOLoop.current().add_callback(callback)
 
 ENGINE = Engine()
 ENGINE.start()

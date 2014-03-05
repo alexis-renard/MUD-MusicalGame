@@ -24,9 +24,8 @@ class Composed(Basic):
         super().init_from_yaml(data, world)
         if "parts" in data:
             for pdata in data["parts"]:
-                p = world.make(**pdata)
+                p = world[pdata]
                 self._parts.append(p)
-                world.autocreated.append(p)
 
     def update_from_yaml(self, data, world):
         super().update_from_yaml(data, world)

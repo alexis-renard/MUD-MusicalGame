@@ -3,8 +3,8 @@
 #==============================================================================
 
 from tornado.template import Template
-from mud.mixins.evented import Evented
-from mud.mixins.propertied import Propertied
+from mud.models.mixins.evented import Evented
+from mud.models.mixins.propertied import Propertied
 import mud.static, re
 STATIC = Evented(events=mud.static.STATIC["events"])
 
@@ -27,16 +27,13 @@ class Event(Evented, Propertied):
     def execute_effects(self):
         if not self._effects_executed:
             self._effects_executed = True
-            for effect in self.get_effects():
+            for effect in self.get_effects(self.NAME):
                 effect.execute()
 
     def format(self, template, **kargs):
         context = self.context()
         context.update(kargs)
-        return Template(template).generate(**context)
-
-    def context(self):
-        return {"event": self}
+        return Template(template).generate(**context).decode()
 
     def to_html(self, text):
         text = text.strip()
@@ -75,7 +72,7 @@ class Event(Evented, Propertied):
             self.buffer_clear()
 
     def buffer_peek(self, what, **kargs):
-        text = what.get_template("peek")
+        text = what.get_template("info.actor")
         if text:
             html = self.format(text, peeked=what, **kargs)
             self.buffer_append("<li>")

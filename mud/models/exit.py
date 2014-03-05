@@ -28,7 +28,7 @@ class Exit(Model):
     def init_from_yaml(self, data, world):
         super().init_from_yaml(data, world)
         self.location  = world[data["location"]]
-        self.direction = data["direction"]
+        self.direction = data.get("direction")
         self.add_name(self.direction)
         self.location.add_exit(self)
 
@@ -55,7 +55,7 @@ class Exit(Model):
         return self.portal.other_exit(self)
 
     def get_traversal(self):
-        return self.portal.get_traversal()
+        return self.portal.get_traversal(self)
 
     def the_direction(self):
         from mud.static import STATIC

@@ -88,6 +88,7 @@ class PortalTraversal:
         self.exit1 = exit1
         self.exit2 = exit2
         self._commit = commit
+        self.portal = exit1.portal
 
     def commit(self):
         if self._commit:

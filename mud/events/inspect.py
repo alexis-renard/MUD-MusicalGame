@@ -2,13 +2,13 @@
 # Copyright (C) 2014 Denys Duchier, IUT d'Orléans
 #==============================================================================
 
-from .event import Event1
+from .event import Event2
 
-class LookEvent(Event1):
+class InspectEvent(Event2):
     NAME = "look"
 
     def get_event_templates(self):
-        return self.actor.container().get_event_templates()
+        return self.object.get_event_templates()
 
     def perform(self):
         if not self.actor.can_see():
@@ -17,25 +17,23 @@ class LookEvent(Event1):
         self.buffer_inform("look.actor")
         players = []
         objects = []
-        for x in self.actor.container().contents():
+        for x in self.object.contents():
             if x is self.actor:
                 pass
             elif x.is_player():
                 players.append(x)
             else:
                 objects.append(x)
-        if players:
-            self.buffer_inform("look-players")
+        if players or objects:
+            self.buffer_inform("inspect-inside.actor")
             self.buffer_append("<ul>")
             for x in players:
                 self.buffer_peek(x)
-            self.buffer_append("</ul>")
-        if objects:
-            self.buffer_inform("look-objects")
-            self.buffer_append("<ul>")
             for x in objects:
                 self.buffer_peek(x)
             self.buffer_append("</ul>")
+        else:
+            self.buffer_inform("inspect-inside-empty.actor")
         self.actor.send_result(self.buffer_get())
 
     def failed_cannot_see(self):

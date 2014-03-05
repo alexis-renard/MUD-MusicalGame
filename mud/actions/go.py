@@ -17,4 +17,5 @@ class GoAction(Action2):
             self.RESOLVE_MAP.update(STATIC["directions"]["normalized"])
             self.RESOLVE_MAP.update((v,k) for (k,v) in STATIC["directions"]["noun_the"].items())
             self.RESOLVE_MAP.update((v,k) for (k,v) in STATIC["directions"]["noun_at_the"].items())
-        return self.RESOLVE_MAP.get(self.object, None)
+        self.object = self.RESOLVE_MAP.get(self.object, None)
+        return super().resolve_object()

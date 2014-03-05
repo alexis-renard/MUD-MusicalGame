@@ -12,6 +12,7 @@ from mud.actions import (
     LightOnAction, LightOffAction,
 )
 from mud.static import STATIC
+import re
 
 DIRS = list(STATIC["directions"]["noun_at_the"].values())
 DIRS.extend(STATIC["directions"]["noun_the"].values())
@@ -19,15 +20,15 @@ DIRS.extend(STATIC["directions"]["normalized"].keys())
 DETS = "(?:l |le |la |les |une |un |)"
 
 RULES = (
-    (ActionGo       , r"(?:aller |)(%s)$" % "|".join(DIRS)),
-    (ActionTake     , r"prendre %s(\w+)$" % DETS),
-    (ActionLook     , r"regarder$"),
-    (ActionInspect  , r"(?:regarder|lire|inspecter|observer) %s(\w+)$" % DETS),
-    (ActionOpen     , r"ouvrir %s(\w+)$" % DETS),
-    (ActionOpenWith , r"ouvrir %s(\w+) avec %s(\w+)$" % (DETS,DETS)),
-    (ActionClose    , r"fermer %s(\w+)$" % DETS),
-    (ActionType     , r"(?:taper|[eé]crire) (\w+)$"),
-    (ActionInventory, r"(?:inventaire|inv|i)$"),
+    (GoAction       , r"(?:aller |)(%s)$" % "|".join(DIRS)),
+    (TakeAction     , r"prendre %s(\w+)$" % DETS),
+    (LookAction     , r"regarder$"),
+    (InspectAction  , r"(?:regarder|lire|inspecter|observer) %s(\w+)$" % DETS),
+    (OpenAction     , r"ouvrir %s(\w+)$" % DETS),
+    (OpenWithAction , r"ouvrir %s(\w+) avec %s(\w+)$" % (DETS,DETS)),
+    (CloseAction    , r"fermer %s(\w+)$" % DETS),
+    (TypeAction     , r"(?:taper|[eé]crire) (\w+)$"),
+    (InventoryAction, r"(?:inventaire|inv|i)$"),
     (LightOnAction  , r"allumer %s(\w+)$"),
     (LightOffAction , r"[eé]teindre %s(\w+)$"),
 )
@@ -41,9 +42,9 @@ RULES = (
 def parse(actor, text):
     text = " ".join(text.strip().lower().split())
     text = " ".join(text.split("'"))
-    for action,pattern in rules:
+    for action,pattern in RULES:
         pattern += "$"
-        m = pattern.match(text)
+        m = re.match(pattern, text)
         if m:
-            return action(actor, *m.groups())
+            return action(actor, *m.groups()),text
     return None,text

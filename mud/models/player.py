@@ -2,13 +2,16 @@
 # Copyright (C) 2014 Denys Duchier, IUT d'Orléans
 #==============================================================================
 
-from mud.db.transcript import DATABASE as TRANSCRIPTS
-from .thing      import Thing
-from .containing import Containing
+from mud.db.transcript  import DATABASE as TRANSCRIPTS
+from mud.world          import WORLD
+from .thing             import Thing
+from .mixins.containing import Containing
+from .location          import Location
+import queue
 
 class Player(Containing, Thing):
 
-    _UUID_IF_ID_MISSING = True
+    _UUID_IF_ID_IS_MISSING = True
     _PLAYERS = {}
 
     def __new__(cls, name=None, **kargs):
@@ -25,9 +28,10 @@ class Player(Containing, Thing):
         if hasattr(self, "name"):     # check if the player has already been initialized
             return                    # in which case, nothing more needs to be done
         super().__init__(**kargs)     # otherwise, initialize base classes
-        _PLAYERS[name]  = self        # save player in static dict
+        self._PLAYERS[name]  = self   # save player in static dict
         self.transcript = TRANSCRIPTS.lookup(name) # and add appropriate attributes
         self.name = name
+        self.move_to(WORLD["parking-000"])
 
     #--------------------------------------------------------------------------
     # initialization from YAML data
@@ -81,6 +85,9 @@ class Player(Containing, Thing):
         yield from self.contents()
         yield from self.parts()
 
+    def is_alive(self):
+        return True
+
     #--------------------------------------------------------------------------
     # API for sending messages back to the user through his websocket
     #--------------------------------------------------------------------------
@@ -119,7 +126,7 @@ class Player(Containing, Thing):
     # functions for performing the search in different use cases.
     #--------------------------------------------------------------------------
 
-    def _make_find_pred(kargs):
+    def _make_find_pred(self, kargs):
         """create a function to test whether an object matches the given
         criteria."""
         test = kargs.get("test")          # a function           (optional)
@@ -152,7 +159,7 @@ class Player(Containing, Thing):
                 return x
         c = self.container()
         if c is not None:
-            for x in c:
+            for x in c.all():
                 if pred(x):
                     return x
         return None
@@ -169,7 +176,7 @@ class Player(Containing, Thing):
         q.put(cont)
         while not q.empty():
             cont = q.get()
-            for x in cont:
+            for x in cont.all():
                 if pred(x):
                     return x
                 if isinstance(x, Containing) and not x.has_prop("closed"):

@@ -7,6 +7,7 @@ from mud.models.mixins.propertied import Propertied
 class Effect(Propertied):
 
     def __init__(self, yaml, context):
+        super().__init__()
         self.yaml = yaml
         self.context = context
 
@@ -17,9 +18,18 @@ class Effect(Propertied):
         val = self.yaml.get(key)
         if val is None:
             return self.context[key]
-        if val[0] == "*":
+        # anything but a string needs no further interpretation
+        if not isinstance(val, str):
+            return val
+        # ref to a world object
+        if val[0] == "=":
             from mud.world import WORLD
             return WORLD[val[1:]]
+        # literal string
+        if val[0] == "/":
+            assert val[-1] == "/"
+            return val[1:-1]
+        # ref to a context object
         return self.context[val]
 
     @staticmethod
@@ -27,7 +37,9 @@ class Effect(Propertied):
         cls = yaml["type"]
         import mud.effects
         cls = mud.effects.__dict__[cls]
-        return cls(yaml, context)
+        eff = cls(yaml, context)
+        eff.init_from_yaml(yaml)
+        return eff
 
     @staticmethod
     def make_effects(yamls, context):

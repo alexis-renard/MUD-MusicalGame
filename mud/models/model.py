@@ -2,12 +2,13 @@
 # Copyright (C) 2014 Denys Duchier, IUT d'Orléans
 #==============================================================================
 
+from .mixins.identified import Identified
 from .mixins.propertied import Propertied
 from .mixins.evented    import Evented
 from .mixins.named      import Named
 from .mixins.composed   import Composed
 
-class Model(Named, Propertied, Evented, Composed):
+class Model(Identified, Named, Propertied, Evented, Composed):
 
     """primitive base class for all models."""
 

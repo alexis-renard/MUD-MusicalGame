@@ -3,11 +3,11 @@
 #==============================================================================
 
 import re
-from .identified import Identified
+from .basic import Basic
 
 RE_CALL = re.compile(r"^(?P<prop>(?:\w|[-_.])+)(?:\((?P<arg>[^)]*)\)|)$")
 
-class Propertied(Identified):
+class Propertied(Basic):
 
     """mixin class that provides a way for a model to have properties that can
     be tested and modified."""
@@ -67,11 +67,11 @@ class Propertied(Identified):
             return self._has_prop(prop[1:], context)
         if prefix == "-":
             return not self._has_prop(prop[1:], context)
-        return return self._has_prop(prop, context)
+        return self._has_prop(prop, context)
 
     def _has_prop(self, prop, context=None):
         """m._has_prop("actor:foo", context) looks up actor in context and
-        delegates to it _has_prop("foo").  m._has_prop("*toto:foo") looks up
+        delegates to it _has_prop("foo").  m._has_prop("=toto:foo") looks up
         toto (by id) in the world and delegates _has_prop("foo") to it.
         m._has_prop("foo") either tries m.has_prop_foo() if it exists, or
         m._has_prop_foo() if it exists, or checks if m has a property "foo"."""
@@ -95,7 +95,7 @@ class Propertied(Identified):
     def _analyze_prop(self, prop, context):
         if ":" in prop:
             key, prop = prop.split(":", 1)
-            if key[0] == "*":
+            if key[0] == "=":
                 from mud.world import WORLD
                 obj = WORLD[key[1:]]
             else:
@@ -108,7 +108,7 @@ class Propertied(Identified):
         return re.sub(r"[^\w]+", "_", prop)
 
     def _get_props(self):
-        return self.props_proxy()._props()
+        return self.props_proxy()._props
 
     def add_prop(self, prop, context=None):
         obj, prop = self._analyze_prop(prop, context)

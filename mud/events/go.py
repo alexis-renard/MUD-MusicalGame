@@ -6,6 +6,7 @@ from .event import Event2
 
 
 class EnterPortalEvent(Event2):
+    NAME = "enter-portal"
 
     @property
     def exit(self):
@@ -34,9 +35,11 @@ class EnterPortalEvent(Event2):
     def context(self):
         context = super().context()
         context["exit"] = self.exit
+        return context
 
 
 class TraversePortalEvent(Event2):
+    NAME = "traverse-portal"
 
     @property
     def traversal(self):
@@ -52,9 +55,14 @@ class TraversePortalEvent(Event2):
     def context(self):
         context = super().context()
         context["traversal"] = self.traversal
+        return context
+
+    def get_event_templates(self):
+        return None
 
 
 class LeavePortalEvent(Event2):
+    NAME = "leave-portal"
 
     @property
     def exit(self):
@@ -66,3 +74,4 @@ class LeavePortalEvent(Event2):
     def context(self):
         context = super().context()
         context["exit"] = self.exit
+        return context

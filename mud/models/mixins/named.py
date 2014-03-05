@@ -23,12 +23,14 @@ class Named(Basic):
 
     def init_from_yaml(self, data, world):
         super().init_from_yaml(data, world)
-        name = data.get("name")
+        name = data.get("name", [])
+        names = data.get("names", [])
         if isinstance(name, str):
-            self.add_name(name)
-        elif name:
-            for x in name:
-                self.add_name(x)
+            name = [name]
+        if isinstance(names, str):
+            names = [names]
+        for x in name+names:
+            self.add_name(x)
 
     def update_from_yaml(self, data, world):
         super().update_from_yaml(data, world)
@@ -46,7 +48,8 @@ class Named(Basic):
     #--------------------------------------------------------------------------
 
     def add_name(self, name):
-        self._names.add(name)
+        if name:
+            self._names.add(name)
 
     def has_name(self, name):
         return name in self._names

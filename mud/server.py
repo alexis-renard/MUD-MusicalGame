@@ -47,12 +47,13 @@ def main():
             (r"/register"  ,  RegisterHandler),
             (r"/websocket" , WebSocketHandler),
         ],
-        cookie_secret = str(uuid.uuid4()),
+        cookie_secret = "not so secret", #str(uuid.uuid4()),
         login_url     = "/login",
         template_path = os.path.join(ROOTDIR, "templates"),
         static_path   = os.path.join(ROOTDIR, "static"),
         xsrf_cookies  = True,
         debug         = DEBUG,
+        autoreload    = False,
     )
     app.listen(options.port)
     tornado.ioloop.IOLoop.instance().start()
