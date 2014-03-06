@@ -48,7 +48,7 @@ class Evented(Basic):
         return {"event": self}
 
     def world_context(self):
-        return collections.ChainMap(self.context(), mud.game.GAME.world)
+        return collections.ChainMap(self.context(), mud.game.GAME.world, mud.game.GAME.static)
 
     def _advance_event_data(self, data, context):
         while isinstance(data, list):
@@ -59,17 +59,17 @@ class Evented(Basic):
                     data2 = datum
                     break
                 if isinstance(props, str):
-                    props = [prop]
+                    props = [props]
                 if self.has_props(props, context):
                     data2 = datum
                     break
             if data2:
-                data = data2["data"]
+                data = data2
+            else:
+                data = None
         return data
 
     def _get_event_data(self, data, dotpath, context, deref_last):
-        # this should also be done with STATIC in case we don't find it here!!!!!! FIXME
-        data = self.get_event_templates()
         for key in dotpath.split("."):
             data = self._advance_event_data(data, context)
             if not data:
@@ -77,13 +77,16 @@ class Evented(Basic):
             data = data.get(key, None)
         if deref_last:
             data = self._advance_event_data(data, context)
+            if isinstance(data, dict) and "data" in data:
+                data = data["data"]
         return data
 
     def get_event_data(self, dotpath, context, deref_last):
-        if hasattr(context, "maps"):
+        if hasattr(context, "maps"): # ChainMap?
             maps = context.maps
         else:
-            maps = [context]
+            maps = [context, mud.game.GAME.static]
+        maps = [self]+maps
         for m in maps:
             if hasattr(m, "get_event_templates"):
                 t = m.get_event_templates()

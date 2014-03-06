@@ -5,7 +5,14 @@
 from .event import Event2, Event3
 
 class OpenEvent(Event2):
-    pass
+    NAME = "open"
+
+    def perform(self):
+        self.inform("open")
+
 
 class OpenWithEvent(Event3):
-    pass
+    NAME = "open-with"
+
+    def perform(self):
+        self.inform("open-with")

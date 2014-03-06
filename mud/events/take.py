@@ -5,6 +5,7 @@
 from .event import Event2
 
 class TakeEvent(Event2):
+    NAME = "take"
 
     def perform(self):
         if not self.object.has_prop("takable"):

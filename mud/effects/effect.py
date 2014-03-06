@@ -38,7 +38,7 @@ class Effect(Propertied):
         import mud.effects
         cls = mud.effects.__dict__[cls]
         eff = cls(yaml, context)
-        eff.init_from_yaml(yaml)
+        eff.init_from_yaml(yaml, mud.game.GAME.world)
         return eff
 
     @staticmethod

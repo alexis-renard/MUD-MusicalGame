@@ -45,6 +45,9 @@ class Containing(Propertied):
         """return an iterator over the contents of the container."""
         return iter(self._contents)
 
+    def is_empty(self):
+        return not self._contents
+
     def add(self, obj):
         """add an object or player to the container."""
         self._contents.add(obj)

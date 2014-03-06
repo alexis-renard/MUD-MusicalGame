@@ -47,6 +47,9 @@ class Exit(Model):
     # model API
     #--------------------------------------------------------------------------
 
+    def is_exit(self):
+        return True
+
     # in this design, all exits of the same portal share the same properties
     # which are stored on the portal
     def props_proxy(self):
@@ -59,4 +62,4 @@ class Exit(Model):
         return self.portal.get_traversal(self)
 
     def the_direction(self):
-        return mud.game.GAME.static["directions"]["noun_the"]
+        return mud.game.GAME.static["directions"]["noun_the"][self.direction]

@@ -86,7 +86,8 @@ events:
     actor: |
       Vous êtes sur le porche du département info.
       Au nord-est, une porte donne accès au hall du
-      département.
+      département. Au sud-ouest, une allée mène au
+      parking de l'IUT.
 ---
 id: portal-porche-hall-000
 type: Portal
@@ -113,19 +114,40 @@ exits:
         actor     : "Vous sortez du département info."
         observer  : "{{ actor.name }} sort du département info."
       open        :
-        - props   : closed
+        - props   : portal:closed
           actor   : *porte001
           observer: *porte002
-        - props   : -closed
-          actor   : "La porte est déjà ouverte."
+        - props   : -portal:closed
+          actor   : &porte003 "La porte est déjà ouverte!"
       open-with   :
         - props   :
-            - closed
-            - object2:key-for-porte-porche
+            - portal:closed
+            - object2:key-for-porte-porche-000
           effects :
             type  : ChangePropEffect
-            object: 
-          
+            modifs:
+              - -portal:closed
+          actor   : |
+            La porte du département s'ouvre avec un déclic.
+          observer: |
+            {{ actor.name }} ouvre la porte du département info
+            avec un badge de sécurité.
+        - props   :
+            - portal:closed
+            - -object2:key-for-porte-porche-000
+          actor   : |
+            Vous tentez vainement d'ouvrir la porte avec
+            {{ object2.noun_the() }}
+          observer: |
+            {{ actor.name }} tente vainement d'ouvrir la porte du
+            département info avec {{ object2.noun_a() }}
+        - props   :
+            - -portal:closed
+          actor   : *porte003
+          observer: |
+            {{ actor.name }} tente futilement d'ouvrir la porte du
+            département info avec {{ object2.noun_a() }}, alors
+            qu'elle est déjà ouverte.
   - location: hall-000
     direction: sud-ouest
     name:

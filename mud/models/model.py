@@ -49,6 +49,9 @@ class Model(Identified, Named, Propertied, Evented, Composed):
     def is_container(self):
         return False
 
+    def is_exit(self):
+        return False
+
     #--------------------------------------------------------------------------
     # model API
     #--------------------------------------------------------------------------

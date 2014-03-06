@@ -5,6 +5,7 @@
 from .event import Event1
 
 class FailedActionEvent(Event1):
+    NAME = "failed-action"
 
     def __init__(self, actor, action):
         super().__init__(actor)

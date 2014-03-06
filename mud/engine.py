@@ -32,6 +32,8 @@ class Engine(threading.Thread):
         action,text = self.parser.parse(actor, text)
         if action:
             action.execute()
+        else:
+            actor.send_error("<p>hein?</p>")
 
 #    def perform_input(self, task):
 #        user    = task["user"]

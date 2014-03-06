@@ -123,7 +123,7 @@ class Propertied(Basic):
             self._get_props().add(prop)
 
     def remove_prop(self, prop, context=None):
-        obj, prop = self._analyze_prop(prop, contex)
+        obj, prop = self._analyze_prop(prop, context)
         if obj is not self:
             return obj.remove_prop(prop, context)
         mprop = self._sanitize_prop(prop)
@@ -132,6 +132,7 @@ class Propertied(Basic):
         if meth:
             meth()
         else:
+            print(self, self.id)
             self._get_props().remove(prop)
 
     def change_prop(self, prop, context=None):
@@ -158,7 +159,6 @@ class Propertied(Basic):
     #--------------------------------------------------------------------------
     # computed properties:
     # - empty		(purely observational)
-    # - open		(negation of closed)
     # - has-class(ClassName)
     #--------------------------------------------------------------------------
 
@@ -170,15 +170,6 @@ class Propertied(Basic):
 
     def _remove_prop_empty(self):
         raise NotImplemented()
-
-    def _has_prop_open(self):
-        return not self.has_prop("closed")
-
-    def _add_prop_open(self):
-        self.remove_prop("closed")
-
-    def _remove_prop_open(self):
-        self.add_prop("closed")
 
     def _has_prop_has_class(self, cname):
         for x in self.__class__.__mro__:

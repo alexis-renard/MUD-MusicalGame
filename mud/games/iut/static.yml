@@ -53,13 +53,11 @@ directions:
     bas       : en bas
 events:
   enter-portal:
-    actor     : "Vous sortez par {{ exit.the_direction() }}."
     observer  : "{{ actor.name }} sort par {{ exit.the_direction() }}."
     failed:
       actor   : "Vous tentez vainement de sortir par {{ exit.the_direction() }}."
       observer: "{{ actor.name }} tente vainement de sortir par {{ exit.the_direction() }}."
   leave-portal:
-    actor     : "Vous sortez par {{ exit.the_direction() }}-"
     observer  : "{{ actor.name }} sort par {{ exit.the_direction() }}."
   traverse-portal:
     actor     : null
@@ -74,7 +72,7 @@ events:
     actor     : "Ici vous rencontrez:"
   look-objects:
     actor     : "Ici vous trouvez:"
-  action-failed:
+  failed-action:
     actor     :
       - props : action:cannot-see
         data  : "Dans cette obscurité, vous n'y voyez rien."
@@ -98,3 +96,15 @@ events:
     actor     : "Dedans vous trouvez:"
   inspect-inside-empty:
     actor     : "Il n'y a rien dedans."
+  inventory-empty:
+    actor     : "Votre inventaire est vide."
+  inventory:
+    actor     : "Votre inventaire contient:"
+  open:
+    actor     :
+      - props : -portal:closed
+        data  : "C'est déjà fait!"
+  open-with:
+    actor     :
+      - props : -portal:closed
+        data  : "C'est déjà fait!"

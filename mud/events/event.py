@@ -119,6 +119,9 @@ class Event2(Event1):
     def context(self):
         context = super().context()
         context["object"] = self.object
+        if hasattr(self.object, "is_exit") and self.object.is_exit():
+            context["exit"] = self.object
+            context["portal"] = self.object.portal
         return context
 
     def get_event_templates(self):

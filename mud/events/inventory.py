@@ -5,4 +5,16 @@
 from .event import Event1
 
 class InventoryEvent(Event1):
-    pass
+    NAME = "inventory"
+
+    def perform(self):
+        self.buffer_clear()
+        if self.actor.is_empty():
+            self.buffer_inform("inventory-empty.actor")
+        else:
+            self.buffer_inform("inventory.actor")
+            self.buffer_append("<ul>")
+            for x in self.actor.contents():
+                self.buffer_peek(x)
+            self.buffer_append("</ul>")
+        self.actor.send_result(self.buffer_get())

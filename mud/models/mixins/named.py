@@ -29,8 +29,19 @@ class Named(Basic):
             name = [name]
         if isinstance(names, str):
             names = [names]
-        for x in name+names:
+        names = name+names
+        if names:
+            self.name = names[0]
+        for x in names:
             self.add_name(x)
+        noun_the = data.get("noun_the")
+        if noun_the is None and names:
+            noun_the = "le "+self.name
+        self._noun_the = noun_the
+        noun_a = data.get("noun_a")
+        if noun_a is None and names:
+            noun_a = "un "+self.name
+        self._noun_a = noun_a
 
     def update_from_yaml(self, data, world):
         super().update_from_yaml(data, world)
@@ -60,3 +71,9 @@ class Named(Basic):
     # computed property: has-name(Name)
     def _has_prop_has_name(self, name):
         return has_name(name)
+
+    def noun_the(self):
+        return self._noun_the
+
+    def noun_a(self):
+        return self._noun_a

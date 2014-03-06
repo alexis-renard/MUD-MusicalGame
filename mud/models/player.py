@@ -96,6 +96,7 @@ class Player(Containing, Thing):
         ws = getattr(self, "websocket", None)
         if ws:
             ws.write_message(msg)
+            self.transcript.append(msg)
 
     def send_echo(self, html):
         """sends back the commands as received."""
@@ -190,10 +191,10 @@ class Player(Containing, Thing):
         - or recursively in outer containers (unless you find that's
           closed and you can't look outside any further
         - or carried by people in your surroundings
-        - or recursively by people in outer comtainers (that you
+        - or recursively by people in outer containers (that you
           can reach)"""
         pred = self._make_find_pred(kargs)
-        for x in self:
+        for x in self.contents():
             if pred(x):
                 return x
         q = queue.Queue()

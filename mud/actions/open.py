@@ -16,4 +16,4 @@ class OpenWithAction(Action3):
     EVENT = OpenWithEvent
     RESOLVE_OBJECT = "resolve_for_operate"
     RESOLVE_OBJECT2 = "resolve_for_use"
-    ACTION = "open"
+    ACTION = "open-with"
