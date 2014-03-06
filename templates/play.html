@@ -3,7 +3,9 @@
 <div id="inbox">
  <div id="inboxcontents">
   {% for item in items %}
-    {% raw item %}
+  <div class="alert mud-{{ item['type'] }}">
+    {% raw item['html'] %}
+  </div>
   {% end %}
  </div>
 </div>

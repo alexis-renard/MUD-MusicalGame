@@ -27,7 +27,7 @@ class Engine(threading.Thread):
 
     def perform_input(self, task):
         actor = task["player"]
-        text  = task["text"]
+        text  = task["text"].strip()
         actor.send_echo("<pre>%s</pre>" % text)
         action,text = self.parser.parse(actor, text)
         if action:

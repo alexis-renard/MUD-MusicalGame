@@ -1,3 +1,8 @@
+body {
+    font-family: "Trebuchet MS", Verdana, Arial, sans-serif;
+    font-size: large;
+}
+
 div.mudcontent {
     padding-top: 7em;
 }
@@ -7,10 +12,6 @@ span.welcome {
     float: right;
     color: white;
     top: 1em;
-}
-
-body {
-    font-family: sans;
 }
 
 #input {
@@ -32,4 +33,33 @@ body {
 
 #inputbox {
     width: 50em;
+}
+
+div.alert.mud-echo {
+    font-family: monospace;
+    font-size: x-large;
+/*    border: 1px solid #cccccc;*/
+    padding: 0px;
+}
+
+.mud-echo pre {
+    font-size: large;
+    background-color: white;
+    border: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+.mud-echo pre:before {
+    content: "> ";
+}
+
+.mud-result {
+  background-color: #dff0d8;
+}
+
+.mud-error {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
 }

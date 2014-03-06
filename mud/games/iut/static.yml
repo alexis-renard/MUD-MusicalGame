@@ -108,3 +108,9 @@ events:
     actor     :
       - props : -portal:closed
         data  : "C'est déjà fait!"
+  look:
+    failed:
+      actor   :
+        - props: event:cannot-see
+          data : "Dans cette obscurité, vous n'y voyez rien."
+        - data : "Pour une raison inconnue, vous ne voyez rien."

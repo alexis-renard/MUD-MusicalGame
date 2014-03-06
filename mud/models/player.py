@@ -201,14 +201,14 @@ class Player(Containing, Thing):
         c = self.container()
         while c:
             q.put(c)
-            c = c.container()
+            c = c.is_container() and c.container()
         while not q.empty():
             c = q.get()
-            for x in c:
+            for x in c.all():
                 if pred(x):
                     return x
                 if isinstance(x, Player):
-                    for y in x:
+                    for y in x.all():
                         if pred(y):
                             return y
         return None

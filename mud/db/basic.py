@@ -2,8 +2,7 @@
 # Copyright (C) 2014 Denys Duchier, IUT d'Orléans
 #==============================================================================
 
-import threading, os.path, json, pickle
-from mud.config import DATADIR
+import threading, os, os.path, json, pickle
 
 #==============================================================================
 # basic functionality for all databases
@@ -13,11 +12,12 @@ class BasicDB(dict):
 
     def __init__(self, filename):
         self.lock = threading.RLock()
-        self.json_path = os.path.join(DATADIR, "%s.json" % filename)
-        self.pickle_path = os.path.join(DATADIR, "%s.pckl" % filename)
+        self.json_path = "%s.json" % filename
+        self.pickle_path = "%s.pckl" % filename
 
     def json_save(self):
         with self.lock:
+            os.makedirs(os.path.dirname(self.json_path), exist_ok=True)
             with open(self.json_path, "w") as f:
                 json.dump(self, f, ensure_ascii=False, indent=4)
 
@@ -34,6 +34,7 @@ class BasicDB(dict):
 
     def pickle_save(self):
         with self.lock:
+            os.makedirs(os.path.dirname(self.pickle_path), exist_ok=True)
             with open(self.pickle_path, "wb") as f:
                 pickle.dump(dict(self), f, protocol=-1)
 

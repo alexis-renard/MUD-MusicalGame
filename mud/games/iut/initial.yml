@@ -1,6 +1,8 @@
 ---
 id: parking-000
 type: Location
+contains:
+  - lampe-000
 events:
   info:
     actor: "Parking de l'IUT."
@@ -186,7 +188,7 @@ parts:
 events:
   info:
     actor: "Un tableau d'affichage."
-  inspect:
+  look:
     actor: |
       Sur le tableau d'affichage une notice jaune est
       fixée par une punaise.
@@ -196,7 +198,7 @@ type: Thing
 events:
   info:
     actor: "Une notice jaune."
-  inspect:
+  look:
     actor: |
       Sur cette notice est inscrit: <i>le mot de passe
       n'est pas <tt>XYZZY</tt>... absolument pas! Jamais
@@ -308,12 +310,22 @@ id: lampe-000
 type: Thing
 props:
   - lightable
+  - takable
+noun_a  : une lampe-torche
+noun_the: la lampe-torche
+names   :
+  - lampe
+  - torche
+  - lampe-torche
 events:
   info:
-    actor: "Une lampe torche."
-  inspect:
+    actor:
+      - props: =lampe-000:light-on
+        data : "Une lampe-torche allumée."
+      - data : "Une lampe-torche éteinte."
+  look:
     actor:
       - props:
           - object:light-on
-        data: "Une lampe torche allumée."
-      - data: "Une lampe torche éteinte."
+        data: "Une lampe-torche allumée."
+      - data: "Une lampe-torche éteinte."

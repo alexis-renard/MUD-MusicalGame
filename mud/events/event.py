@@ -49,15 +49,20 @@ class Event(Evented, Propertied):
     def buffer_append(self, html):
         self.HTML.append(html)
 
-    def buffer_htmlize(self, text):
+    def buffer_htmlize(self, text, omit_first_p=False):
         if not text:
             return
         text = text.strip()
         if not text or text[0]=="<":
             return self.buffer_append(text)
         text = re.sub(r"(?:(?:^|\n)\s*){2,}", r"\n\n", text)
+        first = True
         for item in text.split(r"\n\n"):
-            self.buffer_append("<p>%s</p>" % item)
+            if first and omit_first_p:
+                self.buffer_append(item)
+            else:
+                self.buffer_append("<p>%s</p>" % item)
+            first = False
 
     def buffer_inform(self, dotpath, **kargs):
         text = self.get_template(dotpath)
@@ -76,7 +81,7 @@ class Event(Evented, Propertied):
         if text:
             html = self.format(text, peeked=what, **kargs)
             self.buffer_append("<li>")
-            self.buffer_htmlize(html)
+            self.buffer_htmlize(html, omit_first_p=True)
             self.buffer_append("</li>")
 
 
