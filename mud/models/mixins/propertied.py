@@ -132,7 +132,6 @@ class Propertied(Basic):
         if meth:
             meth()
         else:
-            print(self, self.id)
             self._get_props().remove(prop)
 
     def change_prop(self, prop, context=None):

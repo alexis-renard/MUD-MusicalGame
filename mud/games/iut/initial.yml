@@ -43,7 +43,7 @@ events:
     actor: |
       Vous êtes dans l'arbre.  Les branches semblent heureusement
       solides.  Il y a un nid au creux d'une de ces branches.
-contains:
+parts:
   - nid-000
 ---
 id: nid-000
@@ -100,6 +100,7 @@ exits:
     direction: nord-est
     name:
       - porte
+    gender: fem
     events:
       enter-portal:
         actor     : "Vous entrez dans le département info."
@@ -152,8 +153,8 @@ exits:
             qu'elle est déjà ouverte.
   - location: hall-000
     direction: sud-ouest
-    name:
-      - porte
+    name: porte
+    gender: fem
     events:
       enter-portal:
         observer  : "{{ actor.name }} sort du département info."
@@ -177,14 +178,15 @@ events:
     actor: |
       Vous êtes dans le hall du département info de l'IUT.
       Au sud-ouest, la porte d'entrée mène au porche.  Un
-      escalier mène à l'étage.
+      escalier mène à l'étage.  Un tableau d'affichage est
+      accroché au mur.
 parts:
   - tableau-000
+  - notice-000
 ---
 id: tableau-000
 type: Thing
-parts:
-  - notice-000
+name: tableau
 events:
   info:
     actor: "Un tableau d'affichage."
@@ -195,14 +197,14 @@ events:
 ---
 id: notice-000
 type: Thing
+name: notice
+gender: fem
 events:
   info:
     actor: "Une notice jaune."
   look:
     actor: |
-      Sur cette notice est inscrit: <i>le mot de passe
-      n'est pas <tt>XYZZY</tt>... absolument pas! Jamais
-      de la vie!
+      Sur cette notice est inscrit: <i>mdp paradis.mud: <tt>XYZZY</tt>
 ---
 id: escalier-000
 type: Portal
@@ -244,6 +246,7 @@ parts:
 ---
 id: ordinateur-000
 type: Thing
+name: ordinateur
 events:
   info:
     actor: "Un ordinateur."
@@ -252,11 +255,17 @@ events:
       L'ordinateur est allumé.  Le prompt dit: <i>tapez
       le mot de passe du paradis.</i>
   taper:
-    actor:
+    - props: event:typed-xyzzy
       effects:
-        - props: event:typed-xyzzy
-          type : EnterPortalEvent
+        - type : EnterPortalEffect
           exit : portal-ordinateur-cabane-000-exit-1
+      observer: |
+        {{ actor.name }} entre un mot de passe dans l'ordinateur.
+    - actor: |
+        Ce n'est pas le bon mot de passe.
+      observer: |
+        {{ actor.name }} entre un mot de passe dans l'ordinateur,
+        mais ce n'est pas le bon.
 ---
 id: portal-ordinateur-cabane-000
 type: Portal
@@ -268,7 +277,7 @@ exits:
         actor: |
           Une étrange lumière émane de l'écran et emplit
           la salle.  Vous vous dématérialisez et êtes aspiré
-          dans l'étrange widget étiqueté "ENTREZ SANS FRAPPER"
+          dans le widget étiqueté "ENTREZ SANS FRAPPER"
           sur l'écran.
         observer: "{{ actor.name }} disparaît."
       leave-portal:
@@ -282,18 +291,17 @@ exits:
           - props:
               - exit:activated
             data : |
-              Vous sautez dans le vide.  Un oiseau gigantesque
-              passe en dessous et vous reçoit sur son dos et plonge
-              dans la cascade.
+              Vous sautez dans le vide.  Un tapis volant vous
+              cueille dans votre chute et plonge dans la cascade.
             effects:
-              - type: ChangePropsEvent
+              - type: ChangePropsEffect
                 data:
                   - -exit:activated
           - data : |
               Vous sautez dans le vide et vous vous écrasez en
               bas de la falaise.
             effects:
-              - type: DyingEvent
+              - type: DyingEffect
 ---
 id: cabane-000
 type: Location
@@ -311,12 +319,11 @@ type: Thing
 props:
   - lightable
   - takable
-noun_a  : une lampe-torche
-noun_the: la lampe-torche
 names   :
   - lampe
   - torche
   - lampe-torche
+gender: fem
 events:
   info:
     actor:
@@ -325,7 +332,24 @@ events:
       - data : "Une lampe-torche éteinte."
   look:
     actor:
-      - props:
-          - object:light-on
-        data: "Une lampe-torche allumée."
-      - data: "Une lampe-torche éteinte."
+      - props: object:light-on
+        data : "Une lampe-torche allumée."
+      - data : "Une lampe-torche éteinte."
+  light-on:
+    - props : object:light-on
+      actor : "La lampe est déjà allumée."
+    - actor : "Vous allumez votre lampe-torche."
+      observer: |
+        {{ actor.name }} allume sa lampe-torche.
+      effects:
+        - type  : ChangePropEffect
+          modifs: object:light-on
+  light-off:
+    - props : -object:light-on
+      actor : "La lampe est déjà éteinte."
+    - actor : "Vous éteignez votre lampe-torche."
+      observer: |
+        {{ actor.name }} éteind sa lampe-torche.
+      effects:
+        - type  : ChangePropEffect
+          modifs: -object:light-on

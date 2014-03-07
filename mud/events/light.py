@@ -5,6 +5,7 @@
 from .event import Event2
 
 class LightOnEvent(Event2):
+    NAME = "light-on"
 
     def perform(self):
         if not self.object.has_prop("lightable"):
@@ -13,6 +14,7 @@ class LightOnEvent(Event2):
 
 
 class LightOffEvent(Event2):
+    NAME = "light-off"
 
     def perform(self):
         if not self.object.has_prop("lightable"):

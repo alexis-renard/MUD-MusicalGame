@@ -31,8 +31,8 @@ def make_rules():
         (CloseAction    , r"fermer %s(\w+)$" % DETS),
         (TypeAction     , r"(?:taper|[eé]crire) (\w+)$"),
         (InventoryAction, r"(?:inventaire|inv|i)$"),
-        (LightOnAction  , r"allumer %s(\w+)$"),
-        (LightOffAction , r"[eé]teindre %s(\w+)$"),
+        (LightOnAction  , r"allumer %s(\w+)$" % DETS),
+        (LightOffAction , r"[eé]teindre %s(\w+)$" % DETS),
     )
 
 #==============================================================================

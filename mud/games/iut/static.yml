@@ -73,25 +73,37 @@ events:
   look-objects:
     actor     : "Ici vous trouvez:"
   failed-action:
-    actor     :
-      - props : action:cannot-see
-        data  : "Dans cette obscurité, vous n'y voyez rien."
-      - props : action:go
-        data  : "Il n'y a pas d'issue dans cette direction."
-      - props : action:cannot-find-object
-        data  : "{{ action.object }}: introuvable!"
-      - props : action:cannot-find-object2
-        data  : "{{ action.object2 }}: introuvable!"
+    - props   : action:cannot-see
+      actor   : "Dans cette obscurité, vous n'y voyez rien."
+    - props   : action:go
+      actor   : "Il n'y a pas d'issue dans cette direction."
+    - props   : action:cannot-find-object
+      actor   : "{{ action.object }}: introuvable!"
+    - props   : action:cannot-find-object2
+      actor   : "{{ action.object2 }}: introuvable!"
+
   light-on:
-    actor     :
-      - props:
-          - object:light-on
-        data: "Vous allumez {{ object.noun_the() }}."
-      - data: "{{ object.noun_the() }} est déjà allumé{{ object.e() }}"
-    observer  : "{{ actor.name }} allume {{ object.noun_his() }}."
+    - props   : -object:lightable
+      actor   : "{{ object.noun_the() }} n'est pas allumable."
+    - props   : object:light-on
+      actor   : "{{ object.noun_the() }} est déjà allumé{{ object.e() }}"
+    - actor   : "Vous allumez {{ object.noun_the() }}."
+      observer: "{{ actor.name }} allume {{ object.noun_his() }}."
+      effects :
+        - type  : ChangePropEffect
+          modifs: object:light-on
+
   light-off:
-    actor     : "Vous éteignez {{ object.noun_the() }}."
-    observer  : "{{ actor.name }} éteind {{ object.noun_his() }}."
+    - props   : -object:lightable
+      actor   : "{{ object.noun_the() }} n'est pas allumable, donc pas éteignable."
+    - props   : -object:light-on
+      actor   : "{{ object.noun_the() }} est déjà éteint{{ object.e() }}"
+    - actor   : "Vous éteignez {{ object.noun_the() }}."
+      observer: "{{ actor.name }} éteind {{ object.noun_his() }}."
+      effects :
+        - type  : ChangePropEffect
+          modifs: -object:light-on
+
   inspect-inside:
     actor     : "Dedans vous trouvez:"
   inspect-inside-empty:

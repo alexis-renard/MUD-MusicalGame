@@ -15,6 +15,8 @@ class InspectEvent(Event2):
             return self.failed_cannot_see()
         self.buffer_clear()
         self.buffer_inform("look.actor")
+        if not self.object.is_container():
+            return self.actor.send_result(self.buffer_get())
         players = []
         objects = []
         for x in self.object.contents():
@@ -39,4 +41,4 @@ class InspectEvent(Event2):
     def failed_cannot_see(self):
         self.buffer_clear()
         self.buffer_inform("look.failed")
-        self.actor.send.result(self.buffer_get())
+        self.actor.send_result(self.buffer_get())
