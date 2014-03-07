@@ -8,5 +8,5 @@ from mud.events import ChangePropEvent
 class ChangePropEffect(Effect2):
     EVENT = ChangePropEvent
 
-    def execute(self):
-        self.EVENT(self.actor, self.object, self.yaml["modifs"]).execute()
+    def make_event(self):
+        return self.EVENT(self.actor, self.object, self.yaml["modifs"])

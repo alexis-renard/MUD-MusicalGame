@@ -5,7 +5,14 @@
 from .event import Event2, Event3
 
 class CloseEvent(Event2):
-    pass
+    NAME = "close"
+
+    def perform(self):
+        self.inform("close")
+
 
 class CloseWithEvent(Event3):
-    pass
+    NAME = "close-with"
+
+    def perform(self):
+        self.inform("close-with")

@@ -250,7 +250,8 @@ events:
   look:
     actor: |
       Vous êtes dans la salle 22.  Il y a un ordinateur
-      allumé.
+      allumé.  Au sud-est, une porte donne sur la partie
+      centrale de l'étage.
 parts:
   - ordinateur-000
 ---
@@ -291,6 +292,7 @@ exits:
           sur l'écran.
         observer: "{{ actor.name }} disparaît."
       leave-portal:
+        actor   : "Vous vous rematérialisez en salle 22."
         observer: "{{ actor.name }} apparaît de nulle part."
   - id: portal-ordinateur-cabane-exit-2
     location: cabane-000
@@ -336,11 +338,15 @@ parts:
 ---
 id: bouton-cabane-000
 type: Thing
+name:
+  - bouton
+props:
+  - pushable
 events:
   look:
     actor: |
       Un bouton étiqueté: <i>Taxi Service</i>.
-  press:
+  push:
     actor: |
       Vous appuyez sur le bouton, mais rien ne semble se
       produire.
@@ -348,7 +354,7 @@ events:
       {{ actor.name }} appuie sur le bouton, mais rien ne
       semble se produire.
     effects:
-      - type  : ChangePropsEffect
+      - type  : ChangePropEffect
         modifs: =portal-ordinateur-cabane-exit-2:activated
 ---
 id: lampe-000

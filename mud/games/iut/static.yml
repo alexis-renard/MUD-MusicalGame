@@ -67,8 +67,10 @@ events:
     actor     : "Vous prenez {{ object.noun_the() }}."
     observer  : "{{ actor.name }} prend {{ object.noun_the() }}."
     failed:
-      actor   : "Vous tentez en vain de prendre {{ object.noun_the() }}."
-      observer: "{{ actor.name }} tente en vain de prendre {{ object.noun_the() }}."
+      - props : event:object-already-in-inventory
+        actor : "{{ object.noun_the() }} est déjà dans votre inventaire."
+      - actor   : "Vous tentez en vain de prendre {{ object.noun_the() }}."
+        observer: "{{ actor.name }} tente en vain de prendre {{ object.noun_the() }}."
   look-players:
     actor     : "Ici vous rencontrez:"
   look-objects:
@@ -144,3 +146,29 @@ events:
     actor: |
       Vous êtes mort.  Pour recommencer le MUD, cliquer sur Logout,
       puis logger vous à nouveau.
+
+  drop:
+    actor: |
+      Vous laissez ici {{ object.noun_the() }}
+    observer: |
+      {{ actor.name }} laisse ici {{ object.noun_a() }}
+
+  drop-in:
+    - props: event:object2-not-container
+      actor: |
+        Vous ne pouvez pas poser cela là.
+    - props: event:object-not-in-inventory
+      actor: |
+        Vous ne pouvez poser que ce que vous avez
+        dans votre inventaire.
+    - actor: |
+        Vous posez {{ object.noun_the() }} dans {{ object2.noun_the() }}
+      observer: |
+        {{ actor.name }} pose {{ object.noun_the() }} dans {{ object2.noun_the() }}
+
+  push:
+    failed:
+      actor: |
+        Vous appuyez futilement sur {{ object.noun_the() }}
+      observer: |
+        {{ actor.name }} appuie futilement sur {{ object.noun_the() }}

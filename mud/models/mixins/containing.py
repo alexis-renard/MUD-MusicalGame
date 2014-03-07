@@ -45,6 +45,9 @@ class Containing(Propertied):
         """return an iterator over the contents of the container."""
         return iter(self._contents)
 
+    def __contains__(self, x):
+        return x in self._contents
+
     def is_empty(self):
         return not self._contents
 
