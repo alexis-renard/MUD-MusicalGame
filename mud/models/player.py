@@ -7,10 +7,10 @@ from .thing             import Thing
 from .mixins.containing import Containing
 from .location          import Location
 import queue
+from tornado.ioloop     import IOLoop
 
 class Player(Containing, Thing):
 
-    _UUID_IF_ID_IS_MISSING = True
     _PLAYERS = {}
 
     def __new__(cls, name=None, **kargs):
@@ -26,12 +26,13 @@ class Player(Containing, Thing):
     def __init__(self, name=None, **kargs):
         if hasattr(self, "name"):     # check if the player has already been initialized
             return                    # in which case, nothing more needs to be done
+        kargs["id"] = pid = "player__" + name
         super().__init__(**kargs)     # otherwise, initialize base classes
         self._PLAYERS[name]  = self   # save player in static dict
         GAME = mud.game.GAME
         self.transcript = GAME.transcripts.lookup(name) # and add appropriate attributes
         self.name = name
-        self.move_to(GAME.world["parking-000"])
+        self.yaml = {"id": pid, "name": name}
 
     #--------------------------------------------------------------------------
     # initialization from YAML data
@@ -86,7 +87,7 @@ class Player(Containing, Thing):
         yield from self.parts()
 
     def is_alive(self):
-        return True
+        return bool(self.container())
 
     #--------------------------------------------------------------------------
     # API for sending messages back to the user through his websocket
@@ -95,8 +96,9 @@ class Player(Containing, Thing):
     def _send(self, msg):
         ws = getattr(self, "websocket", None)
         if ws:
-            ws.write_message(msg)
-            self.transcript.append(msg)
+            IOLoop.current().add_callback(ws.write_message, msg)
+            if msg["type"] != "death":
+                self.transcript.append(msg)
 
     def send_echo(self, html):
         """sends back the commands as received."""

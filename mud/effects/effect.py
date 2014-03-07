@@ -54,7 +54,19 @@ class Effect(Propertied):
                 yield effect
 
     def execute(self):
-        raise NotImplemented()
+        self.to_event().execute()
+
+    def to_event(self):
+        event = self.make_event()
+        self.init_event(event)
+        return event
+
+    def init_event(self, event):
+        props = self.yaml.get("event-props")
+        if props:
+            if isinstance(props, str):
+                props = [props]
+            event.add_props(props)
 
 
 class Effect1(Effect):
@@ -63,8 +75,9 @@ class Effect1(Effect):
         super().__init__(yaml, context)
         self.actor = self.resolve("actor")
 
-    def execute(self):
-        self.EVENT(self.actor).execute()
+    def make_event(self):
+        return self.EVENT(self.actor)
+
 
 
 class Effect2(Effect1):
@@ -73,8 +86,9 @@ class Effect2(Effect1):
         super().__init__(yaml, context)
         self.object = self.resolve("object")
 
-    def execute(self):
-        self.EVENT(self.actor, self.object).execute()
+    def make_event(self):
+        return self.EVENT(self.actor, self.object)
+
 
 
 class Effect3(Effect2):
@@ -83,5 +97,5 @@ class Effect3(Effect2):
         super().__init__(yaml, context)
         self.object2 = self.resolve("object2")
 
-    def execute(self):
-        self.EVENT(self.actor, self.object, self.object2).execute()
+    def make_event(self):
+        return self.EVENT(self.actor, self.object, self.object2)

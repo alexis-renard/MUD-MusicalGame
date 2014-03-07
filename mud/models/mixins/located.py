@@ -30,7 +30,8 @@ class Located(Identified):
     def update_from_yaml(self, data, world):
         super().update_from_yaml(data, world)
         if "container" in data:
-            self.move_to(world[data["container"]])
+            loc = data["container"]
+            self.move_to(loc and world[loc])
 
     #--------------------------------------------------------------------------
     # API for saving the dynamic part of objects to YAML (via JSON)

@@ -16,11 +16,11 @@ class Game:
     def yaml_initial_filename(self):
         return os.path.join(self.GAMES_DIR, self.name, "initial.yml")
 
-    def yaml_current_filename(self):
-        return os.path.join(self.GAMES_DIR, self.name, "current.yml")
-
     def yaml_static_filename(self):
         return os.path.join(self.GAMES_DIR, self.name, "static.yml")
+
+    def yaml_current_filename(self):
+        return os.path.join(self.SAVES_DIR, self.name, "current.yml")
 
     def transcripts_filename(self):
         return os.path.join(self.SAVES_DIR, self.name, "transcripts")
@@ -46,7 +46,7 @@ class Game:
 
     def yaml_load(self, filename):
         try:
-            return yaml.load_all(open(filename))
+            return list(yaml.load_all(open(filename)))
         except FileNotFoundError:
             return ""
     
@@ -54,8 +54,8 @@ class Game:
         self.users.load()
         self.transcripts.load()
         self.static.update(self._static)
+        self.users.create_avatars()
         self.world.load(self._initial, self._current)
-        self.static_evented = Evented(events=self.static["events"])
         del self._initial
         del self._current
         del self._static
@@ -63,4 +63,10 @@ class Game:
     def save(self):
         contents = self.world.save()
         with open(self.yaml_current_filename(), "w") as stream:
-            dump_all(contents, stream)
+            yaml.dump_all(contents, stream)
+        self.transcripts.save()
+        self.users.save()
+
+    def start_for_player(self, player):
+        init = self.static["start"]
+        return self.world[init]

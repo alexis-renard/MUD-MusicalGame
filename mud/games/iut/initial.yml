@@ -15,7 +15,8 @@ events:
 id: portal-parking-arbre-000
 type: Portal
 exits:
-  - location: parking-000
+  - id: parking-000-haut
+    location: parking-000
     direction: haut
     events:
       enter-portal:
@@ -25,7 +26,8 @@ exits:
         observer: |
           {{ actor.name }} descend de l'arbre et vous rejoint
           sur le parking de l'IUT.
-  - location: arbre-000
+  - id: arbre-000-bas
+    location: arbre-000
     direction: bas
     events:
       enter-portal:
@@ -74,9 +76,11 @@ events:
 id: portal-parking-porche-000
 type: Portal
 exits:
-  - location: parking-000
+  - id: parking-000-nord-est
+    location: parking-000
     direction: nord-est
-  - location: porche-000
+  - id: porche-000-sud-ouest
+    location: porche-000
     direction: sud-ouest
 ---
 id: porche-000
@@ -96,7 +100,8 @@ type: Portal
 props:
   - closed
 exits:
-  - location: porche-000
+  - id: porche-000-nor-est
+    location: porche-000
     direction: nord-est
     name:
       - porte
@@ -151,7 +156,8 @@ exits:
             {{ actor.name }} tente futilement d'ouvrir la porte du
             département info avec {{ object2.noun_a() }}, alors
             qu'elle est déjà ouverte.
-  - location: hall-000
+  - id: hall-000-sud-ouest
+    location: hall-000
     direction: sud-ouest
     name: porte
     gender: fem
@@ -209,9 +215,11 @@ events:
 id: escalier-000
 type: Portal
 exits:
-  - location: hall-000
+  - id: hall-000-haut
+    location: hall-000
     direction: haut
-  - location: etage-000
+  - id: etage-000-bas
+    location: etage-000
     direction: bas
 ---
 id: etage-000
@@ -227,9 +235,11 @@ events:
 id: etage-salle-22-000
 type: Portal
 exits:
-  - location: etage-000
+  - id: etage-000-nord-ouest
+    location: etage-000
     direction: nord-ouest
-  - location: salle-22-000
+  - id: salle-22-000-sud-est
+    location: salle-22-000
     direction: sud-est
 ---
 id: salle-22-000
@@ -254,11 +264,11 @@ events:
     actor: |
       L'ordinateur est allumé.  Le prompt dit: <i>tapez
       le mot de passe du paradis.</i>
-  taper:
+  type:
     - props: event:typed-xyzzy
       effects:
-        - type : EnterPortalEffect
-          exit : portal-ordinateur-cabane-000-exit-1
+        - type  : EnterPortalEffect
+          object: =portal-ordinateur-cabane-000-exit-1
       observer: |
         {{ actor.name }} entre un mot de passe dans l'ordinateur.
     - actor: |
@@ -287,21 +297,18 @@ exits:
     direction: est
     events:
       enter-portal:
-        actor:
-          - props:
-              - exit:activated
-            data : |
-              Vous sautez dans le vide.  Un tapis volant vous
-              cueille dans votre chute et plonge dans la cascade.
-            effects:
-              - type: ChangePropsEffect
-                data:
-                  - -exit:activated
-          - data : |
-              Vous sautez dans le vide et vous vous écrasez en
-              bas de la falaise.
-            effects:
-              - type: DyingEffect
+        - prop: exit:activated
+          actor: |
+            Vous sautez dans le vide.  Un tapis volant vous
+            cueille dans votre chute et plonge dans la cascade.
+          effects:
+            - type: ChangePropsEffect
+              data: -exit:activated
+        - actor: |
+            Vous sautez dans le vide et vous vous écrasez en
+            bas de la falaise.
+          effects:
+            - type: DyingEffect
 ---
 id: cabane-000
 type: Location
@@ -312,7 +319,29 @@ events:
     actor: |
       Vous êtes dans une cabane construite dans un arbre.
       Elle surplombe un gouffre dans lequel se déverse une
-      cascade.
+      cascade.  A l'est, une ouverture dans la balustrade
+      semble vous offrir la dangereuse option de sauter dans
+      le vide.  Sur le mur, un bouton est étiquetté:
+      <i>Taxi Service</i>.
+parts:
+  - bouton-cabane-000
+---
+id: bouton-cabane-000
+type: Thing
+events:
+  look:
+    actor: |
+      Un bouton étiqueté: <i>Taxi Service</i>.
+  press:
+    actor: |
+      Vous appuyez sur le bouton, mais rien ne semble se
+      produire.
+    observer: |
+      {{ actor.name }} appuie sur le bouton, mais rien ne
+      semble se produire.
+    effects:
+      - type  : ChangePropsEffect
+        modifs: =portal-ordinateur-cabane-exit-2:activated
 ---
 id: lampe-000
 type: Thing

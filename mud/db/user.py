@@ -22,3 +22,9 @@ class UserDB(BasicDB):
             self[username] = user
             self.save()
             return user
+
+    def create_avatars(self):
+        from mud.models.player import Player
+        with self.lock:
+            for username in self:
+                Player(username)

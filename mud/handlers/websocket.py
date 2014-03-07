@@ -25,6 +25,7 @@ class WebSocketHandler(BaseHandler, tornado.websocket.WebSocketHandler):
         self.player = self.get_player()
         self.player.websocket = self      # the player knows its websocket
         self.opensockets.add(self)
+        ENGINE.put({"type":"birth", "player":self.player})
 
     def on_close(self):
         del self.player.websocket         # remove websocket from player

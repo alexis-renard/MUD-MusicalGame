@@ -35,6 +35,17 @@ class Engine(threading.Thread):
         else:
             actor.send_error("<p>hein?</p>")
 
+    def perform_save(self, task):
+        actor = task["player"]
+        mud.game.GAME.save()
+        actor.send_info("<p>Sauvegarde effectuée!</p>")
+
+    def perform_birth(self, task):
+        actor = task["player"]
+        if not actor.container():
+            from mud.events.birth import BirthEvent
+            BirthEvent(actor).execute()
+
 #    def perform_input(self, task):
 #        user    = task["user"]
 #        text    = task["text"]

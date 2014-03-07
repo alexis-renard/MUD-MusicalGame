@@ -42,6 +42,7 @@
 	    <li id="tabregister"><a href="/register">Register</a></li>
 {% else %}
 	    <li><a href="/logout">Logout</a></li>
+	    <li><a id="save" href="#">Save</a></li>
 {% end %}
           </ul>
 {% if current_user %}
@@ -69,6 +70,7 @@ var selected_tab = "";
     <script src="{{ static_url('js/mud.js') }}"></script>
 <script>
 {% block js %}{% end %}
+$("#save").click(saveMessage);
 $(selected_tab).addClass('active')
 </script>
   </body>

@@ -51,7 +51,7 @@ class World:
         for data in current:
             key = data["id"]
             obj = self.database[key]
-            obj.update_from_yaml(data, world)
+            obj.update_from_yaml(data, self)
 
     def save(self):
         return [x.to_json() for x in self.database.values()]

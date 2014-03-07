@@ -10,23 +10,16 @@ class Identified(Basic):
 
     """mixin class that provides an id attribute."""
 
-    _NEEDS_ID = True
-    _UUID_IF_ID_IS_MISSING = False
-
     #--------------------------------------------------------------------------
     # initialization
     #--------------------------------------------------------------------------
 
     def __init__(self, id=None, **kargs):
+        if id is None:
+            raise Exception("missing id: %s" % str(kargs))
         super().__init__(**kargs)
-        if id is None and self._NEEDS_ID:
-            if self._UUID_IF_ID_IS_MISSING:
-                id = uuid.uuid4()
-            else:
-                raise Exception("missing id: %s" % str(kargs))
         self.id = id
-        if id:
-            mud.game.GAME.world[id] = self
+        mud.game.GAME.world[id] = self
 
     #--------------------------------------------------------------------------
     # initialization from YAML data

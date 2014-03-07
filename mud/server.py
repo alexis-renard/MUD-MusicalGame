@@ -47,7 +47,7 @@ def main():
             (r"/register"  ,  RegisterHandler),
             (r"/websocket" , WebSocketHandler),
         ],
-        cookie_secret = "not so secret", #str(uuid.uuid4()),
+        cookie_secret = "secret2", #str(uuid.uuid4()),
         login_url     = "/login",
         template_path = os.path.join(ROOTDIR, "templates"),
         static_path   = os.path.join(ROOTDIR, "static"),

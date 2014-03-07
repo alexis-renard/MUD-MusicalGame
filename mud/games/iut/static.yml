@@ -1,3 +1,4 @@
+start: parking-000
 directions:
   normalized:
     nord      : nord
@@ -126,3 +127,15 @@ events:
         - props: event:cannot-see
           data : "Dans cette obscurité, vous n'y voyez rien."
         - data : "Pour une raison inconnue, vous ne voyez rien."
+  birth:
+    observer: |
+      {{ actor.name }} se matérialise de nulle part près de vous.
+  death:
+    actor: |
+      Vous êtes mort!
+    observer: |
+      {% if actor.contents() %}
+      {{ actor.name }} est mort, laissant derrière lui ses possessions.
+      {% else %}
+      {{ actor.name }} est mort!
+      {% end %}
