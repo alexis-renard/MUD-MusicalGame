@@ -268,7 +268,7 @@ events:
     - props: event:typed-xyzzy
       effects:
         - type  : EnterPortalEffect
-          object: =portal-ordinateur-cabane-000-exit-1
+          exit  : =portal-ordinateur-cabane-000-exit-1
       observer: |
         {{ actor.name }} entre un mot de passe dans l'ordinateur.
     - actor: |
@@ -297,18 +297,26 @@ exits:
     direction: est
     events:
       enter-portal:
-        - prop: exit:activated
+        - props: exit:activated
           actor: |
             Vous sautez dans le vide.  Un tapis volant vous
             cueille dans votre chute et plonge dans la cascade.
+          observer: |
+            {{ actor.name }} s'élance dans le vide.  Un tapis
+            volant le cueille dans sa chute et plonge dans la
+            cascade.
           effects:
-            - type: ChangePropsEffect
-              data: -exit:activated
+            - type  : ChangePropEffect
+              modifs: -exit:activated
         - actor: |
             Vous sautez dans le vide et vous vous écrasez en
             bas de la falaise.
+          observer: |
+            {{ actor.name }} s'élance dans le vide et s'écrase
+            en bas de la falaise.
+          data-driven: true
           effects:
-            - type: DyingEffect
+            - type: DeathEffect
 ---
 id: cabane-000
 type: Location

@@ -34,11 +34,11 @@ class Action1(Action):
     def __init__(self, subject):
         super().__init__()
         self.subject = subject
-        if not self.subject.can_see():
-            self.add_prop("cannot-see")
 
     def resolve(self):
         super().resolve()
+        if not self.subject.can_see():
+            self.add_prop("cannot-see")
 
     def perform(self):
         self.EVENT(self.subject).execute()

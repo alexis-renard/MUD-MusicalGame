@@ -132,7 +132,10 @@ class Propertied(Basic):
         if meth:
             meth()
         else:
-            self._get_props().remove(prop)
+            try:
+                self._get_props().remove(prop)
+            except KeyError:
+                pass
 
     def change_prop(self, prop, context=None):
         prefix = prop[0]

@@ -73,7 +73,10 @@ class Effect1(Effect):
 
     def __init__(self, yaml, context):
         super().__init__(yaml, context)
-        self.actor = self.resolve("actor")
+        self.actor = self.resolve_actor()
+
+    def resolve_actor(self):
+        return self.resolve("actor")
 
     def make_event(self):
         return self.EVENT(self.actor)
@@ -84,7 +87,10 @@ class Effect2(Effect1):
 
     def __init__(self, yaml, context):
         super().__init__(yaml, context)
-        self.object = self.resolve("object")
+        self.object = self.resolve_object()
+
+    def resolve_object(self):
+        return self.resolve("object")
 
     def make_event(self):
         return self.EVENT(self.actor, self.object)
@@ -95,7 +101,10 @@ class Effect3(Effect2):
 
     def __init__(self, yaml, context):
         super().__init__(yaml, context)
-        self.object2 = self.resolve("object2")
+        self.object2 = self.resolve_object2()
+
+    def resolve_object2(self):
+        return self.resolve("object2")
 
     def make_event(self):
         return self.EVENT(self.actor, self.object, self.object2)

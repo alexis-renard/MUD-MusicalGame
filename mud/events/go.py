@@ -14,6 +14,9 @@ class EnterPortalEvent(Event2):
         return self.object
 
     def perform(self):
+        if self.get_datum("enter-portal.data-driven"):
+            return self.perform_data_driven()
+        print(self.exit, self.exit.id)
         self.traversal = self.exit.get_traversal()
         if not self.actor.can_pass(self.traversal.exit1):
             self.add_prop("cannot-pass")
@@ -37,6 +40,10 @@ class EnterPortalEvent(Event2):
         context = super().context()
         context["exit"] = self.exit
         return context
+
+    def perform_data_driven(self):
+        self.inform("enter-portal")
+        # effects do the rest
 
 
 class TraversePortalEvent(Event2):

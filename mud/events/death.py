@@ -10,6 +10,6 @@ class DeathEvent(Event1):
     def perform(self):
         self.inform("death")
         cont = self.actor.container()
-        for x in self.actor.contents():
-            x.move_to(loc)
+        for x in list(self.actor.contents()):
+            x.move_to(cont)
         self.actor.move_to(None)

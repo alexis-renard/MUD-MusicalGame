@@ -109,3 +109,8 @@ class Evented(Basic):
         return Effect.make_effects(
             self.get_event_data(dotpath+".effects", context, False),
             context)
+
+    def get_datum(self, dotpath, context=NONE, deref_last=True):
+        if context is NONE:
+            context = self.world_context()
+        return self.get_event_data(dotpath, context, deref_last)
