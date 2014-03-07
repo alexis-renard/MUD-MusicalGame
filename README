@@ -19,3 +19,4 @@ USING
 ===============================================================================
 
   direct your browser to http://localhost:9999/
+  The server actually listens on all interfaces.
