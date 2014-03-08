@@ -193,7 +193,11 @@ class Player(Containing, Thing):
             for x in cont.all():
                 if pred(x):
                     return x
-                if isinstance(x, Containing) and not x.has_prop("closed"):
+                elif x is self:
+                    q.put(x)
+                elif isinstance(x, Containing) and \
+                     not isinstance(x, Player) and \
+                     not x.has_prop("closed"):
                     q.put(x)
         return None
 
