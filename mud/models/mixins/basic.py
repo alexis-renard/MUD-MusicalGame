@@ -39,8 +39,5 @@ class Basic:
     # MUD API
     #--------------------------------------------------------------------------
 
-    def short_description_for(self, player):
-        raise NotImplemented()
-
-    def long_description_for(self, player):
-        raise NotImplemented()
+    def reset(self):
+        pass

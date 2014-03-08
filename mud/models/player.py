@@ -119,6 +119,11 @@ class Player(Containing, Thing):
         for example, for actions of players in the same location."""
         self._send({"type": "info", "html": html})
 
+    def reset(self):
+        from mud.events import ResetEvent
+        super().reset()
+        ResetEvent(self).execute()
+
     #--------------------------------------------------------------------------
     # find API
     # when the player issues an order, this order will refer to objects by name

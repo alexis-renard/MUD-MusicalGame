@@ -2,7 +2,7 @@
 # Copyright (C) 2014 Denys Duchier, IUT d'Orléans
 #==============================================================================
 
-import os.path, yaml
+import os, os.path, yaml, glob
 from mud.world                 import World
 from mud.db.transcript         import TranscriptDB
 from mud.db.user               import UserDB
@@ -29,6 +29,10 @@ class Game:
         return os.path.join(self.SAVES_DIR, self.name, "users")
 
     def __init__(self, name=None, initial=None, current=None, static=None):
+        self._for_reset  = {"name"   : name   ,
+                            "initial": initial,
+                            "current": current,
+                            "static" : static }
         self.name        = name
         self.world       = World()
         self.static      = {}
@@ -38,17 +42,23 @@ class Game:
         self._current    = current
         self._static     = static
         if initial is None:
-            self._initial = self.yaml_load(self.yaml_initial_filename())
+            self._initial = self.yaml_load_all(self.yaml_initial_filename())
         if current is None:
-            self._current = self.yaml_load(self.yaml_current_filename())
+            self._current = self.yaml_load_all(self.yaml_current_filename())
         if static  is None:
-            [self._static] = self.yaml_load(self.yaml_static_filename())
+            self._static = self.yaml_load(self.yaml_static_filename())
 
-    def yaml_load(self, filename):
+    def yaml_load_all(self, filename):
         try:
             return list(yaml.load_all(open(filename)))
         except FileNotFoundError:
-            return ""
+            return []
+
+    def yaml_load(self, filename):
+        try:
+            return yaml.load(open(filename))
+        except FileNotFoundError:
+            return {}
     
     def load(self):
         self.users.load()
@@ -71,8 +81,20 @@ class Game:
         init = self.static["start"]
         return self.world[init]
 
+    def remove(self, filename):
+        try:
+            os.remove(filename)
+        except FileNotFoundError:
+            pass
+
+    def remove_glob(self, filename):
+        for path in glob.glob(filename):
+            self.remove(path)
+
     def reset(self):
-        # reset all players
-        pass
-        # remove all current saves
-        pass
+        self.users.reset_avatars()
+        self.transcripts.reset_players()
+        self.remove(self.yaml_current_filename())
+        self.remove_glob(self.transcripts_filename() + ".*")
+        self.__init__(**self._for_reset)
+        self.load()

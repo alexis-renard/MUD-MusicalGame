@@ -15,6 +15,9 @@ class BasicDB(dict):
         self.json_path = "%s.json" % filename
         self.pickle_path = "%s.pckl" % filename
 
+    def reset(self):
+        self.clear()
+
     def json_save(self):
         with self.lock:
             os.makedirs(os.path.dirname(self.json_path), exist_ok=True)

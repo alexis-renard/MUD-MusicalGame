@@ -207,3 +207,7 @@ events:
       effects:
         - type  : ChangePropEffect
           modifs: portal:closed
+
+  reset:
+    actor: |
+      Le jeu a été reset.  Vous êtes donc mort!

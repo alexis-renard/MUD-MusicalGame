@@ -28,3 +28,9 @@ class UserDB(BasicDB):
         with self.lock:
             for username in self:
                 Player(username)
+
+    def reset_avatars(self):
+        from mud.models.player import Player
+        with self.lock:
+            for username in self:
+                Player(username).reset()

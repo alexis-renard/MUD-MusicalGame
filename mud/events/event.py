@@ -97,9 +97,11 @@ class Event1(Event):
         return context
 
     def observers(self):
-        for x in self.actor.container().contents():
-            if x is not self.actor and x.is_player() and x.can_see():
-                yield x
+        cont = self.actor.container()
+        if cont:
+            for x in cont.contents():
+                if x is not self.actor and x.is_player() and x.can_see():
+                    yield x
 
     def inform(self, dotpath, **kargs):
         self.buffer_clear()

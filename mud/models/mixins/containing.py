@@ -58,3 +58,7 @@ class Containing(Propertied):
     def remove(self, obj):
         """remove an object or player from the container."""
         self._contents.remove(obj)
+
+    def reset(self):
+        self._contents.clear()
+        super().reset()

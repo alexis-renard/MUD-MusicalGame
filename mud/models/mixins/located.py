@@ -60,3 +60,7 @@ class Located(Identified):
 
     def container(self):
         return self._container
+
+    def reset(self):
+        self._container = None
+        super().reset()

@@ -13,3 +13,7 @@ class TranscriptDB(BasicDB):
                 trans = []
                 self[username] = trans
             return trans
+
+    def reset_players(self):
+        for t in self.values():
+            t.clear()

@@ -16,3 +16,5 @@ from .inventory    import InventoryEvent
 from .info         import InfoEvent
 from .drop         import DropEvent, DropInEvent
 from .push         import PushEvent
+from .reset        import ResetEvent
+from .deadaction   import DeadAction

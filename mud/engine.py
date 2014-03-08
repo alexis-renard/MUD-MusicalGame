@@ -30,7 +30,12 @@ class Engine(threading.Thread):
         actor = task["player"]
         text  = task["text"].strip()
         actor.send_echo("<pre>%s</pre>" % text)
-        action,text = self.parser.parse(actor, text)
+        if actor.is_alive():
+            action,text = self.parser.parse(actor, text)
+        else:
+            from mud.events import DeadAction
+            # this is actually an event, but it also has an execute method
+            action = DeadAction(actor)
         if action:
             action.execute()
         else:
