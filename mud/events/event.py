@@ -65,7 +65,7 @@ class Event(Evented, Propertied):
             first = False
 
     def buffer_inform(self, dotpath, **kargs):
-        text = self.get_template(dotpath)
+        text = self.get_template(dotpath, **kargs)
         if text:
             html = self.format(text, **kargs)
             self.buffer_htmlize(html)
@@ -77,7 +77,7 @@ class Event(Evented, Propertied):
             self.buffer_clear()
 
     def buffer_peek(self, what, **kargs):
-        text = what.get_template("info.actor")
+        text = what.get_template("info.actor", peeked=what)
         if text:
             html = self.format(text, peeked=what, **kargs)
             self.buffer_append("<li>")

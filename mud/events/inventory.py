@@ -10,9 +10,9 @@ class InventoryEvent(Event1):
     def perform(self):
         self.buffer_clear()
         if self.actor.is_empty():
-            self.buffer_inform("inventory-empty.actor")
+            self.buffer_inform("inventory.empty")
         else:
-            self.buffer_inform("inventory.actor")
+            self.buffer_inform("inventory.intro")
             self.buffer_append("<ul>")
             for x in self.actor.contents():
                 self.buffer_peek(x)

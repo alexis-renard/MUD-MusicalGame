@@ -97,9 +97,11 @@ class Evented(Basic):
                 return d
         return None
 
-    def get_template(self, dotpath, context=NONE):
+    def get_template(self, dotpath, context=NONE, **kargs):
         if context is NONE:
             context = self.world_context()
+        if kargs:
+            context.update(kargs)
         return self.get_event_data(dotpath, context, True)
 
     def get_effects(self, dotpath, context=NONE):

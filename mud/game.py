@@ -70,3 +70,9 @@ class Game:
     def start_for_player(self, player):
         init = self.static["start"]
         return self.world[init]
+
+    def reset(self):
+        # reset all players
+        pass
+        # remove all current saves
+        pass

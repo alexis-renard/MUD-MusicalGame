@@ -12,5 +12,11 @@ class InfoEvent(Event1):
     def get_event_templates(self):
         return self.actor.container().get_event_templates()
 
+    def context(self):
+        context = super().context()
+        if "peeked" not in context:
+            context["peeked"] = self.actor
+        return context
+
     def perform(self):
         self.inform("info")

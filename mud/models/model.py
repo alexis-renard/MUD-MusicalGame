@@ -52,6 +52,18 @@ class Model(Identified, Named, Propertied, Evented, Composed):
     def is_exit(self):
         return False
 
+    def _has_prop_is_player(self):
+        return self.is_player()
+
+    def _has_prop_is_location(self):
+        return self.is_location()
+
+    def _has_prop_is_container(self):
+        return self.is_container()
+
+    def _has_prop_is_exit(self):
+        return self.is_exit()
+
     #--------------------------------------------------------------------------
     # model API
     #--------------------------------------------------------------------------

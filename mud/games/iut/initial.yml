@@ -99,6 +99,7 @@ id: portal-porche-hall-000
 type: Portal
 props:
   - closed
+  - closable
 exits:
   - id: porche-000-nor-est
     location: porche-000
@@ -156,6 +157,14 @@ exits:
             {{ actor.name }} tente futilement d'ouvrir la porte du
             département info avec {{ object2.noun_a() }}, alors
             qu'elle est déjà ouverte.
+      close       : &porte004
+        - props   : portal:closed
+          actor   : "Vous fermez la porte du département."
+          observer: "{{ actor.name }} ferme le porte du département info."
+          effects :
+            - type  : ChangePropEffect
+              modifs: =portal-porche-hall-000:closed
+      close-with  : *porte004
   - id: hall-000-sud-ouest
     location: hall-000
     direction: sud-ouest

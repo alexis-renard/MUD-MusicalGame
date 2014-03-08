@@ -5,6 +5,7 @@
 import tornado.ioloop
 import threading, queue
 import mud.parser
+import mud.game
 
 class Engine(threading.Thread):
 
@@ -46,15 +47,10 @@ class Engine(threading.Thread):
             from mud.events.birth import BirthEvent
             BirthEvent(actor).execute()
 
-#    def perform_input(self, task):
-#        user    = task["user"]
-#        text    = task["text"]
-#        request = task["request"] # keep the request so that it can be reused for template rendering
-#        html    = request.render_string(
-#            "chat.html", user=user, text=text).decode("utf-8")
-#        def callback():
-#            request.output_to_all(html)
-#        tornado.ioloop.IOLoop.current().add_callback(callback)
+    def perform_reset(self, task):
+        actor = task["player"]
+        mud.game.GAME.reset()
+
 
 ENGINE = Engine()
 ENGINE.start()

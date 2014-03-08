@@ -40,6 +40,12 @@ function saveMessage() {
     form.find("input[type=text]").val("").select();
 }
 
+function resetMessage() {
+    var message = {"type":"reset"};
+    updater.socket.send(JSON.stringify(message));
+    form.find("input[type=text]").val("").select();
+}
+
 function scroll_to_bottom() {
     $("#inbox").animate({scrollTop:$("#inboxcontents").height()}, 1000);
 }

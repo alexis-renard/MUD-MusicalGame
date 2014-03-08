@@ -58,11 +58,14 @@ events:
     failed:
       actor   : "Vous tentez vainement de sortir par {{ exit.the_direction() }}."
       observer: "{{ actor.name }} tente vainement de sortir par {{ exit.the_direction() }}."
+
   leave-portal:
-    observer  : "{{ actor.name }} sort par {{ exit.the_direction() }}."
+    observer  : "{{ actor.name }} entre par {{ exit.the_direction() }}."
+
   traverse-portal:
     actor     : null
     observer  : null
+
   take:
     actor     : "Vous prenez {{ object.noun_the() }}."
     observer  : "{{ actor.name }} prend {{ object.noun_the() }}."
@@ -71,10 +74,7 @@ events:
         actor : "{{ object.noun_the() }} est déjà dans votre inventaire."
       - actor   : "Vous tentez en vain de prendre {{ object.noun_the() }}."
         observer: "{{ actor.name }} tente en vain de prendre {{ object.noun_the() }}."
-  look-players:
-    actor     : "Ici vous rencontrez:"
-  look-objects:
-    actor     : "Ici vous trouvez:"
+
   failed-action:
     - props   : action:cannot-see
       actor   : "Dans cette obscurité, vous n'y voyez rien."
@@ -107,31 +107,43 @@ events:
         - type  : ChangePropEffect
           modifs: -object:light-on
 
-  inspect-inside:
-    actor     : "Dedans vous trouvez:"
-  inspect-inside-empty:
-    actor     : "Il n'y a rien dedans."
-  inventory-empty:
-    actor     : "Votre inventaire est vide."
   inventory:
-    actor     : "Votre inventaire contient:"
+    empty: "Votre inventaire est vide."
+    intro: "Votre inventaire contient:"
+
   open:
     actor     :
       - props : -portal:closed
         data  : "C'est déjà fait!"
+
   open-with:
     actor     :
       - props : -portal:closed
         data  : "C'est déjà fait!"
+
   look:
+    players-intro: "Ici vous rencontrez:"
+    objects-intro: "Ici vous trouvez:"
     failed:
       actor   :
         - props: event:cannot-see
           data : "Dans cette obscurité, vous n'y voyez rien."
         - data : "Pour une raison inconnue, vous ne voyez rien."
+    actor:
+      - props: object:is_player
+        data : "{{ object.name }}."
+    inside:
+      intro: "Dedans vous trouvez:"
+      empty: "Il n'y a rien dedans."
+
+  info:
+    - props: peeked:is_player
+      actor: "{{ peeked.name }}."
+
   birth:
     observer: |
       {{ actor.name }} se matérialise de nulle part près de vous.
+
   death:
     actor: |
       Vous êtes mort!
@@ -172,3 +184,26 @@ events:
         Vous appuyez futilement sur {{ object.noun_the() }}
       observer: |
         {{ actor.name }} appuie futilement sur {{ object.noun_the() }}
+
+  close:
+    - props: -portal:closable
+      actor: |
+        Vous tentez en vain de fermer {{ object.noun_the() }} qui n'est
+        pas fermable.
+      observer: |
+        {{ actor.name }} tente en vain de fermer {{ object.noun_the() }}
+        qui n'est pas fermable.
+    - props: portal:closed
+      actor: |
+        Vous tentez futilement de fermer {{ object.noun_the() }} qui
+        est déjà fermé.
+      observer: |
+        {{ actor.name }} tente futilement de fermer {{ object.noun_the() }}
+        qui est déjà fermé.
+    - actor: |
+        Vous fermez {{ object.noun_the() }}.
+      observer: |
+        {{ actor.name }} ferme {{ object.noun_the() }}.
+      effects:
+        - type  : ChangePropEffect
+          modifs: portal:closed

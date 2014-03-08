@@ -14,7 +14,7 @@ class InspectEvent(Event2):
         if not self.actor.can_see():
             return self.failed_cannot_see()
         self.buffer_clear()
-        self.buffer_inform("look.actor")
+        self.buffer_inform("look.actor", object=self.object)
         if not self.object.is_container():
             return self.actor.send_result(self.buffer_get())
         players = []
@@ -27,7 +27,7 @@ class InspectEvent(Event2):
             else:
                 objects.append(x)
         if players or objects:
-            self.buffer_inform("inspect-inside.actor")
+            self.buffer_inform("look.inside.intro")
             self.buffer_append("<ul>")
             for x in players:
                 self.buffer_peek(x)
@@ -35,7 +35,7 @@ class InspectEvent(Event2):
                 self.buffer_peek(x)
             self.buffer_append("</ul>")
         else:
-            self.buffer_inform("inspect-inside-empty.actor")
+            self.buffer_inform("look.inside.empty")
         self.actor.send_result(self.buffer_get())
 
     def failed_cannot_see(self):

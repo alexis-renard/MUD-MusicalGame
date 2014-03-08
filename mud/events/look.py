@@ -15,7 +15,7 @@ class LookEvent(Event1):
             self.add_prop("cannot-see")
             return self.failed()
         self.buffer_clear()
-        self.buffer_inform("look.actor")
+        self.buffer_inform("look.actor", object=self.actor.container())
         players = []
         objects = []
         for x in self.actor.container().contents():
@@ -26,16 +26,15 @@ class LookEvent(Event1):
             else:
                 objects.append(x)
         if players:
-            self.buffer_inform("look-players.actor")
+            self.buffer_inform("look.players-intro")
             self.buffer_append("<ul>")
             for x in players:
                 self.buffer_peek(x)
             self.buffer_append("</ul>")
         if objects:
-            self.buffer_inform("look-objects.actor")
+            self.buffer_inform("look.objects-intro")
             self.buffer_append("<ul>")
             for x in objects:
-                print(x)
                 self.buffer_peek(x)
             self.buffer_append("</ul>")
         self.actor.send_result(self.buffer_get())

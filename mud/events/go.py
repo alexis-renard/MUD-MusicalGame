@@ -16,7 +16,6 @@ class EnterPortalEvent(Event2):
     def perform(self):
         if self.get_datum("enter-portal.data-driven"):
             return self.perform_data_driven()
-        print(self.exit, self.exit.id)
         self.traversal = self.exit.get_traversal()
         if not self.actor.can_pass(self.traversal.exit1):
             self.add_prop("cannot-pass")
