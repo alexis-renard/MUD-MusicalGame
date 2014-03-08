@@ -1,81 +1,87 @@
 body {
-    font-family: "Trebuchet MS", Verdana, Arial, sans-serif;
-    font-size: large;
+    font-family     : "Trebuchet MS", Verdana, Arial, sans-serif;
+    font-size       : large;
 }
 
 div.mudcontent {
-    padding-top: 7em;
+    padding-top     : 7em;
 }
 
 span.welcome {
-    position: relative;
-    float: right;
-    color: white;
-    top: 1em;
-}
-
-#input {
-    position: fixed;
-    bottom: 1em;
-    left: 10em;
+    position        : relative;
+    float           : right;
+    color           : white;
+    top             : 1em;
 }
 
 #inbox {
-    position: fixed;
-    top: 5em;
-    bottom: 5em;
-    left: 10em;
-    right: 10em;
-    overflow: scroll;
-    padding-right: 1em;
-    overflow-x: hidden;
+    position        : fixed;
+    top             : 5em;
+    bottom          : 5em;
+    left            : 0px;
+    right           : 0px;
+    overflow        : scroll;
+    overflow-x      : hidden;
+}
+
+#inboxcontents {
+    width           : 80%;
+    margin-left     : auto;
+    margin-right    : auto;
+}
+
+#input {
+    position        : fixed;
+    bottom          : 1em;
+    left            : 0px;
+    right           : 0px;
+}
+
+#inputcontents {
+    width           : 80%;
+    margin-left     : auto;
+    margin-right    : auto;
 }
 
 #inputbox {
-    font-size: large;
-    font-family: "Trebuchet MS", Verdana, Arial, sans-serif;
-    width: 50em;
+    font-size       : large;
+    font-family     : "Trebuchet MS", Verdana, Arial, sans-serif;
 }
 
 div.alert.mud-echo {
-    font-family: monospace;
-    font-size: x-large;
-/*    border: 1px solid #cccccc;*/
-    padding: 0px;
+    font-family     : monospace;
+    font-size       : x-large;
+    padding         : 0px;
 }
 
 .mud-echo pre {
-    font-size: large;
-    font-weight: bold;
+    font-size       : large;
+    font-weight     : bold;
     background-color: white;
-    border: none;
-    padding: 0px;
-    margin: 0px;
+    border          : none;
+    padding         : 0px;
+    margin          : 0px;
 }
 
 .mud-echo pre:before {
-    content: "> ";
+    content         : "> ";
 }
 
 .mud-result {
-/*  background-color: #dff0d8;*/
     background-color: #eeeeee;
-    border-color: #777777;
-    color: black;
+    border-color    : #777777;
+    color           : black;
 }
 
 .mud-error {
-    color: #a94442;
+    color           : #a94442;
     background-color: #f2dede;
-    border-color: #a94442; /*#cbacb1;*/
+    border-color    : #a94442;
 }
 
 .mud-info {
-/*  color: #31708f;
-  background-color: #d9edf7;
-  border-color: #bce8f1; */
     background-color: #f9f9f9;
-    border-color: #999999;
-    color: #888888;
-    font-style: italic;
+    border-color    : #999999;
+    color           : #888888;
+    font-style      : italic;
 }
