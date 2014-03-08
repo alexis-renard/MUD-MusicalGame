@@ -216,7 +216,7 @@ events:
     not-found:
       actor: |
         Aucune destination trouvée!
-    ambigous:
+    ambiguous:
       actor: |
         Destination ambigue!  Les options possibles sont:
         <ul>
