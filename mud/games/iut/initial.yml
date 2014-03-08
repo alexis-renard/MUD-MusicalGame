@@ -233,6 +233,8 @@ exits:
 ---
 id: etage-000
 type: Location
+props:
+  - dark
 events:
   info:
     actor: "Étage du département info."
@@ -253,6 +255,8 @@ exits:
 ---
 id: salle-22-000
 type: Location
+props:
+  - dark
 events:
   info:
     actor: "Salle 22."
@@ -266,7 +270,11 @@ parts:
 ---
 id: ordinateur-000
 type: Thing
-name: ordinateur
+names:
+  - ordinateur
+  - ordi
+props:
+  - light-on
 events:
   info:
     actor: "Un ordinateur."
