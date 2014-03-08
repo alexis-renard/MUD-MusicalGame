@@ -211,3 +211,24 @@ events:
   reset:
     actor: |
       Le jeu a été reset.  Vous êtes donc mort!
+
+  teleport:
+    not-found:
+      actor: |
+        Aucune destination trouvée!
+    ambigous:
+      actor: |
+        Destination ambigue!  Les options possibles sont:
+        <ul>
+        {% for k in object %}
+        <li>{{ k.id }}</li>
+        {% end %}
+        </ul>
+    departure:
+      observer: |
+        {{ actor.name }} disparaît par téléportation!
+    arrival:
+      observer: |
+        {{ actor.name }} apparaît près de vous par téléportation.
+      actor: |
+        Vous vous matérialisez à votre destination.

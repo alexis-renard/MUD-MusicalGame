@@ -64,3 +64,12 @@ class World:
 
     def get(self, key, default=None):
         return self.database.get(key, default)
+
+    def keys(self):
+        return self.database.keys()
+
+    def values(self):
+        return self.database.values()
+
+    def items(self):
+        return self.database.items()

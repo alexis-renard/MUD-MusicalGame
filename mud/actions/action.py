@@ -55,7 +55,7 @@ class Action2(Action1):
         super().resolve()
         if not self.error:
             obj = self.resolve_object()
-            if obj:
+            if obj is not None:
                 self.object_resolved = obj
             else:
                 self.error = "cannot-find-object"

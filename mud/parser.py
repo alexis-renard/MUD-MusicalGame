@@ -10,7 +10,7 @@ from mud.actions import (
     GoAction, TakeAction, LookAction, InspectAction, OpenAction,
     OpenWithAction, CloseAction, TypeAction, InventoryAction,
     LightOnAction, LightOffAction, DropAction, DropInAction,
-    PushAction
+    PushAction, TeleportAction,
 )
 import mud.game
 import re
@@ -36,7 +36,8 @@ def make_rules():
         (LightOffAction , r"[eé]teindre %s(\w+)$" % DETS),
         (DropAction     , r"(?:poser|laisser) %s(\w+)$" % DETS),
         (DropInAction   , r"(?:poser|laisser) %s(\w+) (?:dans |sur |)%s(\w+)$" % (DETS,DETS)),
-        (PushAction     , r"pousser %s(\w+)$" % DETS),
+        (PushAction     , r"(?:appuyer|pousser|presser)(?: sur|) %s(\w+)$" % DETS),
+        (TeleportAction , r"tele(?:porter|) (\S+)$"),
     )
 
 #==============================================================================
