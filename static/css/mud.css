@@ -32,6 +32,8 @@ span.welcome {
 }
 
 #inputbox {
+    font-size: large;
+    font-family: "Trebuchet MS", Verdana, Arial, sans-serif;
     width: 50em;
 }
 
