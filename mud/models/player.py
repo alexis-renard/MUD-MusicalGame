@@ -89,6 +89,12 @@ class Player(Containing, Thing):
     def is_alive(self):
         return bool(self.container())
 
+    def noun_the(self):
+        return self.name
+
+    def noun_a(self):
+        return self.name
+
     #--------------------------------------------------------------------------
     # API for sending messages back to the user through his websocket
     #--------------------------------------------------------------------------
