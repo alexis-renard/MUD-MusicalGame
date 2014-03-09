@@ -15,11 +15,11 @@ class Game:
     GAMES_DIR = os.path.join(os.path.dirname(__file__), "games")
     SAVES_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), ".games")
 
-    def yaml_initial_filename(self):
-        return os.path.join(self.GAMES_DIR, self.name, "initial.yml")
+    def yaml_initial_glob(self):
+        return os.path.join(self.GAMES_DIR, self.name, "*initial*.yml")
 
-    def yaml_static_filename(self):
-        return os.path.join(self.GAMES_DIR, self.name, "static.yml")
+    def yaml_static_glob(self):
+        return os.path.join(self.GAMES_DIR, self.name, "*static*.yml")
 
     def yaml_current_filename(self):
         return os.path.join(self.SAVES_DIR, self.name, "current.yml")
@@ -46,11 +46,17 @@ class Game:
         self._current    = current
         self._static     = static
         if initial is None:
-            self._initial = self.yaml_load_all(self.yaml_initial_filename())
+            self._initial = self.yaml_load_all_glob(self.yaml_initial_glob())
         if current is None:
             self._current = self.yaml_load_all(self.yaml_current_filename())
         if static  is None:
-            self._static = self.yaml_load(self.yaml_static_filename())
+            self._static = self.yaml_load_glob(self.yaml_static_glob())
+
+    def yaml_load_all_glob(self, pattern):
+        l = []
+        for filename in glob.glob(pattern):
+            l.extend(self.yaml_load_all(filename))
+        return l
 
     def yaml_load_all(self, filename):
         try:
@@ -63,6 +69,12 @@ class Game:
             return yaml.load(open(filename))
         except FileNotFoundError:
             return {}
+
+    def yaml_load_glob(self, pattern):
+        d = {}
+        for filename in glob.glob(pattern):
+            d.update(self.yaml_load(filename))
+        return d
 
     def game_module_load(self):
         import importlib
