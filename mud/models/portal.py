@@ -6,32 +6,8 @@ from .model import Model
 
 class Portal(Model):
 
-    """a Portal has 2 exits.  Each exit is located at a certain location in a
-    given direction.  An exit refers to the properties of its portal.  In YAML
-    a portal is described by:
-
-    type: portal
-    props: [closable, closed]
-    exits:
-      - location: dark-cave
-        direction: north
-        long:
-          - true: [closed]
-            text: north is a wooden door
-          - false:[closed]
-            text: |
-              north is wooden door.  it is ajar and leads into
-              a dark cave.
-      - location: treasure-room
-        direction: south
-        long:
-          - true: [closed]
-            text: north, a heavy boulder blocks a passage
-          - false:[closed]
-            text: |
-              north, a boulder has been rolled to the side. there
-              is a passage leading into a brightly lit treasure room.
-    """
+    """a Portal has 1 or more exits.  It mediates the traversal from one
+    exit to another.  It can also hold properties shared with its exits."""
 
     #--------------------------------------------------------------------------
     # initialization
