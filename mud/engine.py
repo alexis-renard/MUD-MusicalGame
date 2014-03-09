@@ -14,7 +14,8 @@ class Engine(threading.Thread):
         self._queue = queue.Queue()
         self.put = self._queue.put
         self.again = True
-        self.parser = mud.parser.Parser()
+        rules = mud.game.GAME.module.make_rules()
+        self.parser = mud.parser.Parser(rules)
 
     def run(self):
         while self.again:

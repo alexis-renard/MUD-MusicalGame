@@ -63,8 +63,13 @@ class Game:
             return yaml.load(open(filename))
         except FileNotFoundError:
             return {}
+
+    def game_module_load(self):
+        import importlib
+        self.module = importlib.import_module("mud.games.%s" % self.name)
     
     def load(self):
+        self.game_module_load()
         self.users.load()
         self.transcripts.load()
         self.static.update(self._static)

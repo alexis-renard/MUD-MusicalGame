@@ -2,61 +2,29 @@
 # Copyright (C) 2014 Denys Duchier, IUT d'Orléans
 #==============================================================================
 
-#==============================================================================
-# a rule is a pair (ACTIONCLASS, PATTERN)
-#==============================================================================
-
-from mud.actions import (
-    GoAction, TakeAction, LookAction, InspectAction, OpenAction,
-    OpenWithAction, CloseAction, TypeAction, InventoryAction,
-    LightOnAction, LightOffAction, DropAction, DropInAction,
-    PushAction, TeleportAction,
-)
-import mud.game
-import re
-
-def make_rules():
-    GAME = mud.game.GAME
-    DIRS = list(GAME.static["directions"]["noun_at_the"].values())
-    DIRS.extend(GAME.static["directions"]["noun_the"].values())
-    DIRS.extend(GAME.static["directions"]["normalized"].keys())
-    DETS = "(?:l |le |la |les |une |un |)"
-
-    return (
-        (GoAction       , r"(?:aller |)(%s)$" % "|".join(DIRS)),
-        (TakeAction     , r"(?:p|prendre) %s(\w+)$" % DETS),
-        (LookAction     , r"(?:r|regarder)$"),
-        (InspectAction  , r"(?:r|regarder|lire|inspecter|observer) %s(\w+)$" % DETS),
-        (OpenAction     , r"ouvrir %s(\w+)$" % DETS),
-        (OpenWithAction , r"ouvrir %s(\w+) avec %s(\w+)$" % (DETS,DETS)),
-        (CloseAction    , r"fermer %s(\w+)$" % DETS),
-        (TypeAction     , r"(?:taper|[eé]crire) (\w+)$"),
-        (InventoryAction, r"(?:inventaire|inv|i)$"),
-        (LightOnAction  , r"allumer %s(\w+)$" % DETS),
-        (LightOffAction , r"[eé]teindre %s(\w+)$" % DETS),
-        (DropAction     , r"(?:poser|laisser) %s(\w+)$" % DETS),
-        (DropInAction   , r"(?:poser|laisser) %s(\w+) (?:dans |sur |)%s(\w+)$" % (DETS,DETS)),
-        (PushAction     , r"(?:appuyer|pousser|presser)(?: sur|) %s(\w+)$" % DETS),
-        (TeleportAction , r"tele(?:porter|) (\S+)$"),
-    )
-
-#==============================================================================
-# parse(TEXT) returns a pair (ACTION,PARAMS), where ACTION is the name of the
-# matching rule, and PARAMS is the list of the capturing groups from the rule's
-# PATTERN.
-#==============================================================================
-
 class Parser:
     
-    def __init__(self):
-        self.RULES = make_rules()
+    def __init__(self, rules):
+        """A rule is pair (ACTIONCLASS, PATTERN). see e.g. mud.games.iut.
+        """
+        import re
+        self.rules = [(a,re.compile(p+"$")) for (a,p) in rules]
 
     def parse(self, actor, text):
-        text = " ".join(text.strip().lower().split())
+        """Returns a pair (ACTION,TEXT) where ACTION is the instance of the
+        action class for a matching rule.  The instance is constructed by
+        calling the action constructor with the actor as first argument, and
+        the (text of the) capturing groups as further arguments.  TEXT is
+        the normalized version of the input, obtained by lowercasing, turning
+        apostrophes into spaces, and ensuring that words are separated by
+        single spaces.
+
+        If no rule matched, then None,TEXT is returned.  
+        """
         text = " ".join(text.split("'"))
-        for action,pattern in self.RULES:
-            pattern += "$"
-            m = re.match(pattern, text)
+        text = " ".join(text.strip().lower().split())
+        for action,pattern in self.rules:
+            m = pattern.match(text)
             if m:
                 return action(actor, *m.groups()),text
         return None,text
