@@ -33,6 +33,9 @@ class Player(Containing, Thing):
         self.transcript = GAME.transcripts.lookup(name) # and add appropriate attributes
         self.name = name
         self.yaml = {"id": pid, "name": name}
+        user = mud.game.GAME.users[name]
+        self.gender = user["gender"]
+        self.description = user["description"]
 
     #--------------------------------------------------------------------------
     # initialization from YAML data

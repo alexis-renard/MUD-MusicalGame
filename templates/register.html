@@ -20,6 +20,23 @@
     </div>
   </div>
   <div class="form-group">
+    <label for="playerDescription" class="col-sm-2 control-label">Description</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" id="playerDescription" placeholder="Description (Optional)" name="description">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="playerGender" class="col-sm-2 control-label">Gender</label>
+    <div class="col-sm-4">
+      <div class="radio-inline">
+	<label><input type="radio" name="gender" id="playerMale" value="m" checked>Male</label>
+      </div>
+      <div class="radio-inline">
+	<label><input type="radio" name="gender" id="playerFemale" value="f">Female</label>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
     <div class="col-sm-offset-2 col-sm-4">
       <button type="submit" class="btn btn-default">Create Account</button>
     </div>
@@ -38,6 +55,9 @@
 {% end %}
 {% if password_empty %}
 <div class="alert alert-danger">Password must not be empty</div>
+{% end %}
+{% if gender_unknown %}
+<div class="alert alert-danger">Unknown gender: {{ gender }}</div>
 {% end %}
 {% end %}
 {% block js %}

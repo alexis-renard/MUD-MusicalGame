@@ -22,10 +22,12 @@ class Named(Basic):
     #--------------------------------------------------------------------------
 
     GENDER = {
-        "masc": "masculine",
-        "m"   : "masculine",
-        "fem" : "feminine" ,
-        "f"   : "feminine"
+        "masc"  : "masculine",
+        "m"     : "masculine",
+        "fem"   : "feminine" ,
+        "f"     : "feminine" ,
+        "male"  : "masculine",
+        "female": "feminine" ,
     }
 
     def init_from_yaml(self, data, world):
@@ -92,23 +94,18 @@ class Named(Basic):
         return "%s %s" % (self.GENDER_TO_A[self.gender],
                           self.name)
 
-    GENDER_TO_HIS = {
-        "masculine": "son",
-        "feminine" : "sa"
+    GENDER_GENDER_TO_HIS = {
+        "masculine+masculine": "son",
+        "masculine+feminine" : "sa" ,
+        "feminine+masculine" : "son",
+        "feminine+feminine"  : "sa",
     }
 
-    def noun_his(self):
-        return "%s %s" % (self.GENDER_TO_HIS[self.gender],
-                          self.name)
-
-    GENDER_TO_HER = {
-        "masculine": "son",
-        "feminine" : "sa"
-    }
-
-    def noun_her(self):
-        return "%s %s" % (self.GENDER_TO_HER[self.gender],
-                          self.name)
+    def noun_his(self, actor):
+        if isinstance(actor, str):
+            gender = self.GENDER[actor]
+        else:
+            gender = self.GENDER[actor.gender]
 
     GENDER_TO_E = {
         "masculine": "",

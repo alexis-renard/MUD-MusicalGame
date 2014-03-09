@@ -131,14 +131,18 @@ events:
         - data : "Pour une raison inconnue, vous ne voyez rien."
     actor:
       - props: object:is_player
-        data : "{{ object.name }}."
+        data : |
+          {{ object.name }}{% if object.description %}, {{ object.description }}{% end %}.
+      - data : |
+          {{ object.noun_a() }} <i>(sans description)</i>.
     inside:
       intro: "Dedans vous trouvez:"
       empty: "Il n'y a rien dedans."
 
   info:
     - props: peeked:is_player
-      actor: "{{ peeked.name }}."
+      actor: |
+        {{ peeked.name }}{% if peeked.description %}, {{ peeked.description }}{% end %}.
 
   birth:
     observer: |

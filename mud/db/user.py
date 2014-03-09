@@ -11,13 +11,15 @@ class UserDB(BasicDB):
             user = self.get(username, None)
             return user and user["password"]==password
 
-    def create_user(self, username, password):
+    def create_user(self, username, password, description, gender):
         with self.lock:
             if username in self:
                 return None
             user = {
-                "username": username,
-                "password": password,
+                "username"   : username,
+                "password"   : password,
+                "description": description,
+                "gender"     : gender
             }
             self[username] = user
             self.save()
