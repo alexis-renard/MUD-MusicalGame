@@ -77,14 +77,6 @@ class Player(Containing, Thing):
     def _has_prop_can_see(self):
         return self.can_see()
 
-    def can_pass(self, exit):
-        other = exit.other_exit()
-        if not (exit.has_prop("closed") or other.has_prop("closed")):
-            return True
-        if self.has_prop("power-to-pass"):
-            return True
-        return False
-
     def all(self):
         yield from self.contents()
         yield from self.parts()

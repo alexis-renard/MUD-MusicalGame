@@ -52,6 +52,7 @@ directions:
     sud-ouest : au sud-ouest
     haut      : en haut
     bas       : en bas
+
 events:
   enter-portal:
     observer  : "{{ actor.name }} sort par {{ exit.the_direction() }}."
@@ -61,10 +62,6 @@ events:
 
   leave-portal:
     observer  : "{{ actor.name }} entre par {{ exit.the_direction() }}."
-
-  traverse-portal:
-    actor     : null
-    observer  : null
 
   take:
     actor     : "Vous prenez {{ object.noun_the() }}."
@@ -113,12 +110,12 @@ events:
 
   open:
     actor     :
-      - props : -portal:closed
+      - props : -object:closed
         data  : "C'est déjà fait!"
 
   open-with:
     actor     :
-      - props : -portal:closed
+      - props : -object:closed
         data  : "C'est déjà fait!"
 
   look:
@@ -190,27 +187,27 @@ events:
         {{ actor.name }} appuie futilement sur {{ object.noun_the() }}
 
   close:
-    - props: -portal:closable
+    - props: -object:closable
       actor: |
         Vous tentez en vain de fermer {{ object.noun_the() }} qui n'est
         pas fermable.
       observer: |
         {{ actor.name }} tente en vain de fermer {{ object.noun_the() }}
         qui n'est pas fermable.
-    - props: portal:closed
+    - props: object:closed
       actor: |
         Vous tentez futilement de fermer {{ object.noun_the() }} qui
-        est déjà fermé.
+        est déjà fermé{{ object.noun_e() }}.
       observer: |
         {{ actor.name }} tente futilement de fermer {{ object.noun_the() }}
-        qui est déjà fermé.
+        qui est déjà fermé{{ object.noun_e() }}.
     - actor: |
         Vous fermez {{ object.noun_the() }}.
       observer: |
         {{ actor.name }} ferme {{ object.noun_the() }}.
       effects:
         - type  : ChangePropEffect
-          modifs: portal:closed
+          modifs: object:closed
 
   reset:
     actor: |
@@ -236,3 +233,11 @@ events:
         {{ actor.name }} apparaît près de vous par téléportation.
       actor: |
         Vous vous matérialisez à votre destination.
+
+  # this is the default for portal/exits
+  # it should not really be under events, but that's because
+  # I am using the get_event_data API.  It should fix this one day!!!
+  shared-props:
+    - closed
+    - closable
+

@@ -79,6 +79,9 @@ class Propertied(Basic):
         obj, prop = self._analyze_prop(prop, context)
         if obj is not self:
             return obj._has_prop(prop)
+        obj = self.prop_proxy(prop)
+        if obj is not self:
+            return obj._has_prop(prop)
         m = RE_CALL.match(prop)
         p = m.group("prop")
         a = m.group("arg")
@@ -110,8 +113,15 @@ class Propertied(Basic):
     def _get_props(self):
         return self.props_proxy()._props
 
+    def prop_proxy(self, prop):
+        """allow for fine-grained delegation of properties."""
+        return self
+
     def add_prop(self, prop, context=None):
         obj, prop = self._analyze_prop(prop, context)
+        if obj is not self:
+            return obj.add_prop(prop, context)
+        obj = self.prop_proxy(prop)
         if obj is not self:
             return obj.add_prop(prop, context)
         mprop = self._sanitize_prop(prop)
@@ -124,6 +134,9 @@ class Propertied(Basic):
 
     def remove_prop(self, prop, context=None):
         obj, prop = self._analyze_prop(prop, context)
+        if obj is not self:
+            return obj.remove_prop(prop, context)
+        obj = self.prop_proxy(prop)
         if obj is not self:
             return obj.remove_prop(prop, context)
         mprop = self._sanitize_prop(prop)

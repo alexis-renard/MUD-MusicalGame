@@ -17,13 +17,21 @@ class EnterPortalEvent(Event2):
         if self.get_datum("enter-portal.data-driven"):
             return self.perform_data_driven()
         self.traversal = self.exit.get_traversal()
-        if not self.actor.can_pass(self.traversal.exit1):
+        if self.actor.has_prop("power-to-pass"):
+            # magical power to pass through portals
+            # even when closed.
+            pass
+        elif self.traversal.exit1.has_prop("closed"):
             self.add_prop("cannot-pass")
             self.add_prop("cannot-pass-exit1")
             return self.enter_portal_failure()
-        if not self.actor.can_pass(self.traversal.exit2):
+        elif self.traversal.exit2.has_prop("closed"):
             self.add_prop("cannot-pass")
             self.add_prop("cannot-pass-exit2")
+            return self.enter_portal_failure()
+        elif self.traversal.portal.has_prop("closed"):
+            self.add_prop("cannot-pass")
+            self.add_prop("cannot-pass-portal")
             return self.enter_portal_failure()
         self.enter_portal_success()
         self.execute_effects()
@@ -38,6 +46,7 @@ class EnterPortalEvent(Event2):
     def context(self):
         context = super().context()
         context["exit"] = self.exit
+        context["portal"] = self.exit.portal
         return context
 
     def perform_data_driven(self):
@@ -62,6 +71,9 @@ class TraversePortalEvent(Event2):
     def context(self):
         context = super().context()
         context["traversal"] = self.traversal
+        context["exit1"]     = self.traversal.exit1
+        context["exit2"]     = self.traversal.exit2
+        context["portal"]    = self.traversal.portal
         return context
 
     def get_event_templates(self):
@@ -82,4 +94,5 @@ class LeavePortalEvent(Event2):
     def context(self):
         context = super().context()
         context["exit"] = self.exit
+        context["portal"] = self.exit.portal
         return context

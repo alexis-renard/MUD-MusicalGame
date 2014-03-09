@@ -32,6 +32,12 @@ class Exit(Model):
         self.direction = data.get("direction")
         self.add_name(self.direction)
         self.location.add_exit(self)
+        shared = data.get("shared-props")
+        if shared is not None:
+            if isinstance(shared, str):
+                shared = [shared]
+            assert all(isinstance(x,str) for x in shared)
+        self.shared_props = shared
 
     def update_from_yaml(self, data, world):
         super().update_from_yaml(data, world)
@@ -52,8 +58,28 @@ class Exit(Model):
 
     # in this design, all exits of the same portal share the same properties
     # which are stored on the portal
-    def props_proxy(self):
-        return self.portal
+    #def props_proxy(self):
+    #    return self.portal
+
+    def prop_proxy(self, prop):
+        if self.shared_props is not None:
+            if prop in self.shared_props:
+                return self.portal
+            return self
+        if self.portal.shared_props is not None:
+            if prop in self.portal.shared_props:
+                return self.portal
+            return self
+        shared = self.get_datum("shared-props", deref_last=False)
+        if shared is not None:
+            if isinstance(shared, str):
+                shared = [shared]
+            assert all(isinstance(x, str) for x in shared)
+            self.shared_props = shared
+            if prop in shared:
+                return self.portal
+        self.shared_props = []
+        return self
 
     def other_exit(self):
         return self.portal.other_exit(self)

@@ -47,6 +47,12 @@ class Portal(Model):
 
     def init_from_yaml(self, data, world):
         super().init_from_yaml(data, world)
+        shared = data.get("shared-props")
+        if shared is not None:
+            if isinstance(shared, str):
+                shared = [shared]
+            assert all(isinstance(x,str) for x in shared)
+        self.shared_props = shared
         for edata in data["exits"]:
             if "type" not in edata:
                 edata["type"] = "Exit"
