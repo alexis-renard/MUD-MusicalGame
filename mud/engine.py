@@ -55,7 +55,3 @@ class Engine(threading.Thread):
     def perform_reset(self, task):
         actor = task["player"]
         mud.game.GAME.reset()
-
-
-ENGINE = Engine()
-ENGINE.start()

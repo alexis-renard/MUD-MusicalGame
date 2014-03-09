@@ -3,6 +3,8 @@
 #==============================================================================
 
 import os, os.path, yaml, glob
+import mud.server
+from mud.engine                import Engine
 from mud.world                 import World
 from mud.db.transcript         import TranscriptDB
 from mud.db.user               import UserDB
@@ -39,6 +41,7 @@ class Game:
         self.transcripts = TranscriptDB(self.transcripts_filename())
         self.users       = UserDB(self.users_filename())
         self.players     = {}
+        self.engine      = None
         self._initial    = initial
         self._current    = current
         self._static     = static
@@ -99,3 +102,8 @@ class Game:
         self.remove_glob(self.transcripts_filename() + ".*")
         self.__init__(**self._for_reset)
         self.load()
+
+    def start(self):
+        self.engine = Engine()
+        self.engine.start()
+        mud.server.main()

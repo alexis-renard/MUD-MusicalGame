@@ -3,7 +3,7 @@
 #==============================================================================
 
 from mud.handlers.base import BaseHandler
-from mud.engine        import ENGINE
+import mud.game
 
 import tornado.websocket
 import tornado.escape
@@ -25,7 +25,7 @@ class WebSocketHandler(BaseHandler, tornado.websocket.WebSocketHandler):
         self.player = self.get_player()
         self.player.websocket = self      # the player knows its websocket
         self.opensockets.add(self)
-        ENGINE.put({"type":"birth", "player":self.player})
+        mud.game.GAME.engine.put({"type":"birth", "player":self.player})
 
     def on_close(self):
         del self.player.websocket         # remove websocket from player
@@ -34,4 +34,4 @@ class WebSocketHandler(BaseHandler, tornado.websocket.WebSocketHandler):
     def on_message(self, message):
         msg = tornado.escape.json_decode(message)
         msg["player"] = self.player       # add player to received message
-        ENGINE.put(msg)
+        mud.game.GAME.engine.put(msg)
