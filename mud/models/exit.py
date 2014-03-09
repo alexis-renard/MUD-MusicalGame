@@ -8,7 +8,7 @@ import mud.game
 class Exit(Model):
 
     """an Exit is available at a Location, in a certain direction.  It is
-    connected to a Portal which itself is connected to 1 or more other exits."""
+    connected to a Portal which itself is connected to 0 or more other exits."""
 
     _NEEDS_ID = False
 

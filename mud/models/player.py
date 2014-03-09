@@ -11,10 +11,8 @@ from tornado.ioloop     import IOLoop
 
 class Player(Containing, Thing):
 
-    _PLAYERS = {}
-
     def __new__(cls, name=None, **kargs):
-        player = cls._PLAYERS.get(name, None)
+        player = mud.game.GAME.players.get(name, None)
         if player is not None:
             return player
         return super(Player, cls).__new__(cls)
@@ -28,8 +26,8 @@ class Player(Containing, Thing):
             return                    # in which case, nothing more needs to be done
         kargs["id"] = pid = "player__" + name
         super().__init__(**kargs)     # otherwise, initialize base classes
-        self._PLAYERS[name]  = self   # save player in static dict
         GAME = mud.game.GAME
+        GAME.players[name] = self                       # save player in game dict
         self.transcript = GAME.transcripts.lookup(name) # and add appropriate attributes
         self.name = name
         self.yaml = {"id": pid, "name": name}

@@ -38,6 +38,7 @@ class Game:
         self.static      = {}
         self.transcripts = TranscriptDB(self.transcripts_filename())
         self.users       = UserDB(self.users_filename())
+        self.players     = {}
         self._initial    = initial
         self._current    = current
         self._static     = static
