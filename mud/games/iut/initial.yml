@@ -219,7 +219,7 @@ events:
     actor: "Une notice jaune."
   look:
     actor: |
-      Sur cette notice est inscrit: <i>mdp paradis.mud: <tt>XYZZY</tt>
+      Sur cette notice est inscrit: <i>mdp paradis.mud</i>: <tt>XYZZY</tt>
 ---
 id: escalier-000
 type: Portal
