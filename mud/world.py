@@ -18,6 +18,8 @@ class World:
                 self.types[v.__name__] = v
 
     def make(self, data):
+        if data is None:
+            return None
         cls = self.types[data["type"]]
         obj = cls(**data)                 # autoadded to database
         obj.yaml = data
