@@ -19,3 +19,4 @@ from .push         import PushEvent
 from .reset        import ResetEvent
 from .deadaction   import DeadAction
 from .teleport     import TeleportEvent
+from .narrative    import NarrativeEvent

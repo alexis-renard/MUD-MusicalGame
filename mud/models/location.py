@@ -60,3 +60,6 @@ class Location(Containing, Model):
         yield from self.contents()
         yield from self.parts()
         yield from self.exits()
+
+    def find_containing(self):
+        return self

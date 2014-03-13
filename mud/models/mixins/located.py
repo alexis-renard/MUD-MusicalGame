@@ -64,3 +64,9 @@ class Located(Identified):
     def reset(self):
         self._container = None
         super().reset()
+
+    def find_containing(self):
+        if self._container:
+            return self._container.find_containing()
+        if hasattr(self, "part_of"):
+            return self.part_of.find_containing()

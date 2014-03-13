@@ -41,3 +41,6 @@ class Container(Containing, Thing):
         """return an iterator over all objects in/at the container."""
         yield from self.contents()
         yield from self.parts()
+
+    def find_containing(self):
+        return self

@@ -265,6 +265,9 @@ events:
       Vous êtes dans la salle 22.  Il y a un ordinateur
       allumé.  Au sud-est, une porte donne sur la partie
       centrale de l'étage.
+  bouton-cabane:
+    observer: |
+      l'ordinateur clignote brièvement.
 parts:
   - ordinateur-000
 ---
@@ -373,6 +376,9 @@ events:
     effects:
       - type  : ChangePropEffect
         modifs: =portal-ordinateur-cabane-exit-2:activated
+      - type  : NarrativeEffect
+        at    : =salle-22-000
+        key   : bouton-cabane
 ---
 id: lampe-000
 type: Thing

@@ -25,6 +25,7 @@ class Composed(Basic):
         if "parts" in data:
             for pdata in data["parts"]:
                 p = world[pdata]
+                p.part_of = self
                 self._parts.append(p)
 
     def update_from_yaml(self, data, world):

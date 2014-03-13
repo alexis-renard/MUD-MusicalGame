@@ -89,3 +89,6 @@ class Exit(Model):
 
     def the_direction(self):
         return mud.game.GAME.static["directions"]["noun_the"][self.direction]
+
+    def find_containing(self):
+        return self.location and self.location.find_containing()
