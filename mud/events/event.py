@@ -16,6 +16,7 @@ class Event(Evented, Propertied):
     def __init__(self):
         super().__init__()
         self._effects_executed = False
+        self._failed = False
 
     def execute(self):
         self.perform()
@@ -25,10 +26,13 @@ class Event(Evented, Propertied):
         raise NotImplemented()
 
     def execute_effects(self):
-        if not self._effects_executed:
+        if not self._effects_executed and not self._failed:
             self._effects_executed = True
             for effect in self.get_effects(self.NAME):
                 effect.execute()
+
+    def fail(self):
+        self._failed = True
 
     def format(self, template, **kargs):
         context = self.context()

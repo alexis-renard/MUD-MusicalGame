@@ -12,8 +12,10 @@ class TeleportEvent(Event2):
     def perform(self):
         n = len(self.object)
         if n == 0:
+            self.fail()
             self.inform("teleport.not-found")
         elif n > 1:
+            self.fail()
             self.inform("teleport.ambiguous")
         else:
             self.inform("teleport.departure")

@@ -39,6 +39,7 @@ class InspectEvent(Event2):
         self.actor.send_result(self.buffer_get())
 
     def failed_cannot_see(self):
+        self.fail()
         self.buffer_clear()
         self.buffer_inform("look.failed")
         self.actor.send_result(self.buffer_get())

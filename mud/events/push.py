@@ -9,5 +9,6 @@ class PushEvent(Event2):
 
     def perform(self):
         if not self.object.has_prop("pushable"):
+            self.fail()
             return self.inform("push.failed")
         self.inform("push")

@@ -41,6 +41,7 @@ class EnterPortalEvent(Event2):
         self.inform("enter-portal")
 
     def enter_portal_failure(self):
+        self.fail()
         self.inform("enter-portal.failed")
 
     def context(self):

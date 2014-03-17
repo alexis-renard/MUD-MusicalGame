@@ -26,3 +26,7 @@ class DropInEvent(Event3):
         if not self.get_datum("drop-in.data-driven"):
             self.object.move_to(self.object2)
         self.inform("drop-in")
+
+    def drop_in_failure(self):
+        self.fail()
+        self.inform("drop-in.failed")

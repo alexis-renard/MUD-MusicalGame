@@ -10,12 +10,13 @@ class TakeEvent(Event2):
     def perform(self):
         if not self.object.has_prop("takable"):
             self.add_prop("object-not-takable")
-            return self.failed()
+            return self.take_failed()
         if self.object in self.actor:
             self.add_prop("object-already-in-inventory")
-            return self.failed()
+            return self.take_failed()
         self.object.move_to(self.actor)
         self.inform("take")
 
-    def failed(self):
+    def take_failed(self):
+        self.fail()
         self.inform("take.failed")

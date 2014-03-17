@@ -13,7 +13,7 @@ class LookEvent(Event1):
     def perform(self):
         if not self.actor.can_see():
             self.add_prop("cannot-see")
-            return self.failed()
+            return self.look_failed()
         self.buffer_clear()
         self.buffer_inform("look.actor", object=self.actor.container())
         players = []
@@ -39,7 +39,8 @@ class LookEvent(Event1):
             self.buffer_append("</ul>")
         self.actor.send_result(self.buffer_get())
 
-    def failed(self):
+    def look_failed(self):
+        self.fail()
         self.buffer_clear()
         self.buffer_inform("look.failed.actor")
         self.actor.send_result(self.buffer_get())
