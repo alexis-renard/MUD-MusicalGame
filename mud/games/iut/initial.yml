@@ -101,7 +101,7 @@ props:
   - closed
   - closable
 exits:
-  - id: porche-000-nor-est
+  - id: porche-000-nord-est
     location: porche-000
     direction: nord-est
     name:
