@@ -114,3 +114,12 @@ class Named(Basic):
 
     def noun_e(self):
         return self.GENDER_TO_E[self.gender]
+
+    def noun_of_the(self):
+        if self.gender=="masculine":
+            return "du %s" % self.name
+        else:
+            return "de %s" % self.noun_the()
+
+    def noun_of_a(self):
+        return "d'%s" % self.noun_a()
