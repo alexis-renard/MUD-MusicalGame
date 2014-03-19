@@ -85,7 +85,20 @@ class Exit(Model):
         return self.portal.other_exit(self)
 
     def get_traversal(self):
-        return self.portal.get_traversal(self)
+        tr = self.get_datum("traversal", exit1=self, exit=self, portal=self.portal)
+        if not tr:
+            tr = self.portal.get_datum("traversal", exit1=self, exit=self, portal=self.portal)
+        if not tr:
+            return self.portal.get_traversal(self)
+        from mud.effects.effect import Effect
+        ctx = self.context()
+        ctx["exit1"] = self
+        ctx["portal"] = self.portal
+        e = Effect(tr, ctx)
+        exit1 = e.resolve("exit1")
+        exit2 = e.resolve("exit2")
+        from mud.models.portal import PortalTraversal
+        return PortalTraversal(exit1, exit2)
 
     def the_direction(self):
         return mud.game.GAME.static["directions"]["noun_the"][self.direction]
