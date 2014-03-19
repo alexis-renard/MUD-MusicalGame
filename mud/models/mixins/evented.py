@@ -45,7 +45,10 @@ class Evented(Basic):
         return self._event_templates
 
     def context(self):
-        return {"event": self}
+        return {"event": self, "the": self._the}
+
+    def _the(self, id):
+        return mud.game.GAME.world[id]
 
     def world_context(self):
         return collections.ChainMap(self.context(), mud.game.GAME.world, mud.game.GAME.static)
@@ -112,7 +115,9 @@ class Evented(Basic):
             self.get_event_data(dotpath+".effects", context, False),
             context)
 
-    def get_datum(self, dotpath, context=NONE, deref_last=True):
+    def get_datum(self, dotpath, context=NONE, deref_last=True, **kargs):
         if context is NONE:
             context = self.world_context()
+        if kargs:
+            context.update(kargs)
         return self.get_event_data(dotpath, context, deref_last)
