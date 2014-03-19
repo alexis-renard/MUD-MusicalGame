@@ -3,7 +3,7 @@
 #==============================================================================
 
 from .failedaction import FailedActionEvent
-from .go           import EnterPortalEvent, TraversePortalEvent, LeavePortalEvent
+from .go           import EnterPortalEvent, TraversePortalEvent, LeavePortalEvent, MoveEvent
 from .look         import LookEvent
 from .inspect      import InspectEvent
 from .take         import TakeEvent

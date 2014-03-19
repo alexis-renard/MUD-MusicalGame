@@ -97,3 +97,14 @@ class LeavePortalEvent(Event2):
         context["exit"] = self.exit
         context["portal"] = self.exit.portal
         return context
+
+
+class MoveEvent(Event2):
+    NAME = "move"
+
+    @property
+    def exit(self):
+        return self.object
+
+    def perform(self):
+        self.actor.move_to(self.object)
