@@ -26,7 +26,7 @@ class TraversePortalEffect(Effect2):
 class LeavePortalEffect(Effect2):
     EVENT = LeavePortalEvent
 
-    def resolve_obejct(self):
+    def resolve_object(self):
         return self.resolve("exit")
 
 
