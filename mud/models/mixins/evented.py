@@ -107,9 +107,11 @@ class Evented(Basic):
             context.update(kargs)
         return self.get_event_data(dotpath, context, True)
 
-    def get_effects(self, dotpath, context=NONE):
+    def get_effects(self, dotpath, context=NONE, **kargs):
         if context is NONE:
             context = self.world_context()
+        if kargs:
+            context.update(kargs)
         from mud.effects.effect import Effect
         return Effect.make_effects(
             self.get_event_data(dotpath+".effects", context, False),
