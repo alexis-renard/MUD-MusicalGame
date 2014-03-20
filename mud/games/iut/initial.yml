@@ -107,6 +107,8 @@ exits:
     name:
       - porte
     gender: fem
+    props:
+      - for-enter
     events:
       enter-portal:
         actor     : "Vous entrez dans le département info."
@@ -170,6 +172,8 @@ exits:
     direction: sud-ouest
     name: porte
     gender: fem
+    props:
+      - for-leave
     events:
       enter-portal:
         observer  : "{{ actor.name }} sort du département info."
@@ -249,9 +253,13 @@ exits:
   - id: etage-000-nord-ouest
     location: etage-000
     direction: nord-ouest
+    props:
+      - for-enter
   - id: salle-22-000-sud-est
     location: salle-22-000
     direction: sud-est
+    props:
+      - for-leave
 ---
 id: salle-22-000
 type: Location
@@ -317,6 +325,8 @@ exits:
   - id: portal-ordinateur-cabane-exit-2
     location: cabane-000
     direction: est
+    props:
+      - for-leave
     events:
       enter-portal:
         - props: exit:activated

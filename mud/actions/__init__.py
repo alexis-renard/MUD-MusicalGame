@@ -2,7 +2,7 @@
 # Copyright (C) 2014 Denys Duchier, IUT d'Orléans
 #==============================================================================
 
-from .go        import GoAction
+from .go        import GoAction, LeaveAction, EnterAction
 from .inspect   import InspectAction
 from .look      import LookAction
 from .open      import OpenAction, OpenWithAction
