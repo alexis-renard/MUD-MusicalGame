@@ -62,6 +62,8 @@ class World:
         return self.database[id]
 
     def __setitem__(self, id, val):
+        if id in self.database:
+            raise Exception("id collision: %s" % id)
         self.database[id] = val
 
     def get(self, key, default=None):
