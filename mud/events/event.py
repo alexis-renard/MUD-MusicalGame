@@ -5,6 +5,7 @@
 from tornado.template import Template
 from mud.models.mixins.evented import Evented
 from mud.models.mixins.propertied import Propertied
+from mud.models.mixins.containing import Containing
 import re
 
 class Event(Evented, Propertied):
@@ -98,7 +99,14 @@ class Event1(Event):
     def context(self):
         context = super().context()
         context["actor"] = self.actor
-        context["location"] = self.actor.container()
+        actor = self.actor
+        if isinstance(actor, Containing):
+            loc = actor
+        elif hasattr(actor, "container"):
+            loc = actor.container()
+        else:
+            loc = None
+        context["location"] = loc
         return context
 
     def observers(self):
