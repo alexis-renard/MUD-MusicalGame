@@ -15,7 +15,7 @@ class InspectEvent(Event2):
             return self.failed_cannot_see()
         self.buffer_clear()
         self.buffer_inform("look.actor", object=self.object)
-        if not self.object.is_container():
+        if not self.object.is_container() or self.object.has_prop("closed"):
             return self.actor.send_result(self.buffer_get())
         players = []
         objects = []
