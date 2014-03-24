@@ -98,6 +98,7 @@ class Event1(Event):
     def context(self):
         context = super().context()
         context["actor"] = self.actor
+        context["location"] = self.actor.container()
         return context
 
     def observers(self):
