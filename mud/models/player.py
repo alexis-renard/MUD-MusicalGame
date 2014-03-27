@@ -165,10 +165,20 @@ class Player(Containing, Thing):
             if pred(x):
                 return x
         c = self.container()
+        parts = []
         if c is not None:
             for x in c.all():
                 if pred(x):
                     return x
+                parts.append(x)
+        while parts:
+            l = parts
+            parts = []
+            for x in l:
+                for y in x.parts():
+                    if pred(y):
+                        return y
+                    parts.append(y)
         return None
 
     def find_for_take(self, **kargs):
