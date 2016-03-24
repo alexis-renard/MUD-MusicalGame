@@ -1,0 +1,18 @@
+---
+id: entree-temple-rock-000
+type: Location
+events:
+  info:
+    actor: "ENTREE TEMPLE rock 000"
+  look:
+    actor: |
+      VOUS ETES A LENTREE DU TEMPLE rock, PORTE FERMEE (portal entree -> hall fermé)
+---
+id: hall-temple-rock-000
+type: Location
+events:
+  info:
+    actor: "ENTREE TEMPLE rock 000"
+  look:
+    actor: |
+      VOUS ETES HALL DU TEMPLE rock,

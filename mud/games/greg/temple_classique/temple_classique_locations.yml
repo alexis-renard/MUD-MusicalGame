@@ -1,0 +1,18 @@
+---
+id: entree-temple-classique-000
+type: Location
+events:
+  info:
+    actor: "ENTREE TEMPLE CLASSIQUE 000"
+  look:
+    actor: |
+      VOUS ETES A LENTREE DU TEMPLE CLASSIQUE, PORTE FERMEE (portal entree -> hall fermé)
+---
+id: hall-temple-classique-000
+type: Location
+events:
+  info:
+    actor: "ENTREE TEMPLE CLASSIQUE 000"
+  look:
+    actor: |
+      VOUS ETES HALL DU TEMPLE CLASSIQUE,

@@ -1,0 +1,101 @@
+---
+id: portal-central-park-entree-temple-classique-000
+type: Portal
+exits:
+  - id: central-park-000-nord
+    location: central-park-000
+    direction: nord
+  - id: entree-temple-classique-000-sud
+    location: entree-temple-classique-000
+    direction: sud
+---
+id: portal-entree-hall-temple-classique-000
+type: Portal
+props:
+  - closed
+  - closable
+exits:
+  - id: entree-temple-classique-000-nord
+    location: entree-temple-classique-000
+    direction: nord
+    name:
+      - porte
+    gender: fem
+    props:
+      - for-enter
+    events:
+      enter-portal:
+        actor     : "Vous entrez dans le temple classique"
+        observer  : "{{ actor.name }} entre dans le temple classique"
+        failed:
+          actor   : &porte001 |
+            La porte d'accès au temple classique est sécurisée.
+            Elle est actuellement fermée et ne peut être ouverte
+            qu'avec un archet.
+          observer: &porte002 |
+            {{ actor.name }} tente en vain d'ouvrir la porte du
+            temple classique
+      leave-portal:
+        actor     : "Vous sortez du temple classique"
+        observer  : "{{ actor.name }} sort du temple classique"
+      open        :
+        - props   : portal:closed
+          actor   : *porte001
+          observer: *porte002
+        - props   : -portal:closed
+          actor   : &porte003 "La porte est déjà ouverte!"
+      open-with   :
+        - props   :
+            - portal:closed
+            - object2:key-for-porte-porche-000
+          effects :
+            type  : ChangePropEffect
+            modifs:
+              - -portal:closed
+          actor   : |
+            La porte du département s'ouvre avec un déclic.
+          observer: |
+            {{ actor.name }} ouvre la porte du temple classique
+            avec un badge de sécurité.
+        - props   :
+            - portal:closed
+            - -object2:key-for-porte-porche-000
+          actor   : |
+            Vous tentez vainement d'ouvrir la porte avec
+            {{ object2.noun_the() }}
+          observer: |
+            {{ actor.name }} tente vainement d'ouvrir la porte du
+            temple classique avec {{ object2.noun_a() }}
+        - props   :
+            - -portal:closed
+          actor   : *porte003
+          observer: |
+            {{ actor.name }} tente futilement d'ouvrir la porte du
+            temple classique avec {{ object2.noun_a() }}, alors
+            qu'elle est déjà ouverte.
+      close       : &porte004
+        - props   : portal:closed
+          actor   : "Vous fermez la porte du département."
+          observer: "{{ actor.name }} ferme le porte du temple classique"
+          effects :
+            - type  : ChangePropEffect
+              modifs: =portal-porche-hall-000:closed
+      close-with  : *porte004
+  - id: hall-000-sud-ouest
+    location: hall-000
+    direction: sud-ouest
+    name: porte
+    gender: fem
+    props:
+      - for-leave
+    events:
+      enter-portal:
+        observer  : "{{ actor.name }} sort du temple classique"
+        failed:
+          actor   : |
+            La porte d'accès au temple classique est sécurisée.
+            Elle est actuellement fermée et, même pour sortir,
+            elle ne peut être ouverte qu'avec un badge de sécurité.
+          observer: |
+            {{ actor.name }} tente en vain de sortir par la porte
+            du temple classique

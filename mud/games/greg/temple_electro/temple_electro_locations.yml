@@ -1,0 +1,18 @@
+---
+id: entree-temple-electro-000
+type: Location
+events:
+  info:
+    actor: "ENTREE TEMPLE ELECTRO 000"
+  look:
+    actor: |
+      VOUS ETES A LENTREE DU TEMPLE electro, PORTE FERMEE (portal entree -> hall fermé)
+---
+id: hall-temple-electro-000
+type: Location
+events:
+  info:
+    actor: "ENTREE TEMPLE electro 000"
+  look:
+    actor: |
+      VOUS ETES HALL DU TEMPLE electro,
