@@ -8,11 +8,38 @@ events:
     actor: |
       VOUS ETES A LENTREE DU TEMPLE rock, PORTE FERMEE (portal entree -> hall fermé)
 ---
-id: hall-temple-rock-000
+id: loges-temple-rock-000
 type: Location
 events:
   info:
-    actor: "ENTREE TEMPLE rock 000"
+    actor: "LOGES TEMPLE rock 000"
   look:
     actor: |
-      VOUS ETES HALL DU TEMPLE rock,
+      VOUS ETES LOGES DU TEMPLE rock, un homme ivre vous supplie deprendre sa veste
+contains:
+  - veste-000
+---
+id: scene-temple-rock-000
+type: Location
+events:
+  info:
+    actor: "scene TEMPLE rock 000"
+  look:
+    actor: |
+      VOUS ETES scene DU TEMPLE rock, le public hurle et vous acclame, vous ne pouvez pas les laisser attendre,
+      le siege de la batterie est vide, le chanteur vous demande dejouer
+contains:
+  - veste-000
+parts:
+  - tabouret-batterie-000
+---
+id: batterie-temple-rock-000
+type: Location
+events:
+  info:
+    actor: "batriete TEMPLE rock 000"
+  look:
+    actor: |
+      Vous etes batterie, trouvez baguettes poser sur caisse claire
+contains:
+  - baguettes-000
