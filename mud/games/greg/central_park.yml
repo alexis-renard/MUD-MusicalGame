@@ -1,0 +1,49 @@
+---
+id: parc-central-000
+type: Location
+events:
+  info:
+    actor: "Vous êtes dans le parc"
+  look:
+    actor: |
+      Vous vous trouvez dans un parc. L'ambiance est désertique et vous voyez au Sud un temple majestueux ressemblant
+      à ces célèbres chateaux de la Renaissance. A l'Ouest se trouve un mystérieux temple qui ressemble à une arène enveloppée
+      de cuir d'un noir profond. Cela vous fait frissoner. Au Nord semble se trouver un 3ème temple qui est le plus rassurant
+      des 3. Vous sentez un certain amour émaner de ce lieu. Enfin, à l'est se trouve un temple que l'on pourrait confondre avec
+      un énorme mur d'enceintes... Vous sentez votre cage thoracique vibrer au rythme de la musique ambiante de ce parc, mais vous
+      n'arrivez pas à identifier à quel genre l'attribuer.
+contains:
+  - archet-000
+parts:
+  - pilier-000
+---
+id: pilier-000
+type: Thing
+name: pilier
+events:
+  info:
+    actor: "Un pilier semblant contenir un message gravé"
+  look:
+    actor: |
+      Sur le pilier est écrit :
+      <i>
+        " Bienvenue étranger. Tu as du être envoyé ici pour une mission particulière. Les temples qui t'entourent
+        sont bien particuliers. Tu te rendras compte que chacun représente un style de musique particulier. Il
+        doit y avoir un lien entre eux mais... à toi de découvrir lequel.
+        Attention, tu ne pourras ouvrir ces temples qu'avec des objets des objets particuliers, qui doivent
+        surement être liés à leur histoire... "
+      </i>
+---
+id: archet-000
+type: Thing
+name: archet
+props:
+  - takable
+  - buildable
+  - key-for-porte-portal-central-park-entree-temple-classique-000
+events:
+  info:
+    actor: "Un archet de violon"
+  look:
+    actor: |
+      C'est un archet de violon, qui doit surement servir à en jouer... Encore faut-il pouvoir l'assembler. Vous remarquez une sorte de clef à son extrémité
