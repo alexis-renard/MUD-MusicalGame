@@ -1,0 +1,300 @@
+---
+id: ascenseur-hall-000
+type: Location
+parts:
+  - bouton-ascenseur-hall-000
+events:
+  info:
+    actor: "Le coin de l'ascenseur dans le hall."
+  look:
+    actor: |
+      Vous êtes dans le coin de l'ascenseur du hall du
+      département informatique.  Il y a un bouton pour
+      l'appeler.  Au sud-ouest, la porte de l'ascenseur est
+      {% if the("ascenseur-cage-000").has_prop("upstairs") %}
+      fermée.
+      {% else %}
+      ouverte.
+      {% end %}
+      A l'est, se trouve la partie principale du hall.
+  fermeture-ascenseur:
+    observer: |
+      La porte de l'ascenseur se ferme.
+  ouverture-ascenseur:
+    observer: |
+      La porte de l'ascenseur s'ouvre.
+---
+id: hall-ascenseur-portal-000
+type: Portal
+exits:
+  - id: exit1-hall-ascenseur-portal-000
+    location: hall-000
+    direction: ouest
+  - id: exit2-hall-ascenseur-portal-000
+    location: ascenseur-hall-000
+    direction: est
+---
+id: bouton-ascenseur-hall-000
+type: Thing
+name: bouton
+props:
+  - pushable
+events:
+  info:
+    actor: "Un bouton pour appeler l'ascenseur."
+  look:
+    actor: "C'est un bouton pour appeler l'ascenseur."
+  push:
+    - props: =ascenseur-cage-000:upstairs
+      observer: |
+        {{ actor.name }} appuie sur le bouton de l'ascenseur.
+      effects:
+        - type  : NarrativeEffect
+          at    : =ascenseur-etage-000
+          key   : fermeture-ascenseur
+        - type  : NarrativeEffect
+          at    : =ascenseur-cage-000
+          key   : fermeture-ascenseur
+        - type  : ChangePropEffect
+          modifs: =exit-ascenseur-etage-000:closed
+        - type  : NarrativeEffect
+          at    : =ascenseur-cage-000
+          key   : descente-ascenseur
+        - type  : ChangePropEffect
+          modifs: -=ascenseur-cage-000:upstairs
+        - type  : NarrativeEffect
+          at    : =ascenseur-hall-000
+          key   : ouverture-ascenseur
+        - type  : NarrativeEffect
+          at    : =ascenseur-cage-000
+          key   : ouverture-ascenseur
+        - type  : ChangePropEffect
+          modifs: -=exit-ascenseur-hall-000:closed
+    - actor: "L'ascenseur est déjà là!"
+      observer: |
+        {{ actor.name }} appuie stupidement sur le bouton d'appel alors
+        que l'ascenseur est déjà là.
+---
+id: ascenseur-etage-000
+type: Location
+parts:
+  - bouton-ascenseur-etage-000
+events:
+  info:
+    actor: "Le coin de l'ascenseur à l'étage."
+  look:
+    actor: |
+      Vous êtes dans le coin de l'ascenseur à l'étage du
+      département informatique.  Il y a un bouton pour
+      l'appeler.  Au sud-ouest, la porte de l'ascenseur est
+      {% if the("ascenseur-cage-000").has_prop("upstairs") %}
+      ouverte.
+      {% else %}
+      fermée.
+      {% end %}
+      Au nord, se trouve la partie principale de l'étage.
+  fermeture-ascenseur:
+    observer: |
+      La porte de l'ascenseur se ferme.
+  ouverture-ascenseur:
+    observer: |
+      La porte de l'ascenseur s'ouvre.
+---
+id: etage-ascenseur-portal-000
+type: Portal
+exits:
+  - id: exit1-etage-ascenseur-portal
+    location: etage-000
+    direction: sud
+  - id: exit2-etage-ascenseur-portal
+    location: ascenseur-etage-000
+    direction: nord
+---
+id: bouton-ascenseur-etage-000
+type: Thing
+name: bouton
+props:
+  - pushable
+events:
+  info:
+    actor: "Un bouton pour appeler l'ascenseur."
+  look:
+    actor: "C'est un bouton pour appeler l'ascenseur."
+  push:
+    - props: -=ascenseur-cage-000:upstairs
+      observer: |
+        {{ actor.name }} appuie sur le bouton de l'ascenseur.
+      effects:
+        - type  : NarrativeEffect
+          at    : =ascenseur-hall-000
+          key   : fermeture-ascenseur
+        - type  : NarrativeEffect
+          at    : =ascenseur-cage-000
+          key   : fermeture-ascenseur
+        - type  : ChangePropEffect
+          modifs: =exit-ascenseur-hall-000:closed
+        - type  : NarrativeEffect
+          at    : =ascenseur-cage-000
+          key   : ascension-ascenseur
+        - type  : ChangePropEffect
+          modifs: =ascenseur-cage-000:upstairs
+        - type  : NarrativeEffect
+          at    : =ascenseur-etage
+          key   : ouverture-ascenseur
+        - type  : NarrativeEffect
+          at    : =ascenseur-cage-000
+          key   : ouverture-ascenseur
+        - type  : ChangePropEffect
+          modifs: -=exit-ascenseur-etage-000:closed
+    - actor: "L'ascenseur est déjà là!"
+      observer: |
+        {{ actor.name }} appuie stupidement sur le bouton d'appel alors
+        que l'ascenseur est déjà là.
+---
+id: ascenseur-cage-000
+type: Location
+parts:
+  - bouton-cage-000
+props:
+  - upstairs
+events:
+  info:
+    actor: "La cage d'ascenseur."
+  look:
+    actor: |
+      Vous êtes dans la cage d'ascenseur.  Au nord-est,
+      la porte est ouverte sur
+      {% if the("ascenseur-cage-000").has_prop("upstairs") %}
+      l'étage.
+      {% else %}
+      le hall.
+      {% end %}
+      Un bouton permet de commander à l'ascenseur de
+      changer d'étage.
+  fermeture-ascenseur:
+    observer: |
+      La porte de l'ascenseur se ferme.
+  ouverture-ascenseur:
+    observer: |
+      La porte de l'ascenseur s'ouvre.
+  descente-ascenseur:
+    observer: |
+      L'ascenseur descend.
+  ascension-ascenseur:
+    observer: |
+      L'ascenseur monte.
+---
+id: ascenseur-portal-000
+type: Portal
+events:
+  traversal:
+    - props: =ascenseur-cage-000:upstairs
+      exit1: =exit-ascenseur-etage-000
+      exit2: =exit-ascenseur-cage-000
+    - exit1: =exit-ascenseur-hall-000
+      exit2: =exit-ascenseur-cage-000
+exits:
+  - id      : exit-ascenseur-hall-000
+    location: ascenseur-hall-000
+    direction: sud-ouest
+    props   :
+      - closed
+    events  :
+      enter-portal:
+        failed:
+          actor: &ascenseur-ferme |
+            "La porte de l'ascenseur est fermée."
+          observer: &force-ascenseur |
+            {{ actor.name }} tente vainement de forcer la porte de l'ascenseur.
+      leave-portal:
+        actor: ""
+        observer: &sortie-ascenseur |
+          {{ actor.name }} sort de l'ascenseur.
+
+  - id      : exit-ascenseur-etage-000
+    location: ascenseur-etage-000
+    direction: sud-ouest
+    events  :
+      enter-portal:
+        failed:
+          actor: *ascenseur-ferme
+          observer: *force-ascenseur
+      leave-portal:
+        actor: ""
+        observer: *sortie-ascenseur
+
+  - id      : exit-ascenseur-cage-000
+    location: ascenseur-cage-000
+    direction: nord-est
+    events:
+      traversal:
+        - props: =ascenseur-cage-000:upstairs
+          exit1: =exit-ascenseur-cage-000
+          exit2: =exit-ascenseur-etage-000
+        - exit1: =exit-ascenseur-cage-000
+          exit2: =exit-ascenseur-hall-000
+      leave-portal:
+        actor: ""
+        observer: |
+          {{ actor.name }} vous rejoint dans l'ascenseur.
+      enter-portal:
+        actor: ""
+        observer: *sortie-ascenseur
+---
+id: bouton-cage-000
+type: Thing
+name: bouton
+props:
+  - pushable
+events:
+  info:
+    actor: "Un bouton pour changer d'étage."
+  look:
+    actor: |
+      C'est un bouton pour commander à l'ascenseur de changer d'étage.
+  push:
+    - props: =ascenseur-cage-000:upstairs
+      effects:
+        - type  : NarrativeEffect
+          at    : =ascenseur-etage-000
+          key   : fermeture-ascenseur
+        - type  : NarrativeEffect
+          at    : =ascenseur-cage-000
+          key   : fermeture-ascenseur
+        - type  : ChangePropEffect
+          modifs: =exit-ascenseur-etage-000:closed
+        - type  : NarrativeEffect
+          at    : =ascenseur-cage-000
+          key   : descente-ascenseur
+        - type  : ChangePropEffect
+          modifs: -=ascenseur-cage-000:upstairs
+        - type  : NarrativeEffect
+          at    : =ascenseur-hall-000
+          key   : ouverture-ascenseur
+        - type  : NarrativeEffect
+          at    : =ascenseur-cage-000
+          key   : ouverture-ascenseur
+        - type  : ChangePropEffect
+          modifs: -=exit-ascenseur-hall-000:closed
+    - effects:
+        - type  : NarrativeEffect
+          at    : =ascenseur-hall-000
+          key   : fermeture-ascenseur
+        - type  : NarrativeEffect
+          at    : =ascenseur-cage-000
+          key   : fermeture-ascenseur
+        - type  : ChangePropEffect
+          modifs: =exit-ascenseur-hall-000:closed
+        - type  : NarrativeEffect
+          at    : =ascenseur-cage-000
+          key   : ascension-ascenseur
+        - type  : ChangePropEffect
+          modifs: =ascenseur-cage-000:upstairs
+        - type  : NarrativeEffect
+          at    : =ascenseur-etage-000
+          key   : ouverture-ascenseur
+        - type  : NarrativeEffect
+          at    : =ascenseur-cage-000
+          key   : ouverture-ascenseur
+        - type  : ChangePropEffect
+          modifs: -=exit-ascenseur-etage-000:closed

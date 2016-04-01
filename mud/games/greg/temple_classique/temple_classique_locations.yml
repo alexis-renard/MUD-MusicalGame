@@ -30,19 +30,7 @@ events:
 parts:
   - tabouret-piano-000
 ---
-id: tabouret-piano-000
-type: Container
-name: nid
-events:
-  look:
-    actor: |
-      C'est un nid de facture plutôt sommaire,
-      mais assez spacieux.
-contains:
-  - cordes-000
-  - mediator-000
----
-id: opera-temple-classique-000
+id: salle-opera-temple-classique-000
 type: Location
 events:
   info:

@@ -36,4 +36,5 @@ def make_rules():
         (TeleportAction , r"tele(?:porter|) (\S+)"),
         (EnterAction    , r"entrer"),
         (LeaveAction    , r"sortir|partir"),
+        (BuildAction    , r"assembler|craft %s(\S+) (?:avec|) %s(\S+) (?:avec|et|) %s(\S+)" % (DETS,DETS, DETS)),
     )

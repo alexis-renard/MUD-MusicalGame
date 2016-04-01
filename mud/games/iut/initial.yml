@@ -5,11 +5,11 @@ contains:
   - lampe-000
 events:
   info:
-    actor: "Parking de l'IUT."
+    actor: "Parking de lIUT."
   look:
     actor: |
-      Vous êtes sur le parking de l'IUT.  Au nord-est, se trouve
-      l'entrée du département info.  Il y a un arbre près de vous.
+      Vous êtes sur le parking de lIUT.  Au nord-est, se trouve
+      lentrée du département info.  Il y a un arbre près de vous.
       Les branches les plus basses sont à portée de main.
 ---
 id: portal-parking-arbre-000
@@ -20,31 +20,31 @@ exits:
     direction: haut
     events:
       enter-portal:
-        actor   : "Vous grimpez prestement dans l'arbre."
-        observer: "{{ actor.name }} grimpe dans l'arbre."
+        actor   : "Vous grimpez prestement dans larbre."
+        observer: "{{ actor.name }} grimpe dans larbre."
       leave-portal:
         observer: |
-          {{ actor.name }} descend de l'arbre et vous rejoint
-          sur le parking de l'IUT.
+          {{ actor.name }} descend de larbre et vous rejoint
+          sur le parking de lIUT.
   - id: arbre-000-bas
     location: arbre-000
     direction: bas
     events:
       enter-portal:
-        actor   : "Vous descendez prudemment de l'arbre."  
-        observer: "{{ actor.name }} vous quitte et descend de l'arbre."
+        actor   : "Vous descendez prudemment de larbre."
+        observer: "{{ actor.name }} vous quitte et descend de larbre."
       leave-portal:
-        observer: "{{ actor.name }} vous rejoint dans l'arbre."
+        observer: "{{ actor.name }} vous rejoint dans larbre."
 ---
 id: arbre-000
 type: Location
 events:
   info:
-    actor: "Dans l'arbre."
+    actor: "Dans larbre."
   look:
     actor: |
-      Vous êtes dans l'arbre.  Les branches semblent heureusement
-      solides.  Il y a un nid au creux d'une de ces branches.
+      Vous êtes dans larbre.  Les branches semblent heureusement
+      solides.  Il y a un nid au creux dune de ces branches.
 parts:
   - nid-000
 ---
@@ -54,7 +54,7 @@ name: nid
 events:
   look:
     actor: |
-      C'est un nid de facture plutôt sommaire,
+      Cest un nid de facture plutôt sommaire,
       mais assez spacieux.
 contains:
   - badge-000
@@ -70,7 +70,7 @@ events:
     actor: "Un badge de sécurité."
   look:
     actor: |
-      C'est un badge de sécurité permettant d'ouvrir des
+      Cest un badge de sécurité permettant douvrir des
       portes sécurisées.
 ---
 id: portal-parking-porche-000
@@ -93,7 +93,7 @@ events:
       Vous êtes sur le porche du département info.
       Au nord-est, une porte donne accès au hall du
       département. Au sud-ouest, une allée mène au
-      parking de l'IUT.
+      parking de lIUT.
 ---
 id: portal-porche-hall-000
 type: Portal
@@ -115,11 +115,11 @@ exits:
         observer  : "{{ actor.name }} entre dans le département info."
         failed:
           actor   : &porte001 |
-            La porte d'accès au département info est sécurisée.
+            La porte daccès au département info est sécurisée.
             Elle est actuellement fermée et ne peut être ouverte
-            qu'avec un badge de sécurité.
+            quavec un badge de sécurité.
           observer: &porte002 |
-            {{ actor.name }} tente en vain d'ouvrir la porte du
+            {{ actor.name }} tente en vain douvrir la porte du
             département info.
       leave-portal:
         actor     : "Vous sortez du département info."
@@ -139,7 +139,7 @@ exits:
             modifs:
               - -portal:closed
           actor   : |
-            La porte du département s'ouvre avec un déclic.
+            La porte du département souvre avec un déclic.
           observer: |
             {{ actor.name }} ouvre la porte du département info
             avec un badge de sécurité.
@@ -147,18 +147,18 @@ exits:
             - portal:closed
             - -object2:key-for-porte-porche-000
           actor   : |
-            Vous tentez vainement d'ouvrir la porte avec
+            Vous tentez vainement douvrir la porte avec
             {{ object2.noun_the() }}
           observer: |
-            {{ actor.name }} tente vainement d'ouvrir la porte du
+            {{ actor.name }} tente vainement douvrir la porte du
             département info avec {{ object2.noun_a() }}
         - props   :
             - -portal:closed
           actor   : *porte003
           observer: |
-            {{ actor.name }} tente futilement d'ouvrir la porte du
+            {{ actor.name }} tente futilement douvrir la porte du
             département info avec {{ object2.noun_a() }}, alors
-            qu'elle est déjà ouverte.
+            quelle est déjà ouverte.
       close       : &porte004
         - props   : portal:closed
           actor   : "Vous fermez la porte du département."
@@ -179,9 +179,9 @@ exits:
         observer  : "{{ actor.name }} sort du département info."
         failed:
           actor   : |
-            La porte d'accès au département info est sécurisée.
+            La porte daccès au département info est sécurisée.
             Elle est actuellement fermée et, même pour sortir,
-            elle ne peut être ouverte qu'avec un badge de sécurité.
+            elle ne peut être ouverte quavec un badge de sécurité.
           observer: |
             {{ actor.name }} tente en vain de sortir par la porte
             du département info.
@@ -195,9 +195,9 @@ events:
     actor: "Le hall du département info."
   look:
     actor: |
-      Vous êtes dans le hall du département info de l'IUT.
-      Au sud-ouest, la porte d'entrée mène au porche.  Un
-      escalier mène à l'étage.  Un tableau d'affichage est
+      Vous êtes dans le hall du département info de lIUT.
+      Au sud-ouest, la porte dentrée mène au porche.  Un
+      escalier mène à létage.  Un tableau daffichage est
       accroché au mur.
 parts:
   - tableau-000
@@ -208,10 +208,10 @@ type: Thing
 name: tableau
 events:
   info:
-    actor: "Un tableau d'affichage."
+    actor: "Un tableau daffichage."
   look:
     actor: |
-      Sur le tableau d'affichage une notice jaune est
+      Sur le tableau daffichage une notice jaune est
       fixée par une punaise.
 ---
 id: notice-000
@@ -244,7 +244,7 @@ events:
     actor: "Étage du département info."
   look:
     actor: |
-      Vous êtes à l'étage du département.  Au nord-ouest,
+      Vous êtes à létage du département.  Au nord-ouest,
       la salle 22 est ouverte.
 ---
 id: etage-salle-22-000
@@ -272,10 +272,10 @@ events:
     actor: |
       Vous êtes dans la salle 22.  Il y a un ordinateur
       allumé.  Au sud-est, une porte donne sur la partie
-      centrale de l'étage.
+      centrale de létage.
   bouton-cabane:
     observer: |
-      l'ordinateur clignote brièvement.
+      lordinateur clignote brièvement.
 parts:
   - ordinateur-000
 ---
@@ -291,7 +291,7 @@ events:
     actor: "Un ordinateur."
   look:
     actor: |
-      L'ordinateur est allumé.  Le prompt dit: <i>tapez
+      Lordinateur est allumé.  Le prompt dit: <i>tapez
       le mot de passe du paradis.</i>
   type:
     - props: event:typed-xyzzy
@@ -299,12 +299,12 @@ events:
         - type  : EnterPortalEffect
           exit  : =portal-ordinateur-cabane-000-exit-1
       observer: |
-        {{ actor.name }} entre un mot de passe dans l'ordinateur.
+        {{ actor.name }} entre un mot de passe dans lordinateur.
     - actor: |
-        Ce n'est pas le bon mot de passe.
+        Ce nest pas le bon mot de passe.
       observer: |
-        {{ actor.name }} entre un mot de passe dans l'ordinateur,
-        mais ce n'est pas le bon.
+        {{ actor.name }} entre un mot de passe dans lordinateur,
+        mais ce nest pas le bon.
 ---
 id: portal-ordinateur-cabane-000
 type: Portal
@@ -314,10 +314,10 @@ exits:
     events:
       enter-portal:
         actor: |
-          Une étrange lumière émane de l'écran et emplit
+          Une étrange lumière émane de lécran et emplit
           la salle.  Vous vous dématérialisez et êtes aspiré
           dans le widget étiqueté "ENTREZ SANS FRAPPER"
-          sur l'écran.
+          sur lécran.
         observer: "{{ actor.name }} disparaît."
       leave-portal:
         actor   : "Vous vous rematérialisez en salle 22."
@@ -334,7 +334,7 @@ exits:
             Vous sautez dans le vide.  Un tapis volant vous
             cueille dans votre chute et plonge dans la cascade.
           observer: |
-            {{ actor.name }} s'élance dans le vide.  Un tapis
+            {{ actor.name }} sélance dans le vide.  Un tapis
             volant le cueille dans sa chute et plonge dans la
             cascade.
           effects:
@@ -344,7 +344,7 @@ exits:
             Vous sautez dans le vide et vous vous écrasez en
             bas de la falaise.
           observer: |
-            {{ actor.name }} s'élance dans le vide et s'écrase
+            {{ actor.name }} sélance dans le vide et sécrase
             en bas de la falaise.
           data-driven: true
           effects:
@@ -359,7 +359,7 @@ events:
     actor: |
       Vous êtes dans une cabane construite dans un arbre.
       Elle surplombe un gouffre dans lequel se déverse une
-      cascade.  A l'est, une ouverture dans la balustrade
+      cascade.  A lest, une ouverture dans la balustrade
       semble vous offrir la dangereuse option de sauter dans
       le vide.  Sur le mur, un bouton est étiquetté:
       <i>Taxi Service</i>.

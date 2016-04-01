@@ -10,6 +10,8 @@ events:
 ---
 id: loges-temple-rock-000
 type: Location
+contains:
+  - veste-000
 events:
   info:
     actor: "LOGES TEMPLE rock 000"
@@ -28,18 +30,14 @@ events:
     actor: |
       VOUS ETES scene DU TEMPLE rock, le public hurle et vous acclame, vous ne pouvez pas les laisser attendre,
       le siege de la batterie est vide, le chanteur vous demande dejouer
-contains:
-  - veste-000
-parts:
-  - tabouret-batterie-000
 ---
 id: batterie-temple-rock-000
 type: Location
+parts:
+  - tabouret-batterie-000
 events:
   info:
     actor: "batriete TEMPLE rock 000"
   look:
     actor: |
-      Vous etes batterie, trouvez baguettes poser sur caisse claire
-contains:
-  - baguettes-000
+      Vous etes batterie, vous voyez un tabouret qui semble contenir quelque chose

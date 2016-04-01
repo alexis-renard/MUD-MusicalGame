@@ -31,7 +31,7 @@ exits:
     direction: bas
     events:
       enter-portal:
-        actor   : "Vous descendez prudemment de l'arbre."  
+        actor   : "Vous descendez prudemment de l'arbre."
         observer: "{{ actor.name }} vous quitte et descend de l'arbre."
       leave-portal:
         observer: "{{ actor.name }} vous rejoint dans l'arbre."
