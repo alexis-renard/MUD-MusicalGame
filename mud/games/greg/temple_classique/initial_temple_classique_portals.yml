@@ -99,3 +99,63 @@ exits:
           observer: |
             {{ actor.name }} tente en vain de sortir par la porte
             du temple classique
+---
+id: portal-hall-salle-temple-classique-000
+type: Portal
+exits:
+  - id: hall-opera-temple-classique-000-nord
+    location: hall-opera-temple-classique-000
+    direction: nord
+  - id: salle-opera-temple-classique-000-sud
+    location: salle-opera-temple-classique-000
+    direction: sud
+---
+id: portal-salle-scene-temple-classique-000
+type: Portal
+exits:
+  - id: scene-opera-temple-classique-000-sud
+    location: scene-opera-temple-classique-000
+    direction: sud
+  - id: salle-opera-temple-classique-000-nord
+    location: salle-opera-temple-classique-000
+    direction: nord
+---
+id: portal-scene-place-temple-classique-000
+type: Portal
+exits:
+  - id: scene-opera-temple-classique-000-ouest
+    location: scene-opera-temple-classique-000
+    direction: ouest
+  - id: place-libre-opera-temple-classique-000-est
+    location: place-libre-opera-temple-classique-000
+    direction: est
+---
+id: portal-hall-balcon-gauche-temple-classique-000
+type: Portal
+exits:
+  - id: hall-opera-temple-classique-000-ouest
+    location: hall-opera-temple-classique-000
+    direction: ouest
+  - id: balcon-opera-temple-classique-000-est
+    location: balcon-opera-temple-classique-000
+    direction: est
+---
+id: portal-hall-balcon-droite-temple-classique-000
+type: Portal
+exits:
+  - id: hall-opera-temple-classique-000-est
+    location: hall-opera-temple-classique-000
+    direction: est
+  - id: balcon-opera-temple-classique-000-ouest
+    location: balcon-opera-temple-classique-000
+    direction: ouest
+---
+id: portal-balcon-tabouret-temple-classique-000
+type: Portal
+exits:
+  - id: tabouret-piano-000-sud
+    location: tabouret-piano-000
+    direction: sud
+  - id: balcon-opera-temple-classique-000-nord
+    location: balcon-opera-temple-classique-000
+    direction: nord

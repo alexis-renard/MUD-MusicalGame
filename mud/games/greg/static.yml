@@ -1,4 +1,4 @@
-start: parking-000
+start: parc-central-000
 directions:
   normalized:
     nord      : nord
@@ -240,4 +240,3 @@ events:
   shared-props:
     - closed
     - closable
-
