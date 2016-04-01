@@ -1,31 +1,25 @@
-portal-parc-central-entree-temple-rock-000 #pour la cohérence avec l'objet médiator du temple classique
-entree-temple-rock-000
-loges-temple-rock-000
-scene-temple-rock-000
-batterie-temple-rock-000
-
 ---
-id: portal-parc-central-entree-temple-rock-000
+id: portal-central-park-entree-temple-classique-000
 type: Portal
 exits:
-  - id: parc-central-000-est
-    location: parc-central-000
-    direction: est
-  - id: entree-temple-rock-000-ouest
-    location: entree-temple-rock-000
-    direction: ouest
+  - id: central-park-000-nord
+    location: central-park-000
+    direction: nord
+  - id: entree-temple-classique-000-sud
+    location: entree-temple-classique-000
+    direction: sud
 ---
-id: portal-parc-central-entree-temple-rock-000
+id: portal-entree-hall-temple-classique-000
 type: Portal
 props:
   - closed
   - closable
 exits:
-  - id: parc-central-000-est
+  - id: entree-temple-classique-000-nord
     location: entree-temple-classique-000
-    direction: est
+    direction: nord
     name:
-      - porte rock
+      - porte
     gender: fem
     props:
       - for-enter
@@ -105,3 +99,66 @@ exits:
           observer: |
             {{ actor.name }} tente en vain de sortir par la porte
             du temple classique
+<<<<<<< HEAD:mud/games/greg/temple_classique/initial_temple_classique_portals.yml
+---
+id: portal-hall-salle-temple-classique-000
+type: Portal
+exits:
+  - id: hall-opera-temple-classique-000-nord
+    location: hall-opera-temple-classique-000
+    direction: nord
+  - id: salle-opera-temple-classique-000-sud
+    location: salle-opera-temple-classique-000
+    direction: sud
+---
+id: portal-salle-scene-temple-classique-000
+type: Portal
+exits:
+  - id: scene-opera-temple-classique-000-sud
+    location: scene-opera-temple-classique-000
+    direction: sud
+  - id: salle-opera-temple-classique-000-nord
+    location: salle-opera-temple-classique-000
+    direction: nord
+---
+id: portal-scene-place-temple-classique-000
+type: Portal
+exits:
+  - id: scene-opera-temple-classique-000-ouest
+    location: scene-opera-temple-classique-000
+    direction: ouest
+  - id: place-libre-opera-temple-classique-000-est
+    location: place-libre-opera-temple-classique-000
+    direction: est
+---
+id: portal-hall-balcon-gauche-temple-classique-000
+type: Portal
+exits:
+  - id: hall-opera-temple-classique-000-ouest
+    location: hall-opera-temple-classique-000
+    direction: ouest
+  - id: balcon-opera-temple-classique-000-est
+    location: balcon-opera-temple-classique-000
+    direction: est
+---
+id: portal-hall-balcon-droite-temple-classique-000
+type: Portal
+exits:
+  - id: hall-opera-temple-classique-000-est
+    location: hall-opera-temple-classique-000
+    direction: est
+  - id: balcon-opera-temple-classique-000-ouest
+    location: balcon-opera-temple-classique-000
+    direction: ouest
+---
+id: portal-balcon-tabouret-temple-classique-000
+type: Portal
+exits:
+  - id: tabouret-piano-000-sud
+    location: tabouret-piano-000
+    direction: sud
+  - id: balcon-opera-temple-classique-000-nord
+    location: balcon-opera-temple-classique-000
+    direction: nord
+=======
+>>>>>>> 0399c644d1c22ecb5ffc3b31b3c2898523944bb0:mud/games/greg/temple_classique/temple_classique_portals.yml

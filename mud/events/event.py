@@ -128,7 +128,7 @@ class Event1(Event):
             html = self.buffer_get()
             if html:
                 getattr(observer, self.SEND_OBSERVER)(html)
-                      
+
 
 class Event2(Event1):
 
@@ -157,4 +157,15 @@ class Event3(Event2):
     def context(self):
         context = super().context()
         context["object2"] = self.object2
+        return context
+
+class Event4(Event3):
+
+    def __init__(self, actor, object, object2, object3):
+        Event3.__init__(self, actor, object, object)
+        self.object3 = object3
+
+    def context(self):
+        context = super().context()
+        context["object3"] = self.object3
         return context

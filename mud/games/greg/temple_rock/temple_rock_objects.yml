@@ -1,0 +1,39 @@
+---
+id: veste-000
+type: Thing
+name: veste
+props:
+  - takable
+  - buildable
+events:
+  info:
+    actor: "Une veste de rocker"
+  look:
+    actor: |
+      C'est une veste de rocker, qui a visiblement...
+---
+id: tabouret-batterie-000
+type: Container
+name: tabouret de batterie
+events:
+  info:
+    actor: "Un tabouret, qui semble être le siege du batteur"
+  look:
+    actor: |
+        tabouret avec baguettes dessus
+contains:
+  - baguettes-000
+---
+id: baguettes-000
+type: Thing
+name: baguettes
+props:
+  - takable
+  - buildable
+events:
+  info:
+    actor: "Des baguettes de batterie."
+  look:
+    actor: |
+      Ce sont de magnifiques baguettes, bon shit samere
+---

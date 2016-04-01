@@ -12,7 +12,6 @@ events:
     actor: |
       C'est une partition qui semble pouvoir être jouée avec n'importe quel instrument. Vous sentez étrangement un certain
       potentiel dans ce vieux parchemin.
-
 ---
 id: tabouret-000
 type: Container
