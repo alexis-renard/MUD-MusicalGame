@@ -47,7 +47,7 @@ name: mediator
 props:
   - takable
   - buildable
-  - key-for-porte-portal-central-park-entree-temple-rock-000
+  - key-for-loges-temple-rock-000
 events:
   info:
     actor: "Un mediator de collection"
