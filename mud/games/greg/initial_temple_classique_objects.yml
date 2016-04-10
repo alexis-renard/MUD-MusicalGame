@@ -71,4 +71,27 @@ events:
       permettre d'asssembler un magnifique violon.
 ---
 
-# IL MANQUE LE BOUTON DE LA FIN AVEC LES PROPRIETES QUI VONT BIEN
+id: bouton-classique-000
+type: Thing
+name:
+  - bouton
+props:
+  - pushable
+events:
+  look:
+    actor: |
+      Un bouton qui semble ordinaire, mais qui est sûrement beaucoup plus important que ce que vous pensez...
+  push:
+    actor: |
+      Vous appuyez sur le bouton, mais rien ne semble se
+      produire.
+    observer: |
+      {{ actor.name }} appuie sur le bouton, mais rien ne
+      semble se produire.
+    effects:
+      - type  : ChangePropEffect
+        modifs: =portal-ordinateur-cabane-exit-2:activated
+      - type  : NarrativeEffect
+        at    : =salle-electro
+        key   : bouton-classique
+---

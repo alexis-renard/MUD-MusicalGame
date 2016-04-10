@@ -14,7 +14,7 @@ events:
 ---
 id: tabouret-batterie-000
 type: Container
-name: Tabouret de batterie
+name: tabouret
 events:
   info:
     actor: "Un tabouret, qui semble être le siege du batteur"
@@ -36,4 +36,49 @@ events:
   look:
     actor: |
       Ce sont de magnifiques baguettes, bon shit samere
+---
+id: bouton-rock-000
+type: Thing
+name:
+  - bouton
+props:
+  - pushable
+events:
+  look:
+    actor: |
+      Un bouton qui semble ordinaire, mais qui est sûrement beaucoup plus important que ce que vous pensez...
+  push:
+    actor: |
+      Vous appuyez sur le bouton, mais rien ne semble se
+      produire.
+    observer: |
+      {{ actor.name }} appuie sur le bouton, mais rien ne
+      semble se produire.
+    effects:
+      - type  : ChangePropEffect
+        modifs: =portal-ordinateur-cabane-exit-2:activated
+      - type  : NarrativeEffect
+        at    : =salle-electro
+        key   : bouton-rock
+---
+
+        #### A BOUGER CEST POUR LE TEST
+
+id: mediator-000
+type: Thing
+name: mediator
+props:
+  - takable
+  - buildable
+  - key-for-loges-temple-rock-000
+events:
+  info:
+    actor: "Un mediator de collection"
+  look:
+    actor: |
+      C'est un médiator qui semble avoir appartenu à un des meilleurs rocker du monde. Il doit pouvoir former un instrument interessant
+      avec un inventaire approprié IF YOU KNOW WHAT I MEAN.
+
+
+    #### A BOUGER CEST POUR LE TEST
 ---

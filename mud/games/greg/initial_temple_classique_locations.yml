@@ -49,7 +49,9 @@ events:
     actor: "OPERA TEMPLE CLASSIQUE 000"
   look:
     actor: |
-      VOUS ETES OPERA DU TEMPLE CLASSIQUE,
+      VOUS ETES dans les gradins de l'OPERA DU TEMPLE CLASSIQUE, vous voyez un bouton sur le mur
+contains:
+    - bouton-classique-000
 ---
 id: scene-opera-temple-classique-000
 type: Location

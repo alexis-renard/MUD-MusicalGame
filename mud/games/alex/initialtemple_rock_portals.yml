@@ -7,12 +7,12 @@
 id: portal-parc-central-entree-temple-rock-000
 type: Portal
 exits:
-  - id: parc-central-000-est
+  - id: parc-central-000-ouest
     location: parc-central-000
-    direction: est
-  - id: entree-temple-rock-000-ouest
-    location: entree-temple-rock-000
     direction: ouest
+  - id: entree-temple-rock-000-est
+    location: entree-temple-rock-000
+    direction: est
 ---
 id: portal-entree-loges-temple-rock-000
 type: Portal
@@ -34,11 +34,11 @@ exits:
         observer  : "{{ actor.name }} entre dans le temple rock"
         failed:
           actor   : &porte001 |
-            La porte d'accès au temple rock est sécurisée.
+            La porte d accès au temple rock est sécurisée.
             Elle est actuellement fermée et ne peut être ouverte
-            qu'avec un médiator.
+            qu avec un médiator.
           observer: &porte002 |
-            {{ actor.name }} tente en vain d'ouvrir la porte du
+            {{ actor.name }} tente en vain d ouvrir la porte du
             temple rock
       leave-portal:
         actor     : "Vous sortez du temple rock"
@@ -58,7 +58,7 @@ exits:
             modifs:
               - -portal:closed
           actor   : |
-            La porte du département s'ouvre avec un déclic.
+            La porte du département s ouvre avec un déclic.
           observer: |
             {{ actor.name }} ouvre la porte du temple rock
             avec un badge de sécurité.
@@ -108,20 +108,20 @@ exits:
 id: portal-loges-scene-temple-rock-000
 type: Portal
 exits:
-  - id: loges-temple-rock-000-est
+  - id: loges-temple-rock-000-ouest
     location: loges-temple-rock-000
-    direction: est
-  - id: scene-temple-rock-000-ouest
-    location: scene-temple-rock-000
     direction: ouest
+  - id: scene-temple-rock-000-est
+    location: scene-temple-rock-000
+    direction: est
 ---
 id: portal-scene-batterie-temple-rock-000
 type: Portal
 exits:
-  - id: scene-temple-rock-000-nord
+  - id: scene-temple-rock-000-sud
     location: scene-temple-rock-000
-    direction: nord
-  - id: batterie-temple-rock-000-sud
-    location: batterie-temple-rock-000
     direction: sud
+  - id: batterie-temple-rock-000-nord
+    location: batterie-temple-rock-000
+    direction: nord
 ---

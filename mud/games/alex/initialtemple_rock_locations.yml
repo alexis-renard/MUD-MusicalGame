@@ -17,9 +17,11 @@ events:
     actor: "LOGES TEMPLE rock 000"
   look:
     actor: |
-      VOUS ETES LOGES DU TEMPLE rock, un homme ivre vous supplie deprendre sa veste
+      VOUS ETES LOGES DU TEMPLE rock, un homme ivre vous supplie deprendre sa veste. Vous voyez un étrange bouton
+      sur votre droite, qui semble ne jamais avoir servi.
 contains:
   - veste-000
+  - bouton-rock-000
 ---
 id: scene-temple-rock-000
 type: Location
