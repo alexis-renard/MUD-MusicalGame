@@ -61,6 +61,21 @@ events:
         at    : =salle-electro
         key   : bouton-rock
 ---
+id: figurine-000
+type: Thing
+name: figurine
+props:
+  - takable
+  - buildable
+  - key-for-salle-mysterieuse-temple-zouklove-000
+events:
+  info:
+    actor: "Une petite figurine hawaienne"
+  look:
+    actor: |
+      C'est une figurine qui semble encore danser en rythme avec la musique ambiante. Elle ferait à coup sûr un tabac
+      sur la plage arrière de votre voiture.
+---
 
         #### A BOUGER CEST POUR LE TEST
 
