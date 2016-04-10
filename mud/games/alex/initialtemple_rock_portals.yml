@@ -1,0 +1,127 @@
+# portal-parc-central-entree-temple-rock-000 #pour la cohérence avec l'objet médiator du temple rock
+# entree-temple-rock-000
+# loges-temple-rock-000
+# scene-temple-rock-000
+# batterie-temple-rock-000
+---
+id: portal-parc-central-entree-temple-rock-000
+type: Portal
+exits:
+  - id: parc-central-000-est
+    location: parc-central-000
+    direction: est
+  - id: entree-temple-rock-000-ouest
+    location: entree-temple-rock-000
+    direction: ouest
+---
+id: portal-entree-loges-temple-rock-000
+type: Portal
+props:
+  - closed
+  - closable
+exits:
+  - id: entree-temple-rock-000-ouest
+    location: entree-temple-rock-000
+    direction: ouest
+    name:
+      - porte
+    gender: fem
+    props:
+      - for-enter
+    events:
+      enter-portal:
+        actor     : "Vous entrez dans le temple rock"
+        observer  : "{{ actor.name }} entre dans le temple rock"
+        failed:
+          actor   : &porte001 |
+            La porte d'accès au temple rock est sécurisée.
+            Elle est actuellement fermée et ne peut être ouverte
+            qu'avec un médiator.
+          observer: &porte002 |
+            {{ actor.name }} tente en vain d'ouvrir la porte du
+            temple rock
+      leave-portal:
+        actor     : "Vous sortez du temple rock"
+        observer  : "{{ actor.name }} sort du temple rock"
+      open        :
+        - props   : portal:closed
+          actor   : *porte001
+          observer: *porte002
+        - props   : -portal:closed
+          actor   : &porte003 "La porte est déjà ouverte!"
+      open-with   :
+        - props   :
+            - portal:closed
+            - object2:key-for-loges-temple-rock-000
+          effects :
+            type  : ChangePropEffect
+            modifs:
+              - -portal:closed
+          actor   : |
+            La porte du département s'ouvre avec un déclic.
+          observer: |
+            {{ actor.name }} ouvre la porte du temple rock
+            avec un badge de sécurité.
+        - props   :
+            - portal:closed
+            - -object2:key-for-loges-temple-rock-000
+          actor   : |
+            Vous tentez vainement d'ouvrir la porte avec
+            {{ object2.noun_the() }}
+          observer: |
+            {{ actor.name }} tente vainement d'ouvrir la porte du
+            temple rock avec {{ object2.noun_a() }}
+        - props   :
+            - -portal:closed
+          actor   : *porte003
+          observer: |
+            {{ actor.name }} tente futilement d'ouvrir la porte du
+            temple rock avec {{ object2.noun_a() }}, alors
+            qu'elle est déjà ouverte.
+      close       : &porte004
+        - props   : portal:closed
+          actor   : "Vous fermez la porte du département."
+          observer: "{{ actor.name }} ferme le porte du temple rock"
+          effects :
+            - type  : ChangePropEffect
+              modifs: =portal-porche-hall-000:closed
+      close-with  : *porte004
+  - id: loges-temple-rock-000-est
+    location: loges-temple-rock-000
+    direction: est
+    name: porte
+    gender: fem
+    props:
+      - for-leave
+    events:
+      enter-portal:
+        observer  : "{{ actor.name }} sort du temple rock"
+        failed:
+          actor   : |
+            La porte d'accès au temple rock est sécurisée.
+            Elle est actuellement fermée et, même pour sortir,
+            elle ne peut être ouverte qu'avec un badge de sécurité.
+          observer: |
+            {{ actor.name }} tente en vain de sortir par la porte
+            du temple rock
+---
+id: portal-loges-scene-temple-rock-000
+type: Portal
+exits:
+  - id: loges-temple-rock-000-est
+    location: loges-temple-rock-000
+    direction: est
+  - id: scene-temple-rock-000-ouest
+    location: scene-temple-rock-000
+    direction: ouest
+---
+id: portal-scene-batterie-temple-rock-000
+type: Portal
+exits:
+  - id: scene-temple-rock-000-nord
+    location: scene-temple-rock-000
+    direction: nord
+  - id: batterie-temple-rock-000-sud
+    location: batterie-temple-rock-000
+    direction: sud
+---
