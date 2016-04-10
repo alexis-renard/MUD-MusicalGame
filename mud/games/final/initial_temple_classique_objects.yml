@@ -1,0 +1,96 @@
+---
+id: partition-000
+type: Thing
+name: partition
+props:
+  - takable
+  - playable
+events:
+  info:
+    actor: "Une partition de musique."
+  look:
+    actor: |
+      C'est une partition qui semble pouvoir être jouée avec n'importe quel instrument. Vous sentez étrangement un certain
+      potentiel dans ce vieux parchemin.
+---
+id: tabouret-000
+type: Container
+name: tabouret
+events:
+  info:
+    actor: "La tabouret du piano qui semble contenir quelque chose"
+  look:
+    actor: |
+      En vous rapprochant de plus près vous voyez des cordes qui semblent être cachées sous le siege du tabouret. Vous n'avez qu'à
+      soulever le mécanisme pour simplement prendre ces cordes.
+contains:
+    - cordes-000
+    - mediator-000
+---
+id: cordes-000
+type: Thing
+name: cordes
+props:
+  - takable
+  - buildable
+events:
+  info:
+    actor: "Des cordes de violons"
+  look:
+    actor: |
+      Ce sont des cordes de violons, qui n'ont contre toute attente pas l'air d'avoir beaucoup servi. Elles doivent pouvoir être
+      assemblées avec d'autres objets pour former un violon.
+---
+id: mediator-000
+type: Thing
+name: mediator
+props:
+  - takable
+  - buildable
+  - key-for-loges-temple-rock-000
+events:
+  info:
+    actor: "Un mediator de collection"
+  look:
+    actor: |
+      C'est un médiator qui semble avoir appartenu à un des meilleurs rocker du monde. Il doit pouvoir former un instrument interessant
+      avec un inventaire approprié IF YOU KNOW WHAT I MEAN.
+---
+id: corps-violon-000
+type: Thing
+name: corps-violon
+props:
+  - takable
+  - buildable
+events:
+  info:
+    actor: "Un corps de violon."
+  look:
+    actor: |
+      C'est un corps violon qui ressemble fortement à celui d'un stradivarius. Avec les cordes et l'archet qui correspondent, il doit
+      permettre d'asssembler un magnifique violon.
+---
+id: bouton-classique-000
+type: Thing
+name:
+  - bouton
+props:
+  - pushable
+events:
+  look:
+    actor: |
+      Un bouton qui semble ordinaire, mais qui est sûrement beaucoup plus important que ce que vous pensez...
+  push:
+    actor: |
+      Vous appuyez sur le bouton, mais rien ne semble se
+      produire.
+    observer: |
+      {{ actor.name }} appuie sur le bouton, mais rien ne
+      semble se produire.
+    effects:
+      - type  : ChangePropEffect
+        modifs: =portal-ordinateur-cabane-exit-2:activated
+      - type  : NarrativeEffect
+        at    : =salle-electro
+        key   : bouton-classique
+---
