@@ -1,0 +1,121 @@
+---
+id: entree-temple-electro-000
+type: Location
+events:
+  info:
+    actor: "ENTREE TEMPLE ELECTRO 000"
+  look:
+    actor: |
+      VOUS ETES A LENTREE DU TEMPLE electro, PORTE FERMEE (portal entree -> hall fermé)
+---
+id: hall-temple-electro-000
+type: Location
+events:
+  info:
+    actor: "Hall TEMPLE electro 000"
+  look:
+    actor: |
+      VOUS ETES HALL DU TEMPLE electro vous voyez un pilier et un bouton
+parts:
+    - pilier-electro-000
+    - bouton-electro-000
+---
+id: salle-finale-temple-electro-000
+type: Location
+events:
+  info:
+    actor: "Salle finale TEMPLE electro 000"
+  look:
+    actor: |
+      VOUS ETES Salle finale DU TEMPLE electro vous voyez un pilier
+parts:
+    - pilier-electro-001
+---
+    ### ASCENSEUR ###
+
+id: ascenseur-hall-temple-electro-000
+type: Location
+parts:
+  - bouton-ascenseur-hall-temple-electro-000
+events:
+  info:
+    actor: "Le coin de l'ascenseur dans le hall."
+  look:
+    actor: |
+      Vous êtes dans le coin de l'ascenseur du hall du
+      département informatique.  Il y a un bouton pour
+      l'appeler.  Au sud-ouest, la porte de l'ascenseur est
+      {% if the("ascenseur-cage-000").has_prop("upstairs") %}
+      fermée.
+      {% else %}
+      ouverte.
+      {% end %}
+      A l'est, se trouve la partie principale du hall.
+  fermeture-ascenseur:
+    observer: |
+      La porte de l'ascenseur se ferme.
+  ouverture-ascenseur:
+    observer: |
+      La porte de l'ascenseur s'ouvre.
+---
+id: ascenseur-salle-finale-temple-electro-000
+type: Location
+parts:
+  - bouton-ascenseur-salle-finale-temple-electro-000
+events:
+  info:
+    actor: "Le coin de l'ascenseur à l'étage."
+  look:
+    actor: |
+      Vous êtes dans le coin de l'ascenseur à l'étage du
+      département informatique.  Il y a un bouton pour
+      l'appeler.  Au sud-ouest, la porte de l'ascenseur est
+      {% if the("ascenseur-cage-000").has_prop("upstairs") %}
+      ouverte.
+      {% else %}
+      fermée.
+      {% end %}
+      Au nord, se trouve la partie principale de l'étage.
+  fermeture-ascenseur:
+    observer: |
+      La porte de l'ascenseur se ferme.
+  ouverture-ascenseur:
+    observer: |
+      La porte de l'ascenseur s'ouvre.
+---
+id: ascenseur-cage-000
+type: Location
+parts:
+  - bouton-cage-000
+props:
+  - upstairs
+events:
+  info:
+    actor: "La cage d'ascenseur."
+  look:
+    actor: |
+      Vous êtes dans la cage d'ascenseur.  Au nord-est,
+      la porte est ouverte sur
+      {% if the("ascenseur-cage-000").has_prop("upstairs") %}
+      l'étage.
+      {% else %}
+      le hall.
+      {% end %}
+      Un bouton permet de commander à l'ascenseur de
+      changer d'étage.
+  fermeture-ascenseur:
+    observer: |
+      La porte de l'ascenseur se ferme.
+  ouverture-ascenseur:
+    observer: |
+      La porte de l'ascenseur s'ouvre.
+  descente-ascenseur:
+    observer: |
+      L'ascenseur descend.
+  ascension-ascenseur:
+    observer: |
+      L'ascenseur monte.
+
+    ### FIN ASCENSEUR ###
+
+---

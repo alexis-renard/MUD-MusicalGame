@@ -1,0 +1,190 @@
+---
+id: portal-parc-central-entree-temple-electro-000
+type: Portal
+exits:
+  - id: parc-central-000-est
+    location: parc-central-000
+    direction: est
+  - id: entree-temple-electro-000-ouest
+    location: entree-temple-electro-000
+    direction: ouest
+---
+id: portal-entree-hall-temple-electro-000
+type: Portal
+exits:
+  - id: entree-temple-electro-000-est
+    location: entree-temple-electro-000
+    direction: est
+    events:
+      enter-portal:
+        actor     : "Vous entrez dans le temple electro"
+  - id: hall-temple-electro-000-ouest
+    location: hall-temple-electro-000
+    direction: ouest
+# id: portal-entree-hall-temple-electro-000
+# type: Portal
+# props:
+#   - closed
+#   - closable
+# exits:
+#   - id: entree-temple-electro-000-ouest
+#     location: entree-temple-electro-000
+#     direction: ouest
+#     name:
+#       - porte
+#     gender: fem
+#     props:
+#       - for-enter
+#     events:
+#       enter-portal:
+#         actor     : "Vous entrez dans le temple electro"
+#         observer  : "{{ actor.name }} entre dans le temple electro"
+#         failed:
+#           actor   : &porte001 |
+#             La porte d accès au temple electro est sécurisée.
+#             Elle est actuellement fermée et ne peut être ouverte
+#             qu avec un médiator.
+#           observer: &porte002 |
+#             {{ actor.name }} tente en vain d ouvrir la porte du
+#             temple electro
+#       leave-portal:
+#         actor     : "Vous sortez du temple electro"
+#         observer  : "{{ actor.name }} sort du temple electro"
+#       open        :
+#         - props   : portal:closed
+#           actor   : *porte001
+#           observer: *porte002
+#         - props   : -portal:closed
+#           actor   : &porte003 "La porte est déjà ouverte!"
+#       open-with   :
+#         - props   :
+#             - portal:closed
+#             - object2:key-for-hall-temple-electro-000
+#           effects :
+#             type  : ChangePropEffect
+#             modifs:
+#               - -portal:closed
+#           actor   : |
+#             La porte du département s ouvre avec un déclic.
+#           observer: |
+#             {{ actor.name }} ouvre la porte du temple electro
+#             avec un badge de sécurité.
+#         - props   :
+#             - portal:closed
+#             - -object2:key-for-hall-temple-electro-000
+#           actor   : |
+#             Vous tentez vainement d'ouvrir la porte avec
+#             {{ object2.noun_the() }}
+#           observer: |
+#             {{ actor.name }} tente vainement d'ouvrir la porte du
+#             temple electro avec {{ object2.noun_a() }}
+#         - props   :
+#             - -portal:closed
+#           actor   : *porte003
+#           observer: |
+#             {{ actor.name }} tente futilement d'ouvrir la porte du
+#             temple electro avec {{ object2.noun_a() }}, alors
+#             qu'elle est déjà ouverte.
+#       close       : &porte004
+#         - props   : portal:closed
+#           actor   : "Vous fermez la porte du département."
+#           observer: "{{ actor.name }} ferme le porte du temple electro"
+#           effects :
+#             - type  : ChangePropEffect
+#               modifs: =portal-porche-hall-temple-electro-000:closed
+#       close-with  : *porte004
+#   - id: hall-temple-electro-000-est
+#     location: hall-temple-electro-000
+#     direction: est
+#     name: porte
+#     gender: fem
+#     props:
+#       - for-leave
+#     events:
+#       enter-portal:
+#         observer  : "{{ actor.name }} sort du temple electro"
+#         failed:
+#           actor   : |
+#             La porte d'accès au temple electro est sécurisée.
+#             Elle est actuellement fermée et, même pour sortir,
+#             elle ne peut être ouverte qu'avec un badge de sécurité.
+#           observer: |
+#             {{ actor.name }} tente en vain de sortir par la porte
+#             du temple electro
+---
+id: hall-ascenseur-portal-000
+type: Portal
+exits:
+  - id: hall-temple-electro-000-est
+    location: hall-temple-electro-000
+    direction: est
+  - id: ascenseur-hall-temple-electro-000-ouest
+    location: ascenseur-hall-temple-electro-000
+    direction: ouest
+---
+id: etage-ascenseur-portal-000
+type: Portal
+exits:
+  - id: exit1-etage-ascenseur-portal
+    location: salle-finale-temple-electro-000
+    direction: sud
+  - id: exit2-etage-ascenseur-portal
+    location: ascenseur-salle-finale-temple-electro-000
+    direction: nord
+---
+id: ascenseur-portal-000
+type: Portal
+events:
+  traversal:
+    - props: =ascenseur-cage-000:upstairs
+      exit1: =exit-ascenseur-salle-finale-temple-electro-000
+      exit2: =exit-ascenseur-cage-000
+    - exit1: =exit-ascenseur-hall-temple-electro-000
+      exit2: =exit-ascenseur-cage-000
+exits:
+  - id      : exit-ascenseur-hall-temple-electro-000
+    location: ascenseur-hall-temple-electro-000
+    direction: sud-ouest
+    props   :
+      - closed
+    events  :
+      enter-portal:
+        failed:
+          actor: &ascenseur-ferme |
+            "La porte de l'ascenseur est fermée."
+          observer: &force-ascenseur |
+            {{ actor.name }} tente vainement de forcer la porte de l'ascenseur.
+      leave-portal:
+        actor: ""
+        observer: &sortie-ascenseur |
+          {{ actor.name }} sort de l'ascenseur.
+
+  - id      : exit-ascenseur-salle-finale-temple-electro-000
+    location: ascenseur-salle-finale-temple-electro-000
+    direction: sud-ouest
+    events  :
+      enter-portal:
+        failed:
+          actor: *ascenseur-ferme
+          observer: *force-ascenseur
+      leave-portal:
+        actor: ""
+        observer: *sortie-ascenseur
+
+  - id      : exit-ascenseur-cage-000
+    location: ascenseur-cage-000
+    direction: nord-est
+    events:
+      traversal:
+        - props: =ascenseur-cage-000:upstairs
+          exit1: =exit-ascenseur-cage-000
+          exit2: =exit-ascenseur-salle-finale-temple-electro-000
+        - exit1: =exit-ascenseur-cage-000
+          exit2: =exit-ascenseur-hall-temple-electro-000
+      leave-portal:
+        actor: ""
+        observer: |
+          {{ actor.name }} vous rejoint dans l'ascenseur.
+      enter-portal:
+        actor: ""
+        observer: *sortie-ascenseur

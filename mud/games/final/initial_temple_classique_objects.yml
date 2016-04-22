@@ -72,8 +72,7 @@ events:
 ---
 id: bouton-classique-000
 type: Thing
-name:
-  - bouton
+name: bouton
 props:
   - pushable
 events:

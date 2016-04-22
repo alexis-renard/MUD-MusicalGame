@@ -76,24 +76,3 @@ events:
       C'est une figurine qui semble encore danser en rythme avec la musique ambiante. Elle ferait à coup sûr un tabac
       sur la plage arrière de votre voiture.
 ---
-
-        #### A BOUGER CEST POUR LE TEST
-
-id: mediator-000
-type: Thing
-name: mediator
-props:
-  - takable
-  - buildable
-  - key-for-loges-temple-rock-000
-events:
-  info:
-    actor: "Un mediator de collection"
-  look:
-    actor: |
-      C'est un médiator qui semble avoir appartenu à un des meilleurs rocker du monde. Il doit pouvoir former un instrument interessant
-      avec un inventaire approprié IF YOU KNOW WHAT I MEAN.
-
-
-    #### A BOUGER CEST POUR LE TEST
----
