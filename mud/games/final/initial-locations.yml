@@ -43,7 +43,7 @@ events:
       C'est un tabouret qui semble contenir quelque chose...
 contains:
   - cordes-000
-  - mediator-000
+  # - mediator-000
 ---
 id: salle-opera-temple-classique-000
 type: Location
@@ -114,9 +114,16 @@ events:
   info:
     actor: "scene TEMPLE rock 000"
   look:
-    actor: |
-      VOUS ETES scene DU TEMPLE rock, le public hurle et vous acclame, vous ne pouvez pas les laisser attendre,
-      le siege de la batterie est vide, le chanteur vous demande dejouer
+    - props: portal-scene-foule-temple-rock-000:calme
+      actor: |
+        VOUS ETES scene DU TEMPLE rock, le public hurle et vous acclame, vous ne pouvez pas les laisser attendre,
+        le siege de la batterie qui est au SUD est vide, le chanteur vous demande dejouer. Vous ne pouvez pas le décevoir.
+        Vous voyez que la foule est plutot calme, vous ne devriez pas vous risquer à partir en slam.
+    - props: -portal-scene-foule-temple-rock-000:calme
+      actor: |
+        VOUS ETES scene DU TEMPLE rock, le public hurle et vous acclame, vous ne pouvez pas les laisser attendre,
+        le siege de la batterie qui est au SUD est vide, le chanteur vous demande dejouer. Vous ne pouvez pas le décevoir.
+        Vous voyez que la foule izonfire, vous pouvez vous lancer en slam sans probleme.
 ---
 id: batterie-temple-rock-000
 type: Location
@@ -130,7 +137,15 @@ events:
       Vous etes à la batterie, vous voyez un tabouret qui semble contenir quelque chose
 contains:
     - figurine-000
-
+---
+id: foule-temple-rock-000
+type: Location
+events:
+  info:
+    actor: "foule TEMPLE rock 000"
+  look:
+    actor: |
+      VOUS ETES sur la foule
 
 #########################
 ## --TEMPLE ZOUKLOVE-- ##
@@ -213,6 +228,18 @@ events:
     actor: |
       VOUS ETES A LENTREE DU TEMPLE electro, PORTE FERMEE (portal entree -> hall fermé)
 ---
+id: pre-hall-temple-electro-000
+type: Location
+events:
+  info:
+    actor: "pre Hall TEMPLE electro 000"
+  look:
+    actor: |
+      VOUS ETES pre HALL DU TEMPLE electro vous voyez un pilier et un bouton
+parts:
+    - pilier-electro-000
+    - bouton-electro-000
+---
 id: hall-temple-electro-000
 type: Location
 events:
@@ -234,18 +261,7 @@ events:
 parts:
     - pilier-electro-001
 ---
-id: pre-hall-temple-electro-000
-type: Location
-events:
-  info:
-    actor: "pre Hall TEMPLE electro 000"
-  look:
-    actor: |
-      VOUS ETES pre HALL DU TEMPLE electro vous voyez un pilier et un bouton
-parts:
-    - pilier-electro-000
-    - bouton-electro-000
----
+
     ### ASCENSEUR ###
 
 id: ascenseur-hall-temple-electro-000

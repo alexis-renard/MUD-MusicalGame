@@ -1,3 +1,5 @@
+# teleporter scene-temple-rock-000
+# teleporter pre-hall-temple-electro-000
 ---
 id: parc-central-000
 type: Location
@@ -15,7 +17,7 @@ events:
 contains:
   - archet-000
   # - usb-000
-  # - mediator-000
+  - mediator-000
   # - figurine-000
   - bouton-cheat-000
 parts:
@@ -71,7 +73,8 @@ events:
       semble se produire.
     effects:
       - type  : ChangePropEffect
-        modifs:
-          - =portal-pre-hall-hall-temple-electro-000:-closed-classique
-          - =portal-pre-hall-hall-temple-electro-000:-closed-rock
-          - =portal-pre-hall-hall-temple-electro-000:-closed-zouk
+        modifs: -=portal-pre-hall-hall-temple-electro-000:closed-classique
+      - type  : ChangePropEffect
+        modifs: -=portal-pre-hall-hall-temple-electro-000:closed-rock
+      - type  : ChangePropEffect
+        modifs: -=portal-pre-hall-hall-temple-electro-000:closed-zouk

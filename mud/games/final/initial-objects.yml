@@ -195,10 +195,13 @@ events:
     - props :
         - bouton-rock-000:deactivated
       actor: |
-        Vous appuyez sur le bouton, mais rien ne se passe.
+        Vous appuyez sur le bouton, mais rien ne se passe. Cependant vous entendez la foule chanter l'air d'une musique qui vous est connue... vous feriez mieux d'aller voir
       observer: |
         {{ actor.name }} appuie sur le bouton, mais rien ne
-        semble se produire.
+        semble se produire. La foule se fait retentir.
+      effects:
+        - type  : ChangePropEffect
+          modifs: =portal-scene-foule-temple-rock-000:-calme
     - props: -bouton-rock-000:deactivated
       actor: |
         Vous appuyez sur le bouton, et action dans temple electro pour le deverouillement de laz porte.
@@ -206,7 +209,9 @@ events:
         {{ actor.name }} appuie sur le bouton, et quelque chose semble se déverouille fat far away.
       effects:
         - type  : ChangePropEffect
-          modifs: =portal-pre-hall-hall-temple-electro-000:-closed-rock
+          modifs:
+            - =portal-pre-hall-hall-temple-electro-000:-closed-rock
+            - =portal-scene-foule-temple-rock-000:-calme
         # - type  : NarrativeEffect
         #   at    : =salle-electro
         #   key   : bouton-classique

@@ -280,6 +280,46 @@ exits:
   - id: batterie-temple-rock-000-nord
     location: batterie-temple-rock-000
     direction: nord
+---
+id: portal-scene-foule-temple-rock-000
+type: Portal
+props:
+  - calme
+exits:
+  - id: portal-scene-temple-rock-000-ouest
+    location: scene-temple-rock-000
+    direction: ouest
+    props:
+      - for-leave
+    events:
+      enter-portal:
+        - props: portal-scene-foule-temple-rock-000:calme
+          actor: |
+            Vous sautez dans la foule mais elle s'écarte sous vos pieds #shym #moise
+          observer: |
+            {{ actor.name }} sélance dans la foule qui s'écarte majestueusement pour lui faire de la place sur le sol...
+          data-driven: true
+          effects:
+            - type: DeathEffect
+        - props: -portal-scene-foule-temple-rock-000:calme
+          actor: |
+            Vous sautez dans la foule qui vous porte avec une énergie hallu...wait for it...cinante (s'il vous plait how i met ça se regarde en anglais)
+          observer: |
+            {{ actor.name }} s'élance dans le vide et se fait porter par la foule telle un pingouin faisant la planche. La plancha. Baila Baila la nocha . Bref.
+      leave-portal:
+        actor   : "Vous remontez sur scène ouest"
+        observer: "{{ actor.name }} remonte sur scène."
+  - id: portal-foule-temple-rock-000-est
+    location: foule-temple-rock-000
+    direction: est
+    events:
+      enter-portal:
+        actor: |
+          Le vigile vous rattrape et vous remet sur scène.
+        observer: "{{ actor.name }} revient sur scène."
+      leave-portal:
+        actor   : "Vous remontez sur scène est"
+        observer: "{{ actor.name }} remonte sur scène."
 
 
 #########################
@@ -549,21 +589,29 @@ exits:
       - for-enter
     events:
       enter-portal:
-        actor     : "Vous entrez dans la partie qui suit la porte"
-        observer  : "{{ actor.name }} entre dans la partie qui suit la porte"
-        failed:
-          actor   : &porte001 |
-            La porte est vérouillée elle ne peut etre ouverte que par l appuie sur les 3 boutons dans les differents temples
-          observer: &porte002 |
-            {{ actor.name }} tente en vain d ouvrir la porte
+        - props   :
+          - -portal-pre-hall-hall-temple-electro-000:closed-classique
+          - -portal-pre-hall-hall-temple-electro-000:closed-rock
+          - -portal-pre-hall-hall-temple-electro-000:closed-zouk
+          actor     : "Vous entrez dans la partie qui suit la porte"
+          observer  : "{{ actor.name }} entre dans la partie qui suit la porte"
+          failed:
+            actor   : &porte001 |
+              La porte est vérouillée elle ne peut etre ouverte que par l appuie sur les 3 boutons dans les differents temples
+            observer: &porte002 |
+              {{ actor.name }} tente en vain d ouvrir la porte
       leave-portal:
+        # - props   :
+        #   - portal:closed-classique
+        #   - portal:closed-rock
+        #   - portal:closed-zouk
         actor     : "Vous sortez de la salle"
         observer  : "{{ actor.name }} sort de la salle"
       open        :
         - props   :
-          - portal:closed-classique
-          - portal:closed-rock
-          - portal:closed-zouk
+          - -portal-pre-hall-hall-temple-electro-000:closed-classique
+          - -portal-pre-hall-hall-temple-electro-000:closed-rock
+          - -portal-pre-hall-hall-temple-electro-000:closed-zouk
           actor   : *porte001
           observer: *porte002
         - props   : -portal:closed

@@ -29,7 +29,7 @@ class EnterPortalEvent(Event2):
             self.add_prop("cannot-pass")
             self.add_prop("cannot-pass-exit2")
             return self.enter_portal_failure()
-        elif self.traversal.portal.has_prop("closed"):
+        elif self.traversal.portal.has_prop("closed") or self.traversal.portal.has_prop("closed-classique") or self.traversal.portal.has_prop("closed-rock") or self.traversal.portal.has_prop("closed-zouk"):
             self.add_prop("cannot-pass")
             self.add_prop("cannot-pass-portal")
             return self.enter_portal_failure()
