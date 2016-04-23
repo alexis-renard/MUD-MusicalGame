@@ -14,7 +14,9 @@ events:
       n'arrivez pas à identifier à quel genre l'attribuer.
 contains:
   - archet-000
-  - usb-000
+  # - usb-000
+  # - mediator-000
+  # - figurine-000
   - bouton-cheat-000
 parts:
   - pilier-000
@@ -73,12 +75,3 @@ events:
           - =portal-pre-hall-hall-temple-electro-000:-closed-classique
           - =portal-pre-hall-hall-temple-electro-000:-closed-rock
           - =portal-pre-hall-hall-temple-electro-000:-closed-zouk
-
-
-        #
-        # id: portal-pre-hall-hall-temple-electro-000
-        # type: Portal
-        # props:
-        #   - closed-classique
-        #   - closed-rock
-        #   - closed-zouk
