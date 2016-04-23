@@ -180,6 +180,36 @@ events:
       C'est une figurine qui semble encore danser en rythme avec la musique ambiante. Elle ferait à coup sûr un tabac
       sur la plage arrière de votre voiture.
 
+#########################
+## --TEMPLE ZOUKLOVE-- ##
+#########################
+
+---
+id: peau-000
+type: Thing
+name: peau
+props:
+  - takable
+  - buildable
+events:
+  info:
+    actor: "peau de chèvre servant à faire des instruments de musique"
+  look:
+    actor: |
+      peau qui sert à créer instruments
+---
+id: amour-000
+type: Thing
+name: amour
+props:
+  - takable
+  - buildable
+events:
+  info:
+    actor: "l'amour est un element essentiel d'un instrument de musique"
+  look:
+    actor: |
+      aamour dans instrument musique
 
 
 ##########################
