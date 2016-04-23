@@ -30,7 +30,7 @@ events:
     actor: "ENTREE BALCON OPERA TEMPLE CLASSIQUE 000"
   look:
     actor: |
-      VOUS ETES BALCON OPERA DU TEMPLE CLASSIQUE,
+      VOUS ETES BALCON OPERA DU TEMPLE CLASSIQUE, vous voyez un tabouret qui semble contenir quelque chose.
 parts:
   - tabouret-piano-000
 ---
@@ -63,7 +63,7 @@ events:
     actor: " SCENE OPERA TEMPLE CLASSIQUE 000, ORCHESTRE PLACEVIDE"
   look:
     actor: |
-      VOUS ETES scene OPERA DU TEMPLE CLASSIQUE,
+      VOUS ETES scene OPERA DU TEMPLE CLASSIQUE, vous voyez une place libre dans l'orchestre à l'est
 parts:
   - place-libre-opera-temple-classique-000
 ---
@@ -196,6 +196,7 @@ events:
       femme qui donne de l'amour
 contains:
   - amour-000
+  # - usb-000
 
 
 ##########################
@@ -220,9 +221,7 @@ events:
   look:
     actor: |
       VOUS ETES HALL DU TEMPLE electro vous voyez un pilier et un bouton
-parts:
-    - pilier-electro-000
-    - bouton-electro-000
+
 ---
 id: salle-finale-temple-electro-000
 type: Location
@@ -234,6 +233,18 @@ events:
       VOUS ETES Salle finale DU TEMPLE electro vous voyez un pilier
 parts:
     - pilier-electro-001
+---
+id: pre-hall-temple-electro-000
+type: Location
+events:
+  info:
+    actor: "pre Hall TEMPLE electro 000"
+  look:
+    actor: |
+      VOUS ETES pre HALL DU TEMPLE electro vous voyez un pilier et un bouton
+parts:
+    - pilier-electro-000
+    - bouton-electro-000
 ---
     ### ASCENSEUR ###
 

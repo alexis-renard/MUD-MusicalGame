@@ -426,110 +426,163 @@ exits:
 ---
 
     ## portal sans porte pour éviter d'avoir à l'ouvrir et faire des tests
+
+# id: portal-entree-hall-temple-electro-000
+# type: Portal
+# exits:
+#   - id: entree-temple-electro-000-est
+#     location: entree-temple-electro-000
+#     direction: est
+#     events:
+#       enter-portal:
+#         actor     : "Vous entrez dans le temple electro"
+#   - id: pre-hall-temple-electro-000-ouest
+#     location: pre-hall-temple-electro-000
+#     direction: ouest
+
+    ## portal normal avec porte
 id: portal-entree-hall-temple-electro-000
 type: Portal
+props:
+  - closed
+  - closable
 exits:
   - id: entree-temple-electro-000-est
     location: entree-temple-electro-000
     direction: est
+    name:
+      - porte
+    gender: fem
+    props:
+      - for-enter
     events:
       enter-portal:
         actor     : "Vous entrez dans le temple electro"
+        observer  : "{{ actor.name }} entre dans le temple electro"
+        failed:
+          actor   : &porte001 |
+            La porte d accès au temple electro est sécurisée.
+            Elle est actuellement fermée et ne peut être ouverte
+            qu avec un médiator.
+          observer: &porte002 |
+            {{ actor.name }} tente en vain d ouvrir la porte du
+            temple electro
+      leave-portal:
+        actor     : "Vous sortez du temple electro"
+        observer  : "{{ actor.name }} sort du temple electro"
+      open        :
+        - props   : portal:closed
+          actor   : *porte001
+          observer: *porte002
+        - props   : -portal:closed
+          actor   : &porte003 "La porte est déjà ouverte!"
+      open-with   :
+        - props   :
+            - portal:closed
+            - object2:key-for-pre-hall-temple-electro-000
+          effects :
+            type  : ChangePropEffect
+            modifs:
+              - -portal:closed
+          actor   : |
+            La porte du département s ouvre avec un déclic.
+          observer: |
+            {{ actor.name }} ouvre la porte du temple electro
+            avec un badge de sécurité.
+        - props   :
+            - portal:closed
+            - -object2:key-for-hall-temple-electro-000
+          actor   : |
+            Vous tentez vainement d'ouvrir la porte avec
+            {{ object2.noun_the() }}
+          observer: |
+            {{ actor.name }} tente vainement d'ouvrir la porte du
+            temple electro avec {{ object2.noun_a() }}
+        - props   :
+            - -portal:closed
+          actor   : *porte003
+          observer: |
+            {{ actor.name }} tente futilement d'ouvrir la porte du
+            temple electro avec {{ object2.noun_a() }}, alors
+            qu'elle est déjà ouverte.
+      close       : &porte004
+        - props   : portal:closed
+          actor   : "Vous fermez la porte du département."
+          observer: "{{ actor.name }} ferme le porte du temple electro"
+          effects :
+            - type  : ChangePropEffect
+              modifs: =portal-porche-hall-temple-electro-000:closed
+      close-with  : *porte004
+  - id: pre-hall-temple-electro-000-ouest
+    location: pre-hall-temple-electro-000
+    direction: ouest
+    name: porte
+    gender: fem
+    props:
+      - for-leave
+    events:
+      enter-portal:
+        observer  : "{{ actor.name }} sort du temple electro"
+        failed:
+          actor   : |
+            La porte d'accès au temple electro est sécurisée.
+            Elle est actuellement fermée et, même pour sortir,
+            elle ne peut être ouverte qu'avec un badge de sécurité.
+          observer: |
+            {{ actor.name }} tente en vain de sortir par la porte
+            du temple electro
+---
+id: portal-pre-hall-hall-temple-electro-000
+type: Portal
+props:
+  - closed-classique
+  - closed-rock
+  - closed-zouk
+exits:
+  - id: pre-hall-temple-electro-000-est
+    location: pre-hall-temple-electro-000
+    direction: est
+    name:
+      - porte
+    gender: fem
+    props:
+      - for-enter
+    events:
+      enter-portal:
+        actor     : "Vous entrez dans la partie qui suit la porte"
+        observer  : "{{ actor.name }} entre dans la partie qui suit la porte"
+        failed:
+          actor   : &porte001 |
+            La porte est vérouillée elle ne peut etre ouverte que par l appuie sur les 3 boutons dans les differents temples
+          observer: &porte002 |
+            {{ actor.name }} tente en vain d ouvrir la porte
+      leave-portal:
+        actor     : "Vous sortez de la salle"
+        observer  : "{{ actor.name }} sort de la salle"
+      open        :
+        - props   :
+          - portal:closed-classique
+          - portal:closed-rock
+          - portal:closed-zouk
+          actor   : *porte001
+          observer: *porte002
+        - props   : -portal:closed
+          actor   : &porte003 "La porte est déjà ouverte!"
   - id: hall-temple-electro-000-ouest
     location: hall-temple-electro-000
     direction: ouest
-
-    ## portal normal avec porte
-# id: portal-entree-hall-temple-electro-000
-# type: Portal
-# props:
-#   - closed
-#   - closable
-# exits:
-#   - id: entree-temple-electro-000-ouest
-#     location: entree-temple-electro-000
-#     direction: ouest
-#     name:
-#       - porte
-#     gender: fem
-#     props:
-#       - for-enter
-#     events:
-#       enter-portal:
-#         actor     : "Vous entrez dans le temple electro"
-#         observer  : "{{ actor.name }} entre dans le temple electro"
-#         failed:
-#           actor   : &porte001 |
-#             La porte d accès au temple electro est sécurisée.
-#             Elle est actuellement fermée et ne peut être ouverte
-#             qu avec un médiator.
-#           observer: &porte002 |
-#             {{ actor.name }} tente en vain d ouvrir la porte du
-#             temple electro
-#       leave-portal:
-#         actor     : "Vous sortez du temple electro"
-#         observer  : "{{ actor.name }} sort du temple electro"
-#       open        :
-#         - props   : portal:closed
-#           actor   : *porte001
-#           observer: *porte002
-#         - props   : -portal:closed
-#           actor   : &porte003 "La porte est déjà ouverte!"
-#       open-with   :
-#         - props   :
-#             - portal:closed
-#             - object2:key-for-hall-temple-electro-000
-#           effects :
-#             type  : ChangePropEffect
-#             modifs:
-#               - -portal:closed
-#           actor   : |
-#             La porte du département s ouvre avec un déclic.
-#           observer: |
-#             {{ actor.name }} ouvre la porte du temple electro
-#             avec un badge de sécurité.
-#         - props   :
-#             - portal:closed
-#             - -object2:key-for-hall-temple-electro-000
-#           actor   : |
-#             Vous tentez vainement d'ouvrir la porte avec
-#             {{ object2.noun_the() }}
-#           observer: |
-#             {{ actor.name }} tente vainement d'ouvrir la porte du
-#             temple electro avec {{ object2.noun_a() }}
-#         - props   :
-#             - -portal:closed
-#           actor   : *porte003
-#           observer: |
-#             {{ actor.name }} tente futilement d'ouvrir la porte du
-#             temple electro avec {{ object2.noun_a() }}, alors
-#             qu'elle est déjà ouverte.
-#       close       : &porte004
-#         - props   : portal:closed
-#           actor   : "Vous fermez la porte du département."
-#           observer: "{{ actor.name }} ferme le porte du temple electro"
-#           effects :
-#             - type  : ChangePropEffect
-#               modifs: =portal-porche-hall-temple-electro-000:closed
-#       close-with  : *porte004
-#   - id: hall-temple-electro-000-est
-#     location: hall-temple-electro-000
-#     direction: est
-#     name: porte
-#     gender: fem
-#     props:
-#       - for-leave
-#     events:
-#       enter-portal:
-#         observer  : "{{ actor.name }} sort du temple electro"
-#         failed:
-#           actor   : |
-#             La porte d'accès au temple electro est sécurisée.
-#             Elle est actuellement fermée et, même pour sortir,
-#             elle ne peut être ouverte qu'avec un badge de sécurité.
-#           observer: |
-#             {{ actor.name }} tente en vain de sortir par la porte
-#             du temple electro
+    name: porte
+    gender: fem
+    props:
+      - for-leave
+    events:
+      enter-portal:
+        observer  : "{{ actor.name }} sort de la porte verrouillée avec les 3 props"
+        failed:
+          actor   : |
+            Le porte semble etre vérouillée par 3 verrous, elle ne s'ouvre pas
+          observer: |
+            {{ actor.name }} tente en vain de sortir par la porte
 ---
 id: hall-ascenseur-portal-000
 type: Portal

@@ -79,23 +79,63 @@ type: Thing
 name: bouton
 props:
   - pushable
+  - deactivated
 events:
   look:
     actor: |
       Un bouton qui semble ordinaire, mais qui est sûrement beaucoup plus important que ce que vous pensez...
   push:
-    actor: |
-      Vous appuyez sur le bouton, mais rien ne semble se
-      produire.
-    observer: |
-      {{ actor.name }} appuie sur le bouton, mais rien ne
-      semble se produire.
-    effects:
-      - type  : ChangePropEffect
-        modifs: =portal-ordinateur-cabane-exit-2:activated
-      - type  : NarrativeEffect
-        at    : =salle-electro
-        key   : bouton-classique
+    - props :
+        - bouton-classique-000:deactivated
+      actor: |
+        Vous appuyez sur le bouton, mais rien ne se passe.
+      observer: |
+        {{ actor.name }} appuie sur le bouton, mais rien ne
+        semble se produire.
+    - props: -bouton-classique-000:deactivated
+      actor: |
+        Vous appuyez sur le bouton, et action dans temple electro pour le deverouillement de laz porte.
+      observer: |
+        {{ actor.name }} appuie sur le bouton, et quelque chose semble se déverouille fat far away.
+      effects:
+        - type  : ChangePropEffect
+          modifs: =portal-pre-hall-hall-temple-electro-000:-closed-classique
+        # - type  : NarrativeEffect
+        #   at    : =salle-electro
+        #   key   : bouton-classique
+
+
+#
+# open-with   :
+#   - props   :
+#       - portal:closed
+#       - object2:key-for-porte-porche-000
+#     effects :
+#       type  : ChangePropEffect
+#       modifs:
+#         - -portal:closed
+#     actor   : |
+#       La porte du département souvre avec un déclic.
+#     observer: |
+#       {{ actor.name }} ouvre la porte du département info
+#       avec un badge de sécurité.
+#   - props   :
+#       - portal:closed
+#       - -object2:key-for-porte-porche-000
+#     actor   : |
+#       Vous tentez vainement douvrir la porte avec
+#       {{ object2.noun_the() }}
+#     observer: |
+#       {{ actor.name }} tente vainement douvrir la porte du
+#       département info avec {{ object2.noun_a() }}
+#   - props   : -portal:closed
+#     actor   : *porte003
+#     observer: |
+#       {{ actor.name }} tente futilement douvrir la porte du
+#       département info avec {{ object2.noun_a() }}, alors
+#       quelle est déjà ouverte.
+
+
 
 
 ##########################
@@ -143,27 +183,33 @@ events:
 ---
 id: bouton-rock-000
 type: Thing
-name:
-  - bouton
+name: bouton
 props:
   - pushable
+  - deactivated
 events:
   look:
     actor: |
       Un bouton qui semble ordinaire, mais qui est sûrement beaucoup plus important que ce que vous pensez...
   push:
-    actor: |
-      Vous appuyez sur le bouton, mais rien ne semble se
-      produire.
-    observer: |
-      {{ actor.name }} appuie sur le bouton, mais rien ne
-      semble se produire.
-    effects:
-      - type  : ChangePropEffect
-        modifs: =portal-ordinateur-cabane-exit-2:activated
-      - type  : NarrativeEffect
-        at    : =salle-electro
-        key   : bouton-rock
+    - props :
+        - bouton-rock-000:deactivated
+      actor: |
+        Vous appuyez sur le bouton, mais rien ne se passe.
+      observer: |
+        {{ actor.name }} appuie sur le bouton, mais rien ne
+        semble se produire.
+    - props: -bouton-rock-000:deactivated
+      actor: |
+        Vous appuyez sur le bouton, et action dans temple electro pour le deverouillement de laz porte.
+      observer: |
+        {{ actor.name }} appuie sur le bouton, et quelque chose semble se déverouille fat far away.
+      effects:
+        - type  : ChangePropEffect
+          modifs: =portal-pre-hall-hall-temple-electro-000:-closed-rock
+        # - type  : NarrativeEffect
+        #   at    : =salle-electro
+        #   key   : bouton-classique
 ---
 id: figurine-000
 type: Thing
@@ -210,8 +256,53 @@ events:
   look:
     actor: |
       aamour dans instrument musique
-
-
+---
+id: usb-000
+type: Thing
+name:
+  - usb
+  - cable
+  - cable usb
+props:
+  - takable
+  - key-for-pre-hall-temple-electro-000
+events:
+  info:
+    actor: "le cable usb semble faire parti d'un tout qui vous dépasse"
+  look:
+    actor: |
+      Vous voyez un cable usb male
+---
+id: bouton-zouk-000
+type: Thing
+name: bouton
+props:
+  - pushable
+  - deactivated
+events:
+  look:
+    actor: |
+      Un bouton qui semble ordinaire, mais qui est sûrement beaucoup plus important que ce que vous pensez...
+  push:
+    - props :
+        - bouton-zouk-000:deactivated
+      actor: |
+        Vous appuyez sur le bouton, mais rien ne se passe.
+      observer: |
+        {{ actor.name }} appuie sur le bouton, mais rien ne
+        semble se produire.
+    - props: -bouton-zouk-000:deactivated
+      actor: |
+        Vous appuyez sur le bouton, et action dans temple electro pour le deverouillement de laz porte.
+      observer: |
+        {{ actor.name }} appuie sur le bouton, et quelque chose semble se déverouille fat far away.
+      effects:
+        - type  : ChangePropEffect
+          modifs: =portal-pre-hall-hall-temple-electro-000:-closed-zouk
+        # - type  : NarrativeEffect
+        #   at    : =salle-electro
+        #   key   : bouton-classique
+---
 ##########################
 ### --TEMPLE ELECTRO-- ###
 ##########################
@@ -265,8 +356,11 @@ events:
       {{ actor.name }} appuie sur le bouton, et il semble agir bizarrement, comme s'il écoutait quelqu'un parler.
       Etrangement, la pièce vous semble très calme... et vous préférez quand c'est un peu trop plus moins calme.
     effects:
-    #   - type  : ChangePropEffect
-    #     modifs: =portal-ordinateur-cabane-exit-2:activated
+      - type  : ChangePropEffect
+        modifs:
+          - =bouton-classique-000:-deactivated
+          - =bouton-zouk-000:-deactivated
+          - =bouton-rock-000:-deactivated
       - type  : NarrativeEffect
         at    : =salle-electro
         key   : bouton-electro

@@ -14,7 +14,8 @@ events:
       n'arrivez pas à identifier à quel genre l'attribuer.
 contains:
   - archet-000
-  - mediator-000
+  - usb-000
+  - bouton-cheat-000
 parts:
   - pilier-000
 ---
@@ -48,3 +49,36 @@ events:
   look:
     actor: |
       C'est un archet de violon, qui doit surement servir à en jouer... Encore faut-il pouvoir l'assembler. Vous remarquez une sorte de clef à son extrémité
+---
+id: bouton-cheat-000
+type: Thing
+name:
+  - bouton
+props:
+  - pushable
+events:
+  look:
+    actor: |
+      test
+  push:
+    actor: |
+      Vous appuyez sur le bouton, mais rien ne semble se
+      produire.
+    observer: |
+      {{ actor.name }} appuie sur le bouton, mais rien ne
+      semble se produire.
+    effects:
+      - type  : ChangePropEffect
+        modifs:
+          - =portal-pre-hall-hall-temple-electro-000:-closed-classique
+          - =portal-pre-hall-hall-temple-electro-000:-closed-rock
+          - =portal-pre-hall-hall-temple-electro-000:-closed-zouk
+
+
+        #
+        # id: portal-pre-hall-hall-temple-electro-000
+        # type: Portal
+        # props:
+        #   - closed-classique
+        #   - closed-rock
+        #   - closed-zouk
