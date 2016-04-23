@@ -1,0 +1,60 @@
+---
+id: entree-temple-zouklove-000
+type: Location
+events:
+  info:
+    actor: "ENTREE TEMPLE zouklove 000"
+  look:
+    actor: |
+      VOUS ETES A LENTREE DU TEMPLE zouklove, PORTE FERMEE (portal entree -> hall fermé)
+---
+id: salle-mysterieuse-temple-zouklove-000
+type: Location
+events:
+  info:
+    actor: "ENTREE TEMPLE zouklove 000"
+  look:
+    actor: |
+      vous etes dans salle principale de temple zouklove
+parts:
+  - statue-temple-zouklove-000
+---
+id: statue-temple-zouklove-000
+type: Container
+name: statue
+events:
+  look:
+    actor: |
+      statue avec peau de chèvre
+contains:
+  - peau-000
+---
+id: jardin-temple-zouklove-000
+type: Location
+events:
+  info:
+    actor: "ENTREE TEMPLE zouklove 000"
+  look:
+    actor: |
+      vous etes dans jardin du temple zouklove
+---
+id: cabane-temple-zouklove-000
+type: Location
+events:
+  info:
+    actor: "ENTREE TEMPLE zouklove 000"
+  look:
+    actor: |
+      VOUS ETES HALL cabane temple zouklove
+parts:
+  - femme-temple-zouklove-000
+---
+id: femme-temple-zouklove-000
+type: Container
+name: femme
+events:
+  look:
+    actor: |
+      femme qui donne de l'amour
+contains:
+  - amour-000
