@@ -86,6 +86,8 @@ events:
     effects:
       - type  : ChangePropEffect
         modifs: -=guitare-000:hidden1
+      - type  : ChangePropEffect
+        modifs: =mediator-000:hidden1
 ---
 id: corps-violon-000
 type: Thing
@@ -181,7 +183,9 @@ events:
 ---
 id: guitare-000
 type: Thing
-name: guitare
+name:
+  - guitare
+  - fender
 props:
   - takable
   - hidden1
@@ -397,10 +401,11 @@ props:
   - key-for-pre-hall-temple-electro-000
 events:
   info:
-    actor: "le câble usb semble faire parti d'un tout qui vous dépasse, mais seulement parcequ'il est grand"
+    actor: "Un cable USB"
   look:
     actor: |
-      Vous voyez un joli câble USB 3.0 mâle de type A, de longueur 90cm, vendu ordinairement aux alentours de 2 euros chez Saturn.
+      Ce câble usb semble faire parti d'un tout qui vous dépasse, mais seulement parcequ'il est grand. En regardant de plus près vous devinez qu'il
+      s'agit d'un joli câble USB 3.0 mâle de type A, de longueur 90cm, vendu ordinairement aux alentours de 2 euros chez Saturn.
 ---
 id: bouton-zouk-000
 type: Thing
@@ -513,13 +518,11 @@ events:
       Etrangement, la pièce vous semble très calme... et vous préférez quand c'est un peu trop plus moins calme.
     effects:
       - type  : ChangePropEffect
-        modifs:
-          - =bouton-classique-000:-deactivated
-          - =bouton-zouk-000:-deactivated
-          - =bouton-rock-000:-deactivated
-      - type  : NarrativeEffect
-        at    : =salle-electro
-        key   : bouton-electro
+        modifs: -=bouton-classique-000:deactivated
+      - type  : ChangePropEffect
+        modifs: -=bouton-zouk-000:deactivated
+      - type  : ChangePropEffect
+        modifs: -=bouton-rock-000:deactivated
 ---
 id: bouton-ascenseur-hall-temple-electro-000
 type: Thing

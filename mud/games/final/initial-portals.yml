@@ -437,10 +437,10 @@ type: Portal
 exits:
   - id: jardin-temple-zouklove-000-est
     location: jardin-temple-zouklove-000
-    direction: est
+    direction: haut
   - id: cabane-temple-zouklove-000-ouest
     location: cabane-temple-zouklove-000
-    direction: ouest
+    direction: bas
 
 
 ##########################

@@ -8,6 +8,7 @@ type: Location
 events:
   info:
     actor: |
+      <iframe width="100%" height="300" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/218967210&amp;auto_play=true&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
       <div class='info-contain'>
       <div class='info-g'>
       <div class='info-g-c'>Entrée du temple de la musique classique</div>
@@ -29,7 +30,6 @@ type: Location
 events:
   info:
     actor: |
-      <iframe width="100%" height="300" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/218967210&amp;auto_play=true&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
       <div class='info-contain'>
       <div class='info-g'>Hall de de l'opéra
       </div>
@@ -76,7 +76,7 @@ events:
     actor: |
       Vous ouvez la charnière du siege du tabouret qui vous semblait mal refermée : le tabouret contenait bien une partie interne. Bien joué !
 contains:
-  # - cordes-000
+  - cordes-000
   - mediator-000
 ---
 id: salle-opera-temple-classique-000
@@ -134,11 +134,11 @@ events:
       </div>
   look:
     actor: |
-      Vous vous trouvez à la place libre au mileu de trompettistes. Ceci tentent de vous jeter un regard noir, mais sont déjà épris entre suivre la
+      Vous vous trouvez à la place libre au mileu des musiciens. Ceci tentent de vous jeter un regard noir, mais sont déjà épris entre suivre la
       partition et le chef d'orchestre. Vous les sentez transpirer la frustration. M'enfin voyons ce n'est pas ceci qui va vous déranger. Vous pouvez uniquement
       retourner à l'ouest pour quitter cette place quelque peu embarassante.
-# contains:
-#   - corps-violon-000
+contains:
+  - corps-violon-000
 ---
 
 
@@ -151,6 +151,7 @@ type: Location
 events:
   info:
     actor: |
+      <iframe width="100%" height="300" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/218967407&amp;auto_play=true&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
       <div class='info-contain'>
       <div class='info-g'>
       <div class='info-g-c'>Entrée du temple du rock</div>
@@ -174,7 +175,6 @@ contains:
 events:
   info:
     actor: |
-      <iframe width="100%" height="300" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/218967407&amp;auto_play=true&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
       <div class='info-contain'>
       <div class='info-g'>      Loges de la salle de concert
       </div>
@@ -186,7 +186,8 @@ events:
     actor: |
       Vous vous trouvez dans la loge de la salle de concert. Vous voyez un homme qui se trouve à votre gauche, ivre mort. Il semble avoir réussi à enlever sa veste avant
       de tomber dans ses songes éthiliques, et elle semble être de bonne qualité. Vous pouvez continuer à l'ouest vers ce qui vous semble être des rideaux menant à la scène,
-      ou retourner à la sortie de la salle de concert en allant vers l'est. <br>
+      ou retourner à la sortie de la salle de concert en allant vers l'est. Vous voyez également un roady qui se tient contre le mur, les bras croisés. Vous hésitez
+      à lui parler.<br>
       OMG, vous voyez un bouton sur le mur à votre droite. L'envie d'appuyer dessus est grande, comme cette envie de prendre le dernier bout de saucisson peut subitement
       nous prendre lors d'un apéro entre amis. Sauriez vous controler vos pulsions ? Seul l'avenir nous le dira...
 contains:
@@ -240,7 +241,7 @@ events:
     actor: |
       Vous etes à la batterie. Ne sachant pas jouer, vous ne vous y risquez pas. Vous pouvez retourner vers le nord afin de revenir au milieu de la scène,
       mais aussi voler les objets qui se trouvent où vous êtes. Au fond... pas vu pas pris. Et vous n'avez pas envie de vous faire prendre par tout ce groupe de rockers hein.
-      Tachez donc de ne pas vous faire voir.
+      Tachez donc de ne pas vous faire voir. Vous voyez également quelque chose sur le tabouret...
 contains:
     - figurine-000
 ---
@@ -286,6 +287,7 @@ type: Location
 events:
   info:
     actor: |
+      <iframe width="100%" height="300" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/218967920&amp;auto_play=true&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
       <div class='info-contain'>
       <div class='info-g'>
       <div class='info-g-c'>Entrée du temple du ZoukLove</div>
@@ -297,7 +299,6 @@ events:
       </div>
   look:
     actor: |
-      <iframe width="100%" height="300" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/218967920&amp;auto_play=true&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
       Vous vous trouvez à l'entrée du temple Créole. Vous voyez de gigantesques statues de part et d'autre de l'entrée du temple. Une ambiance chaleureuse
       se fait sentir de ce lieu, comme une odeur de fumée qui vous était d'ailleurs inconnue avant votre voyage en Jamaique pendant l'été 2010.
 ---
@@ -318,8 +319,10 @@ events:
       Vous êtes dans une salle de réception mystérieuse, qui est l'entrée de ce temple de l'amour. L'odeur de fumée que vous sentiez déjà dehors se fait plus forte,
       et vous fait même tousser. <i>Vous entendez "Miskine"</i>. Vous voyez une étrange statue représentant une femme. Vous pouvez continuer à explorer ce temple
       intriguant en continuant vers le nord, ou retourner en dehors en marchant vers le sud. Vous voyez un artistan à qui vous sentez que vous pouvez parler.
+      <br> Un bouton en bois d'ébène semble dépasser du mur à votre gauche.
 contains:
   - djembe-000
+  - bouton-zouk-000
 parts:
   - statue-temple-zouklove-000
   - artisan-000
@@ -368,9 +371,15 @@ events:
       </div>
   look:
     actor: |
-      Vous vous trouvez dans la cabane qui semble être une chambre. Une odeur des îles caresse vos narines et vous enivre d'une sensation particulierement agréable.
-      Vous voyez un cable USB à vos pieds<br>
-      <i>Bonjour, jeune aventurier.</i> dit doucement une femme qui se présente à vous. Malgré votre timidité, vous vous sentez capable de lui parler.
+      <div class='info-contain'>
+      <div class='info-g'>Cabane dans l'arbre
+      </div>
+      <div class='info-d'>
+      <img src="static/ressources/zouk/cabane.jpg"/>
+      </div>
+      </div>
+      Vous vous trouvez dans la cabane qui semble être une chambre. Une odeur des îles caresse vos narines et vous enivre d'une sensation particulierement agréable.<br>
+      <i>"Bonjour, jeune aventurier"</i> dit doucement une femme qui se présente à vous. Malgré votre timidité, vous vous sentez capable de lui parler.
 contains:
   - usb-000
 parts:
@@ -397,6 +406,7 @@ type: Location
 events:
   info:
     actor: |
+      <iframe width="100%" height="300" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/218968376&amp;auto_play=true&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
       <div class='info-contain'>
       <div class='info-g'>
       <div class='info-g-c'>L'entrée du temple électro, la fin de votre périple en somme</div>
@@ -425,7 +435,6 @@ events:
       </div>
   look:
     actor: |
-      <iframe width="100%" height="300" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/218968376&amp;auto_play=true&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
       Vous voici dans le pré-hall du temple, vous voyez un pilier ainsi qu'un bouton, intriguant tout ça.
       A l'est se trouve le hall principal de ce temple.
 parts:
@@ -463,7 +472,15 @@ events:
       </div>
   look:
     actor: |
-      Nous y voila ! La salle de concert ! Totalement blindée les gens se pressent au devant de la scène, tout le monde semble ravi d'être ici.
+      <div class='info-contain'>
+      <div class='info-g'>      La salle finale, salle de concert du temple électro, la fin approche"
+      </div>
+      <div class='info-d'>
+      <img src="static/ressources/electro/salle.jpg"/>
+      </div>
+      </div>
+      Nous y voila ! La salle de concert ! Totalement blindée les gens se pressent au devant de la scène, tout le monde semble ravi d'être ici. Vous
+      semblez reconnaitre un célèbre DJ ayant fait un tabac sur l'interweb : Darude !
 contains:
   - launchpad-000
 parts:
