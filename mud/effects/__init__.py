@@ -17,3 +17,6 @@ from .push       import PushEffect
 from .take       import TakeEffect
 from .type       import TypeEffect
 from .narrative  import NarrativeEffect
+
+#ajouté
+from .play       import PlayWithEffect

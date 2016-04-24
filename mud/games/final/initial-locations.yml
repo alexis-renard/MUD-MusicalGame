@@ -20,8 +20,8 @@ events:
   look:
     actor: |
       VOUS ETES HALL OPERA DU TEMPLE CLASSIQUE,
-contains:
-  - partition-000
+# contains:
+#   - partition-000
 ---
 id: balcon-opera-temple-classique-000
 type: Location

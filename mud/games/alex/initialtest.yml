@@ -2,8 +2,8 @@
 # teleporter pre-hall-temple-electro-000
 # teleporter salle-mysterieuse-temple-zouk-000
 
-# - figurine-000
-# - usb-000
+  # - figurine-000
+  # - usb-000
 
 ---
 id: parc-central-000
@@ -21,7 +21,7 @@ events:
       n'arrivez pas à identifier à quel genre l'attribuer.
 contains:
   - archet-000
-  - mediator-000
+  # - mediator-000
   - bouton-cheat-000
   - instrument-cheat-000
   - partition-000
@@ -86,16 +86,46 @@ events:
 ---
 id: instrument-cheat-000
 type: Thing
-name: instrument
+name: i
 props:
-  - portal-hall-salle-temple-classique-000
+  - loges-temple-rock-000
   - instrument
   - takable
 events:
   info:
-    actor: "Joue maggle"
+    actor: "instrument"
   look:
     actor: |
       go jouer omg
   play:
     actor: "Vous jouez ENFIN d'un instrument"
+
+---
+id: mediator-000
+type: Thing
+name: mediator
+props:
+  - takable
+  - buildable
+  - key-for-loges-temple-rock-000
+events:
+  info:
+    actor: "Un mediator de collection"
+  look:
+    actor: |
+      C'est un médiator qui semble avoir appartenu à un des meilleurs rocker du monde. Il doit pouvoir former un instrument interessant
+      avec un inventaire approprié IF YOU KNOW WHAT I MEAN.
+---
+id: partition-000
+type: Thing
+name: p
+props:
+  - takable
+  - playable
+events:
+  info:
+    actor: "Une partition de musique."
+  look:
+    actor: |
+      C'est une partition qui semble pouvoir être jouée avec n'importe quel instrument. Vous sentez étrangement un certain
+      potentiel dans ce vieux parchemin.

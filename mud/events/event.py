@@ -159,6 +159,8 @@ class Event3(Event2):
         context["object2"] = self.object2
         return context
 
+
+#classe créée pour l'assemblage de 3 objets
 class Event4(Event3):
 
     def __init__(self, actor, object, object2, object3):

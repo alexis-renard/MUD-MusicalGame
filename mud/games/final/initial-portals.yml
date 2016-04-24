@@ -306,9 +306,6 @@ exits:
             Vous sautez dans la foule qui vous porte avec une énergie hallu...wait for it...cinante (s'il vous plait how i met ça se regarde en anglais)
           observer: |
             {{ actor.name }} s'élance dans le vide et se fait porter par la foule telle un pingouin faisant la planche. La plancha. Baila Baila la nocha . Bref.
-      leave-portal:
-        actor   : "Vous remontez sur scène ouest"
-        observer: "{{ actor.name }} remonte sur scène."
   - id: portal-foule-temple-rock-000-est
     location: foule-temple-rock-000
     direction: est
@@ -317,9 +314,6 @@ exits:
         actor: |
           Le vigile vous rattrape et vous remet sur scène.
         observer: "{{ actor.name }} revient sur scène."
-      leave-portal:
-        actor   : "Vous remontez sur scène est"
-        observer: "{{ actor.name }} remonte sur scène."
 
 
 #########################
