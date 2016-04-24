@@ -58,6 +58,10 @@ events:
   look:
     actor: |
       C'est un archet de violon, qui doit surement servir à en jouer... Encore faut-il pouvoir l'assembler. Vous remarquez une sorte de clef à son extrémité
+  drop:
+    effects:
+      - type  : ChangePropEffect
+        modifs: -=violon-000:hidden1
 ---
 id: bouton-cheat-000
 type: Thing

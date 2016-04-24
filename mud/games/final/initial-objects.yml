@@ -2,6 +2,37 @@
 ### --TEMPLE CLASSIQUE-- ###
 ############################
 
+id: violon-000
+type: Thing
+name: violon
+props:
+  - takable
+  - hidden1
+  - hidden2
+  - hidden3
+events:
+  info:
+    actor: "Un magnifique violon Stradivarius de chez LIDL. Ca pue l'arnaque. Vous n'auriez jamais du croire cet homme avec une longue barbe grise"
+  look:
+    actor: |
+      Manigifique violon, un peu amoché, mais ça peut s'arranger. Comme le chien Pilou de la voisine Thérèse.
+  drop:
+    effects:
+      - type  : ChangePropEffect
+        modifs: -=launchpad-000:hidden1
+---
+id: luthier-000
+type: Container
+name: luthier
+events:
+  info:
+    actor: "Un luthier en plein travail"
+  look:
+    actor: |
+      Lokhtar mon ami, je vois que vous êtes intéréssé par mes violons. Je peux vous en construire un si vous le souhaitez.
+      Déposez simplement les éléments qui le constituent et je vous déposera un violon confectionné par mes soins.
+contains:
+    - violon-000
 ---
 id: partition-000
 type: Thing
@@ -44,6 +75,10 @@ events:
     actor: |
       Ce sont des cordes de violons, qui n'ont contre toute attente pas l'air d'avoir beaucoup servi. Elles doivent pouvoir être
       assemblées avec d'autres objets pour former un violon.
+  drop:
+    effects:
+      - type  : ChangePropEffect
+        modifs: -=violon-000:hidden2
 ---
 id: mediator-000
 type: Thing
@@ -57,8 +92,12 @@ events:
     actor: "Un mediator de collection"
   look:
     actor: |
-      C'est un médiator qui semble avoir appartenu à un des meilleurs rocker du monde. Il doit pouvoir former un instrument interessant
-      avec un inventaire approprié IF YOU KNOW WHAT I MEAN.
+      C'est un médiator qui semble avoir appartenu à Jimmy Page. Il doit pouvoir former un instrument intéressant
+      avec un inventaire approprié...
+  drop:
+    effects:
+      - type  : ChangePropEffect
+        modifs: -=guitare-000:hidden1
 ---
 id: corps-violon-000
 type: Thing
@@ -71,12 +110,18 @@ events:
     actor: "Un corps de violon."
   look:
     actor: |
-      C'est un corps violon qui ressemble fortement à celui d'un stradivarius. Avec les cordes et l'archet qui correspondent, il doit
+      C'est un corps de violon qui ressemble fortement à celui d'un Stradivarius. Avec les cordes et l'archet qui correspondent, il devrait
       permettre d'asssembler un magnifique violon.
+  drop:
+    effects:
+      - type  : ChangePropEffect
+        modifs: -=violon-000:hidden3
 ---
 id: bouton-classique-000
 type: Thing
-name: bouton
+name: 
+  - tableau
+  - bouton
 props:
   - pushable
   - deactivated
@@ -93,9 +138,9 @@ events:
         semble se produire.
     - props: -bouton-classique-000:deactivated
       actor: |
-        Vous appuyez sur le bouton, et action dans temple electro pour le deverouillement de laz porte.
+        Vous appuyez sur le bouton et entendez comme un déclic électronique provenir de l'est.
       observer: |
-        {{ actor.name }} appuie sur le bouton, et quelque chose semble se déverouille fat far away.
+        {{ actor.name }} appuie sur le bouton, et quelque chose se déverouiller à l'est d'ici.
       effects:
         - type  : ChangePropEffect
           modifs: -=portal-pre-hall-hall-temple-electro-000:closed-classique
@@ -140,7 +185,25 @@ events:
 ##########################
  ### --TEMPLE ROCK-- ####
 ##########################
-
+---
+id: guitare-000
+type: Thing
+name: guitare
+props:
+  - takable
+  - hidden1
+  - hidden3
+  - hidden2
+events:
+  info:
+    actor: "Une belle Fender, parce que Gibson cest pas jojo"
+  look:
+    actor: |
+      Très jolie Fender Stratocaster pré-CBS de 89, un bijou. Vivement noël.
+  sdrop:
+    effects:
+      - type  : ChangePropEffect
+        modifs: -=launchpad-000:hidden2
 ---
 id: veste-000
 type: Thing
@@ -153,17 +216,34 @@ events:
     actor: "Une veste de rocker"
   look:
     actor: |
-      C'est une veste de rocker, qui a visiblement...
+      C'est une veste de rocker, elle sent bon la bière et le tabac froid. La veste est remplie de patch anarchy 
+      et Guns'n'Roses. Une jolie veste quoi.
+  drop:
+    effects:
+      - type  : ChangePropEffect
+        modifs: -=guitare-000:hidden2
+---
+id: roady-000
+type: Container
+name: roady
+events:
+  info:
+    actor: "Un roady, grand, carafe, jeu long, clope roulée au bec"
+  look:
+    actor: |
+      ça va ou quoi ? tu veux ta gratte? lache moi ta veste, les cordes et les baguettes et jte la ramene !
+  contains:
+    - guitare-000
 ---
 id: tabouret-batterie-000
 type: Container
 name: tabouret
 events:
   info:
-    actor: "Un tabouret, qui semble être le siege du batteur"
+    actor: "Un tabouret hydrolique, parfait pour des petites fesses de batteur."
   look:
     actor: |
-        tabouret avec baguettes dessus
+        un tabouret de belle qualité, une paire de baguette Vic Firth 7A est posée dessus. Les bouts sont un peu abimés.
 contains:
   - baguettes-000
 ---
@@ -175,10 +255,14 @@ props:
   - buildable
 events:
   info:
-    actor: "Des baguettes de batterie."
+    actor: "Des baguettes de batterie, modèle 7A de chez Vic Firth, belle manufacture"
   look:
     actor: |
-      Ce sont de magnifiques baguettes, bon shit samere
+      Ce sont de magnifiques baguettes, un peu amochées et encore transpirantes.
+  drop:
+    effects:
+      - type  : ChangePropEffect
+        modifs: -=guitare-000:hidden3
 ---
 id: bouton-rock-000
 type: Thing
@@ -189,22 +273,22 @@ props:
 events:
   look:
     actor: |
-      Un bouton qui semble ordinaire, mais qui est sûrement beaucoup plus important que ce que vous pensez...
+      Un bouton qui semble ordinaire, tamponné d'un logo "Let's Rock", mais qui est sûrement beaucoup plus important que ce que vous ne pensez...
   push:
     - props : bouton-rock-000:deactivated
       actor: |
-        Vous appuyez sur le bouton, mais rien ne se passe. Cependant vous entendez la foule chanter l'air d'une musique qui vous est connue... vous feriez mieux d'aller voir
+        Vous appuyez sur le bouton, mais rien ne se passe. Cependant la foule vous acclame et se rassemble au devant de la scène.
       observer: |
         {{ actor.name }} appuie sur le bouton, mais rien ne
-        semble se produire. La foule se fait retentir.
+        semble se produire. La foule est en délire.
       effects:
         - type  : ChangePropEffect
           modifs: -=portal-scene-foule-temple-rock-000:calme
     - props: -bouton-rock-000:deactivated
       actor: |
-        Vous appuyez sur le bouton, et action dans temple electro pour le deverouillement de laz porte.
+        Vous appuyez sur le bouton, et un second déclic électronique se déclenche à l'est de votre position.
       observer: |
-        {{ actor.name }} appuie sur le bouton, et quelque chose semble se déverouille fat far away.
+        {{ actor.name }} appuie sur le bouton, et quelque chose semble se déverouiller vers l'est.
       effects:
         - type  : ChangePropEffect
           modifs:
@@ -223,16 +307,51 @@ props:
   - key-for-salle-mysterieuse-temple-zouklove-000
 events:
   info:
-    actor: "Une petite figurine hawaienne"
+    actor: "Une petite figurine hawaienne, peinte à la main, rappelant les belles iles aux plages de sable fin"
   look:
     actor: |
       C'est une figurine qui semble encore danser en rythme avec la musique ambiante. Elle ferait à coup sûr un tabac
-      sur la plage arrière de votre voiture.
+      sur la plage arrière de votre voiture. Si les voitures existent, évidemment.
+  drop:
+    effects:
+      - type  : ChangePropEffect
+        modifs: -=djembe-000:hidden1
 
 #########################
-## --TEMPLE ZOUKLOVE-- ##
+## --TEMPLE ZOUKLOVE-- ## 
 #########################
-
+---
+id: djembe-000
+type: Thing
+name: djembe
+props:
+  - takable
+  - hidden1
+  - hidden3
+  - hidden2
+events:
+  info:
+    actor: "un magnifique djembé en bois de bambou, sentant bon la lessive ARIEL fraicheur des iles."
+  look:
+    actor: |
+      Djembé made in china, numéro de série 69ZOUGLOU
+  drop:
+    effects:
+      - type  : ChangePropEffect
+        modifs: -=launchpad-000:hidden3
+---
+id: artisan-000
+type: Container
+name: artisan
+events:
+  info:
+    actor: "Un artisan local, grand sourire, dents jaunes"
+  look:
+    actor: |
+      *accent des iles* il dit : <i> HEYYYYYY MON AMI, POUR UN PRIX TRES BAS JE PEUX TE CONFECTIONNER UN JOLI djembe WALAL BILAL,
+      depose moi simplement les objets necessaires et je te laisserai le djembe, au plaisir </i>
+contains:
+  - djembe-000
 ---
 id: peau-000
 type: Thing
@@ -242,10 +361,14 @@ props:
   - buildable
 events:
   info:
-    actor: "peau de chèvre servant à faire des instruments de musique"
+    actor: "Une peau de chèvre qui en ferait palir tous les cordonniers de l'Indre et Loire. Cette peau semble être déjà précoupé en forme de cercle"
   look:
     actor: |
-      peau qui sert à créer instruments
+      Cette peau de la chèvre de Satan ferait un très beau début d'instrument
+  drop:
+    effects:
+      - type  : ChangePropEffect
+        modifs: -=djembe-000:hidden2
 ---
 id: amour-000
 type: Thing
@@ -255,10 +378,22 @@ props:
   - buildable
 events:
   info:
-    actor: "l'amour est un element essentiel d'un instrument de musique"
+    actor: |
+      L'amour est un element essentiel d'un instrument de musique.
+       C’est l’étoffe de la nature que l’imagination a brodée. Veux-tu avoir une idée de l’amour ? Vois les moineaux de ton jardin ;
+       vois tes pigeons ; contemple le taureau qu’on amène à ta génisse ; regarde ce fier cheval que deux de ses valets conduisent
+       à la cavale paisible qui l’attend, et qui détourne sa queue pour le recevoir ; vois comme ses yeux étincellent ; 
+       entends ses hennissements ; contemple ces sauts, ces courbettes, ces oreilles dressées, cette bouche qui s’ouvre avec de petites convulsions,
+       ces narines qui s’enflent, ce souffle enflammé qui en sort, ces crins qui se relèvent et qui flottent, ce mouvement impétueux 
+       *dont il s’élance sur l’objet que la nature lui a destiné : mais n’en sois point jaloux, et songe aux avantages de l’espèce humaine ;
+       ils compensent en amour tous ceux que la nature a donnés aux animaux, force, beauté, légèreté, rapidité.
   look:
     actor: |
-      aamour dans instrument musique
+      Un amour vrai et véritable, qui montre que le matin, y'a pas que le soleil qui se lève. Ah, et c'est aussi un bout d'un instrument de musique.
+  drop:
+    effects:
+      - type  : ChangePropEffect
+        modifs: -=djembe-000:hidden3
 ---
 id: usb-000
 type: Thing
@@ -271,10 +406,10 @@ props:
   - key-for-pre-hall-temple-electro-000
 events:
   info:
-    actor: "le cable usb semble faire parti d'un tout qui vous dépasse"
+    actor: "le câble usb semble faire parti d'un tout qui vous dépasse, mais seulement parcequ'il est grand"
   look:
     actor: |
-      Vous voyez un cable usb male
+      Vous voyez un joli câble USB 3.0 mâle de type A, de longueur 90cm, vendu ordinairement aux alentours de 2 euros chez Saturn.
 ---
 id: bouton-zouk-000
 type: Thing
@@ -289,26 +424,57 @@ events:
   push:
     - props : bouton-zouk-000:deactivated
       actor: |
-        Vous appuyez sur le bouton, mais rien ne se passe.
+        Vous appuyez sur le bouton, mais rien ne se passe. Genre rien de rien (8)
       observer: |
         {{ actor.name }} appuie sur le bouton, mais rien ne
         semble se produire.
     - props: -bouton-zouk-000:deactivated
       actor: |
-        Vous appuyez sur le bouton, et action dans temple electro pour le deverouillement de laz porte.
+        Vous appuyez sur le bouton, et vous entendez un "d-d-d-d-DROP THE BASS"
       observer: |
-        {{ actor.name }} appuie sur le bouton, et quelque chose semble se déverouille fat far away.
+        {{ actor.name }} appuie sur le bouton, et un énorme drop bien sale se fait entendre à l'est.
       effects:
         - type  : ChangePropEffect
           modifs: -=portal-pre-hall-hall-temple-electro-000:closed-zouk
         # - type  : NarrativeEffect
         #   at    : =salle-electro
         #   key   : bouton-classique
----
+
 ##########################
 ### --TEMPLE ELECTRO-- ###
 ##########################
 
+---
+id: launchpad-000
+type: Thing
+name: launchpad
+props:
+  - takable
+  - hidden1
+  - hidden3
+  - hidden2
+events:
+  info:
+    actor: "un laucnhpad S de marque Novation"
+  look:
+    actor: |
+      un launchpad signature Madeon, prêt à ambiancey all the night long*
+---
+id: darude-000
+type: Container
+name:
+  - darude
+  - dj
+events:
+  info:
+    actor: "le DJ international Darude, connu pour son titre Sandstorm"
+  look:
+    actor: |
+      Yo mon gars bien ou bien ça chill ? j'ai entendu dire que tetais en galere pour ton mix ce soir
+      depose moi les 3 derniers instruments que t'as construis et je devrais pouvoir te construire un matos pour ce soir
+      allez la bise
+contains:
+  - launchpad-000
 ---
 id: pilier-electro-000
 type: Thing
@@ -320,8 +486,8 @@ events:
     actor: |
       Sur le pilier est écrit : <br>
       <i>
-        "Blablabla faut appuyer sur le bouton, faut se teleporter avec nos objets pour aller appuyer sur les autres boutons
-        qui vont nous permettre de pouvoir appeler l'ascenceur"
+        Ta quête n'est pas fini le bleu, tu dois encore déverouiller cette dernière porte. Le bouton situé à coté de toi te permettra 
+        d'activer 3 autres boutons répartis dans les temples d'où tu viens. Reviens quand tu en auras fini.
       </i>
 ---
 id: pilier-electro-001
@@ -334,7 +500,7 @@ events:
     actor: |
       Sur le pilier est écrit : <br>
       <i>
-        "Assemble tes trois instruments bonhomme et go voir Yoda"
+        "Assemble tes trois instruments petit homme, la force est avec toi"
       </i>
 ---
 id: bouton-electro-000
@@ -351,8 +517,7 @@ events:
     actor: |
       Vous appuyez sur le bouton, et une voix se fait entendre dans votre tête: <br>
       <i>
-        "Youhou bien ouej t'as presque fini maintenant il te reste à aller dans les autres temple appuyer sur les boutons
-        pour pouvoir utiliser l'ascenceur"
+        "PAS MAL DU TOUT, PIETRE HUMAIN, BELZEBUTH EST FIER DE TOI. TU DOIS MAINTENANT TE RENDRE DANS LES 3 DERNIERES DEMEURES DE SATAN NOTRE SAUVEUR ! "
       </i>
     observer: |
       {{ actor.name }} appuie sur le bouton, et il semble agir bizarrement, comme s'il écoutait quelqu'un parler.
