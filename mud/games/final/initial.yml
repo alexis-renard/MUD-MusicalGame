@@ -13,7 +13,7 @@ events:
     actor: "Vous êtes dans le parc"
   look:
     actor: |
-      Vous vous trouvez dans un parc. L'ambiance est désertique et vous voyez au Sud un temple majestueux ressemblant
+      Vous vous trouvez dans un parc. L'ambiance est désertique. <br>Vous voyez au Sud un temple majestueux ressemblant
       à ces célèbres chateaux de la Renaissance. A l'Ouest se trouve un mystérieux temple qui ressemble à une arène enveloppée
       de cuir d'un noir profond. Cela vous fait frissoner. Au Nord semble se trouver un 3ème temple qui est le plus rassurant
       des 3. Vous sentez un certain amour émaner de ce lieu. Enfin, à l'est se trouve un temple que l'on pourrait confondre avec
@@ -21,10 +21,10 @@ events:
       n'arrivez pas à identifier à quel genre l'attribuer.
 contains:
   - archet-000
-  - mediator-000
+  # - mediator-000
   - bouton-cheat-000
   - instrument-cheat-000
-  - partition-000
+  # - partition-000
 parts:
   - pilier-000
 ---

@@ -7,30 +7,38 @@ id: entree-temple-classique-000
 type: Location
 events:
   info:
-    actor: "ENTREE TEMPLE CLASSIQUE 000"
+    actor: "Entrée du temple de la musique classique"
   look:
     actor: |
-      VOUS ETES A LENTREE DU TEMPLE CLASSIQUE, PORTE FERMEE (portal entree -> hall fermé)
+    Vous entendez une douce musique qui vous rappelle votre enfance, lorsque vous étiez en voiture avec votre grand père,
+    et que ce dernier s'amusait à faire des tours en ville avec les fenêtres ouvertes avec une K7 de la 5ème Symphonie de
+    Beethoven... ces souvenirs vous donnent une certaine envie d'aller voir ce qu'il se trouve derrière cette porte dressée
+    devant vous.
 ---
 id: hall-opera-temple-classique-000
 type: Location
 events:
   info:
-    actor: "ENTREE HALL OPERA TEMPLE CLASSIQUE 000"
+    actor: "Hall de de l'opéra"
   look:
     actor: |
-      VOUS ETES HALL OPERA DU TEMPLE CLASSIQUE,
-# contains:
-#   - partition-000
+      Vous êtes dans le hall d'entrée du temple classique, qui se trouve être un ancien opéra. Vous voyez à l'ouest comme à l'est deux
+      escaliers qui semblent mener jusqu'aux balcons, mais vous pouvez également continuer plus au sud vers la salle de l'opéra.
+contains:
+  - partition-000
+  - violon-000
+  - lutier-000
 ---
 id: balcon-opera-temple-classique-000
 type: Location
 events:
   info:
-    actor: "ENTREE BALCON OPERA TEMPLE CLASSIQUE 000"
+    actor: "Balcon de l'opéra"
   look:
     actor: |
-      VOUS ETES BALCON OPERA DU TEMPLE CLASSIQUE, vous voyez un tabouret qui semble contenir quelque chose.
+      Une fois en haut de ce balcon, vous vous rendez compte que les deux escaliers menaient au même endroit. Vous voyez la scène de l'opéra
+      en contrebas, et tous les musiciens y jouer un air majestueux. Vous voyez également un tabouret qui semble contenir quelque chose...
+      Pour revenir en bas, il vous faut donc aller à l'est ou à l'ouest.
 parts:
   - tabouret-piano-000
 ---
@@ -40,19 +48,23 @@ name: tabouret
 events:
   look:
     actor: |
-      C'est un tabouret qui semble contenir quelque chose...
+      Vous ouvez la charnière du siege du tabouret qui vous semblait mal refermée : le tabouret contenait bien une partie interne. Bien joué !
 contains:
   - cordes-000
-  # - mediator-000
+  - mediator-000
 ---
 id: salle-opera-temple-classique-000
 type: Location
 events:
   info:
-    actor: "OPERA TEMPLE CLASSIQUE 000"
+    actor: "Salle principale de l'opéra"
   look:
     actor: |
-      VOUS ETES dans les gradins de l'OPERA DU TEMPLE CLASSIQUE, vous voyez un bouton sur le mur
+      Vous êtes dans la salle principale de l'opéra. Vous voyez sur les murs différents portraits de grands musiciens de l'époque telles que Franz Schubert,
+      Robert Schumann ou encore le défunt et peu connu Wolfgang Amadeus Mozartzer prince du terter. Vous pouvez continuer vers le sud pour monter sur scène ou vers le nord
+      pour revenir à l'entrée et faire la queue pour le vestiaire. <br>
+      Pas si vite... vous voyez également un tableau qui semble être bancal, vous pouvez être sympa et le pousser afin de le remettre en place.
+      Vous détestez les choses qui ne sont pas cartésiennes, si je me souviens bien ?
 parts:
     - bouton-classique-000
 ---
@@ -60,10 +72,11 @@ id: scene-opera-temple-classique-000
 type: Location
 events:
   info:
-    actor: " SCENE OPERA TEMPLE CLASSIQUE 000, ORCHESTRE PLACEVIDE"
+    actor: "Scène de l'opéra"
   look:
     actor: |
-      VOUS ETES scene OPERA DU TEMPLE CLASSIQUE, vous voyez une place libre dans l'orchestre à l'est
+      Vous arrivez sur scène. Les musiciens vous regardent quelque peu de travers, mais que voulez-vous il n'y a pas de vigile pour vous sortir de la salle
+      à l'époque. L'aubaine tout de même. Vous pouvez continuer à l'est vers une place qui vous semble vide, ou rebrousser chemin au nord pour revenir à la salle principale.
 parts:
   - place-libre-opera-temple-classique-000
 ---
@@ -71,10 +84,12 @@ id: place-libre-opera-temple-classique-000
 type: Location
 events:
   info:
-    actor: "place libre scene OPERA TEMPLE CLASSIQUE 000 + message qui guide sur assembler le avec nanana et nanan pour botenir VIOLON STRADIVARIUS"
+    actor: "Place libre sur scène"
   look:
     actor: |
-      VOUS ETES place libre OPERA DU TEMPLE CLASSIQUE,
+      Vous vous trouvez à la place libre au mileu de trompettistes. Ceci tentent de vous jeter un regard noir, mais sont déjà épris entre suivre la
+      partition et le chef d'orchestre. Vous les sentez transpirer la frustration. M'enfin voyons ce n'est pas ceci qui va vous déranger. Vous pouvez uniquement
+      retourner à l'ouest pour quitter cette place quelque peu embarassante.
 contains:
   - corps-violon-000
 ---
@@ -88,10 +103,13 @@ id: entree-temple-rock-000
 type: Location
 events:
   info:
-    actor: "ENTREE TEMPLE rock 000"
+    actor: "Entrée du temple du rock "
   look:
     actor: |
-      VOUS ETES A LENTREE DU TEMPLE rock, PORTE FERMEE (portal entree -> hall fermé)
+      Vous êtes à l'entrée de cette arène de cuir, qui vous a tout l'air d'être le temple du rock'n'roll. Hell yeah Mazère feuille coeur. Si vous continuez encore
+      plus à l'ouest, vous vous risquez de rentrer dans un endroit qui vous risque de vous faire un make up de personnalité. Votre père Mercelin étant un des
+      plus vieux fan de Johnny, vous ne pouvez pas faire l'affront de ne pas affronter votre destin et de rentrer dans ce temple. Comme si toute cette histoire
+      vous était liée finalement...
 ---
 id: loges-temple-rock-000
 type: Location
