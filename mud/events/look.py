@@ -24,7 +24,7 @@ class LookEvent(Event1):
             elif x.is_player():
                 players.append(x)
             else:
-                if x.not_hidden():
+                if not x.hidden():
                     objects.append(x)
         if players:
             self.buffer_inform("look.players-intro")

@@ -26,10 +26,10 @@ events:
       n'arrivez pas à identifier à quel genre l'attribuer.
 contains:
   - archet-000
-  # - mediator-000
   - bouton-cheat-000
-  - instrument-cheat-000
-  # - partition-000
+  # - instrument-cheat-000
+  - cordes-000
+  - corps-violon-000
 parts:
   - pilier-000
 ---
@@ -64,9 +64,12 @@ events:
     actor: |
       C'est un archet de violon, qui doit surement servir à en jouer... Encore faut-il pouvoir l'assembler. Vous remarquez une sorte de clef à son extrémité
   drop:
-    effects:
-      - type  : ChangePropEffect
-        modifs: -=violon-000:hidden1
+    - props:
+      effects:
+        - type  : ChangePropEffect
+          modifs: -=violon-000:hidden1
+        - type  : ChangePropEffect
+          modifs: =archet-000:hidden2
 ---
 id: bouton-cheat-000
 type: Thing

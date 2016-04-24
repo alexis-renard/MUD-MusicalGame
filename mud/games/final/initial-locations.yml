@@ -40,10 +40,12 @@ events:
   look:
     actor: |
       Vous êtes dans le hall d'entrée du temple classique, qui se trouve être un ancien opéra. Vous voyez à l'ouest comme à l'est deux
-      escaliers qui semblent mener jusqu'aux balcons, mais vous pouvez également continuer plus au sud vers la salle de l'opéra.
+      escaliers qui semblent mener jusqu'aux balcons, mais vous pouvez également continuer plus au sud vers la salle de l'opéra. Un luthier
+      est à l'entrée. Vous pouvez lui parler pour voir ce qu'il propose.
 contains:
   - partition-000
   - violon-000
+parts:
   - luthier-000
 ---
 id: balcon-opera-temple-classique-000
@@ -74,7 +76,7 @@ events:
     actor: |
       Vous ouvez la charnière du siege du tabouret qui vous semblait mal refermée : le tabouret contenait bien une partie interne. Bien joué !
 contains:
-  - cordes-000
+  # - cordes-000
   - mediator-000
 ---
 id: salle-opera-temple-classique-000
@@ -135,8 +137,8 @@ events:
       Vous vous trouvez à la place libre au mileu de trompettistes. Ceci tentent de vous jeter un regard noir, mais sont déjà épris entre suivre la
       partition et le chef d'orchestre. Vous les sentez transpirer la frustration. M'enfin voyons ce n'est pas ceci qui va vous déranger. Vous pouvez uniquement
       retourner à l'ouest pour quitter cette place quelque peu embarassante.
-contains:
-  - corps-violon-000
+# contains:
+#   - corps-violon-000
 ---
 
 
@@ -160,24 +162,10 @@ events:
       </div>
   look:
     actor: |
-      <iframe width="100%" height="300" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/218967407&amp;auto_play=true&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
       Vous êtes à l'entrée de cette arène de cuir, qui vous a tout l'air d'être le temple du rock'n'roll. Hell yeah Mazère feuille coeur. Si vous continuez encore
       plus à l'ouest, vous vous risquez de rentrer dans un endroit qui vous risque de vous faire un make up de personnalité. Votre père Mercelin étant un des
       plus vieux fan de Johnny, vous ne pouvez pas faire l'affront de ne pas affronter votre destin et de rentrer dans ce temple. Comme si toute cette histoire
       vous était liée finalement...
----
-id: roady-000
-type: Container
-name: roady
-events:
-  info:
-    actor: |
-      Un roady, grand, carafe, jeu long, clope roulée au bec"
-  look:
-    actor: |
-      Ca va ou quoi ? tu veux ta gratte? lache moi ta veste, les cordes et les baguettes et jte la ramene !
-  contains:
-    - guitare-000
 ---
 id: loges-temple-rock-000
 type: Location
@@ -186,6 +174,7 @@ contains:
 events:
   info:
     actor: |
+      <iframe width="100%" height="300" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/218967407&amp;auto_play=true&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
       <div class='info-contain'>
       <div class='info-g'>      Loges de la salle de concert
       </div>
@@ -203,6 +192,9 @@ events:
 contains:
   - veste-000
   - bouton-rock-000
+  - guitare-000
+parts:
+  - roady-000
 ---
 id: scene-temple-rock-000
 type: Location
@@ -325,9 +317,12 @@ events:
     actor: |
       Vous êtes dans une salle de réception mystérieuse, qui est l'entrée de ce temple de l'amour. L'odeur de fumée que vous sentiez déjà dehors se fait plus forte,
       et vous fait même tousser. <i>Vous entendez "Miskine"</i>. Vous voyez une étrange statue représentant une femme. Vous pouvez continuer à explorer ce temple
-      intriguant en continuant vers le nord, ou retourner en dehors en marchant vers le sud.
+      intriguant en continuant vers le nord, ou retourner en dehors en marchant vers le sud. Vous voyez un artistan à qui vous sentez que vous pouvez parler.
+contains:
+  - djembe-000
 parts:
   - statue-temple-zouklove-000
+  - artisan-000
 ---
 id: statue-temple-zouklove-000
 type: Container
@@ -469,8 +464,11 @@ events:
   look:
     actor: |
       Nous y voila ! La salle de concert ! Totalement blindée les gens se pressent au devant de la scène, tout le monde semble ravi d'être ici.
+contains:
+  - launchpad-000
 parts:
     - pilier-electro-001
+    - darude-000
 ---
 
     ### ASCENSEUR ###

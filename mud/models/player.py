@@ -170,7 +170,7 @@ class Player(Containing, Thing):
             for x in c.all():
                 if pred(x):
                     return x
-                parts.append(x)
+            parts.append(x)
         while parts:
             l = parts
             parts = []
@@ -200,7 +200,7 @@ class Player(Containing, Thing):
                     q.put(x)
                 elif isinstance(x, Containing) and \
                      not isinstance(x, Player) and \
-                     not x.has_prop("closed"):
+                     not x.has_prop("closed") :
                     q.put(x)
         return None
 

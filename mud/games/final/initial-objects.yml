@@ -20,9 +20,11 @@ events:
     effects:
       - type  : ChangePropEffect
         modifs: -=launchpad-000:hidden1
+      - type  : ChangePropEffect
+        modifs: =violon-000:hidden1
 ---
 id: luthier-000
-type: Container
+type: Thing
 name: luthier
 events:
   info:
@@ -31,8 +33,6 @@ events:
     actor: |
       Lokhtar mon ami, je vois que vous êtes intéréssé par mes violons. Je peux vous en construire un si vous le souhaitez.
       Déposez simplement les éléments qui le constituent et je vous déposera un violon confectionné par mes soins.
-contains:
-    - violon-000
 ---
 id: partition-000
 type: Thing
@@ -47,20 +47,6 @@ events:
     actor: |
       C'est une partition qui semble pouvoir être jouée avec n'importe quel instrument. Vous sentez étrangement un certain
       potentiel dans ce vieux parchemin.
----
-id: tabouret-000
-type: Container
-name: tabouret
-events:
-  info:
-    actor: "La tabouret du piano qui semble contenir quelque chose"
-  look:
-    actor: |
-      En vous rapprochant de plus près vous voyez des cordes qui semblent être cachées sous le siege du tabouret. Vous n'avez qu'à
-      soulever le mécanisme pour simplement prendre ces cordes.
-contains:
-    - cordes-000
-    - mediator-000
 ---
 id: cordes-000
 type: Thing
@@ -79,6 +65,8 @@ events:
     effects:
       - type  : ChangePropEffect
         modifs: -=violon-000:hidden2
+      - type  : ChangePropEffect
+        modifs: =cordes-000:hidden2
 ---
 id: mediator-000
 type: Thing
@@ -101,7 +89,10 @@ events:
 ---
 id: corps-violon-000
 type: Thing
-name: corps-violon
+name:
+  - corps
+  - violon
+  - corps violon
 props:
   - takable
   - buildable
@@ -116,6 +107,8 @@ events:
     effects:
       - type  : ChangePropEffect
         modifs: -=violon-000:hidden3
+      - type  : ChangePropEffect
+        modifs: =corps-violon-000:hidden2
 ---
 id: bouton-classique-000
 type: Thing
@@ -204,6 +197,19 @@ events:
     effects:
       - type  : ChangePropEffect
         modifs: -=launchpad-000:hidden2
+      - type  : ChangePropEffect
+        modifs: =guitare-000:hidden2
+---
+id: roady-000
+type: Thing
+name: roady
+events:
+  info:
+    actor: |
+      Un roady, grand, carafe, jeu long, clope roulée au bec"
+  look:
+    actor: |
+      Ca va ou quoi ? tu veux ta gratte? lache moi ta veste, les cordes et les baguettes et jte la ramene !
 ---
 id: veste-000
 type: Thing
@@ -222,6 +228,8 @@ events:
     effects:
       - type  : ChangePropEffect
         modifs: -=guitare-000:hidden2
+      - type  : ChangePropEffect
+        modifs: =veste-000:hidden2
 ---
 id: baguettes-000
 type: Thing
@@ -239,6 +247,8 @@ events:
     effects:
       - type  : ChangePropEffect
         modifs: -=guitare-000:hidden3
+      - type  : ChangePropEffect
+        modifs: =baguettes-000:hidden3
 ---
 id: bouton-rock-000
 type: Thing
@@ -292,7 +302,8 @@ events:
     effects:
       - type  : ChangePropEffect
         modifs: -=djembe-000:hidden1
-
+      - type  : ChangePropEffect
+        modifs: =figurine-000:hidden3
 #########################
 ## --TEMPLE ZOUKLOVE-- ##
 #########################
@@ -315,9 +326,11 @@ events:
     effects:
       - type  : ChangePropEffect
         modifs: -=launchpad-000:hidden3
+      - type  : ChangePropEffect
+        modifs: =djembe-000:hidden3
 ---
 id: artisan-000
-type: Container
+type: Thing
 name: artisan
 events:
   info:
@@ -326,8 +339,6 @@ events:
     actor: |
       *accent des iles* il dit : <i> HEYYYYYY MON AMI, POUR UN PRIX TRES BAS JE PEUX TE CONFECTIONNER UN JOLI djembe WALAL BILAL,
       depose moi simplement les objets necessaires et je te laisserai le djembe, au plaisir </i>
-contains:
-  - djembe-000
 ---
 id: peau-000
 type: Thing
@@ -345,6 +356,8 @@ events:
     effects:
       - type  : ChangePropEffect
         modifs: -=djembe-000:hidden2
+      - type  : ChangePropEffect
+        modifs: =peau-000:hidden2
 ---
 id: amour-000
 type: Thing
@@ -370,6 +383,8 @@ events:
     effects:
       - type  : ChangePropEffect
         modifs: -=djembe-000:hidden3
+      - type  : ChangePropEffect
+        modifs: =amour-000:hidden2
 ---
 id: usb-000
 type: Thing
@@ -437,7 +452,7 @@ events:
       un launchpad signature Madeon, prêt à ambiancey all the night long*
 ---
 id: darude-000
-type: Container
+type: Thing
 name:
   - darude
   - dj
@@ -449,8 +464,6 @@ events:
       Yo mon gars bien ou bien ça chill ? j'ai entendu dire que tetais en galere pour ton mix ce soir
       depose moi les 3 derniers instruments que t'as construis et je devrais pouvoir te construire un matos pour ce soir
       allez la bise
-contains:
-  - launchpad-000
 ---
 id: pilier-electro-000
 type: Thing
