@@ -107,7 +107,7 @@ type: Location
 events:
   info:
     actor: |
-      Entrée du temple du rock 
+      Entrée du temple du rock
   look:
     actor: |
       <iframe width="100%" height="300" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/218967407&amp;auto_play=true&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
@@ -227,7 +227,9 @@ events:
     actor: "Salle d'entrée mystérieuse"
   look:
     actor: |
-      vous etes dans salle principale de temple zouklove
+      Vous êtes dans une salle de réception mystérieuse, qui est l'entrée de ce temple de l'amour. L'odeur de fumée que vous sentiez déjà dehors se fait plus forte,
+      et vous fait même tousser. <i>Vous entendez "Miskine"</i>. Vous voyez une étrange statue représentant une femme. Vous pouvez continuer à explorer ce temple
+      intriguant en continuant vers le nord, ou retourner en dehors en marchant vers le sud.
 parts:
   - statue-temple-zouklove-000
 ---
@@ -237,7 +239,8 @@ name: statue
 events:
   look:
     actor: |
-      statue avec peau de chèvre
+      En regardant de plus près cette statue, et sans savoir pourquoi, son imposante taille et son air protecteur vous rappelle votre mère lorsqu'elle rentrait de
+      son entraînement de lutte. Cette image vous apaise et rassure. Vous voyez également une peau qui semble tenir dans sa main.
 contains:
   - peau-000
 ---
@@ -245,19 +248,26 @@ id: jardin-temple-zouklove-000
 type: Location
 events:
   info:
-    actor: "ENTREE TEMPLE zouklove 000"
+    actor: "Jardin extérieur"
   look:
     actor: |
-      vous etes dans jardin du temple zouklove
+      Vous sentez l'humidité qui règne dans ce jardin. La première chose que vous voyez est une cabane perchée dans les arbres. Un rêve de gosse d'y monter.
+      En regardant quelque peu autour de vous, vous remarquez des personnes qui s'amusent et jouent une musique qui vous met de bonne humeur. Cela vous rappelle
+      des souvenirs d'enfance partagés avec votre soeur, chez votre tante en Jamaïque. La belle époque ! <br>
+      Vous pouvez donc monter (haut) dans la cabane, ou revenir dans la salle mystérieuse.
 ---
 id: cabane-temple-zouklove-000
 type: Location
 events:
   info:
-    actor: "ENTREE TEMPLE zouklove 000"
+    actor: "Cabane dans l'arbre"
   look:
     actor: |
-      VOUS ETES HALL cabane temple zouklove
+      Vous vous trouvez dans la cabane qui semble être une chambre. Une odeur des îles caresse vos narines et vous enivre d'une sensation particulierement agréable.
+      Vous voyez un cable USB à vos pieds<br>
+      <i>Bonjour, jeune aventurier.</i> dit doucement une femme qui se présente à vous. Malgré votre timidité, vous vous sentez capable de lui parler.
+contains:
+  - usb-000
 parts:
   - femme-temple-zouklove-000
 ---
@@ -267,11 +277,10 @@ name: femme
 events:
   look:
     actor: |
-      femme qui donne de l'amour
+      <i>Permettez moi de vous offrir mon amour</i><br>
+      Devant sa beauté, prenez vous donc l'amour qu'elle vous propose ? Le choix est votre.
 contains:
   - amour-000
-  - usb-000
-
 
 ##########################
 ### --TEMPLE ELECTRO-- ###
