@@ -8,7 +8,15 @@ type: Location
 events:
   info:
     actor: |
-      Entrée du temple de la musique classique
+      <div class='info-contain'>
+      <div class='info-g'>
+      <div class='info-g-c'>Entrée du temple de la musique classique</div>
+      <div class='info-g-c'><img src="static/ressources/classique/entree.jpg"/></div>
+      </div>
+      <div class='info-d'>
+      <img src="static/ressources/map/map_classique.jpg"/>
+      </div>
+      </div>
   look:
     actor: |
       Vous entendez une douce musique qui vous rappelle votre enfance, lorsque vous étiez en voiture avec votre grand père,
@@ -22,7 +30,13 @@ events:
   info:
     actor: |
       <iframe width="100%" height="300" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/218967210&amp;auto_play=true&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
-      Hall de de l'opéra
+      <div class='info-contain'>
+      <div class='info-g'>Hall de de l'opéra
+      </div>
+      <div class='info-d'>
+      <img src="static/ressources/classique/hall.jpg"/>
+      </div>
+      </div>
   look:
     actor: |
       Vous êtes dans le hall d'entrée du temple classique, qui se trouve être un ancien opéra. Vous voyez à l'ouest comme à l'est deux
@@ -36,7 +50,14 @@ id: balcon-opera-temple-classique-000
 type: Location
 events:
   info:
-    actor: "Balcon de l'opéra"
+    actor: |
+      <div class='info-contain'>
+      <div class='info-g'>    Balcon de l'opéra"
+      </div>
+      <div class='info-d'>
+      <img src="static/ressources/classique/balcon.jpg"/>
+      </div>
+      </div>
   look:
     actor: |
       Une fois en haut de ce balcon, vous vous rendez compte que les deux escaliers menaient au même endroit. Vous voyez la scène de l'opéra
@@ -60,7 +81,14 @@ id: salle-opera-temple-classique-000
 type: Location
 events:
   info:
-    actor: "Salle principale de l'opéra"
+    actor: |
+      <div class='info-contain'>
+      <div class='info-g'>    Salle principale de l'opéra
+      </div>
+      <div class='info-d'>
+      <img src="static/ressources/classique/salle.jpg"/>
+      </div>
+      </div>
   look:
     actor: |
       Vous êtes dans la salle principale de l'opéra. Vous voyez sur les murs différents portraits de grands musiciens de l'époque telles que Franz Schubert,
@@ -75,7 +103,14 @@ id: scene-opera-temple-classique-000
 type: Location
 events:
   info:
-    actor: "Scène de l'opéra"
+    actor: |
+      <div class='info-contain'>
+      <div class='info-g'>    Scène de l'opéra
+      </div>
+      <div class='info-d'>
+      <img src="static/ressources/classique/scene.jpeg"/>
+      </div>
+      </div>
   look:
     actor: |
       Vous arrivez sur scène. Les musiciens vous regardent quelque peu de travers, mais que voulez-vous il n'y a pas de vigile pour vous sortir de la salle
@@ -87,7 +122,14 @@ id: place-libre-opera-temple-classique-000
 type: Location
 events:
   info:
-    actor: "Place libre sur scène"
+    actor: |
+      <div class='info-contain'>
+      <div class='info-g'>      Place libre sur scène
+      </div>
+      <div class='info-d'>
+      <img src="static/ressources/classique/place.jpg"/>
+      </div>
+      </div>
   look:
     actor: |
       Vous vous trouvez à la place libre au mileu de trompettistes. Ceci tentent de vous jeter un regard noir, mais sont déjà épris entre suivre la
@@ -107,7 +149,15 @@ type: Location
 events:
   info:
     actor: |
-      Entrée du temple du rock 
+      <div class='info-contain'>
+      <div class='info-g'>
+      <div class='info-g-c'>Entrée du temple du rock</div>
+      <div class='info-g-c'><img src="static/ressources/rock/entree.jpg"/></div>
+      </div>
+      <div class='info-d'>
+      <img src="static/ressources/map/map_rock.jpg"/>
+      </div>
+      </div>
   look:
     actor: |
       <iframe width="100%" height="300" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/218967407&amp;auto_play=true&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
@@ -121,7 +171,8 @@ type: Container
 name: roady
 events:
   info:
-    actor: "Un roady, grand, carafe, jeu long, clope roulée au bec"
+    actor: |
+      Un roady, grand, carafe, jeu long, clope roulée au bec"
   look:
     actor: |
       Ca va ou quoi ? tu veux ta gratte? lache moi ta veste, les cordes et les baguettes et jte la ramene !
@@ -134,7 +185,14 @@ contains:
   - veste-000
 events:
   info:
-    actor: "Loges de la salle de concert"
+    actor: |
+      <div class='info-contain'>
+      <div class='info-g'>      Loges de la salle de concert
+      </div>
+      <div class='info-d'>
+      <img src="static/ressources/rock/loges.jpg"/>
+      </div>
+      </div>
   look:
     actor: |
       Vous vous trouvez dans la loge de la salle de concert. Vous voyez un homme qui se trouve à votre gauche, ivre mort. Il semble avoir réussi à enlever sa veste avant
@@ -150,7 +208,14 @@ id: scene-temple-rock-000
 type: Location
 events:
   info:
-    actor: "Scène de la salle de concert"
+    actor: |
+      <div class='info-contain'>
+      <div class='info-g'>    Scène de la salle de concert
+      </div>
+      <div class='info-d'>
+      <img src="static/ressources/rock/scene.jpg"/>
+      </div>
+      </div>
   look:
     - props: portal-scene-foule-temple-rock-000:calme
       actor: |
@@ -171,7 +236,14 @@ parts:
   - tabouret-batterie-000
 events:
   info:
-    actor: "Place du batteur"
+    actor: |
+      <div class='info-contain'>
+      <div class='info-g'>      Place du batteur
+      </div>
+      <div class='info-d'>
+      <img src="static/ressources/rock/batterie.jpg"/>
+      </div>
+      </div>
   look:
     actor: |
       Vous etes à la batterie. Ne sachant pas jouer, vous ne vous y risquez pas. Vous pouvez retourner vers le nord afin de revenir au milieu de la scène,
@@ -184,7 +256,14 @@ id: foule-temple-rock-000
 type: Location
 events:
   info:
-    actor: "En slam sur la foule"
+    actor: |
+      <div class='info-contain'>
+      <div class='info-g'>      En slam sur la foule
+      </div>
+      <div class='info-d'>
+      <img src="static/ressources/rock/foule.jpg"/>
+      </div>
+      </div>
   look:
     actor: |
       Vous êtes sur la foule et vous sentez cette bonne odeur émanant de tous ces gens transpirant. Enfin, vous n'y pretez pas vraiment attention
@@ -195,7 +274,8 @@ type: Container
 name: tabouret
 events:
   info:
-    actor: "Un tabouret hydrolique, parfait pour des petites fesses de batteur."
+    actor: |
+      Un tabouret hydrolique, parfait pour des petites fesses de batteur."
   look:
     actor: |
         Un tabouret de belle qualité, une paire de baguette Vic Firth 7A est posée dessus. Leurs bouts sont un peu abimés sûrement par une utilisation un peu trop intensive
@@ -213,7 +293,16 @@ id: entree-temple-zouklove-000
 type: Location
 events:
   info:
-    actor: "Entrée du temple du ZoukLove"
+    actor: |
+      <div class='info-contain'>
+      <div class='info-g'>
+      <div class='info-g-c'>ENTREE TEMPLE</div>
+      <div class='info-g-c'><img src="static/ressources/zouk/entree.jpg"/></div>
+      </div>
+      <div class='info-d'>
+      <img src="static/ressources/map/map_zouk.jpg"/>
+      </div>
+      </div>
   look:
     actor: |
       <iframe width="100%" height="300" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/218967920&amp;auto_play=true&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
@@ -224,7 +313,14 @@ id: salle-mysterieuse-temple-zouklove-000
 type: Location
 events:
   info:
-    actor: "Salle d'entrée mystérieuse"
+    actor: |
+      <div class='info-contain'>
+      <div class='info-g'>    Salle d'entrée mystérieuse
+      </div>
+      <div class='info-d'>
+      <img src="static/ressources/zouk/salle.jpg"/>
+      </div>
+      </div>
   look:
     actor: |
       vous etes dans salle principale de temple zouklove
@@ -245,7 +341,14 @@ id: jardin-temple-zouklove-000
 type: Location
 events:
   info:
-    actor: "ENTREE TEMPLE zouklove 000"
+    actor: |
+      <div class='info-contain'>
+      <div class='info-g'>
+      </div>
+      <div class='info-d'>
+      <img src="static/ressources/zouk/jardin.jpg"/>
+      </div>
+      </div>
   look:
     actor: |
       vous etes dans jardin du temple zouklove
@@ -254,7 +357,14 @@ id: cabane-temple-zouklove-000
 type: Location
 events:
   info:
-    actor: "ENTREE TEMPLE zouklove 000"
+    actor: |
+      <div class='info-contain'>
+      <div class='info-g'>
+      </div>
+      <div class='info-d'>
+      <img src="static/ressources/zouk/cabane.jpg"/>
+      </div>
+      </div>
   look:
     actor: |
       VOUS ETES HALL cabane temple zouklove
@@ -283,7 +393,15 @@ type: Location
 events:
   info:
     actor: |
-      L'entrée du temple électro, la fin de votre périple en somme
+      <div class='info-contain'>
+      <div class='info-g'>
+      <div class='info-g-c'>L'entrée du temple électro, la fin de votre périple en somme</div>
+      <div class='info-g-c'><img src="static/ressources/electro/entree.jpg"/></div>
+      </div>
+      <div class='info-d'>
+      <img src="static/ressources/map/map_electro.jpg"/>
+      </div>
+      </div>
   look:
     actor: |
       Vous vous trouvez à l'entrée du temple électro, une musique remplie de basses vous immerge.
@@ -293,7 +411,14 @@ id: pre-hall-temple-electro-000
 type: Location
 events:
   info:
-    actor: "Le pré-hall du temple électro"
+    actor: |
+      <div class='info-contain'>
+      <div class='info-g'>    Le pré-hall du temple électro"
+      </div>
+      <div class='info-d'>
+      <img src="static/ressources/electro/pre-hall.jpg"/>
+      </div>
+      </div>
   look:
     actor: |
       <iframe width="100%" height="300" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/218968376&amp;auto_play=true&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
@@ -307,7 +432,14 @@ id: hall-temple-electro-000
 type: Location
 events:
   info:
-    actor: "Hall TEMPLE electro 000"
+    actor: |
+      <div class='info-contain'>
+      <div class='info-g'>      Hall TEMPLE electro 000
+      </div>
+      <div class='info-d'>
+      <img src="static/ressources/electro/hall.jpg"/>
+      </div>
+      </div>
   look:
     actor: |
       TRES JOLI Hall, on sent l'influence des styles précédents. Des leds pavent les murs, les basses de font de plus en plus ressentir.
@@ -317,7 +449,14 @@ id: salle-finale-temple-electro-000
 type: Location
 events:
   info:
-    actor: "La salle finale, salle de concert du temple électro, la fin approche"
+    actor: |
+      <div class='info-contain'>
+      <div class='info-g'>      La salle finale, salle de concert du temple électro, la fin approche"
+      </div>
+      <div class='info-d'>
+      <img src="static/ressources/electro/salle.jpg"/>
+      </div>
+      </div>
   look:
     actor: |
       Nous y voila ! La salle de concert ! Totalement blindée les gens se pressent au devant de la scène, tout le monde semble ravi d'être ici.

@@ -85,3 +85,23 @@ div.alert.mud-echo {
     color           : #888888;
     font-style      : italic;
 }
+.info-contain {
+    display: flex;
+    flex-direction: row;
+}
+.info-g {
+    display: flex;
+    flex:1 66%;
+}
+.info-g-c{
+    flex:1 50%;
+}
+.info-d {
+    flex:1 33%;
+}
+.info-d>img  {
+    width: 100%;
+}
+.info-g-c>img  {
+    width: 100%;
+}
