@@ -10,10 +10,10 @@ events:
     actor: "Entrée du temple de la musique classique"
   look:
     actor: |
-    Vous entendez une douce musique qui vous rappelle votre enfance, lorsque vous étiez en voiture avec votre grand père,
-    et que ce dernier s'amusait à faire des tours en ville avec les fenêtres ouvertes avec une K7 de la 5ème Symphonie de
-    Beethoven... ces souvenirs vous donnent une certaine envie d'aller voir ce qu'il se trouve derrière cette porte dressée
-    devant vous.
+      Vous entendez une douce musique qui vous rappelle votre enfance, lorsque vous étiez en voiture avec votre grand père,
+      et que ce dernier s'amusait à faire des tours en ville avec les fenêtres ouvertes avec une K7 de la 5ème Symphonie de
+      Beethoven... ces souvenirs vous donnent une certaine envie d'aller voir ce qu'il se trouve derrière cette porte dressée
+      devant vous.
 ---
 id: hall-opera-temple-classique-000
 type: Location
@@ -27,7 +27,7 @@ events:
 contains:
   - partition-000
   - violon-000
-  - lutier-000
+  - luthier-000
 ---
 id: balcon-opera-temple-classique-000
 type: Location
@@ -111,17 +111,32 @@ events:
       plus vieux fan de Johnny, vous ne pouvez pas faire l'affront de ne pas affronter votre destin et de rentrer dans ce temple. Comme si toute cette histoire
       vous était liée finalement...
 ---
+id: roady-000
+type: Container
+name: roady
+events:
+  info:
+    actor: "Un roady, grand, carafe, jeu long, clope roulée au bec"
+  look:
+    actor: |
+      Ca va ou quoi ? tu veux ta gratte? lache moi ta veste, les cordes et les baguettes et jte la ramene !
+  contains:
+    - guitare-000
+---
 id: loges-temple-rock-000
 type: Location
 contains:
   - veste-000
 events:
   info:
-    actor: "LOGES TEMPLE rock 000"
+    actor: "Loges de la salle de concert"
   look:
     actor: |
-      VOUS ETES LOGES DU TEMPLE rock, un homme ivre vous supplie deprendre sa veste. Vous voyez un étrange bouton
-      sur votre droite, qui semble ne jamais avoir servi.
+      Vous vous trouvez dans la loge de la salle de concert. Vous voyez un homme qui se trouve à votre gauche, ivre mort. Il semble avoir réussi à enlever sa veste avant
+      de tomber dans ses songes éthiliques, et elle semble être de bonne qualité. Vous pouvez continuer à l'ouest vers ce qui vous semble être des rideaux menant à la scène,
+      ou retourner à la sortie de la salle de concert en allant vers l'est. <br>
+      OMG, vous voyez un bouton sur le mur à votre droite. L'envie d'appuyer dessus est grande, comme cette envie de prendre le dernier bout de saucisson peut subitement
+      nous prendre lors d'un apéro entre amis. Sauriez vous controler vos pulsions ? Seul l'avenir nous le dira...
 contains:
   - veste-000
   - bouton-rock-000
@@ -130,18 +145,20 @@ id: scene-temple-rock-000
 type: Location
 events:
   info:
-    actor: "scene TEMPLE rock 000"
+    actor: "Scène de la salle de concert"
   look:
     - props: portal-scene-foule-temple-rock-000:calme
       actor: |
-        VOUS ETES scene DU TEMPLE rock, le public hurle et vous acclame, vous ne pouvez pas les laisser attendre,
-        le siege de la batterie qui est au SUD est vide, le chanteur vous demande dejouer. Vous ne pouvez pas le décevoir.
-        Vous voyez que la foule est plutot calme, vous ne devriez pas vous risquer à partir en slam.
+        Vous êtes maintenant sur scène, le chanteur est en train de se donner sur scène mais le public n'a pas l'air d'être à fond dedans...<br>
+        Vous analysez rapidement la situation et en concluez que vous ne devriez pas vous risquer d'aller vers l'ouest pour partir en slam.
+        <br>
+        Vous voyez que la place du batteur au sud est vide... sûrement était-ce la place de l'homme ivre des loges.
     - props: -portal-scene-foule-temple-rock-000:calme
       actor: |
-        VOUS ETES scene DU TEMPLE rock, le public hurle et vous acclame, vous ne pouvez pas les laisser attendre,
-        le siege de la batterie qui est au SUD est vide, le chanteur vous demande dejouer. Vous ne pouvez pas le décevoir.
-        Vous voyez que la foule izonfire, vous pouvez vous lancer en slam sans probleme.
+        Vous êtes maintenant sur scène, le chanteur des Guns & Roses n'a pas l'air si surpris de vous voir. En fait, rien ne semble pouvoir vraiment
+        le surprendre dans l'état de transe dans lequel il est. Le concert bat son plein et vous voyez que la foule izonfire. <br>
+        Vous semblez pouvoir vous lancer en slam sans probleme en allant vers l'ouest !
+        Vous pouvez également aller à la place du batteur au sud, qui est vide... sûrement était-ce la place de l'homme ivre des loges.
 ---
 id: batterie-temple-rock-000
 type: Location
@@ -149,10 +166,12 @@ parts:
   - tabouret-batterie-000
 events:
   info:
-    actor: "batterie TEMPLE rock 000"
+    actor: "Place du batteur"
   look:
     actor: |
-      Vous etes à la batterie, vous voyez un tabouret qui semble contenir quelque chose
+      Vous etes à la batterie. Ne sachant pas jouer, vous ne vous y risquez pas. Vous pouvez retourner vers le nord afin de revenir au milieu de la scène,
+      mais aussi voler les objets qui se trouvent où vous êtes. Au fond... pas vu pas pris. Et vous n'avez pas envie de vous faire prendre par tout ce groupe de rockers hein.
+      Tachez donc de ne pas vous faire voir.
 contains:
     - figurine-000
 ---
@@ -160,10 +179,25 @@ id: foule-temple-rock-000
 type: Location
 events:
   info:
-    actor: "foule TEMPLE rock 000"
+    actor: "En slam sur la foule"
   look:
     actor: |
-      VOUS ETES sur la foule
+      Vous êtes sur la foule et vous sentez cette bonne odeur émanant de tous ces gens transpirant. Enfin, vous n'y pretez pas vraiment attention
+      tellement la sensation est grandiose. Vous pouver nager dans la foule vers le nord ou le sud, ou revenir sur scène en allant à l'est.
+---
+id: tabouret-batterie-000
+type: Container
+name: tabouret
+events:
+  info:
+    actor: "Un tabouret hydrolique, parfait pour des petites fesses de batteur."
+  look:
+    actor: |
+        Un tabouret de belle qualité, une paire de baguette Vic Firth 7A est posée dessus. Leurs bouts sont un peu abimés sûrement par une utilisation un peu trop intensive
+        des ustensils.
+contains:
+  - baguettes-000
+
 
 #########################
 ## --TEMPLE ZOUKLOVE-- ##
@@ -174,16 +208,17 @@ id: entree-temple-zouklove-000
 type: Location
 events:
   info:
-    actor: "ENTREE TEMPLE zouklove 000"
+    actor: "Entrée du temple du ZoukLove"
   look:
     actor: |
-      VOUS ETES A LENTREE DU TEMPLE zouklove, PORTE FERMEE (portal entree -> hall fermé)
+      Vous vous trouvez à l'entrée du temple Créole. Vous voyez de gigantesques statues de part et d'autre de l'entrée du temple. Une ambiance chaleureuse
+      se fait sentir de ce lieu, comme une odeur de fumée qui vous était d'ailleurs inconnue avant votre voyage en Jamaique pendant l'été 2010.
 ---
 id: salle-mysterieuse-temple-zouklove-000
 type: Location
 events:
   info:
-    actor: "ENTREE TEMPLE zouklove 000"
+    actor: "Salle d'entrée mystérieuse"
   look:
     actor: |
       vous etes dans salle principale de temple zouklove

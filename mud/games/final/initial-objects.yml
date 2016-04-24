@@ -119,7 +119,7 @@ events:
 ---
 id: bouton-classique-000
 type: Thing
-name: 
+name:
   - tableau
   - bouton
 props:
@@ -216,36 +216,12 @@ events:
     actor: "Une veste de rocker"
   look:
     actor: |
-      C'est une veste de rocker, elle sent bon la bière et le tabac froid. La veste est remplie de patch anarchy 
+      C'est une veste de rocker, elle sent bon la bière et le tabac froid. La veste est remplie de patch anarchy
       et Guns'n'Roses. Une jolie veste quoi.
   drop:
     effects:
       - type  : ChangePropEffect
         modifs: -=guitare-000:hidden2
----
-id: roady-000
-type: Container
-name: roady
-events:
-  info:
-    actor: "Un roady, grand, carafe, jeu long, clope roulée au bec"
-  look:
-    actor: |
-      ça va ou quoi ? tu veux ta gratte? lache moi ta veste, les cordes et les baguettes et jte la ramene !
-  contains:
-    - guitare-000
----
-id: tabouret-batterie-000
-type: Container
-name: tabouret
-events:
-  info:
-    actor: "Un tabouret hydrolique, parfait pour des petites fesses de batteur."
-  look:
-    actor: |
-        un tabouret de belle qualité, une paire de baguette Vic Firth 7A est posée dessus. Les bouts sont un peu abimés.
-contains:
-  - baguettes-000
 ---
 id: baguettes-000
 type: Thing
@@ -318,7 +294,7 @@ events:
         modifs: -=djembe-000:hidden1
 
 #########################
-## --TEMPLE ZOUKLOVE-- ## 
+## --TEMPLE ZOUKLOVE-- ##
 #########################
 ---
 id: djembe-000
@@ -382,9 +358,9 @@ events:
       L'amour est un element essentiel d'un instrument de musique.
        C’est l’étoffe de la nature que l’imagination a brodée. Veux-tu avoir une idée de l’amour ? Vois les moineaux de ton jardin ;
        vois tes pigeons ; contemple le taureau qu’on amène à ta génisse ; regarde ce fier cheval que deux de ses valets conduisent
-       à la cavale paisible qui l’attend, et qui détourne sa queue pour le recevoir ; vois comme ses yeux étincellent ; 
+       à la cavale paisible qui l’attend, et qui détourne sa queue pour le recevoir ; vois comme ses yeux étincellent ;
        entends ses hennissements ; contemple ces sauts, ces courbettes, ces oreilles dressées, cette bouche qui s’ouvre avec de petites convulsions,
-       ces narines qui s’enflent, ce souffle enflammé qui en sort, ces crins qui se relèvent et qui flottent, ce mouvement impétueux 
+       ces narines qui s’enflent, ce souffle enflammé qui en sort, ces crins qui se relèvent et qui flottent, ce mouvement impétueux
        *dont il s’élance sur l’objet que la nature lui a destiné : mais n’en sois point jaloux, et songe aux avantages de l’espèce humaine ;
        ils compensent en amour tous ceux que la nature a donnés aux animaux, force, beauté, légèreté, rapidité.
   look:
@@ -486,7 +462,7 @@ events:
     actor: |
       Sur le pilier est écrit : <br>
       <i>
-        Ta quête n'est pas fini le bleu, tu dois encore déverouiller cette dernière porte. Le bouton situé à coté de toi te permettra 
+        Ta quête n'est pas fini le bleu, tu dois encore déverouiller cette dernière porte. Le bouton situé à coté de toi te permettra
         d'activer 3 autres boutons répartis dans les temples d'où tu viens. Reviens quand tu en auras fini.
       </i>
 ---
