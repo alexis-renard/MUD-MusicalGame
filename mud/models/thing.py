@@ -32,3 +32,10 @@ class Thing(Located, Model):
 
     def archive_into(self, obj):
         super().archive_into(obj)
+
+    def not_hidden(self):
+            if not self.has_prop("hidden1"):
+                if not self.has_prop("hidden2"):
+                    if not self.has_prop("hidden3"):
+                        return True
+            return False

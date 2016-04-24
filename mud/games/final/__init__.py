@@ -20,9 +20,9 @@ def make_rules():
 
     return (
         (GoAction       , r"(?:aller |)(%s)" % "|".join(DIRS)),
-        (TakeAction     , r"(?:p|prendre) %s(\S+)" % DETS),
+        (TakeAction     , r"(?:p|prendre|voler) %s(\S+)" % DETS),
         (LookAction     , r"(?:r|regarder)"),
-        (InspectAction  , r"(?:r|regarder|lire|inspecter|observer) %s(\S+)" % DETS),
+        (InspectAction  , r"(?:r|regarder|lire|inspecter|observer|parler)(?: a|à|avec|) %s(\S+)" % DETS),
         (OpenAction     , r"ouvrir %s(\S+)" % DETS),
         (OpenWithAction , r"ouvrir %s(\S+) avec %s(\w+)" % (DETS,DETS)),
         (CloseAction    , r"fermer %s(\S+)" % DETS),

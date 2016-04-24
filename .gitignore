@@ -5,3 +5,4 @@ tmp
 venv
 NOTES.TXT
 .games
+**/*.orig

@@ -7,7 +7,8 @@ id: entree-temple-classique-000
 type: Location
 events:
   info:
-    actor: "Entrée du temple de la musique classique"
+    actor: |
+      Entrée du temple de la musique classique
   look:
     actor: |
       Vous entendez une douce musique qui vous rappelle votre enfance, lorsque vous étiez en voiture avec votre grand père,
@@ -19,7 +20,9 @@ id: hall-opera-temple-classique-000
 type: Location
 events:
   info:
-    actor: "Hall de de l'opéra"
+    actor: |
+      <iframe width="100%" height="300" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/218967210&amp;auto_play=true&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
+      Hall de de l'opéra
   look:
     actor: |
       Vous êtes dans le hall d'entrée du temple classique, qui se trouve être un ancien opéra. Vous voyez à l'ouest comme à l'est deux
@@ -103,9 +106,11 @@ id: entree-temple-rock-000
 type: Location
 events:
   info:
-    actor: "Entrée du temple du rock "
+    actor: |
+      Entrée du temple du rock 
   look:
     actor: |
+      <iframe width="100%" height="300" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/218967407&amp;auto_play=true&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
       Vous êtes à l'entrée de cette arène de cuir, qui vous a tout l'air d'être le temple du rock'n'roll. Hell yeah Mazère feuille coeur. Si vous continuez encore
       plus à l'ouest, vous vous risquez de rentrer dans un endroit qui vous risque de vous faire un make up de personnalité. Votre père Mercelin étant un des
       plus vieux fan de Johnny, vous ne pouvez pas faire l'affront de ne pas affronter votre destin et de rentrer dans ce temple. Comme si toute cette histoire
@@ -211,6 +216,7 @@ events:
     actor: "Entrée du temple du ZoukLove"
   look:
     actor: |
+      <iframe width="100%" height="300" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/218967920&amp;auto_play=true&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
       Vous vous trouvez à l'entrée du temple Créole. Vous voyez de gigantesques statues de part et d'autre de l'entrée du temple. Une ambiance chaleureuse
       se fait sentir de ce lieu, comme une odeur de fumée qui vous était d'ailleurs inconnue avant votre voyage en Jamaique pendant l'été 2010.
 ---
@@ -276,19 +282,23 @@ id: entree-temple-electro-000
 type: Location
 events:
   info:
-    actor: "ENTREE TEMPLE ELECTRO 000"
+    actor: |
+      L'entrée du temple électro, la fin de votre périple en somme
   look:
     actor: |
-      VOUS ETES A LENTREE DU TEMPLE electro, PORTE FERMEE (portal entree -> hall fermé)
+      Vous vous trouvez à l'entrée du temple électro, une musique remplie de basses vous immerge.
+      A l'est se trouve le pré-hall.
 ---
 id: pre-hall-temple-electro-000
 type: Location
 events:
   info:
-    actor: "pre Hall TEMPLE electro 000"
+    actor: "Le pré-hall du temple électro"
   look:
     actor: |
-      VOUS ETES pre HALL DU TEMPLE electro vous voyez un pilier et un bouton
+      <iframe width="100%" height="300" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/218968376&amp;auto_play=true&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
+      Vous voici dans le pré-hall du temple, vous voyez un pilier ainsi qu'un bouton, intriguant tout ça.
+      A l'est se trouve le hall principal de ce temple.
 parts:
     - pilier-electro-000
     - bouton-electro-000
@@ -300,17 +310,17 @@ events:
     actor: "Hall TEMPLE electro 000"
   look:
     actor: |
-      VOUS ETES HALL DU TEMPLE electro vous voyez un pilier et un bouton
-
+      TRES JOLI Hall, on sent l'influence des styles précédents. Des leds pavent les murs, les basses de font de plus en plus ressentir.
+      L'entrée de l'ascenceur se situe à l'est de la pièce.
 ---
 id: salle-finale-temple-electro-000
 type: Location
 events:
   info:
-    actor: "Salle finale TEMPLE electro 000"
+    actor: "La salle finale, salle de concert du temple électro, la fin approche"
   look:
     actor: |
-      VOUS ETES Salle finale DU TEMPLE electro vous voyez un pilier
+      Nous y voila ! La salle de concert ! Totalement blindée les gens se pressent au devant de la scène, tout le monde semble ravi d'être ici.
 parts:
     - pilier-electro-001
 ---
