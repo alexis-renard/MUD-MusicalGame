@@ -77,6 +77,7 @@ class Evented(Basic):
             data = self._advance_event_data(data, context)
             if not data:
                 break
+            print(data)
             data = data.get(key, None)
         if deref_last:
             data = self._advance_event_data(data, context)

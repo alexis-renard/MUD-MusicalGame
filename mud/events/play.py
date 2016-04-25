@@ -8,15 +8,16 @@ from mud.models                   import Player
 import mud.game
 
 class PlayWithEvent(Event3):
+    def __init__(self, actor, object, object2):
+        Event2.__init__(self, actor, object2)
+        self.object2 = object
     NAME = "playwith"
 
     def perform(self):
-        print("base de la base")
-        if self.object.has_prop("playable"):
+        if self.object2.has_prop("playable"):
             print("partition ok")
             if self.object2.has_prop("instrument"):
                 print("instrument ok")
-                # return(self.play_failed())
                 return(self.inform("playwith.actor"))
         return(self.play_failed())
 
