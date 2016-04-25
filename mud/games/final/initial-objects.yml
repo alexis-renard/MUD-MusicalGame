@@ -24,8 +24,9 @@ events:
       - type  : ChangePropEffect
         modifs: =violon-000:hidden1
   playwith:
-    actor: |
-      Vous jouez du violon et vous êtes sensé vous tp les boys. Enfin hope so.
+    info:
+      actor: |
+        Vous jouez du violon et vous êtes sensé vous tp les boys. Enfin hope so.
     effects:
       - type  : EnterPortalEffect
         exit  : =salle-opera-temple-classique-000-nord
