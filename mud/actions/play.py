@@ -2,7 +2,6 @@
 # Copyright (C) 2014 Denys Duchier, IUT d'Orléans
 #==============================================================================
 #
-# from .action                      import Action2
 # from mud.events                   import TeleportEvent
 # from mud.models.mixins.containing import Containing
 # from mud.models                   import Player
@@ -35,12 +34,14 @@
 
 
 from .action import Action3
+from .action import Action2
 from mud.events import PlayWithEvent
 
 
 class PlayWithAction(Action3):
     # instrument = self.resolve_object2()
     # partition = self.resolve_object()
+
     EVENT = PlayWithEvent
     RESOLVE_OBJECT = "resolve_for_operate"
     RESOLVE_OBJECT2 = "resolve_for_use"

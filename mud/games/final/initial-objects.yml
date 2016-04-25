@@ -58,6 +58,15 @@ events:
     actor: |
       C'est une partition qui semble pouvoir être jouée avec n'importe quel instrument. Vous sentez étrangement un certain
       potentiel dans ce vieux parchemin.
+  playwith:
+    actor: |
+      Vous jouez du violon et vous êtes sensé vous tp les boys. Enfin hope so.2
+    effects:
+      - type  : EnterPortalEffect
+        exit  : =scene-temple-rock-000-sud
+    failed:
+      actor: |
+        Vous n'arrivez pas à jouer2
 ---
 id: cordes-000
 type: Thing
