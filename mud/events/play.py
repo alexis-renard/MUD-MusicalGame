@@ -13,35 +13,16 @@ class PlayWithEvent(Event3):
     def perform(self):
         if not self.object.has_prop("playable"):
             self.add_prop("object-not-playable")
+            print(1)
         if self.object.has_prop("playable"):
-            if "instrument" in self.get_props():
-                for prop in self.get_props():
-                    if "id" in prop:
-                        #récupérer l'objet qui correspond au lieu loc
-                        loc = self.resolve_object(prop)
-                        self.actor.move_to(loc)
-                        return(self.inform("playwith.actor"))
+            print(2)
+            return(self.inform("playwith.failed"))
+            print(2.1)
+            if "instrument" in self.object.get_props():
+                return(self.inform("playwith.actor"))
+                print(3)
         return(self.play_failed())
 
-    def resolve_object(location):
-        world = mud.game.GAME.world
-        loc = world.get(location)
-        if loc:
-            locs = [loc]
-        else:
-            locs = []
-            for k,v in world.items():
-                if isinstance(v, Containing) and \
-                   not isinstance(v, Player) and \
-                   k.find(self.object) != -1:
-                    locs.append(v)
-        return locs
-
-    def play_failed(self): ##à implémenter plus en profondeur iflwim
+    def play_failed(self):
         self.fail()
         self.inform("playwith.failed")
-
-
-#initial
-    def perform(self):
-        self.inform("playwith") # de l'html
