@@ -6,7 +6,6 @@ id: violon-000
 type: Thing
 name: violon
 props:
-  - entree-temple-classique-000
   - takable
   - instrument
   - hidden1

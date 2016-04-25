@@ -16,10 +16,10 @@ class PlayWithEvent(Event3):
         if self.object.has_prop("playable"):
             if "instrument" in self.get_props():
                 for prop in self.get_props():
-                    if "000" in prop:
+                    if "id" in prop:
                         #récupérer l'objet qui correspond au lieu loc
                         loc = self.resolve_object(prop)
-                        self.actor.move_to(loc[0])
+                        self.actor.move_to(loc)
                         return(self.inform("playwith.actor"))
         return(self.play_failed())
 
