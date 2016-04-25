@@ -9,9 +9,9 @@ import mud.game
 
 class PlayWithEvent(Event3):
 
-    def __init__(self, actor, object, object2):
-        Event2.__init__(self, actor, object2)
-        self.object2 = object
+    # def __init__(self, actor, object, object2):
+    #     Event2.__init__(self, actor, object2)
+    #     self.object2 = object
 
     NAME = "playwith"
 
@@ -20,6 +20,7 @@ class PlayWithEvent(Event3):
             print("partition ok")
             if self.object.has_prop("instrument"):
                 print("instrument ok")
+                # return(self.play_failed())
                 return(self.inform("playwith.actor"))
         return(self.play_failed())
 

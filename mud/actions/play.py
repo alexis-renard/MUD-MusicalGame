@@ -42,9 +42,16 @@ class PlayWithAction(Action3):
     # instrument = self.resolve_object2()
     # partition = self.resolve_object()
 
+    def __init__(self, subject, o, object2):
+        Action2.__init__(self, subject, object2)
+        self.object2 = o
+        self.object2_resolved = None
+
     EVENT = PlayWithEvent
     RESOLVE_OBJECT = "resolve_for_operate"
     RESOLVE_OBJECT2 = "resolve_for_use"
+    # RESOLVE_OBJECT = "resolve_for_use"
+    # RESOLVE_OBJECT2 = "resolve_for_operate"
     ACTION = "playwith"
 
     # NAME = "teleport"
