@@ -26,8 +26,12 @@ events:
   playwith:
     actor: |
       Vous jouez du violon et vous êtes sensé vous tp les boys. Enfin hope so.
-    failed: |
-      Vous n'arrivez pas à jouer
+    effects:
+      - type  : EnterPortalEffect
+        exit  : =scene-temple-rock-000-sud
+    failed:
+      actor: |
+        Vous n'arrivez pas à jouer
 
 ---
 id: luthier-000

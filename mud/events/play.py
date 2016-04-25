@@ -13,7 +13,6 @@ class PlayWithEvent(Event3):
     def perform(self):
         if not self.object.has_prop("playable"):
             self.add_prop("object-not-playable")
-            return self.fail()
         if self.object.has_prop("playable"):
             if "instrument" in self.get_props():
                 for prop in self.get_props():
