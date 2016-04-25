@@ -42,9 +42,9 @@ events:
       Vous êtes dans le hall d'entrée du temple classique, qui se trouve être un ancien opéra. Vous voyez à l'ouest comme à l'est deux
       escaliers qui semblent mener jusqu'aux balcons, mais vous pouvez également continuer plus au sud vers la salle de l'opéra. Un luthier
       est à l'entrée. Vous pouvez lui parler pour voir ce qu'il propose.
-contains:
-  - partition-000
-  - violon-000
+# contains:
+#   - partition-000
+  # - violon-000
 parts:
   - luthier-000
 ---

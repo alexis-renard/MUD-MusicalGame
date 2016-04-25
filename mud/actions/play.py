@@ -44,7 +44,7 @@ class PlayWithAction(Action3):
     EVENT = PlayWithEvent
     RESOLVE_OBJECT = "resolve_for_operate"
     RESOLVE_OBJECT2 = "resolve_for_use"
-    ACTION = "play-with"
+    ACTION = "playwith"
 
     # NAME = "teleport"
     #

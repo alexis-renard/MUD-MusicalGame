@@ -30,6 +30,9 @@ contains:
   # - instrument-cheat-000
   # - cordes-000
   # - corps-violon-000
+  - violon-000
+  - partition-000
+
 parts:
   - pilier-000
 ---

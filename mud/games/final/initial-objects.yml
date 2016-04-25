@@ -7,12 +7,13 @@ type: Thing
 name: violon
 props:
   - takable
+  - instrument
   - hidden1
   - hidden2
   - hidden3
 events:
   info:
-    actor: "Un magnifique violon Stradivarius de chez LIDL. Ca pue l'arnaque. Vous n'auriez jamais du croire cet homme avec une longue barbe grise"
+    actor: "Un magnifique violon Stradivarius de chez LIDL. Ca pue l'arnaque."
   look:
     actor: |
       Manigifique violon, un peu amoché, mais ça peut s'arranger. Comme le chien Pilou de la voisine Thérèse.
@@ -22,6 +23,12 @@ events:
         modifs: -=launchpad-000:hidden1
       - type  : ChangePropEffect
         modifs: =violon-000:hidden1
+  playwith:
+    actor: |
+      Vous jouez du violon et vous êtes sensé vous tp les boys. Enfin hope so.
+    failed: |
+      Vous n'arrivez pas à jouer
+
 ---
 id: luthier-000
 type: Thing
