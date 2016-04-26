@@ -367,6 +367,7 @@ events:
       - type  : ChangePropEffect
         modifs: -=djembe-000:hidden2
       - type  : ChangePropEffect
+        modifs: =peau-000:hidden2
 ---
 id: amour-000
 type: Thing
@@ -451,12 +452,13 @@ type: Thing
 name: launchpad
 props:
   - takable
+  - instrument
   - hidden1
   - hidden3
   - hidden2
 events:
   info:
-    actor: "un laucnhpad S de marque Novation"
+    actor: "Un laucnhpad S de marque Novation"
   look:
     actor: |
       Un launchpad signature Madeon, prêt à ambiancey all night long* <br>
@@ -468,7 +470,7 @@ events:
         à jamais votre vie.
     effects:
       - type  : EnterPortalEffect
-        exit  : =hall-of-fame-000-exit
+        exit  : =salle-finale-temple-electro-000-exit
     failed:
       actor: |
         Vous n'arrivez visiblement pas à jouer. Vous étiez pourtant si proche de la gloire.

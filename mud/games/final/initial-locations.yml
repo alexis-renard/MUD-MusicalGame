@@ -356,10 +356,10 @@ events:
       <br> Un bouton en bois d'ébène semble dépasser du mur à votre gauche.
 contains:
   - djembe-000
-  - bouton-zouk-000
 parts:
   - statue-temple-zouklove-000
   - artisan-000
+  - bouton-zouk-000
 ---
 id: statue-temple-zouklove-000
 type: Container
@@ -453,7 +453,7 @@ events:
   look:
     actor: |
       Vous vous trouvez à l'entrée du temple électro, une musique remplie de basses vous immerge.
-      A l'est se trouve le pré-hall.
+      A l'est se trouve l'entrée du temple... mais il semble y avoir une queue monstre.
 ---
 id: pre-hall-temple-electro-000
 type: Location
@@ -506,13 +506,7 @@ events:
       </div>
   look:
     actor: |
-      <div class='info-contain'>
-      <div class='info-g'>      La salle finale, salle de concert du temple électro, la fin approche"
-      </div>
-      <div class='info-d'>
-      <img src="static/ressources/electro/salle.jpg"/>
-      </div>
-      </div>
+      La salle finale, salle de concert du temple électro, la fin approche"<br>
       Nous y voila ! La salle de concert ! Totalement blindée les gens se pressent au devant de la scène, tout le monde semble ravi d'être ici. Vous
       semblez reconnaitre un célèbre DJ ayant fait un tabac sur l'interweb : Darude !
 contains:

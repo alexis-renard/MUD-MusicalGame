@@ -501,7 +501,7 @@ exits:
         failed:
           actor   : &porte001 |
             La porte d accès au temple electro est malheureusement sécurisée elle aussi...
-            Elle est actuellement fermée et ne peut être ouverte
+            Elle est actuellement bloquée par un videur et ne peut être ouverte
             qu avec une clef usb 3.0 de dernière génération.
           observer: &porte002 |
             {{ actor.name }} tente en vain d ouvrir la porte du
@@ -524,10 +524,10 @@ exits:
             modifs:
               - -portal:closed
           actor   : |
-            La porte du département s'ouvre avec un déclic.
+            La clef USB semble être appréciée par Jonnhy le vigile. Il vous laisse donc rentrer paisiblement.
           observer: |
             {{ actor.name }} ouvre la porte du temple electro
-            avec un badge de sécurité.
+            avec une clef USB.
         - props   :
             - portal:closed
             - -object2:key-for-hall-temple-electro-000
@@ -546,8 +546,8 @@ exits:
             qu'elle est déjà ouverte.
       close       : &porte004
         - props   : portal:closed
-          actor   : "Vous fermez la porte du département."
-          observer: "{{ actor.name }} ferme le porte du temple electro"
+          actor   : "Vous demandez au vigile de ne plus laisser rentrer personne."
+          observer: "{{ actor.name }} dit au vigile de ne plus laisser rentrer personne."
           effects :
             - type  : ChangePropEffect
               modifs: =portal-porche-hall-temple-electro-000:closed
@@ -564,9 +564,9 @@ exits:
         observer  : "{{ actor.name }} sort du temple electro"
         failed:
           actor   : |
-            La porte d'accès au temple electro est sécurisée.
-            Elle est actuellement fermée et, même pour sortir,
-            seul une clef usb de folie pourra réussir à la débloquer.
+            La porte d accès au temple electro est malheureusement sécurisée elle aussi...
+            Elle est actuellement fermée par un videur et même de l'intérieur ne peut être ouverte
+            qu'avec une clef usb 3.0 de dernière génération.
           observer: |
             {{ actor.name }} tente en vain de sortir par la porte
             du temple electro.
@@ -714,4 +714,7 @@ exits:
   - id: hall-of-fame-000-exit
     location: hall-of-fame-000
     direction: haut
+  - id: salle-finale-temple-electro-000-exit
+    location: salle-finale-temple-electro-000
+    direction: bas
 ---
