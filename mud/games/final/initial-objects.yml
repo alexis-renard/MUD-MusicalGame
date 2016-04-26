@@ -50,7 +50,7 @@ events:
 id: partition-000
 type: Thing
 name: partition
-gender: plu
+gender: fem
 props:
   - takable
   - playable
@@ -139,58 +139,21 @@ props:
 events:
   look:
     actor: |
-      Un bouton qui semble ordinaire, mais qui est sûrement beaucoup plus important que ce que vous pensez...
+      Vous voyez que le tableau est effectivement légèrement de travers. Vous pouvez essayer de le pousser pour le remettre droit.
   push:
     - props : bouton-classique-000:deactivated
       actor: |
-        Vous appuyez sur le bouton, mais rien ne se passe.
+        Vous tentez de remettre le tableau droit mais rien n'y fait, il retombe de plus belle.
       observer: |
-        {{ actor.name }} appuie sur le bouton, mais rien ne
-        semble se produire.
+        {{ actor.name }} essaie de remettre le tableau droit, mais il ne semble pas reussir.
     - props: -bouton-classique-000:deactivated
       actor: |
-        Vous appuyez sur le bouton et entendez comme un déclic électronique provenir de l'est.
+        Vous remettez le tableau droit, et entendez un léger <i>Click</i>. Quelque chose a du se produire.
       observer: |
-        {{ actor.name }} appuie sur le bouton, et quelque chose se déverouiller à l'est d'ici.
+        {{ actor.name }} remet le tableau droit.
       effects:
         - type  : ChangePropEffect
           modifs: -=portal-pre-hall-hall-temple-electro-000:closed-classique
-        # - type  : NarrativeEffect
-        #   at    : =salle-electro
-        #   key   : bouton-classique
-
-
-#
-# open-with   :
-#   - props   :
-#       - portal:closed
-#       - object2:key-for-porte-porche-000
-#     effects :
-#       type  : ChangePropEffect
-#       modifs:
-#         - -portal:closed
-#     actor   : |
-#       La porte du département souvre avec un déclic.
-#     observer: |
-#       {{ actor.name }} ouvre la porte du département info
-#       avec un badge de sécurité.
-#   - props   :
-#       - portal:closed
-#       - -object2:key-for-porte-porche-000
-#     actor   : |
-#       Vous tentez vainement douvrir la porte avec
-#       {{ object2.noun_the() }}
-#     observer: |
-#       {{ actor.name }} tente vainement douvrir la porte du
-#       département info avec {{ object2.noun_a() }}
-#   - props   : -portal:closed
-#     actor   : *porte003
-#     observer: |
-#       {{ actor.name }} tente futilement douvrir la porte du
-#       département info avec {{ object2.noun_a() }}, alors
-#       quelle est déjà ouverte.
-
-
 
 
 ##########################
@@ -315,9 +278,7 @@ events:
           modifs:
             - -=portal-pre-hall-hall-temple-electro-000:closed-rock
             - -=portal-scene-foule-temple-rock-000:calme
-        # - type  : NarrativeEffect
-        #   at    : =salle-electro
-        #   key   : bouton-classique
+
 ---
 id: figurine-000
 type: Thing
@@ -385,7 +346,7 @@ events:
     actor: "Un artisan local, grand sourire, dents jaunes"
   look:
     actor: |
-      *accent des iles* il dit : <i> HEYYYYYY MON AMI, POUR UN PRIX TRES BAS JE PEUX TE CONFECTIONNER UN JOLI djembe WALAL BILAL,
+      *Accent des iles* il dit : <i> HEYYYYYY MON AMI, POUR UN PRIX TRES BAS JE PEUX TE CONFECTIONNER UN JOLI djembe WALAL BILAL,
       depose moi simplement les objets necessaires et je te laisserai le djembe, au plaisir </i>
 ---
 id: peau-000

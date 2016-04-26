@@ -33,11 +33,11 @@ exits:
         observer  : "{{ actor.name }} entre dans le temple classique"
         failed:
           actor   : &porte001 |
-            Les majestueuses portes temple classique est sécurisée.
-            Elle sont actuellement fermées et ne peut être ouverte
+            La majestueuse porte temple classique est sécurisée.
+            Elle est actuellement fermée et ne peut être ouverte
             qu'avec un archet.
           observer: &porte002 |
-            {{ actor.name }} tente en vain d'ouvrir les portes du temple classique.
+            {{ actor.name }} tente en vain d'ouvrir la porte du temple classique.
       leave-portal:
         actor     : "Vous sortez du temple classique"
         observer  : "{{ actor.name }} sort du temple classique"
@@ -78,8 +78,8 @@ exits:
             qu'elle est déjà ouverte.
       close       : &porte004
         - props   : portal:closed
-          actor   : "Vous fermez les portes du temple."
-          observer: "{{ actor.name }} ferme les portes du temple classique"
+          actor   : "Vous fermez la porte du temple."
+          observer: "{{ actor.name }} ferme la porte du temple classique"
           effects :
             - type  : ChangePropEffect
               modifs: =portal-porche-hall-000:closed
@@ -96,12 +96,12 @@ exits:
         observer  : "{{ actor.name }} sort du temple classique"
         failed:
           actor   : |
-            La porte d'accès au temple classique est sécurisée.
+            La porte du temple classique est sécurisée.
             Elle est actuellement fermée et, même pour sortir,
             elle ne peut être ouverte qu'avec un archet.
           observer: |
             {{ actor.name }} tente en vain de sortir par la porte
-            du temple classique
+            du temple classique.
 ---
 id: portal-hall-salle-temple-classique-000
 type: Portal
