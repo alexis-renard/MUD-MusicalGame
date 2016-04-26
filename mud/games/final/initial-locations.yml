@@ -193,7 +193,7 @@ events:
 contains:
   - veste-000
   - bouton-rock-000
-  - guitare-000
+  # - guitare-000
 parts:
   - roady-000
 ---
@@ -321,7 +321,7 @@ events:
       intriguant en continuant vers le nord, ou retourner en dehors en marchant vers le sud. Vous voyez un artistan à qui vous sentez que vous pouvez parler.
       <br> Un bouton en bois d'ébène semble dépasser du mur à votre gauche.
 contains:
-  - djembe-000
+  # - djembe-000
   - bouton-zouk-000
 parts:
   - statue-temple-zouklove-000
@@ -481,8 +481,8 @@ events:
       </div>
       Nous y voila ! La salle de concert ! Totalement blindée les gens se pressent au devant de la scène, tout le monde semble ravi d'être ici. Vous
       semblez reconnaitre un célèbre DJ ayant fait un tabac sur l'interweb : Darude !
-contains:
-  - launchpad-000
+# contains:
+#   - launchpad-000
 parts:
     - pilier-electro-001
     - darude-000

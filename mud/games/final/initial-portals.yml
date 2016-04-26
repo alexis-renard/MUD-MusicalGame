@@ -33,12 +33,11 @@ exits:
         observer  : "{{ actor.name }} entre dans le temple classique"
         failed:
           actor   : &porte001 |
-            La porte d'accès au temple classique est sécurisée.
-            Elle est actuellement fermée et ne peut être ouverte
+            Les majestueuses portes temple classique est sécurisée.
+            Elle sont actuellement fermées et ne peut être ouverte
             qu'avec un archet.
           observer: &porte002 |
-            {{ actor.name }} tente en vain d'ouvrir la porte du
-            temple classique
+            {{ actor.name }} tente en vain d'ouvrir les portes du temple classique.
       leave-portal:
         actor     : "Vous sortez du temple classique"
         observer  : "{{ actor.name }} sort du temple classique"
@@ -57,10 +56,10 @@ exits:
             modifs:
               - -portal:closed
           actor   : |
-            La porte du département s'ouvre avec un déclic.
+            Vous entendez un <i>iiiiiiiiiiii</i> et vous voyez que la porte s'ouvre devant vous.
           observer: |
             {{ actor.name }} ouvre la porte du temple classique
-            avec un badge de sécurité.
+            avec son archet.
         - props   :
             - portal:closed
             - -object2:key-for-hall-opera-temple-classique-000
@@ -79,8 +78,8 @@ exits:
             qu'elle est déjà ouverte.
       close       : &porte004
         - props   : portal:closed
-          actor   : "Vous fermez la porte du département."
-          observer: "{{ actor.name }} ferme le porte du temple classique"
+          actor   : "Vous fermez les portes du temple."
+          observer: "{{ actor.name }} ferme les portes du temple classique"
           effects :
             - type  : ChangePropEffect
               modifs: =portal-porche-hall-000:closed
@@ -99,7 +98,7 @@ exits:
           actor   : |
             La porte d'accès au temple classique est sécurisée.
             Elle est actuellement fermée et, même pour sortir,
-            elle ne peut être ouverte qu'avec un badge de sécurité.
+            elle ne peut être ouverte qu'avec un archet.
           observer: |
             {{ actor.name }} tente en vain de sortir par la porte
             du temple classique
@@ -190,12 +189,12 @@ exits:
         observer  : "{{ actor.name }} entre dans le temple rock"
         failed:
           actor   : &porte001 |
-            La porte d accès au temple rock est sécurisée.
+            La porte d'accès aux loges du temple rock est sécurisée.
             Elle est actuellement fermée et ne peut être ouverte
-            qu avec un médiator.
+            qu'avec un médiator.
           observer: &porte002 |
             {{ actor.name }} tente en vain d ouvrir la porte du
-            temple rock
+            temple rock.
       leave-portal:
         actor     : "Vous sortez du temple rock"
         observer  : "{{ actor.name }} sort du temple rock"
@@ -214,10 +213,11 @@ exits:
             modifs:
               - -portal:closed
           actor   : |
-            La porte du département s ouvre avec un déclic.
+            La porte des loges s'ouvre grâce à vos cours de crochetage au médiator
+            que vous avez le mérite d'avoir bien suivi.
           observer: |
             {{ actor.name }} ouvre la porte du temple rock
-            avec un badge de sécurité.
+            avec son médiator.
         - props   :
             - portal:closed
             - -object2:key-for-loges-temple-rock-000
@@ -236,8 +236,8 @@ exits:
             qu'elle est déjà ouverte.
       close       : &porte004
         - props   : portal:closed
-          actor   : "Vous fermez la porte du département."
-          observer: "{{ actor.name }} ferme le porte du temple rock"
+          actor   : "Vous fermez la porte des loges."
+          observer: "{{ actor.name }} ferme la porte du temple rock"
           effects :
             - type  : ChangePropEffect
               modifs: =portal-porche-hall-000:closed
@@ -256,10 +256,10 @@ exits:
           actor   : |
             La porte d'accès au temple rock est sécurisée.
             Elle est actuellement fermée et, même pour sortir,
-            elle ne peut être ouverte qu'avec un badge de sécurité.
+            elle ne peut être ouverte qu'avec un médiator.
           observer: |
             {{ actor.name }} tente en vain de sortir par la porte
-            du temple rock
+            du temple rock.
 ---
 id: portal-loges-scene-temple-rock-000
 type: Portal
@@ -295,17 +295,18 @@ exits:
       enter-portal:
         - props: portal-scene-foule-temple-rock-000:calme
           actor: |
-            Vous sautez dans la foule mais elle s'écarte sous vos pieds #shym #moise
+            Vous sautez dans la foule mais elle s'écarte sous vos pieds. #shym #moïse #wasted
           observer: |
-            {{ actor.name }} sélance dans la foule qui s'écarte majestueusement pour lui faire de la place sur le sol...
+            {{ actor.name }} s'élance dans la foule qui s'écarte majestueusement pour lui faire de la place sur le sol...
           data-driven: true
           effects:
             - type: DeathEffect
         - props: -portal-scene-foule-temple-rock-000:calme
           actor: |
-            Vous sautez dans la foule qui vous porte avec une énergie hallu...wait for it...cinante (s'il vous plait how i met ça se regarde en anglais)
+            Vous sautez dans la foule qui vous porte avec une énergie hallu...wait for it...cinante (s'il vous plait how i met ça se regarde en anglais).
           observer: |
-            {{ actor.name }} s'élance dans le vide et se fait porter par la foule telle un pingouin faisant la planche. La plancha. Baila Baila la nocha . Bref.
+            {{ actor.name }} s'élance dans le vide et se fait porter par la foule telle un pingouin faisant la planche. La plancha. Baila Bailando. Enfin bref.
+            Vous êtes jaloux et feriez mieux d'y aller également.
   - id: portal-foule-temple-rock-000-est
     location: foule-temple-rock-000
     direction: est
@@ -353,10 +354,10 @@ exits:
           actor   : &porte001 |
             La porte d'accès au temple zouklove est sécurisée.
             Elle est actuellement fermée et ne peut être ouverte
-            qu'avec un archet.
+            qu'avec une figurine hawaienne. Tout ce qu'il y a de plus normal.
           observer: &porte002 |
             {{ actor.name }} tente en vain d'ouvrir la porte du
-            temple zouklove
+            temple zouklove.
       leave-portal:
         actor     : "Vous sortez du temple zouklove"
         observer  : "{{ actor.name }} sort du temple zouklove"
@@ -375,10 +376,11 @@ exits:
             modifs:
               - -portal:closed
           actor   : |
-            La porte du département s'ouvre avec un déclic.
+            La porte du temple s'ouvre devant vous, et vous vous prenez un beau nuage de fumée dans la tronche.
+            Vous toussez, et vous commencez à sourir comme un abruti. Reprenez vous bon sang.
           observer: |
             {{ actor.name }} ouvre la porte du temple zouklove
-            avec un badge de sécurité.
+            avec sa petite figurine.
         - props   :
             - portal:closed
             - -object2:key-for-hall-opera-temple-zouklove-000
@@ -397,8 +399,8 @@ exits:
             qu'elle est déjà ouverte.
       close       : &porte004
         - props   : portal:closed
-          actor   : "Vous fermez la porte du département."
-          observer: "{{ actor.name }} ferme le porte du temple zouklove"
+          actor   : "Vous fermez la porte du temple zouklove."
+          observer: "{{ actor.name }} ferme la porte du temple zouklove"
           effects :
             - type  : ChangePropEffect
               modifs: =portal-porche-hall-000:closed
@@ -417,10 +419,10 @@ exits:
           actor   : |
             La porte d'accès au temple zouklove est sécurisée.
             Elle est actuellement fermée et, même pour sortir,
-            elle ne peut être ouverte qu'avec un badge de sécurité.
+            il faut vous armer d'une petite figurine hawaienne. Héééé ouais.
           observer: |
             {{ actor.name }} tente en vain de sortir par la porte
-            du temple zouklove
+            du temple zouklove. En vain...
 ---
 id: portal-salle-mysterieuse-jardin-temple-zouklove-000
 type: Portal
@@ -458,23 +460,6 @@ exits:
     location: entree-temple-electro-000
     direction: ouest
 ---
-
-    ## portal sans porte pour éviter d'avoir à l'ouvrir et faire des tests
-
-# id: portal-entree-hall-temple-electro-000
-# type: Portal
-# exits:
-#   - id: entree-temple-electro-000-est
-#     location: entree-temple-electro-000
-#     direction: est
-#     events:
-#       enter-portal:
-#         actor     : "Vous entrez dans le temple electro"
-#   - id: pre-hall-temple-electro-000-ouest
-#     location: pre-hall-temple-electro-000
-#     direction: ouest
-
-    ## portal normal avec porte
 id: portal-entree-hall-temple-electro-000
 type: Portal
 props:
@@ -495,9 +480,9 @@ exits:
         observer  : "{{ actor.name }} entre dans le temple electro"
         failed:
           actor   : &porte001 |
-            La porte d accès au temple electro est sécurisée.
+            La porte d accès au temple electro est malheureusement sécurisée elle aussi...
             Elle est actuellement fermée et ne peut être ouverte
-            qu avec un médiator.
+            qu avec une clef usb 3.0 de dernière génération.
           observer: &porte002 |
             {{ actor.name }} tente en vain d ouvrir la porte du
             temple electro
@@ -519,7 +504,7 @@ exits:
             modifs:
               - -portal:closed
           actor   : |
-            La porte du département s ouvre avec un déclic.
+            La porte du département s'ouvre avec un déclic.
           observer: |
             {{ actor.name }} ouvre la porte du temple electro
             avec un badge de sécurité.
@@ -561,10 +546,10 @@ exits:
           actor   : |
             La porte d'accès au temple electro est sécurisée.
             Elle est actuellement fermée et, même pour sortir,
-            elle ne peut être ouverte qu'avec un badge de sécurité.
+            seul une clef usb de folie pourra réussir à la débloquer.
           observer: |
             {{ actor.name }} tente en vain de sortir par la porte
-            du temple electro
+            du temple electro.
 ---
 id: portal-pre-hall-hall-temple-electro-000
 type: Portal
@@ -587,18 +572,14 @@ exits:
           - -portal-pre-hall-hall-temple-electro-000:closed-classique
           - -portal-pre-hall-hall-temple-electro-000:closed-rock
           - -portal-pre-hall-hall-temple-electro-000:closed-zouk
-          actor     : "Vous entrez dans la partie qui suit la porte"
-          observer  : "{{ actor.name }} entre dans la partie qui suit la porte"
+          actor     : "Vous arrivez enfin à passer cette porte, bien joué !"
+          observer  : "{{ actor.name }} entre dans la partie qui suit la porte."
           failed:
             actor   : &porte001 |
-              La porte est vérouillée elle ne peut etre ouverte que par l appuie sur les 3 boutons dans les differents temples
+              La porte est vérouillée elle ne peut etre ouverte que par l'appuie sur les 3 boutons dans les differents temples.
             observer: &porte002 |
-              {{ actor.name }} tente en vain d ouvrir la porte
+              {{ actor.name }} tente en vain d'ouvrir la porte
       leave-portal:
-        # - props   :
-        #   - portal:closed-classique
-        #   - portal:closed-rock
-        #   - portal:closed-zouk
         actor     : "Vous sortez de la salle"
         observer  : "{{ actor.name }} sort de la salle"
       open        :
@@ -619,12 +600,12 @@ exits:
       - for-leave
     events:
       enter-portal:
-        observer  : "{{ actor.name }} sort de la porte verrouillée avec les 3 props"
+        observer  : "{{ actor.name }} sort de la porte verrouillée avec les 3 props."
         failed:
           actor   : |
-            Le porte semble etre vérouillée par 3 verrous, elle ne s'ouvre pas
+            Le porte semble etre vérouillée par 3 verrous, elle ne s'ouvre pas...
           observer: |
-            {{ actor.name }} tente en vain de sortir par la porte
+            {{ actor.name }} tente en vain de sortir par la porte.
 ---
 id: hall-ascenseur-portal-000
 type: Portal
@@ -684,7 +665,6 @@ exits:
       leave-portal:
         actor: ""
         observer: *sortie-ascenseur
-
   - id      : exit-ascenseur-cage-000
     location: ascenseur-cage-000
     direction: nord-est

@@ -26,13 +26,13 @@ events:
   playwith:
     info:
       actor: |
-        Vous jouez du violon et vous êtes sensé vous tp les boys. Enfin hope so.
+        Vous jouez majestueusement la partition avec votre violon. Vous vous dématerielisez instantément et réapparaissez à l'entrée du temple.
     effects:
       - type  : EnterPortalEffect
-        exit  : =scene-temple-rock-000-sud
+        exit  : =salle-opera-temple-classique-000-nord
     failed:
       actor: |
-        Vous n'arrivez pas à jouer
+        Vous n'arrivez visiblement pas à jouer.
 
 ---
 id: luthier-000
@@ -44,7 +44,7 @@ events:
   look:
     actor: |
       Lokhtar mon ami, je vois que vous êtes intéréssé par mes violons. Je peux vous en construire un si vous le souhaitez.
-      Déposez simplement les éléments qui le constituent et je vous déposera un violon confectionné par mes soins.
+      Déposez simplement les éléments qui le constituent et je vous déposerai un violon confectionné par mes soins.
 ---
 id: partition-000
 type: Thing
@@ -58,16 +58,8 @@ events:
   look:
     actor: |
       C'est une partition qui semble pouvoir être jouée avec n'importe quel instrument. Vous sentez étrangement un certain
-      potentiel dans ce vieux parchemin.
-  playwith:
-    actor: |
-      Vous jouez du violon et vous êtes sensé vous tp les boys. Enfin hope so.2
-    effects:
-      - type  : EnterPortalEffect
-        exit  : =scene-temple-rock-000-sud
-    failed:
-      actor: |
-        Vous n'arrivez pas à jouer2
+      potentiel dans ce vieux parchemin. <br>
+      Si vous jouez de cet instrument avec un objet assemblé, il vous téléportera quelque part...
 ---
 id: cordes-000
 type: Thing
@@ -209,6 +201,7 @@ name:
   - fender
 props:
   - takable
+  - instrument
   - hidden1
   - hidden3
   - hidden2
@@ -218,12 +211,23 @@ events:
   look:
     actor: |
       Très jolie Fender Stratocaster pré-CBS de 89, un bijou. Vivement noël.
-  sdrop:
+  drop:
     effects:
       - type  : ChangePropEffect
         modifs: -=launchpad-000:hidden2
       - type  : ChangePropEffect
         modifs: =guitare-000:hidden2
+  playwith:
+    info:
+      actor: |
+        Vous vous asseyez et jouez de la guitare <i>assis par terre</i>, comme dirait l'homme au chapeau.
+    effects:
+      - type  : EnterPortalEffect
+        exit  : =scene-temple-rock-000-est
+    failed:
+      actor: |
+        Vous n'arrivez visiblement pas à jouer.
+
 ---
 id: roady-000
 type: Thing
@@ -329,6 +333,7 @@ events:
         modifs: -=djembe-000:hidden1
       - type  : ChangePropEffect
         modifs: =figurine-000:hidden3
+
 #########################
 ## --TEMPLE ZOUKLOVE-- ##
 #########################
@@ -338,6 +343,7 @@ type: Thing
 name: djembe
 props:
   - takable
+  - instrument
   - hidden1
   - hidden3
   - hidden2
@@ -353,6 +359,16 @@ events:
         modifs: -=launchpad-000:hidden3
       - type  : ChangePropEffect
         modifs: =djembe-000:hidden3
+  playwith:
+    info:
+      actor: |
+        Vous vous trouvez un petit coin <i>assis par terre</i>, comme dirait l'homme au chapeau.
+    effects:
+      - type  : EnterPortalEffect
+        exit  : =jardin-temple-zouklove-000-sud
+    failed:
+      actor: |
+        Vous n'arrivez visiblement pas à jouer.
 ---
 id: artisan-000
 type: Thing
@@ -382,7 +398,6 @@ events:
       - type  : ChangePropEffect
         modifs: -=djembe-000:hidden2
       - type  : ChangePropEffect
-        modifs: =peau-000:hidden2
 ---
 id: amour-000
 type: Thing
@@ -475,7 +490,20 @@ events:
     actor: "un laucnhpad S de marque Novation"
   look:
     actor: |
-      un launchpad signature Madeon, prêt à ambiancey all the night long*
+      Un launchpad signature Madeon, prêt à ambiancey all night long* <br>
+      <i>L'abus d'alcool est dangereux, à consommer avec modération. Si vous le trouvez.</i>
+  playwith:
+    info:
+      actor: |
+        Vous vous posez sur les platines, une main sur le scratch l'autre sur le casque. Accrochez vous, vous allez entreprendre un voyage qui va changer
+        à jamais votre vie.
+    effects:
+      - type  : EnterPortalEffect
+        exit  : =hall-of-fame-000-exit
+    failed:
+      actor: |
+        Vous n'arrivez visiblement pas à jouer. Vous étiez pourtant si proche de la gloire.
+
 ---
 id: darude-000
 type: Thing
@@ -488,8 +516,8 @@ events:
   look:
     actor: |
       Yo mon gars bien ou bien ça chill ? j'ai entendu dire que tetais en galere pour ton mix ce soir
-      depose moi les 3 derniers instruments que t'as construis et je devrais pouvoir te construire un matos pour ce soir
-      allez la bise
+      depose moi les 3 derniers instruments que t'as construis et je devrais pouvoir te construire un matos pour ce soir.
+      Allez, la bise.
 ---
 id: pilier-electro-000
 type: Thing
@@ -502,7 +530,7 @@ events:
       Sur le pilier est écrit : <br>
       <i>
         Ta quête n'est pas fini le bleu, tu dois encore déverouiller cette dernière porte. Le bouton situé à coté de toi te permettra
-        d'activer 3 autres boutons répartis dans les temples d'où tu viens. Reviens quand tu en auras fini.
+        d'activer 3 autres boutons répartis dans les temples d'où tu viens. Reviens quand tu en auras fini et tu pourras passer la dernière porte.
       </i>
 ---
 id: pilier-electro-001
@@ -527,13 +555,14 @@ props:
 events:
   look:
     actor: |
-      Un bouton qui semble être d'une importance cruciale
+      Un bouton qui semble être d'une importance cruciale.
   push:
     actor: |
       Vous appuyez sur le bouton, et une voix se fait entendre dans votre tête: <br>
       <i>
         "PAS MAL DU TOUT, PIETRE HUMAIN, BELZEBUTH EST FIER DE TOI. TU DOIS MAINTENANT TE RENDRE DANS LES 3 DERNIERES DEMEURES DE SATAN NOTRE SAUVEUR ! "
-      </i>
+      </i><br>
+      Vous sentez que vous devez aller pousser le tableau du temple classique et appuyer sur les boutons des temples du rock et du zouklove.
     observer: |
       {{ actor.name }} appuie sur le bouton, et il semble agir bizarrement, comme s'il écoutait quelqu'un parler.
       Etrangement, la pièce vous semble très calme... et vous préférez quand c'est un peu trop plus moins calme.
@@ -554,7 +583,7 @@ events:
   info:
     actor: "Un bouton pour appeler l'ascenseur."
   look:
-    actor: "C'est un bouton pour appeler l'ascenseur."
+    actor: "C'est un bouton pour appeler l'ascenseur. En fait."
   push:
     - props: =ascenseur-cage-000:upstairs
       observer: |

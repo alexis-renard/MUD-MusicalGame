@@ -32,6 +32,10 @@ contains:
   # - corps-violon-000
   - violon-000
   - partition-000
+  - guitare-000
+  - djembe-000
+  - launchpad-000
+
 
 parts:
   - pilier-000

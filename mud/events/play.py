@@ -8,11 +8,6 @@ from mud.models                   import Player
 import mud.game
 
 class PlayWithEvent(Event3):
-
-    # def __init__(self, actor, object, object2):
-    #     Event2.__init__(self, actor, object2)
-    #     self.object2 = object
-
     NAME = "playwith"
 
     def perform(self):
@@ -24,7 +19,6 @@ class PlayWithEvent(Event3):
                 return(self.inform("playwith.actor"))
         return(self.play_failed())
 
-    def play_failed(self): ##à implémenter plus en profondeur iflwim
+    def play_failed(self):
         self.fail()
         self.inform("playwith.failed")
-
