@@ -315,7 +315,27 @@ exits:
         actor: |
           Le vigile vous rattrape et vous remet sur scène.
         observer: "{{ actor.name }} revient sur scène."
-
+---
+id: portal-foule-foule-nord-temple-rock-000
+type: Portal
+exits:
+  - id: foule-temple-rock-000-2
+    location: foule-temple-rock-000
+    direction: nord
+  - id: foule-temple-rock-001-sud
+    location: foule-temple-rock-001
+    direction: sud
+---
+id: portal-foule-foule-sud-temple-rock-000
+type: Portal
+exits:
+  - id: foule-temple-rock-000-1
+    location: foule-temple-rock-000
+    direction: sud
+  - id: foule-temple-rock-002-nord
+    location: foule-temple-rock-002
+    direction: nord
+---
 
 #########################
 ## --TEMPLE ZOUKLOVE-- ##
@@ -696,4 +716,3 @@ exits:
     location: hall-of-fame-000
     direction: haut
 ---
-

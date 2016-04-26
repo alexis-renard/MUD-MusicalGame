@@ -16,7 +16,7 @@ events:
     actor: "Un magnifique violon Stradivarius de chez LIDL. Ca pue l'arnaque."
   look:
     actor: |
-      Manigifique violon, un peu amoché, mais ça peut s'arranger. Comme le chien Pilou de la voisine Thérèse.
+      C'est un magnifique violon, un peu amoché, mais ça peut s'arranger. Comme le chien Pilou de la voisine Thérèse.
   drop:
     effects:
       - type  : ChangePropEffect
@@ -211,10 +211,10 @@ props:
   - hidden2
 events:
   info:
-    actor: "Une belle Fender, parce que Gibson cest pas jojo"
+    actor: "Une belle guitare Fender"
   look:
     actor: |
-      Très jolie Fender Stratocaster pré-CBS de 89, un bijou. Vivement noël.
+      Très jolie Fender Stratocaster pré-CBS de 89, un bijou. Vivement noël. Parce que Gibson cest pas jojo.
   drop:
     effects:
       - type  : ChangePropEffect
@@ -356,10 +356,10 @@ props:
   - hidden2
 events:
   info:
-    actor: "un magnifique djembé en bois de bambou, sentant bon la lessive ARIEL fraicheur des iles."
+    actor: "Un magnifique djembé en bois de bambou."
   look:
     actor: |
-      Djembé made in china, numéro de série 69ZOUGLOU
+      Djembé made in china, numéro de série 69ZOUGLOU, sentant bon la lessive ARIEL fraicheur des iles.
   drop:
     effects:
       - type  : ChangePropEffect

@@ -19,7 +19,7 @@ def make_rules():
     DETS = "(?:l |le |la |les |une |un |)"
 
     return (
-        (GoAction       , r"(?:aller |)(%s)" % "|".join(DIRS)),
+        (GoAction       , r"(?:aller |gueuler |)(%s)" % "|".join(DIRS)),
         (TakeAction     , r"(?:p|prendre|voler) %s(\S+)" % DETS),
         (LookAction     , r"(?:r|regarder)"),
         (InspectAction  , r"(?:r|regarder|lire|inspecter|observer|parler)(?: a|à|avec|) %s(\S+)" % DETS),

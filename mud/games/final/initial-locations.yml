@@ -8,6 +8,15 @@ type: Location
 events:
   info:
     actor: |
+      <style>
+      body {
+        background: url(static/ressources/background/classique.jpg) no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+      }
+      </style>
       <iframe width="100%" height="300" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/218967210&amp;auto_play=true&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
       <div class='info-contain'>
       <div class='info-g'>
@@ -42,9 +51,9 @@ events:
       Vous êtes dans le hall d'entrée du temple classique, qui se trouve être un ancien opéra. Vous voyez à l'ouest comme à l'est deux
       escaliers qui semblent mener jusqu'aux balcons, mais vous pouvez également continuer plus au sud vers la salle de l'opéra. Un luthier
       est à l'entrée. Vous pouvez lui parler pour voir ce qu'il propose.
-# contains:
-#   - partition-000
-  # - violon-000
+contains:
+  - partition-000
+  - violon-000
 parts:
   - luthier-000
 ---
@@ -151,6 +160,15 @@ type: Location
 events:
   info:
     actor: |
+      <style>
+      body {
+        background: url(static/ressources/background/rock.jpg) no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+      }
+      </style>
       <iframe width="100%" height="300" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/218967407&amp;auto_play=true&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
       <div class='info-contain'>
       <div class='info-g'>
@@ -193,7 +211,7 @@ events:
 contains:
   - veste-000
   - bouton-rock-000
-  # - guitare-000
+  - guitare-000
 parts:
   - roady-000
 ---
@@ -275,7 +293,40 @@ events:
         des ustensils.
 contains:
   - baguettes-000
-
+---
+id: foule-temple-rock-001
+type: Location
+events:
+  info:
+    actor: |
+      <div class='info-contain'>
+      <div class='info-g'> En slam sur la foule, au nord.
+      </div>
+      <div class='info-d'>
+      <img src="static/ressources/rock/foule3.jpg"/>
+      </div>
+      </div>
+  look:
+    actor: |
+      Vous avez demandé à la foule de vous porter plus au nord, ce qu'elle a fait. Les gars ont poussé du sale à la salle. Plus au nord, c'est le mur.
+      Vous en concluez donc qu'une seul solution s'offre à vous : gueuler "sud".
+---
+id: foule-temple-rock-002
+type: Location
+events:
+  info:
+    actor: |
+      <div class='info-contain'>
+      <div class='info-g'> En slam sur la foule, au sud.
+      </div>
+      <div class='info-d'>
+      <img src="static/ressources/rock/foule2.jpg"/>
+      </div>
+      </div>
+  look:
+    actor: |
+      La foule vous a transporté plus au sud. Les gens sont chauds et motivés, surement grâce à leur entrainement à la barre à tout faire.
+      Plus au sud, vous serez face au mur. Vous en concluez donc qu'une seul solution s'offre à vous : gueuler "nord".
 
 #########################
 ## --TEMPLE ZOUKLOVE-- ##
@@ -287,6 +338,15 @@ type: Location
 events:
   info:
     actor: |
+      <style>
+      body {
+        background: url(static/ressources/background/zouk.jpg) no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+      }
+      </style>
       <iframe width="100%" height="300" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/218967920&amp;auto_play=true&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
       <div class='info-contain'>
       <div class='info-g'>
@@ -321,7 +381,7 @@ events:
       intriguant en continuant vers le nord, ou retourner en dehors en marchant vers le sud. Vous voyez un artistan à qui vous sentez que vous pouvez parler.
       <br> Un bouton en bois d'ébène semble dépasser du mur à votre gauche.
 contains:
-  # - djembe-000
+  - djembe-000
   - bouton-zouk-000
 parts:
   - statue-temple-zouklove-000
@@ -406,6 +466,15 @@ type: Location
 events:
   info:
     actor: |
+      <style>
+      body {
+        background: url(static/ressources/background/electro.jpg) no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+      }
+      </style>
       <iframe width="100%" height="300" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/218968376&amp;auto_play=true&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
       <div class='info-contain'>
       <div class='info-g'>
@@ -481,8 +550,8 @@ events:
       </div>
       Nous y voila ! La salle de concert ! Totalement blindée les gens se pressent au devant de la scène, tout le monde semble ravi d'être ici. Vous
       semblez reconnaitre un célèbre DJ ayant fait un tabac sur l'interweb : Darude !
-# contains:
-#   - launchpad-000
+contains:
+  - launchpad-000
 parts:
     - pilier-electro-001
     - darude-000
@@ -585,19 +654,24 @@ type: Location
 events:
   info:
     actor: |
+      <style>
+      body {
+        background: url(static/ressources/background/hall.jpg) no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+      }
+      </style>
       <iframe width="100%" height="300" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/219615070&amp;auto_play=true&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>      <div class='info-contain'>
       <div class='info-g'>
-      <div class='info-g-c'>
-      QUELLE NUIT ! Vous êtes totalement épuisé. Vous avez vraiment tout donné hier, vous avez réussi à rallier tous les styles
-      musicaux que vos proches vous ont fait découvrir. Vous êtes définitivement devenu un grand artiste. Vos parents seraient fiers de vous. Vous avez maintenant accès au temple des plus grands artistes.
-      A vous de continuer de développer votre musique et de continuer à influencer les générations futures. Peace !
-      </div>
-      <div class='info-g-c'><img src="static/ressources/hall/hall-of-fame-logo.jpg"/></div>
+      <div class='info-g-c'>Entrée du temple de la musique classique</div>
+      <div class='info-g-c'><img src="static/ressources/classique/entree.jpg"/></div>
       </div>
       <div class='info-d'>
-      <img src="static/ressources/hall/artists.jpg"/>
+      <img src="static/ressources/hall/gladiator.jpg"/>
       </div>
       </div>
   look:
     actor: |
-      Michael Jackson vous salue, Carlos vous raconte une blague et Prince vous dédie ce morceau.
+      Vous êtes dans le hall of fame

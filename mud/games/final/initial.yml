@@ -18,16 +18,6 @@ events:
       n'arrivez pas à identifier à quel genre l'attribuer.
 contains:
   - archet-000
-  # - bouton-cheat-000
-  # - instrument-cheat-000
-  # - cordes-000
-  # - corps-violon-000
-  - violon-000
-  - partition-000
-  - guitare-000
-  - djembe-000
-  - launchpad-000
-
 
 parts:
   - pilier-000
