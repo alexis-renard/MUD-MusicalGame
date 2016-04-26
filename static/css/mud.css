@@ -85,6 +85,9 @@ div.alert.mud-echo {
     color           : #888888;
     font-style      : italic;
 }
+
+/* rajouté */
+
 .info-contain {
     display: flex;
     flex-direction: row;

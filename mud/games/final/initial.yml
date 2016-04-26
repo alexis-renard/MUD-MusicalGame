@@ -1,16 +1,17 @@
-# teleporter scene-temple-rock-000
-# teleporter pre-hall-temple-electro-000
-# teleporter salle-mysterieuse-temple-zouk-000
-
-# - figurine-000
-# - usb-000
-
----
 id: parc-central-000
 type: Location
 events:
   info:
     actor: |
+      <style>
+      body { 
+        background: url(static/ressources/background/parc.jpg) no-repeat center center fixed; 
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+      }
+      </style>
       <iframe width="100%" height="300" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/218971614&amp;auto_play=true&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
       <div class='info-contain'>
       <div class='info-g'>Vous êtes dans le parc principal</div>
@@ -77,44 +78,3 @@ events:
           modifs: -=violon-000:hidden1
         - type  : ChangePropEffect
           modifs: =archet-000:hidden2
----
-id: bouton-cheat-000
-type: Thing
-name:
-  - bouton
-props:
-  - pushable
-events:
-  look:
-    actor: |
-      test
-  push:
-    actor: |
-      Vous appuyez sur le bouton, mais rien ne semble se
-      produire.
-    observer: |
-      {{ actor.name }} appuie sur le bouton, mais rien ne
-      semble se produire.
-    effects:
-      - type  : ChangePropEffect
-        modifs: -=portal-pre-hall-hall-temple-electro-000:closed-classique
-      - type  : ChangePropEffect
-        modifs: -=portal-pre-hall-hall-temple-electro-000:closed-rock
-      - type  : ChangePropEffect
-        modifs: -=portal-pre-hall-hall-temple-electro-000:closed-zouk
----
-id: instrument-cheat-000
-type: Thing
-name: instrument
-props:
-  - portal-hall-salle-temple-classique-000
-  - instrument
-  - takable
-events:
-  info:
-    actor: "Joue maggle"
-  look:
-    actor: |
-      go jouer omg
-  play:
-    actor: "Vous jouez ENFIN d'un instrument"
