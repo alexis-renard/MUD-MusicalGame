@@ -29,10 +29,10 @@ events:
         Vous jouez du violon et vous êtes sensé vous tp les boys. Enfin hope so.
     effects:
       - type  : EnterPortalEffect
-        exit  : =scene-temple-rock-000-sud
+        exit  : =salle-opera-temple-classique-000-nord
     failed:
       actor: |
-        Vous n'arrivez pas à jouer
+        Vous n'arrivez pas à jouer.
 
 ---
 id: luthier-000
