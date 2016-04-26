@@ -612,6 +612,9 @@ events:
           modifs: -=ascenseur-cage-000:upstairs
         - type  : NarrativeEffect
           at    : =ascenseur-hall-temple-electro-000
+          key   : descente-ascenseur
+        - type  : NarrativeEffect
+          at    : =ascenseur-hall-temple-electro-000
           key   : ouverture-ascenseur
         - type  : NarrativeEffect
           at    : =ascenseur-cage-000
@@ -649,10 +652,13 @@ events:
         - type  : NarrativeEffect
           at    : =ascenseur-cage-000
           key   : ascension-ascenseur
+        - type  : NarrativeEffect
+          at    : =ascenseur-salle-finale-temple-electro-000
+          key   : ascension-ascenseur
         - type  : ChangePropEffect
           modifs: =ascenseur-cage-000:upstairs
         - type  : NarrativeEffect
-          at    : =ascenseur-etage
+          at    : =ascenseur-salle-finale-temple-electro-000
           key   : ouverture-ascenseur
         - type  : NarrativeEffect
           at    : =ascenseur-cage-000
@@ -710,6 +716,9 @@ events:
           modifs: =exit-ascenseur-hall-temple-electro-000:closed
         - type  : NarrativeEffect
           at    : =ascenseur-cage-000
+          key   : ascension-ascenseur
+        - type  : NarrativeEffect
+          at    : =ascenseur-salle-finale-temple-electro-000
           key   : ascension-ascenseur
         - type  : ChangePropEffect
           modifs: =ascenseur-cage-000:upstairs

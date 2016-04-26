@@ -568,9 +568,8 @@ events:
     actor: "Le coin de l'ascenseur dans le hall."
   look:
     actor: |
-      Vous êtes dans le coin de l'ascenseur du hall du
-      département informatique.  Il y a un bouton pour
-      l'appeler.  Au sud-ouest, la porte de l'ascenseur est
+      Vous êtes dans le coin de l'ascenseur de la salle de concert finale.  Il y a un bouton pour
+      l'appeler.  Au sud-est, la porte de l'ascenseur est
       {% if the("ascenseur-cage-000").has_prop("upstairs") %}
       fermée.
       {% else %}
@@ -593,15 +592,14 @@ events:
     actor: "Le coin de l'ascenseur à l'étage."
   look:
     actor: |
-      Vous êtes dans le coin de l'ascenseur à l'étage du
-      département informatique.  Il y a un bouton pour
-      l'appeler.  Au sud-ouest, la porte de l'ascenseur est
+      Vous êtes dans le coin de l'ascenseur à l'étage hall du temple electro.  Il y a un bouton pour
+      l'appeler.  Au sud-est, la porte de l'ascenseur est
       {% if the("ascenseur-cage-000").has_prop("upstairs") %}
       ouverte.
       {% else %}
       fermée.
       {% end %}
-      Au nord, se trouve la partie principale de l'étage.
+      Au nord, se trouve la salle finale.
   fermeture-ascenseur:
     observer: |
       La porte de l'ascenseur se ferme.
@@ -613,19 +611,16 @@ id: ascenseur-cage-000
 type: Location
 parts:
   - bouton-cage-000
-props:
-  - upstairs
 events:
   info:
     actor: "La cage d'ascenseur."
   look:
     actor: |
-      Vous êtes dans la cage d'ascenseur.  Au nord-est,
-      la porte est ouverte sur
+      Vous êtes dans la cage d'ascenseur.
       {% if the("ascenseur-cage-000").has_prop("upstairs") %}
-      l'étage.
+      Au nord-ouest la porte est ouverte sur l'étage.
       {% else %}
-      le hall.
+      Au nord-ouest la porte est ouverte sur le hall.
       {% end %}
       Un bouton permet de commander à l'ascenseur de
       changer d'étage.

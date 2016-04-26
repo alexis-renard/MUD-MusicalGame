@@ -627,7 +627,7 @@ exits:
           observer: |
             {{ actor.name }} tente en vain de sortir par la porte.
 ---
-id: hall-ascenseur-portal-000
+id: portal-hall-coin-hall-ascenseur-000
 type: Portal
 exits:
   - id: hall-temple-electro-000-est
@@ -637,7 +637,7 @@ exits:
     location: ascenseur-hall-temple-electro-000
     direction: ouest
 ---
-id: etage-ascenseur-portal-000
+id: portal-salle-finale-ascenseur-000
 type: Portal
 exits:
   - id: exit1-etage-ascenseur-portal
@@ -659,7 +659,7 @@ events:
 exits:
   - id      : exit-ascenseur-hall-temple-electro-000
     location: ascenseur-hall-temple-electro-000
-    direction: sud-ouest
+    direction: sud-est
     props   :
       - closed
     events  :
@@ -673,10 +673,9 @@ exits:
         actor: ""
         observer: &sortie-ascenseur |
           {{ actor.name }} sort de l'ascenseur.
-
   - id      : exit-ascenseur-salle-finale-temple-electro-000
     location: ascenseur-salle-finale-temple-electro-000
-    direction: sud-ouest
+    direction: sud-est
     events  :
       enter-portal:
         failed:
@@ -687,7 +686,7 @@ exits:
         observer: *sortie-ascenseur
   - id      : exit-ascenseur-cage-000
     location: ascenseur-cage-000
-    direction: nord-est
+    direction: nord-ouest
     events:
       traversal:
         - props: =ascenseur-cage-000:upstairs
