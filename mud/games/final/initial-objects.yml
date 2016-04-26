@@ -49,7 +49,7 @@ events:
 id: partition-000
 type: Thing
 name: partition
-gender: fem
+gender: plu
 props:
   - takable
   - playable
@@ -64,6 +64,7 @@ events:
 ---
 id: cordes-000
 type: Thing
+gender: plu
 name: cordes
 props:
   - takable
@@ -266,6 +267,7 @@ events:
 id: baguettes-000
 type: Thing
 name: baguettes
+gender: plu
 props:
   - takable
   - buildable
