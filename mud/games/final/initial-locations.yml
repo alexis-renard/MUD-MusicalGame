@@ -587,13 +587,17 @@ events:
     actor: |
       <iframe width="100%" height="300" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/219615070&amp;auto_play=true&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>      <div class='info-contain'>
       <div class='info-g'>
-      <div class='info-g-c'>Entrée du temple de la musique classique</div>
-      <div class='info-g-c'><img src="static/ressources/classique/entree.jpg"/></div>
+      <div class='info-g-c'>
+      QUELLE NUIT ! Vous êtes totalement épuisé. Vous avez vraiment tout donné hier, vous avez réussi à rallier tous les styles
+      musicaux que vos proches vous ont fait découvrir. Vous êtes définitivement devenu un grand artiste. Vos parents seraient fiers de vous. Vous avez maintenant accès au temple des plus grands artistes.
+      A vous de continuer de développer votre musique et de continuer à influencer les générations futures. Peace !
+      </div>
+      <div class='info-g-c'><img src="static/ressources/hall/hall-of-fame-logo.jpg"/></div>
       </div>
       <div class='info-d'>
-      <img src="static/ressources/hall/gladiator.jpg"/>
+      <img src="static/ressources/hall/artists.jpg"/>
       </div>
       </div>
   look:
     actor: |
-      Vous êtes dans le hall of fame
+      Michael Jackson vous salue, Carlos vous raconte une blague et Prince vous dédie ce morceau.
