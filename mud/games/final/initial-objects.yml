@@ -49,6 +49,7 @@ events:
 id: partition-000
 type: Thing
 name: partition
+gender: fem
 props:
   - takable
   - playable
@@ -199,6 +200,7 @@ type: Thing
 name:
   - guitare
   - fender
+gender: fem
 props:
   - takable
   - instrument
@@ -242,6 +244,7 @@ events:
 ---
 id: veste-000
 type: Thing
+gender: fem
 name: veste
 props:
   - takable
@@ -315,6 +318,7 @@ events:
 ---
 id: figurine-000
 type: Thing
+gender: fem
 name: figurine
 props:
   - takable
@@ -383,6 +387,7 @@ events:
 ---
 id: peau-000
 type: Thing
+gender: fem
 name: peau
 props:
   - takable
