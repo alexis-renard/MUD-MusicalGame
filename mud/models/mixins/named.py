@@ -28,6 +28,9 @@ class Named(Basic):
         "f"     : "feminine" ,
         "male"  : "masculine",
         "female": "feminine" ,
+        "pluriel": "pluriel",
+        "plu"   : "pluriel",
+        "p"     : "pluriel"
     }
 
     def init_from_yaml(self, data, world):
@@ -78,7 +81,8 @@ class Named(Basic):
 
     GENDER_TO_THE = {
         "masculine": "le",
-        "feminine" : "la"
+        "feminine" : "la",
+        "pluriel"  : "les"
     }
 
     def noun_the(self):
@@ -87,7 +91,8 @@ class Named(Basic):
 
     GENDER_TO_A = {
         "masculine": "un",
-        "feminine" : "une"
+        "feminine" : "une",
+        "pluriel"  : "des"
     }
 
     def noun_a(self):
@@ -99,6 +104,8 @@ class Named(Basic):
         "masculine+feminine" : "sa" ,
         "feminine+masculine" : "son",
         "feminine+feminine"  : "sa",
+        "pluriel+feminine"   : "ses",
+        "pluriel+masculine"  : "ses"
     }
 
     def noun_his(self, actor):
@@ -109,7 +116,8 @@ class Named(Basic):
 
     GENDER_TO_E = {
         "masculine": "",
-        "feminine" : "e"
+        "feminine" : "e",
+        "pluriel"  : "s"
     }
 
     def noun_e(self):
