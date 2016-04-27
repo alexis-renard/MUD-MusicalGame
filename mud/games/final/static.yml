@@ -57,8 +57,8 @@ events:
   enter-portal:
     observer  : "{{ actor.name }} sort par {{ exit.the_direction() }}."
     failed:
-      actor   : "Vous tentez vainement de sortir par {{ exit.the_direction() }}."
-      observer: "{{ actor.name }} tente vainement de sortir par {{ exit.the_direction() }}."
+      actor   : "Vous tentez vainement d'aller à {{ exit.the_direction() }}. Peut-être avez vous manqué quelque chose..."
+      observer: "{{ actor.name }} tente vainement d'aller à {{ exit.the_direction() }}."
 
   leave-portal:
     observer  : "{{ actor.name }} entre par {{ exit.the_direction() }}."

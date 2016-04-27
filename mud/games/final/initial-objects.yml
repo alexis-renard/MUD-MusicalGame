@@ -458,7 +458,7 @@ props:
   - hidden2
 events:
   info:
-    actor: "Un laucnhpad S de marque Novation"
+    actor: "Un launchpad S de marque Novation"
   look:
     actor: |
       Un launchpad signature Madeon, prêt à ambiancey all night long* <br>
