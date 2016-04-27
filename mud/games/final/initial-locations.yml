@@ -534,7 +534,7 @@ events:
       {% else %}
       ouverte.
       {% end %}
-      A l'est, se trouve la partie principale du hall.
+      A l'ouest, se trouve la partie principale du hall.
   fermeture-ascenseur:
     observer: |
       La porte de l'ascenseur se ferme.
