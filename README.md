@@ -1,4 +1,4 @@
-# Music Manager 
+# The MUD Game
 
 Creation of a textual adventure game, where the player is immersed in an imaginary world in which he needs to travel through music history to survive and figure out, who knows, a bit more who he is...
 The game semantic and mecanisms (such as contextual teleportation, multiple keys, elevator logic...) were the main challenges of this fun project.
